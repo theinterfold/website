@@ -890,8 +890,8 @@ function Frame32() {
 export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden md:left-1/2 md:top-[63px] md:-translate-x-1/2" data-name="image 66">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden bg-[#d9fce8] md:left-1/2 md:top-[63px] md:-translate-x-1/2" data-name="image 66">
+        <div className="absolute inset-0 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken opacity-80" src={imgImage66} />
         </div>
       </div>
