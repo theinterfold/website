@@ -10,7 +10,7 @@ import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 function Frame() {
   return (
-    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[1206px] md:max-w-[1440px]">
+    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[1206px]">
       <ScrollFadeIn>
         <motion.div
           className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
@@ -155,7 +155,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[2244px] w-full md:max-w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[2244px] w-full">
       <ScrollFadeIn>
         <Frame16 />
       </ScrollFadeIn>
@@ -254,7 +254,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[3228px] w-full md:max-w-[1440px]">
+    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[3228px] w-full">
       <ScrollFadeIn>
         <Frame10 />
       </ScrollFadeIn>
@@ -480,7 +480,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[3727px] w-full md:max-w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[3727px] w-full">
       <ScrollFadeIn>
         <Frame18 />
       </ScrollFadeIn>
@@ -696,7 +696,7 @@ function Frame31() {
 
 function Frame15() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[1321px] w-full md:max-w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[1321px] w-full">
       <ScrollFadeIn>
         <Frame14 />
       </ScrollFadeIn>
@@ -801,7 +801,7 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[703px] w-full md:max-w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[703px] w-full">
       <ScrollFadeIn>
         <Frame12 />
       </ScrollFadeIn>
@@ -844,7 +844,7 @@ function Frame33() {
 
 function Frame32() {
   return (
-    <div className="md:absolute relative bg-[#d9fce8] gap-x-[16px] gap-y-[16px] grid grid-cols-1 md:grid-cols-[repeat(2,fit-content(100%))] grid-rows-[auto] md:grid-rows-[repeat(4,fit-content(100%))] md:left-0 p-[16px] md:top-[4552px] w-full md:max-w-[1440px]">
+    <div className="md:absolute relative bg-[#d9fce8] gap-x-[16px] gap-y-[16px] grid grid-cols-1 md:grid-cols-[repeat(2,fit-content(100%))] grid-rows-[auto] md:grid-rows-[repeat(4,fit-content(100%))] md:left-0 p-[16px] md:top-[4552px] w-full">
       <ScrollFadeIn delay={0.1}>
         <div className="md:col-2 content-stretch flex flex-col gap-[8px] items-start not-italic relative md:row-1 self-start shrink-0 w-full md:w-[696px]">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
@@ -890,7 +890,7 @@ function Frame32() {
 export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative h-[400px] md:h-[640px] md:left-1/2 md:top-[63px] md:-translate-x-1/2 w-full md:max-w-[1440px]" data-name="image 66">
+      <div className="md:absolute relative h-[400px] md:h-[640px] md:left-1/2 md:top-[63px] md:-translate-x-1/2 w-full" data-name="image 66">
         <div className="absolute inset-0 mix-blend-darken overflow-hidden pointer-events-none">
           <img alt="" className="absolute inset-0 h-full w-full object-cover object-center" src={imgImage66} />
         </div>
