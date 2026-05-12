@@ -801,11 +801,11 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] xl:h-[503px] xl:justify-center xl:py-0 md:top-[703px] w-full">
-      <ScrollFadeIn>
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] lg:justify-center lg:py-0 md:top-[703px] w-full">
+      <ScrollFadeIn className="lg:-translate-y-[64px]">
         <Frame12 />
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.1}>
+      <ScrollFadeIn className="lg:-translate-y-[64px]" delay={0.1}>
         <Frame17 />
       </ScrollFadeIn>
     </div>
