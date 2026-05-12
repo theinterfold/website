@@ -303,7 +303,7 @@ function Frame3() {
 
 function Frame26() {
   return (
-    <div className="bg-[#d9fce8] content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+    <div className="bg-[#d9fce8] content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -332,8 +332,8 @@ function Frame26() {
 
 function Frame27() {
   return (
-    <div className="content-stretch flex items-start relative shrink-0">
-      <div className="content-stretch flex items-center relative shrink-0">
+    <div className="content-stretch flex items-start relative shrink-0 w-full">
+      <div className="content-stretch flex items-center relative shrink-0 w-full">
         <Frame26 />
       </div>
     </div>
@@ -372,7 +372,7 @@ function Frame4() {
 
 function Frame28() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -431,7 +431,7 @@ function Frame5() {
 
 function Frame29() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -460,17 +460,17 @@ function Frame29() {
 
 function Frame30() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[8px] items-start justify-center relative shrink-0 w-full px-4 md:px-8 lg:px-0">
-      <ScrollFadeIn delay={0.1}>
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-start justify-center relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
+      <ScrollFadeIn className="w-full" delay={0.1}>
         <Frame27 />
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.2}>
-        <div className="content-stretch flex items-center relative shrink-0">
+      <ScrollFadeIn className="w-full" delay={0.2}>
+        <div className="content-stretch flex items-center relative shrink-0 w-full">
           <Frame28 />
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.3}>
-        <div className="content-stretch flex items-center relative shrink-0">
+      <ScrollFadeIn className="w-full" delay={0.3}>
+        <div className="content-stretch flex items-center relative shrink-0 w-full">
           <Frame29 />
         </div>
       </ScrollFadeIn>
