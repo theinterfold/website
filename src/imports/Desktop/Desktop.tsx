@@ -812,78 +812,89 @@ function Frame13() {
   );
 }
 
-function Frame33() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <button
-      className="group bg-[rgba(193,217,191,0.8)] md:col-2 content-stretch flex h-[52px] items-center justify-center justify-self-start relative md:row-3 shrink-0 w-full md:w-[340px] transition-colors hover:bg-[#3a5e3c]"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#687d71] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Subscribe
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#687d71] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
-    </button>
-  );
-}
-
 function Frame32() {
+  const [email, setEmail] = useState("");
+  const [isSubscribeHovered, setIsSubscribeHovered] = useState(false);
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   return (
-    <div className="md:absolute relative bg-[#d9fce8] gap-x-[16px] gap-y-[16px] grid grid-cols-1 md:grid-cols-[repeat(2,fit-content(100%))] grid-rows-[auto] md:grid-rows-[repeat(4,fit-content(100%))] md:left-0 p-[16px] md:top-[4552px] w-full">
-      <ScrollFadeIn delay={0.1}>
-        <div className="md:col-2 content-stretch flex flex-col gap-[8px] items-start not-italic relative md:row-1 self-start shrink-0 w-full md:w-[696px]">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
-        <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] min-w-full relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[-0.66px] w-[min-content] whitespace-pre-wrap">
-          <p className="leading-[1.05] mb-0 text-[22px]">Telegram</p>
-          <p className="leading-[1.05] mb-0 text-[22px]">Github</p>
-          <p className="leading-[1.05] mb-0 text-[22px]">X</p>
-          <p className="leading-[1.05] mb-0 text-[22px]">​</p>
-          <p className="leading-[1.075] text-[14.429px]">Enter your email</p>
+    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[4552px] w-full">
+      <div className="mx-auto flex min-h-[312px] max-w-[1440px] flex-col gap-12 px-4 py-6 md:relative md:block md:min-h-[412px] md:px-6">
+        <div className="flex flex-col gap-16 md:block">
+          <ScrollFadeIn>
+            <p className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">The Interfold</p>
+          </ScrollFadeIn>
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-6">
+            <p className="mb-0">privacy</p>
+            <p className="mb-0">{`Terms & Conditions`}</p>
+            <p>
+              —<br aria-hidden="true" />
+              {`All Rights Reserved © 2026`}
+            </p>
+          </div>
         </div>
-        </div>
-      </ScrollFadeIn>
-      <div className="md:col-2 h-0 relative md:row-2 shrink-0 w-full md:w-[340px]">
-        <div className="absolute inset-[-0.5px_0]">
-          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 1">
-            <path d="M0 0.5H340" id="Line 1950" stroke="var(--stroke-0, #3A5E3C)" />
-          </svg>
+
+        <div className="flex flex-col gap-12 md:block">
+          <ScrollFadeIn className="md:absolute md:left-[calc(50%+8px)] md:top-6 md:w-[340px]" delay={0.1}>
+            <div className="content-stretch flex flex-col gap-[32px] items-start not-italic w-full">
+              <div className="flex flex-col gap-[8px] w-full">
+                <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
+                <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
+                  <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
+                  <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
+                  <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
+                </div>
+              </div>
+
+              <label className="w-full">
+                <span className="sr-only">Enter your email</span>
+                <input
+                  className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
+                  inputMode="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="Enter Your Email"
+                  autoComplete="email"
+                  type="text"
+                  value={email}
+                />
+              </label>
+
+              <button
+                className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors disabled:pointer-events-none disabled:opacity-60 enabled:hover:bg-[#3a5e3c]"
+                disabled={!isValidEmail}
+                onMouseEnter={() => setIsSubscribeHovered(true)}
+                onMouseLeave={() => setIsSubscribeHovered(false)}
+              >
+                <div className="flex items-center justify-center gap-1">
+                  <motion.p
+                    className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#687d71] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+                    animate={{ x: isSubscribeHovered && isValidEmail ? -8 : 0 }}
+                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    Subscribe
+                  </motion.p>
+                  <motion.span
+                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#687d71] transition-colors group-hover:text-[#82f5ad]"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: isSubscribeHovered && isValidEmail ? 1 : 0, x: isSubscribeHovered && isValidEmail ? 0 : -10 }}
+                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    →
+                  </motion.span>
+                </div>
+              </button>
+            </div>
+          </ScrollFadeIn>
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-[calc(50%+8px)]">
+            <p>
+              {`Open source protocol. `}
+              <br aria-hidden="true" />
+              Built by Gnosis Guild.
+            </p>
+          </div>
         </div>
       </div>
-      <Frame33 />
-      <ScrollFadeIn>
-        <p className="capitalize md:col-1 font-['ABC_Gramercy:Regular',sans-serif] justify-self-start leading-[0.87] not-italic relative md:row-1 self-start shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px] w-full md:w-[696px]">The Interfold</p>
-      </ScrollFadeIn>
-      <div className="md:col-1 font-['Office_Code_Pro:Medium',sans-serif] justify-self-start leading-[0] not-italic relative md:row-4 self-start shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase">
-        <p className="leading-[1.075] mb-0">privacy</p>
-        <p className="leading-[1.075] mb-0">{`Terms & Conditions`}</p>
-        <p className="leading-[1.075]">
-          —<br aria-hidden="true" />
-          {`All Rights Reserved © 2026 `}
-        </p>
-      </div>
-      <div className="md:absolute relative md:-translate-y-full flex flex-col font-['Office_Code_Pro:Medium',sans-serif] justify-end leading-[0] md:left-[728px] not-italic text-[#3a5e3c] text-[14px] md:top-[307px] tracking-[1.4px] uppercase">
-        <p className="leading-[1.075] whitespace-pre">
-          {`Open source protocol. `}
-          <br aria-hidden="true" />
-          Built by Gnosis Guild.
-        </p>
-      </div>
-    </div>
+    </footer>
   );
 }
 
