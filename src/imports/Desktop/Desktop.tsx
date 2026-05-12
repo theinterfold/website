@@ -638,9 +638,9 @@ function Group() {
 
 function Frame31() {
   return (
-    <div className="content-stretch grid grid-cols-1 gap-[16px] items-start relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:px-0">
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-start relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -657,7 +657,7 @@ function Frame31() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -674,7 +674,7 @@ function Frame31() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
