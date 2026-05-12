@@ -10,7 +10,7 @@ import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 function Frame() {
   return (
-    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[1206px]">
+    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(566px+min(44.444vw,640px))]">
       <ScrollFadeIn>
         <motion.div
           className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
@@ -155,7 +155,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[2244px] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1604px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame16 />
       </ScrollFadeIn>
@@ -254,7 +254,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[3228px] w-full">
+    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2588px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame10 />
       </ScrollFadeIn>
@@ -480,7 +480,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[3727px] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3087px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame18 />
       </ScrollFadeIn>
@@ -696,7 +696,7 @@ function Frame31() {
 
 function Frame15() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[1321px] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame14 />
       </ScrollFadeIn>
@@ -801,7 +801,7 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[703px] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[calc(63px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame12 />
       </ScrollFadeIn>
@@ -818,7 +818,7 @@ function Frame32() {
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   return (
-    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[4552px] w-full">
+    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3912px+min(44.444vw,640px))] w-full">
       <div className="mx-auto flex min-h-[312px] max-w-[1440px] flex-col gap-12 px-4 py-6 md:relative md:block md:min-h-[412px] md:px-6">
         <div className="flex flex-col gap-16 md:block">
           <ScrollFadeIn>
