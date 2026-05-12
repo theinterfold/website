@@ -109,11 +109,11 @@ function Frame25() {
 
 function Frame23() {
   return (
-    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:px-0">
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame22 />
-          <div className="relative rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
@@ -124,9 +124,9 @@ function Frame23() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame24 />
-          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
               <div className="absolute bg-[#121718] inset-0" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
@@ -137,9 +137,9 @@ function Frame23() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame25 />
-          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
               <div className="absolute bg-[#121718] inset-0" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
