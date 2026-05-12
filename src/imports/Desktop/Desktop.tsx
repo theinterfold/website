@@ -10,7 +10,7 @@ import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 function Frame() {
   return (
-    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[1206px] md:w-[1440px]">
+    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[1206px] md:max-w-[1440px]">
       <ScrollFadeIn>
         <motion.div
           className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
@@ -109,11 +109,11 @@ function Frame25() {
 
 function Frame23() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[16px] items-center justify-center relative shrink-0 w-full px-4 md:px-8 lg:px-0">
-      <ScrollFadeIn delay={0.1}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:px-0">
+      <ScrollFadeIn className="w-full" delay={0.1}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <Frame22 />
-          <div className="relative rounded-[24px] shrink-0 w-full aspect-square md:size-[264px] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
@@ -123,10 +123,10 @@ function Frame23() {
           </div>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.2}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+      <ScrollFadeIn className="w-full" delay={0.2}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <Frame24 />
-          <div className="relative shrink-0 w-full aspect-square md:size-[264px] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
               <div className="absolute bg-[#121718] inset-0" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
@@ -136,10 +136,10 @@ function Frame23() {
           </div>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.3}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+      <ScrollFadeIn className="w-full" delay={0.3}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <Frame25 />
-          <div className="relative shrink-0 w-full aspect-square md:size-[264px] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[304px] xl:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
               <div className="absolute bg-[#121718] inset-0" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
@@ -155,7 +155,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[2244px] w-full md:w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[2244px] w-full md:max-w-[1440px]">
       <ScrollFadeIn>
         <Frame16 />
       </ScrollFadeIn>
@@ -254,7 +254,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div className="md:absolute relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-0 py-[64px] md:py-[112px] md:top-[3228px] w-full md:w-[1440px]">
+    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[3228px] w-full md:max-w-[1440px]">
       <ScrollFadeIn>
         <Frame10 />
       </ScrollFadeIn>
@@ -480,7 +480,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[3727px] w-full md:w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[3727px] w-full md:max-w-[1440px]">
       <ScrollFadeIn>
         <Frame18 />
       </ScrollFadeIn>
@@ -638,9 +638,9 @@ function Group() {
 
 function Frame31() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[16px] items-center justify-center relative shrink-0 w-full px-4 md:px-8 lg:px-0">
-      <ScrollFadeIn delay={0.1}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-start relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:px-0">
+      <ScrollFadeIn className="w-full" delay={0.1}>
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -656,8 +656,8 @@ function Frame31() {
           <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Data remains private throughout execution</p>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.2}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+      <ScrollFadeIn className="w-full" delay={0.2}>
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -673,8 +673,8 @@ function Frame31() {
           <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">A subset of nodes governs execution and release</p>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.3}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full md:w-[280px] lg:w-[320px] xl:w-[340px] max-w-[340px]">
+      <ScrollFadeIn className="w-full" delay={0.3}>
+        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none lg:max-w-[320px] xl:max-w-[340px] lg:mx-auto">
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -696,7 +696,7 @@ function Frame31() {
 
 function Frame15() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[1321px] w-full md:w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[1321px] w-full md:max-w-[1440px]">
       <ScrollFadeIn>
         <Frame14 />
       </ScrollFadeIn>
@@ -710,9 +710,9 @@ function Frame15() {
 
 function Frame21() {
   return (
-    <div className="absolute capitalize content-stretch flex font-['ABC_Gramercy:Regular',sans-serif] gap-[24px] md:gap-[40px] items-center justify-center leading-[1.05] right-[16px] md:left-[1107px] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] text-center top-[22px] tracking-[-0.66px] whitespace-nowrap">
-      <p className="relative shrink-0 hidden md:block">Community</p>
-      <p className="relative shrink-0 hidden md:block">Protocol</p>
+    <div className="capitalize content-stretch flex font-['ABC_Gramercy:Regular',sans-serif] gap-[24px] md:gap-[40px] items-center justify-end leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] text-right tracking-[-0.66px] whitespace-nowrap">
+      <p className="relative shrink-0">Community</p>
+      <p className="relative shrink-0">Protocol</p>
       <p className="relative shrink-0">Docs</p>
     </div>
   );
@@ -801,7 +801,7 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[703px] w-full md:w-[1440px]">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[703px] w-full md:max-w-[1440px]">
       <ScrollFadeIn>
         <Frame12 />
       </ScrollFadeIn>
@@ -844,7 +844,7 @@ function Frame33() {
 
 function Frame32() {
   return (
-    <div className="md:absolute relative bg-[#d9fce8] gap-x-[16px] gap-y-[16px] grid grid-cols-1 md:grid-cols-[repeat(2,fit-content(100%))] grid-rows-[auto] md:grid-rows-[repeat(4,fit-content(100%))] md:left-0 p-[16px] md:top-[4552px] w-full md:w-[1440px]">
+    <div className="md:absolute relative bg-[#d9fce8] gap-x-[16px] gap-y-[16px] grid grid-cols-1 md:grid-cols-[repeat(2,fit-content(100%))] grid-rows-[auto] md:grid-rows-[repeat(4,fit-content(100%))] md:left-0 p-[16px] md:top-[4552px] w-full md:max-w-[1440px]">
       <ScrollFadeIn delay={0.1}>
         <div className="md:col-2 content-stretch flex flex-col gap-[8px] items-start not-italic relative md:row-1 self-start shrink-0 w-full md:w-[696px]">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
@@ -890,9 +890,9 @@ function Frame32() {
 export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative h-[400px] md:h-[640px] md:left-0 md:top-[63px] w-full md:w-[1440px]" data-name="image 66">
+      <div className="md:absolute relative h-[400px] md:h-[640px] md:left-1/2 md:top-[63px] md:-translate-x-1/2 w-full md:max-w-[1440px]" data-name="image 66">
         <div className="absolute inset-0 mix-blend-darken overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[127.99%] left-[-1.5%] max-w-none top-[-0.02%] w-[101.5%] object-cover" src={imgImage66} />
+          <img alt="" className="absolute inset-0 h-full w-full object-cover object-center" src={imgImage66} />
         </div>
       </div>
       <Frame />
@@ -900,40 +900,44 @@ export default function Desktop() {
       <Frame11 />
       <Frame20 />
       <Frame15 />
-      <div className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full md:w-[1440px]" data-name="Header">
-        <Frame21 />
-        <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[35.071px] left-[calc(50%-0.15px)] top-[calc(50%+0.04px)] w-[45.703px]" data-name="Vector">
-          <div className="absolute inset-[-2.92%_-3.16%]">
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
-              <g id="Vector">
-                <path d={svgPaths.p2c3ef4f0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p18d4bac0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p79ece00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p3c15f980} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.pd580300} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p3e19a800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p3fc0d800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                <path d={svgPaths.p1f4a0a00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+      <div className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full" data-name="Header">
+        <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
+          <div className="justify-self-start h-[17.239px] w-[120.421px]" data-name="The Interfold">
+            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
+              <g id="The Interfold">
+                <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
+                <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
+                <path d={svgPaths.pc6803c0} fill="#3A5E3C" />
+                <path d={svgPaths.pd8ed180} fill="#3A5E3C" />
+                <path d={svgPaths.p3771fe00} fill="#3A5E3C" />
+                <path d={svgPaths.p2960eb80} fill="#3A5E3C" />
+                <path d={svgPaths.p357bef30} fill="#3A5E3C" />
+                <path d={svgPaths.p2e47ac00} fill="#3A5E3C" />
+                <path d={svgPaths.p254332f0} fill="#3A5E3C" />
+                <path d={svgPaths.p102bd800} fill="#3A5E3C" />
+                <path d={svgPaths.p12150980} fill="#3A5E3C" />
               </g>
             </svg>
           </div>
-        </div>
-        <div className="absolute h-[17.239px] left-[16px] top-[23px] w-[120.421px]" data-name="The Interfold">
-          <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
-            <g id="The Interfold">
-              <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
-              <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
-              <path d={svgPaths.pc6803c0} fill="#3A5E3C" />
-              <path d={svgPaths.pd8ed180} fill="#3A5E3C" />
-              <path d={svgPaths.p3771fe00} fill="#3A5E3C" />
-              <path d={svgPaths.p2960eb80} fill="#3A5E3C" />
-              <path d={svgPaths.p357bef30} fill="#3A5E3C" />
-              <path d={svgPaths.p2e47ac00} fill="#3A5E3C" />
-              <path d={svgPaths.p254332f0} fill="#3A5E3C" />
-              <path d={svgPaths.p102bd800} fill="#3A5E3C" />
-              <path d={svgPaths.p12150980} fill="#3A5E3C" />
-            </g>
-          </svg>
+          <div className="justify-self-center h-[35.071px] w-[45.703px]" data-name="Vector">
+            <div className="size-full">
+              <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
+                <g id="Vector">
+                  <path d={svgPaths.p2c3ef4f0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p18d4bac0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p79ece00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p3c15f980} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.pd580300} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p3e19a800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p3fc0d800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                  <path d={svgPaths.p1f4a0a00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div className="min-w-0 justify-self-end">
+            <Frame21 />
+          </div>
         </div>
       </div>
       <Frame13 />

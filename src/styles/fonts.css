@@ -29,3 +29,20 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Fallbacks for Tailwind arbitrary font-family classes with punctuation-heavy names. */
+[class*="font-['ABC_Gramercy:Regular',sans-serif]"] {
+  font-family: "ABC_Gramercy", sans-serif;
+}
+
+[class*="font-['Office_Code_Pro:Medium',sans-serif]"] {
+  font-family: "Office_Code_Pro", sans-serif;
+}
+
+[class*="font-['ABC_Gramercy',sans-serif]"] {
+  font-family: "ABC_Gramercy", sans-serif;
+}
+
+[class*="font-['Office_Code_Pro',sans-serif]"] {
+  font-family: "Office_Code_Pro", sans-serif;
+}

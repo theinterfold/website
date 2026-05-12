@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Desktop from '../../imports/Desktop/Desktop';
 import { MobileVersion } from './MobileVersion';
 
+const MOBILE_BREAKPOINT = 768;
+
 export function ResponsiveLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -9,7 +11,7 @@ export function ResponsiveLayout() {
   useEffect(() => {
     setIsClient(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     };
 
     checkMobile();
