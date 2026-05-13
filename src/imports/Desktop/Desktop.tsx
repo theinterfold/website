@@ -75,6 +75,44 @@ function Frame16() {
   );
 }
 
+function AnimatedButtonContent({
+  children,
+  isHovered,
+  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
+  textClassName,
+}: {
+  children: string;
+  isHovered: boolean;
+  arrowClassName?: string;
+  textClassName: string;
+}) {
+  return (
+    <span className="relative inline-flex items-center justify-center">
+      <motion.span
+        className={textClassName}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.8 }}
+        animate={{ x: isHovered ? -8 : 0 }}
+        transition={{
+          opacity: { duration: 0.22, delay: 0.14, ease: [0.4, 0, 0.2, 1] },
+          x: { duration: 0.18, ease: [0.4, 0, 0.2, 1] },
+        }}
+      >
+        {children}
+      </motion.span>
+      <motion.span
+        className={arrowClassName}
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+      >
+        →
+      </motion.span>
+    </span>
+  );
+}
+
 function Frame22() {
   return (
     <div className="relative shrink-0 w-full">
@@ -122,7 +160,9 @@ function Frame23() {
     <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
       <ScrollFadeIn className="w-full h-full" delay={0.3}>
         <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
-          <Frame22 />
+          <ScrollFadeIn className="w-full" delay={0.75}>
+            <Frame22 />
+          </ScrollFadeIn>
           <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
@@ -135,7 +175,9 @@ function Frame23() {
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full h-full" delay={0.4}>
         <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
-          <Frame24 />
+          <ScrollFadeIn className="w-full" delay={0.85}>
+            <Frame24 />
+          </ScrollFadeIn>
           <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
@@ -148,7 +190,9 @@ function Frame23() {
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full h-full" delay={0.5}>
         <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
-          <Frame25 />
+          <ScrollFadeIn className="w-full" delay={0.95}>
+            <Frame25 />
+          </ScrollFadeIn>
           <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
@@ -197,23 +241,12 @@ function Frame2() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Build on Interfold
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Build on Interfold
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -227,23 +260,12 @@ function Frame1() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Participate
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Participate
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -300,23 +322,12 @@ function Frame3() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Read the docs
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Read essays
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -369,23 +380,12 @@ function Frame4() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Read the docs
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Read the blog
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -428,23 +428,12 @@ function Frame5() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Read the docs
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Read the docs
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -1511,23 +1500,12 @@ function Frame6() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Build on Interfold
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Build on Interfold
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -1541,23 +1519,12 @@ function Frame7() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex items-center justify-center gap-1">
-        <motion.p
-          className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-          animate={{ x: isHovered ? -8 : 0 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          Participate
-        </motion.p>
-        <motion.span
-          className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-          transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-        >
-          →
-        </motion.span>
-      </div>
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Participate
+      </AnimatedButtonContent>
     </button>
   );
 }
@@ -1591,99 +1558,94 @@ function Frame32() {
 
   return (
     <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3912px+min(44.444vw,640px))] w-full">
-      <div className="mx-auto flex min-h-[312px] max-w-[1440px] flex-col gap-12 px-4 py-6 md:relative md:block md:min-h-[412px] md:px-6">
-        <div className="flex flex-col gap-16 md:block">
+      <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
+        <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
             <p className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">The Interfold</p>
           </ScrollFadeIn>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-6">
-            <ScrollFadeIn delay={0.1}>
-              <p className="mb-0">privacy</p>
-            </ScrollFadeIn>
-            <ScrollFadeIn delay={0.2}>
-              <p className="mb-0">{`Terms & Conditions`}</p>
-            </ScrollFadeIn>
-            <ScrollFadeIn delay={0.3}>
-              <p>
-                —<br aria-hidden="true" />
-                {`All Rights Reserved © 2026`}
-              </p>
-            </ScrollFadeIn>
-          </div>
         </div>
 
-        <div className="flex flex-col gap-12 md:block">
-          <div className="md:absolute md:left-[calc(50%+8px)] md:top-6 md:w-[340px]">
-            <div className="content-stretch flex flex-col gap-[32px] items-start not-italic w-full">
-              <div className="flex flex-col gap-[8px] w-full">
-                <ScrollFadeIn delay={0.1}>
-                <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
-                </ScrollFadeIn>
-                <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
-                  <ScrollFadeIn delay={0.2}>
-                    <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
-                  </ScrollFadeIn>
-                  <ScrollFadeIn delay={0.3}>
-                    <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
-                  </ScrollFadeIn>
-                  <ScrollFadeIn delay={0.4}>
-                    <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
-                  </ScrollFadeIn>
-                </div>
-              </div>
-
-              <ScrollFadeIn className="w-full" delay={0.5}>
-                <label className="w-full">
-                  <span className="sr-only">Enter your email</span>
-                  <input
-                    className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
-                    inputMode="email"
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="Enter Your Email"
-                    autoComplete="email"
-                    type="text"
-                    value={email}
-                  />
-                </label>
+        <div className="not-italic md:col-start-3 md:row-start-1">
+          <div className="flex flex-col gap-[8px]">
+            <ScrollFadeIn delay={0.1}>
+              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
+            </ScrollFadeIn>
+            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
+              <ScrollFadeIn delay={0.2}>
+                <button className="block text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
               </ScrollFadeIn>
-
-              <ScrollFadeIn className="w-full" delay={0.6}>
-              <button
-                className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors disabled:pointer-events-none disabled:opacity-60 enabled:hover:bg-[#3a5e3c]"
-                disabled={!isValidEmail}
-                onMouseEnter={() => setIsSubscribeHovered(true)}
-                onMouseLeave={() => setIsSubscribeHovered(false)}
-              >
-                <div className="flex items-center justify-center gap-1">
-                  <motion.p
-                    className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#687d71] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-                    animate={{ x: isSubscribeHovered && isValidEmail ? -8 : 0 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    Subscribe
-                  </motion.p>
-                  <motion.span
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#687d71] transition-colors group-hover:text-[#82f5ad]"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: isSubscribeHovered && isValidEmail ? 1 : 0, x: isSubscribeHovered && isValidEmail ? 0 : -10 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    →
-                  </motion.span>
-                </div>
-              </button>
+              <ScrollFadeIn delay={0.3}>
+                <button className="block text-left transition-colors hover:text-[#82f5ad]">{`Terms & Conditions`}</button>
               </ScrollFadeIn>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-[calc(50%+8px)]">
-            <ScrollFadeIn delay={0.7}>
-              <p>
-                {`Open source protocol. `}
-                <br aria-hidden="true" />
-                Built by Gnosis Guild.
-              </p>
+        </div>
+
+        <div className="content-stretch flex flex-col gap-[32px] items-start not-italic w-full md:col-start-4 md:row-start-1">
+          <div className="flex flex-col gap-[8px] w-full">
+            <ScrollFadeIn delay={0.1}>
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
             </ScrollFadeIn>
+            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
+              <ScrollFadeIn delay={0.2}>
+                <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
+              </ScrollFadeIn>
+              <ScrollFadeIn delay={0.3}>
+                <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
+              </ScrollFadeIn>
+              <ScrollFadeIn delay={0.4}>
+                <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
+              </ScrollFadeIn>
+            </div>
           </div>
+
+          <ScrollFadeIn className="w-full" delay={0.5}>
+            <label className="w-full">
+              <span className="sr-only">Enter your email</span>
+              <input
+                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
+                inputMode="email"
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Enter Your Email"
+                autoComplete="email"
+                type="text"
+                value={email}
+              />
+            </label>
+          </ScrollFadeIn>
+
+          <ScrollFadeIn className="w-full" delay={0.6}>
+            <button
+              className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors disabled:pointer-events-none disabled:opacity-60 enabled:hover:bg-[#3a5e3c]"
+              disabled={!isValidEmail}
+              onMouseEnter={() => setIsSubscribeHovered(true)}
+              onMouseLeave={() => setIsSubscribeHovered(false)}
+            >
+              <AnimatedButtonContent
+                arrowClassName="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#687d71] transition-colors group-hover:text-[#82f5ad]"
+                isHovered={isSubscribeHovered && isValidEmail}
+                textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#687d71] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+              >
+                Subscribe
+              </AnimatedButtonContent>
+            </button>
+          </ScrollFadeIn>
+        </div>
+
+        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-1 md:row-start-2 md:self-end">
+          <ScrollFadeIn delay={0.7}>
+            <p>{`All Rights Reserved © 2026`}</p>
+          </ScrollFadeIn>
+        </div>
+
+        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-2 md:row-start-2 md:self-end">
+          <ScrollFadeIn delay={0.8}>
+            <p>
+              {`Open source protocol. `}
+              <br aria-hidden="true" />
+              Built by Gnosis Guild.
+            </p>
+          </ScrollFadeIn>
         </div>
       </div>
     </footer>
@@ -1691,6 +1653,14 @@ function Frame32() {
 }
 
 export default function Desktop() {
+  const [headerReady, setHeaderReady] = useState(false);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setHeaderReady(true));
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
       <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden bg-[#d9fce8] md:left-1/2 md:top-[63px] md:-translate-x-1/2" data-name="image 66">
@@ -1704,11 +1674,11 @@ export default function Desktop() {
       <Frame20 />
       <Frame15 />
       <motion.div
-        animate={{ y: 0 }}
-        className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
+        animate={{ y: headerReady ? 0 : -72 }}
+        className="md:absolute relative z-50 bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
         data-name="Header"
-        initial={{ y: "-100%" }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: -72 }}
+        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
           <motion.a
