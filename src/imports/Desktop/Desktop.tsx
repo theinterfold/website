@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 import { motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
 import imgImage66 from "./b2a665648dcdbaa537f982baed705f51f9563175.png";
@@ -276,7 +277,7 @@ function Frame3() {
 
   return (
     <button
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -303,7 +304,7 @@ function Frame3() {
 
 function Frame26() {
   return (
-    <div className="bg-[#d9fce8] content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -372,7 +373,7 @@ function Frame4() {
 
 function Frame28() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -431,7 +432,7 @@ function Frame5() {
 
 function Frame29() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none">
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -501,6 +502,288 @@ function Frame14() {
   );
 }
 
+const executionFlowLinePaths = [
+  svgPaths.p123a9f60,
+  svgPaths.p21624440,
+  svgPaths.pe4db960,
+  svgPaths.p510e600,
+  svgPaths.p2e229900,
+  svgPaths.pc115780,
+  svgPaths.p3bf3d180,
+  svgPaths.p3f53d2c0,
+  svgPaths.p21bd2000,
+  svgPaths.p313dfde0,
+  "M711.769 127.996H778.918",
+  svgPaths.p5f6cf80,
+  svgPaths.p2a2f8580,
+  svgPaths.p21910e80,
+  svgPaths.p39d77040,
+  svgPaths.p1e4e5a40,
+  svgPaths.pf569a00,
+  svgPaths.p35357400,
+  svgPaths.pd678600,
+] as const;
+
+const executionFlowViewBox = {
+  height: 256,
+  width: 819.892,
+};
+
+const executionFlowVertexShader = `
+  attribute float aAlong;
+  attribute float aOffset;
+  varying float vAlong;
+  varying float vOffset;
+
+  void main() {
+    vAlong = aAlong;
+    vOffset = aOffset;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const executionFlowFragmentShader = `
+  precision highp float;
+
+  uniform float uOpacity;
+  uniform float uTime;
+  varying float vAlong;
+  varying float vOffset;
+
+  void main() {
+    float head = fract(uTime + vOffset);
+    float distanceToHead = abs(fract(vAlong - head + 0.5) - 0.5);
+    float signal = smoothstep(0.18, 0.0, distanceToHead);
+    float alpha = pow(signal, 1.45) * uOpacity;
+
+    if (alpha < 0.01) {
+      discard;
+    }
+
+    gl_FragColor = vec4(0.5098, 0.9608, 0.6784, alpha);
+  }
+`;
+
+function parseExecutionFlowPath(pathData: string) {
+  const tokens = pathData.match(/[MLHV]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi) ?? [];
+  const points: THREE.Vector2[] = [];
+  let command = "";
+  let cursor = new THREE.Vector2(0, 0);
+
+  for (let index = 0; index < tokens.length; ) {
+    const token = tokens[index];
+
+    if (/^[MLHV]$/i.test(token)) {
+      command = token.toUpperCase();
+      index += 1;
+      continue;
+    }
+
+    if (command === "M" || command === "L") {
+      const x = Number(token);
+      const y = Number(tokens[index + 1]);
+      cursor = new THREE.Vector2(x, y);
+      points.push(cursor.clone());
+      index += 2;
+      if (command === "M") {
+        command = "L";
+      }
+      continue;
+    }
+
+    if (command === "H") {
+      cursor = new THREE.Vector2(Number(token), cursor.y);
+      points.push(cursor.clone());
+      index += 1;
+      continue;
+    }
+
+    if (command === "V") {
+      cursor = new THREE.Vector2(cursor.x, Number(token));
+      points.push(cursor.clone());
+      index += 1;
+      continue;
+    }
+
+    index += 1;
+  }
+
+  const firstPoint = points[0];
+  const lastPoint = points[points.length - 1];
+  if (firstPoint && lastPoint && (firstPoint.x > lastPoint.x || (firstPoint.x === lastPoint.x && firstPoint.y > lastPoint.y))) {
+    points.reverse();
+  }
+
+  const distances = [0];
+  for (let index = 1; index < points.length; index += 1) {
+    distances.push(distances[index - 1] + points[index].distanceTo(points[index - 1]));
+  }
+
+  const length = distances[distances.length - 1] ?? 0;
+
+  return { distances, length, points };
+}
+
+function getExecutionFlowMiter(points: THREE.Vector2[], pointIndex: number, halfWidth: number) {
+  const previousPoint = points[Math.max(0, pointIndex - 1)];
+  const point = points[pointIndex];
+  const nextPoint = points[Math.min(points.length - 1, pointIndex + 1)];
+  const previousDirection = point.clone().sub(previousPoint);
+  const nextDirection = nextPoint.clone().sub(point);
+
+  if (previousDirection.lengthSq() === 0 && nextDirection.lengthSq() === 0) {
+    return new THREE.Vector2(0, halfWidth);
+  }
+
+  if (previousDirection.lengthSq() === 0) {
+    const direction = nextDirection.normalize();
+    return new THREE.Vector2(-direction.y, direction.x).multiplyScalar(halfWidth);
+  }
+
+  if (nextDirection.lengthSq() === 0) {
+    const direction = previousDirection.normalize();
+    return new THREE.Vector2(-direction.y, direction.x).multiplyScalar(halfWidth);
+  }
+
+  const previousNormal = new THREE.Vector2(-previousDirection.y, previousDirection.x).normalize();
+  const nextNormal = new THREE.Vector2(-nextDirection.y, nextDirection.x).normalize();
+  const miter = previousNormal.clone().add(nextNormal);
+
+  if (miter.lengthSq() < 0.0001) {
+    return nextNormal.multiplyScalar(halfWidth);
+  }
+
+  miter.normalize();
+  const scale = halfWidth / Math.max(0.25, miter.dot(nextNormal));
+
+  return miter.multiplyScalar(Math.min(scale, halfWidth * 3));
+}
+
+function createExecutionFlowGeometry(lineWidth: number) {
+  const halfWidth = lineWidth / 2;
+  const positions: number[] = [];
+  const alongs: number[] = [];
+  const offsets: number[] = [];
+  const indices: number[] = [];
+
+  executionFlowLinePaths.forEach((pathData, pathIndex) => {
+    const { distances, length, points } = parseExecutionFlowPath(pathData);
+    if (points.length < 2 || length === 0) {
+      return;
+    }
+
+    const baseVertexIndex = positions.length / 3;
+    const offset = (pathIndex * 0.071) % 1;
+
+    points.forEach((point, pointIndex) => {
+      const normal = getExecutionFlowMiter(points, pointIndex, halfWidth);
+      const along = distances[pointIndex] / length;
+
+      positions.push(point.x + normal.x, point.y + normal.y, 0);
+      positions.push(point.x - normal.x, point.y - normal.y, 0);
+      alongs.push(along, along);
+      offsets.push(offset, offset);
+    });
+
+    for (let pointIndex = 0; pointIndex < points.length - 1; pointIndex += 1) {
+      const current = baseVertexIndex + pointIndex * 2;
+      indices.push(current, current + 1, current + 2, current + 1, current + 3, current + 2);
+    }
+  });
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute("aAlong", new THREE.Float32BufferAttribute(alongs, 1));
+  geometry.setAttribute("aOffset", new THREE.Float32BufferAttribute(offsets, 1));
+  geometry.setIndex(indices);
+  geometry.computeBoundingSphere();
+
+  return geometry;
+}
+
+function createExecutionFlowMaterial(opacity: number) {
+  return new THREE.ShaderMaterial({
+    blending: THREE.NormalBlending,
+    depthTest: false,
+    depthWrite: false,
+    fragmentShader: executionFlowFragmentShader,
+    side: THREE.DoubleSide,
+    transparent: true,
+    uniforms: {
+      uOpacity: { value: opacity },
+      uTime: { value: 0 },
+    },
+    vertexShader: executionFlowVertexShader,
+  });
+}
+
+function ExecutionFlowThreeGlows() {
+  const mountRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!mount || reduceMotion.matches) {
+      return undefined;
+    }
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.domElement.style.display = "block";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.width = "100%";
+    mount.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(0, executionFlowViewBox.width, 0, executionFlowViewBox.height, -10, 10);
+    camera.position.z = 1;
+
+    const haloMaterial = createExecutionFlowMaterial(0.22);
+    const coreMaterial = createExecutionFlowMaterial(0.92);
+    const haloMesh = new THREE.Mesh(createExecutionFlowGeometry(8), haloMaterial);
+    const coreMesh = new THREE.Mesh(createExecutionFlowGeometry(2.18269), coreMaterial);
+    scene.add(haloMesh, coreMesh);
+
+    const resize = () => {
+      const rect = mount.getBoundingClientRect();
+      renderer.setSize(rect.width, rect.height, false);
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(mount);
+    resize();
+
+    let animationFrame = 0;
+    const clock = new THREE.Clock();
+
+    const animate = () => {
+      const progress = (clock.getElapsedTime() * 0.16) % 1;
+      const easedProgress = progress - Math.sin(progress * Math.PI * 2) * 0.08;
+      const time = easedProgress;
+      haloMaterial.uniforms.uTime.value = time;
+      coreMaterial.uniforms.uTime.value = time;
+      renderer.render(scene, camera);
+      animationFrame = window.requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+      mount.removeChild(renderer.domElement);
+      haloMesh.geometry.dispose();
+      coreMesh.geometry.dispose();
+      haloMaterial.dispose();
+      coreMaterial.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div aria-hidden="true" className="absolute inset-0 pointer-events-none execution-flow-three-glows" ref={mountRef} />;
+}
+
 function Layer() {
   return (
     <div className="col-1 h-[256px] ml-0 mt-[0.57px] relative row-1 w-[819.892px]" data-name="Layer_1">
@@ -516,17 +799,17 @@ function Layer() {
             <path d={svgPaths.p8ed2f00} fill="var(--fill-0, #82F5AD)" id="Vector_7" />
             <path d={svgPaths.p3983bd80} fill="var(--fill-0, #82F5AD)" id="Vector_8" />
           </g>
-          <path d={svgPaths.p123a9f60} id="Vector_9" stroke="url(#paint0_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p21624440} id="Vector_10" stroke="url(#paint1_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pe4db960} id="Vector_11" stroke="url(#paint2_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p510e600} id="Vector_12" stroke="url(#paint3_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p2e229900} id="Vector_13" stroke="url(#paint4_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pc115780} id="Vector_14" stroke="url(#paint5_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p3bf3d180} id="Vector_15" stroke="url(#paint6_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p3f53d2c0} id="Vector_16" stroke="url(#paint7_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p21bd2000} id="Vector_17" stroke="url(#paint8_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p313dfde0} id="Vector_18" stroke="url(#paint9_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d="M711.769 127.996H778.918" id="Vector_19" stroke="url(#paint10_linear_0_363)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.pe4db960} id="Vector_11" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p510e600} id="Vector_12" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p2e229900} id="Vector_13" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.pc115780} id="Vector_14" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p3bf3d180} id="Vector_15" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p3f53d2c0} id="Vector_16" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p21bd2000} id="Vector_17" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d={svgPaths.p313dfde0} id="Vector_18" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path d="M711.769 127.996H778.918" id="Vector_19" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
           <path d={svgPaths.p12f7bbf0} fill="var(--fill-0, #82F5AD)" id="Vector_20" />
           <path d={svgPaths.p5f6cf80} id="Vector_21" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
           <path d={svgPaths.p2a2f8580} id="Vector_22" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
@@ -615,6 +898,7 @@ function Layer() {
           </clipPath>
         </defs>
       </svg>
+      <ExecutionFlowThreeGlows />
     </div>
   );
 }
@@ -696,7 +980,7 @@ function Frame31() {
 
 function Frame15() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full">
+    <div id="execution-model" className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full">
       <ScrollFadeIn>
         <Frame14 />
       </ScrollFadeIn>
@@ -711,9 +995,9 @@ function Frame15() {
 function Frame21() {
   return (
     <div className="capitalize content-stretch flex font-['ABC_Gramercy:Regular',sans-serif] gap-[24px] md:gap-[40px] items-center justify-end leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] text-right tracking-[-0.66px] whitespace-nowrap">
-      <p className="relative shrink-0">Community</p>
-      <p className="relative shrink-0">Protocol</p>
-      <p className="relative shrink-0">Docs</p>
+      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/community">Community</a>
+      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/protocol">Protocol</a>
+      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/docs">Docs</a>
     </div>
   );
 }
@@ -913,7 +1197,7 @@ export default function Desktop() {
       <Frame15 />
       <div className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full" data-name="Header">
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-          <div className="justify-self-start h-[17.239px] w-[120.421px]" data-name="The Interfold">
+          <a aria-label="The Interfold home" className="justify-self-start h-[17.239px] w-[120.421px]" data-name="The Interfold" href="/">
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
               <g id="The Interfold">
                 <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
@@ -929,8 +1213,8 @@ export default function Desktop() {
                 <path d={svgPaths.p12150980} fill="#3A5E3C" />
               </g>
             </svg>
-          </div>
-          <div className="justify-self-center h-[35.071px] w-[45.703px]" data-name="Vector">
+          </a>
+          <a aria-label="The Interfold home" className="justify-self-center h-[35.071px] w-[45.703px]" data-name="Vector" href="/">
             <div className="size-full">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
                 <g id="Vector">
@@ -945,7 +1229,7 @@ export default function Desktop() {
                 </g>
               </svg>
             </div>
-          </div>
+          </a>
           <div className="min-w-0 justify-self-end">
             <Frame21 />
           </div>

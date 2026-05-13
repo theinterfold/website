@@ -222,7 +222,7 @@ export function MobileVersion() {
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
       {/* Header */}
       <div className="sticky top-0 z-50 relative flex items-center justify-center bg-[#d9fce8] px-6 py-4">
-        <div className="absolute left-6 h-4 w-28">
+        <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
             <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
@@ -236,9 +236,9 @@ export function MobileVersion() {
             <path d={svgPaths.p102bd800} fill="#3A5E3C" />
             <path d={svgPaths.p12150980} fill="#3A5E3C" />
           </svg>
-        </div>
+        </a>
 
-        <div className="h-7 w-8">
+        <a aria-label="The Interfold home" className="h-7 w-8" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
             <path d={svgPaths.p2c3ef4f0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
             <path d={svgPaths.p18d4bac0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
@@ -249,7 +249,7 @@ export function MobileVersion() {
             <path d={svgPaths.p3fc0d800} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
             <path d={svgPaths.p1f4a0a00} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
           </svg>
-        </div>
+        </a>
 
         <div className="absolute right-6">
           <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
@@ -271,27 +271,30 @@ export function MobileVersion() {
             Menu
           </p>
           <div className="flex flex-col gap-0 p-[0px] m-[0px]">
-            <button
-              onClick={() => setIsMenuOpen(false)}
+            <a
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="/community"
+              onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
             >
               Community
-            </button>
-            <button
-              onClick={() => setIsMenuOpen(false)}
+            </a>
+            <a
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="/protocol"
+              onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
             >
               Protocol
-            </button>
-            <button
-              onClick={() => setIsMenuOpen(false)}
+            </a>
+            <a
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="/docs"
+              onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
             >
               Docs
-            </button>
+            </a>
           </div>
         </motion.div>
       )}
