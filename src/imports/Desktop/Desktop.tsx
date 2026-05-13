@@ -12,47 +12,52 @@ import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 function Frame() {
   return (
     <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(566px+min(44.444vw,640px))]">
-      <ScrollFadeIn>
-        <motion.div
-          className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6">
+      <motion.div
+        className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+      >
+        <div className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-0 xl:max-w-[1052px]">
+          <ScrollFadeIn className="shrink-0" delay={0.05}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
               <path d={svgPaths.p67816f0} fill="#3A5E3C" />
               <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
               <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
             </svg>
-
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.15}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="422 41 46 35">
               <path d={svgPaths.pfe27200} fill="#3A5E3C" />
             </svg>
-
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.25}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="586 41 34 35">
               <path d={svgPaths.p36323370} fill="#3A5E3C" />
               <path d={svgPaths.pdec5d70} fill="#3A5E3C" />
               <path d={svgPaths.p1ce05600} fill="#3A5E3C" />
               <path d={svgPaths.p3250d600} fill="#3A5E3C" />
             </svg>
-
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.35}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="738 41 164 35">
               <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
               <path d={svgPaths.p59a0800} fill="#3A5E3C" />
             </svg>
-
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.45}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1020 41 34 35">
               <path clipRule="evenodd" d={svgPaths.p2f408d00} fill="#3A5E3C" fillRule="evenodd" />
             </svg>
-
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.55}>
             <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1172 41 34 35">
               <path d={svgPaths.p1b95080} fill="#3A5E3C" />
             </svg>
-          </div>
-        </motion.div>
-      </ScrollFadeIn>
+          </ScrollFadeIn>
+        </div>
+      </motion.div>
     </div>
   );
 }
@@ -60,8 +65,12 @@ function Frame() {
 function Frame16() {
   return (
     <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
-      <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible.</p>
+      <ScrollFadeIn className="w-full">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full" delay={0.1}>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -111,40 +120,40 @@ function Frame25() {
 function Frame23() {
   return (
     <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
-      <ScrollFadeIn className="w-full" delay={0.1}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+      <ScrollFadeIn className="w-full h-full" delay={0.3}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame22 />
-          <div className="relative rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-[104.45%] left-[-42.93%] max-w-none top-[10.39%] w-[185.58%]" src={imgChatGptImageApr232026051856Pm11} />
+                <img alt="" className="absolute h-[104.45%] left-1/2 max-w-none top-[10.39%] w-[185.58%] -translate-x-1/2 lg:left-[-42.93%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm11} />
               </div>
             </div>
           </div>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.2}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+      <ScrollFadeIn className="w-full h-full" delay={0.4}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame24 />
-          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
-            <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-              <div className="absolute bg-[#121718] inset-0" />
-              <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
-                <img alt="" className="absolute h-[87.5%] left-[-27.87%] max-w-none top-[18.03%] w-[155.47%]" src={imgChatGptImageApr232026051856Pm12} />
+          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
+              <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
+              <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
+                <img alt="" className="absolute h-[87.5%] left-1/2 max-w-none top-[18.03%] w-[155.47%] -translate-x-1/2 lg:left-[-27.87%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm12} />
               </div>
             </div>
           </div>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.3}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+      <ScrollFadeIn className="w-full h-full" delay={0.5}>
+        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <Frame25 />
-          <div className="relative shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
-            <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-              <div className="absolute bg-[#121718] inset-0" />
-              <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden">
-                <img alt="" className="absolute h-[89.97%] left-[-30.06%] max-w-none top-[17.63%] w-[159.86%]" src={imgChatGptImageApr232026051856Pm13} />
+          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+            <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
+              <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
+              <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
+                <img alt="" className="absolute h-[89.97%] left-1/2 max-w-none top-[17.63%] w-[159.86%] -translate-x-1/2 lg:left-[-30.06%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm13} />
               </div>
             </div>
           </div>
@@ -157,9 +166,7 @@ function Frame23() {
 function Frame19() {
   return (
     <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1604px+min(44.444vw,640px))] w-full">
-      <ScrollFadeIn>
-        <Frame16 />
-      </ScrollFadeIn>
+      <Frame16 />
       <Frame23 />
     </div>
   );
@@ -168,9 +175,15 @@ function Frame19() {
 function Frame8() {
   return (
     <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[539.639px] px-4 md:px-0">
-      <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">Confidential coordination becomes real through both applications and operators:</p>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
+      <ScrollFadeIn className="w-full">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full" delay={0.1}>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">Confidential coordination becomes real through both applications and operators:</p>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full" delay={0.4}>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -238,8 +251,12 @@ function Frame1() {
 function Frame9() {
   return (
     <div className="content-stretch flex flex-col md:flex-row gap-[8.657px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
-      <Frame2 />
-      <Frame1 />
+      <ScrollFadeIn delay={0.3}>
+        <Frame2 />
+      </ScrollFadeIn>
+      <ScrollFadeIn delay={0.4}>
+        <Frame1 />
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -256,9 +273,7 @@ function Frame10() {
 function Frame11() {
   return (
     <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2588px+min(44.444vw,640px))] w-full">
-      <ScrollFadeIn>
-        <Frame10 />
-      </ScrollFadeIn>
+      <Frame10 />
     </div>
   );
 }
@@ -266,8 +281,12 @@ function Frame11() {
 function Frame18() {
   return (
     <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
-      <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now.</p>
+      <ScrollFadeIn className="w-full">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full" delay={0.1}>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -470,7 +489,7 @@ function Frame30() {
           <Frame28 />
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.3}>
+      <ScrollFadeIn className="w-full" delay={0.5}>
         <div className="content-stretch flex items-center relative shrink-0 w-full">
           <Frame29 />
         </div>
@@ -482,9 +501,7 @@ function Frame30() {
 function Frame20() {
   return (
     <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3087px+min(44.444vw,640px))] w-full">
-      <ScrollFadeIn>
-        <Frame18 />
-      </ScrollFadeIn>
+      <Frame18 />
       <Frame30 />
     </div>
   );
@@ -493,41 +510,58 @@ function Frame20() {
 function Frame14() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
-      <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
-        <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
-        <p className="leading-[1.075] whitespace-pre">execution Model</p>
-      </div>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold introduces a structural fold in digital systems, making coordination possible without third-party custody, data exposure, or trusted hardware. `}</p>
+      <ScrollFadeIn className="w-full flex justify-center">
+        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
+          <p className="leading-[1.075] whitespace-pre">execution Model</p>
+        </div>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold introduces a structural fold in digital systems, making coordination possible without third-party custody, data exposure, or trusted hardware. `}</p>
+      </ScrollFadeIn>
     </div>
   );
 }
 
 const executionFlowLinePaths = [
-  svgPaths.p123a9f60,
-  svgPaths.p21624440,
-  svgPaths.pe4db960,
-  svgPaths.p510e600,
-  svgPaths.p2e229900,
-  svgPaths.pc115780,
-  svgPaths.p3bf3d180,
-  svgPaths.p3f53d2c0,
-  svgPaths.p21bd2000,
-  svgPaths.p313dfde0,
-  "M711.769 127.996H778.918",
-  svgPaths.p5f6cf80,
-  svgPaths.p2a2f8580,
-  svgPaths.p21910e80,
-  svgPaths.p39d77040,
-  svgPaths.p1e4e5a40,
-  svgPaths.pf569a00,
-  svgPaths.p35357400,
-  svgPaths.pd678600,
+  { d: svgPaths.p123a9f60, order: 0 },
+  { d: svgPaths.p21624440, order: 1 },
+  { d: svgPaths.pe4db960, order: 2 },
+  { d: svgPaths.p510e600, order: 3 },
+  { d: svgPaths.p2e229900, order: 4 },
+  { d: svgPaths.pc115780, order: 5 },
+  { d: svgPaths.p3bf3d180, order: 6 },
+  { d: svgPaths.p3f53d2c0, order: 7 },
+  { d: svgPaths.p39d77040, order: 0 },
+  { d: svgPaths.p5f6cf80, order: 1 },
+  { d: svgPaths.pf569a00, order: 2 },
+  { d: svgPaths.p21910e80, order: 3 },
+  { d: svgPaths.p313dfde0, order: 4 },
+  { d: "M711.769 127.996H778.918", order: 4 },
+  { d: svgPaths.pd678600, order: 5 },
+  { d: svgPaths.p35357400, order: 6 },
+  { d: svgPaths.p1e4e5a40, order: 7 },
+  { d: svgPaths.p21bd2000, order: 8 },
+  { d: svgPaths.p2a2f8580, order: 9 },
 ] as const;
+
+const executionFlowMaxOrder = Math.max(...executionFlowLinePaths.map(({ order }) => order));
+const executionFlowCycleDuration = 1 / 0.22;
+const executionFlowInputSquareLead = 0.09;
 
 const executionFlowViewBox = {
   height: 256,
   width: 819.892,
 };
+
+type ExecutionFlowHoverZone = "inputs" | "nodes" | "output" | null;
+
+function getExecutionFlowStagger(order: number, pathIndex = 0) {
+  const normalizedOrder = executionFlowMaxOrder === 0 ? 0 : order / executionFlowMaxOrder;
+  const easedOrder = normalizedOrder * normalizedOrder * normalizedOrder * (normalizedOrder * (normalizedOrder * 6 - 15) + 10);
+
+  return ((1 - easedOrder) * 0.42 + pathIndex * 0.004) % 1;
+}
 
 const executionFlowVertexShader = `
   attribute float aAlong;
@@ -553,8 +587,8 @@ const executionFlowFragmentShader = `
   void main() {
     float head = fract(uTime + vOffset);
     float distanceToHead = abs(fract(vAlong - head + 0.5) - 0.5);
-    float signal = smoothstep(0.18, 0.0, distanceToHead);
-    float alpha = pow(signal, 1.45) * uOpacity;
+    float signal = smoothstep(0.24, 0.0, distanceToHead);
+    float alpha = pow(signal, 1.18) * uOpacity;
 
     if (alpha < 0.01) {
       discard;
@@ -666,14 +700,14 @@ function createExecutionFlowGeometry(lineWidth: number) {
   const offsets: number[] = [];
   const indices: number[] = [];
 
-  executionFlowLinePaths.forEach((pathData, pathIndex) => {
-    const { distances, length, points } = parseExecutionFlowPath(pathData);
+  executionFlowLinePaths.forEach(({ d, order }, pathIndex) => {
+    const { distances, length, points } = parseExecutionFlowPath(d);
     if (points.length < 2 || length === 0) {
       return;
     }
 
     const baseVertexIndex = positions.length / 3;
-    const offset = (pathIndex * 0.071) % 1;
+    const offset = getExecutionFlowStagger(order, pathIndex);
 
     points.forEach((point, pointIndex) => {
       const normal = getExecutionFlowMiter(points, pointIndex, halfWidth);
@@ -717,7 +751,7 @@ function createExecutionFlowMaterial(opacity: number) {
   });
 }
 
-function ExecutionFlowThreeGlows() {
+function ExecutionFlowThreeGlows({ isHidden }: { isHidden: boolean }) {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -739,10 +773,10 @@ function ExecutionFlowThreeGlows() {
     const camera = new THREE.OrthographicCamera(0, executionFlowViewBox.width, 0, executionFlowViewBox.height, -10, 10);
     camera.position.z = 1;
 
-    const haloMaterial = createExecutionFlowMaterial(0.22);
-    const coreMaterial = createExecutionFlowMaterial(0.92);
-    const haloMesh = new THREE.Mesh(createExecutionFlowGeometry(8), haloMaterial);
-    const coreMesh = new THREE.Mesh(createExecutionFlowGeometry(2.18269), coreMaterial);
+    const haloMaterial = createExecutionFlowMaterial(0.2);
+    const coreMaterial = createExecutionFlowMaterial(0.96);
+    const haloMesh = new THREE.Mesh(createExecutionFlowGeometry(8.6), haloMaterial);
+    const coreMesh = new THREE.Mesh(createExecutionFlowGeometry(3.15), coreMaterial);
     scene.add(haloMesh, coreMesh);
 
     const resize = () => {
@@ -758,9 +792,7 @@ function ExecutionFlowThreeGlows() {
     const clock = new THREE.Clock();
 
     const animate = () => {
-      const progress = (clock.getElapsedTime() * 0.16) % 1;
-      const easedProgress = progress - Math.sin(progress * Math.PI * 2) * 0.08;
-      const time = easedProgress;
+      const time = (clock.getElapsedTime() * 0.22) % 1;
       haloMaterial.uniforms.uTime.value = time;
       coreMaterial.uniforms.uTime.value = time;
       renderer.render(scene, camera);
@@ -781,72 +813,470 @@ function ExecutionFlowThreeGlows() {
     };
   }, []);
 
-  return <div aria-hidden="true" className="absolute inset-0 pointer-events-none execution-flow-three-glows" ref={mountRef} />;
+  return (
+    <div
+      aria-hidden="true"
+      className={`absolute inset-0 pointer-events-none execution-flow-three-glows transition-opacity duration-200 ${isHidden ? "opacity-0" : "opacity-100"}`}
+      ref={mountRef}
+    />
+  );
 }
 
-function Layer() {
+type ExecutionFlowInputSquareProps = {
+  d: string;
+  order: number;
+};
+
+type ExecutionFlowPulseDotProps = {
+  order: number;
+  x: number;
+  y: number;
+};
+
+function ExecutionFlowInputSquare({ d, order }: ExecutionFlowInputSquareProps) {
   return (
-    <div className="col-1 h-[256px] ml-0 mt-[0.57px] relative row-1 w-[819.892px]" data-name="Layer_1">
+    <path
+      className="execution-flow-input-square"
+      d={d}
+      fill="#252525"
+      style={{
+        animationDelay: `${-(getExecutionFlowStagger(order) + executionFlowInputSquareLead) * executionFlowCycleDuration}s`,
+        animationDuration: `${executionFlowCycleDuration}s`,
+      }}
+    />
+  );
+}
+
+function ExecutionFlowPulseDot({ order, x, y }: ExecutionFlowPulseDotProps) {
+  return (
+    <g
+      className="execution-flow-pulse-dot"
+      style={{
+        animationDelay: `${-getExecutionFlowStagger(order) * executionFlowCycleDuration}s`,
+        animationDuration: `${executionFlowCycleDuration}s`,
+        transformBox: "fill-box",
+        transformOrigin: "center",
+      }}
+    >
+      <circle className="execution-flow-pulse-dot-halo" cx={x} cy={y} r="5.6" />
+      <circle className="execution-flow-pulse-dot-core" cx={x} cy={y} r="2.7" />
+    </g>
+  );
+}
+
+function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
+  const hoverClass =
+    hoveredZone === "nodes"
+      ? "execution-flow-pulse-dots-hover-nodes"
+      : hoveredZone === "output"
+        ? "execution-flow-pulse-dots-hover-output"
+        : hoveredZone === "inputs"
+          ? "execution-flow-pulse-dots-hidden"
+          : "";
+
+  return (
+    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+      <g clipPath="url(#clip0_execution_flow_pulse_dots)">
+        <style>{`
+          .execution-flow-pulse-dot {
+            animation-name: execution-flow-pulse-dot-scale;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            animation-iteration-count: infinite;
+          }
+
+          .execution-flow-pulse-dot-core {
+            fill: #82F5AD;
+          }
+
+          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot,
+          .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot {
+            opacity: 0;
+            animation: none;
+          }
+
+          .execution-flow-pulse-dots-hidden .execution-flow-final-dot,
+          .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot {
+            opacity: 0.5;
+            animation: none;
+          }
+
+          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot-core,
+          .execution-flow-pulse-dots-hidden .execution-flow-final-dot,
+          .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot,
+          .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot-core {
+            fill: #252525 !important;
+          }
+
+          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot-halo,
+          .execution-flow-pulse-dots-hidden .execution-flow-final-dot-halo,
+          .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot-halo {
+            opacity: 0;
+            animation: none;
+          }
+
+          .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot-halo {
+            opacity: 0;
+            animation: none;
+          }
+
+          .execution-flow-pulse-dots-hover-nodes .execution-flow-pulse-dot {
+            animation-name: execution-flow-hover-dot-scale;
+            animation-duration: 1.8s !important;
+            animation-delay: 0s !important;
+          }
+
+          .execution-flow-pulse-dots-hover-nodes .execution-flow-pulse-dot-halo {
+            animation-name: execution-flow-hover-dot-halo !important;
+            animation-duration: 1.8s !important;
+            animation-delay: 0s !important;
+          }
+
+          .execution-flow-pulse-dots-hover-output .execution-flow-final-dot {
+            animation-duration: 1.65s;
+            animation-delay: 0s;
+            animation-name: execution-flow-hover-final-dot-scale, execution-flow-final-dot-hover-color;
+            filter: drop-shadow(0 0 4px rgba(130, 245, 173, 0.65)) drop-shadow(0 0 10px rgba(130, 245, 173, 0.28));
+          }
+
+          .execution-flow-pulse-dots-hover-output .execution-flow-final-dot-halo {
+            animation-duration: 1.65s;
+            animation-delay: 0s;
+          }
+
+          .execution-flow-final-dot {
+            animation-name: execution-flow-final-dot-scale, execution-flow-final-dot-color;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
+            animation-iteration-count: infinite, infinite;
+            animation-duration: ${executionFlowCycleDuration}s;
+            animation-delay: ${-getExecutionFlowStagger(4) * executionFlowCycleDuration}s;
+            fill: #252525;
+            transform-box: fill-box;
+            transform-origin: center;
+          }
+
+          .execution-flow-pulse-dot-halo {
+            fill: #82F5AD;
+            opacity: 0;
+          }
+
+          .execution-flow-final-dot-halo {
+            animation-name: execution-flow-final-dot-halo;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            animation-iteration-count: infinite;
+            animation-duration: ${executionFlowCycleDuration}s;
+            animation-delay: ${-getExecutionFlowStagger(4) * executionFlowCycleDuration}s;
+            fill: #82F5AD;
+            opacity: 0;
+          }
+
+          .execution-flow-pulse-dot .execution-flow-pulse-dot-halo {
+            animation-name: execution-flow-pulse-dot-halo;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            animation-iteration-count: infinite;
+            animation-duration: inherit;
+            animation-delay: inherit;
+          }
+
+          @keyframes execution-flow-pulse-dot-scale {
+            0% {
+              transform: scale(1.34);
+            }
+
+            12%,
+            100% {
+              transform: scale(1);
+            }
+          }
+
+          @keyframes execution-flow-final-dot-scale {
+            0% {
+              transform: scale(1);
+            }
+
+            5% {
+              transform: scale(1.09);
+            }
+
+            40%,
+            100% {
+              transform: scale(1);
+            }
+          }
+
+          @keyframes execution-flow-final-dot-color {
+            0% {
+              fill: #252525;
+            }
+
+            8%,
+            18% {
+              fill: #82F5AD;
+            }
+
+            82%,
+            100% {
+              fill: #252525;
+            }
+          }
+
+          @keyframes execution-flow-hover-final-dot-scale {
+            0%,
+            100% {
+              transform: scale(1);
+            }
+
+            45% {
+              transform: scale(1.12);
+            }
+          }
+
+          @keyframes execution-flow-final-dot-hover-color {
+            0%,
+            100% {
+              fill: #3a5e3c;
+              opacity: 0.86;
+            }
+
+            45% {
+              fill: #82F5AD;
+              opacity: 1;
+            }
+          }
+
+          @keyframes execution-flow-pulse-dot-halo {
+            0% {
+              opacity: 0.38;
+            }
+
+            16%,
+            100% {
+              opacity: 0;
+            }
+          }
+
+          @keyframes execution-flow-hover-dot-scale {
+            0%,
+            100% {
+              transform: scale(1);
+            }
+
+            45% {
+              transform: scale(1.28);
+            }
+          }
+
+          @keyframes execution-flow-hover-dot-halo {
+            0%,
+            100% {
+              opacity: 0.08;
+            }
+
+            45% {
+              opacity: 0.42;
+            }
+          }
+
+          @keyframes execution-flow-final-dot-halo {
+            0% {
+              opacity: 0;
+            }
+
+            5% {
+              opacity: 0.22;
+            }
+
+            38%,
+            100% {
+              opacity: 0;
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .execution-flow-pulse-dot,
+            .execution-flow-pulse-dot .execution-flow-pulse-dot-halo,
+            .execution-flow-final-dot,
+            .execution-flow-final-dot-halo {
+              animation: none;
+            }
+          }
+        `}</style>
+        <circle className="execution-flow-final-dot-halo" cx="805.785" cy="127.979" r="20" />
+        <circle className="execution-flow-final-dot" cx="805.785" cy="127.979" r="13.43" />
+        <ExecutionFlowPulseDot order={0} x={476.758} y={114.521} />
+        <ExecutionFlowPulseDot order={1} x={476.758} y={127.99} />
+        <ExecutionFlowPulseDot order={2} x={476.758} y={141.481} />
+        <ExecutionFlowPulseDot order={3} x={476.758} y={154.927} />
+        <ExecutionFlowPulseDot order={4} x={476.758} y={168.418} />
+        <ExecutionFlowPulseDot order={5} x={476.758} y={181.909} />
+        <ExecutionFlowPulseDot order={6} x={476.758} y={195.354} />
+        <ExecutionFlowPulseDot order={7} x={476.758} y={208.845} />
+      </g>
+      <defs>
+        <clipPath id="clip0_execution_flow_pulse_dots">
+          <rect fill="white" height="256" width="819.892" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
+  const hoverClass =
+    hoveredZone === "inputs"
+      ? "execution-flow-inputs-hover"
+      : hoveredZone
+        ? "execution-flow-inputs-hidden"
+        : "";
+
+  return (
+    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+      <g clipPath="url(#clip0_execution_flow_inputs)">
+        <style>{`
+          .execution-flow-input-square {
+            animation-name: execution-flow-input-square-pulse;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            animation-iteration-count: infinite;
+          }
+
+          .execution-flow-inputs-hidden .execution-flow-input-square {
+            animation: none;
+            fill: #252525;
+            opacity: 0.5;
+            filter: none;
+          }
+
+          .execution-flow-inputs-hover .execution-flow-input-square {
+            animation-name: execution-flow-input-square-hover-pulse;
+            animation-duration: 1.7s !important;
+            animation-delay: 0s !important;
+            filter: drop-shadow(0 0 4px rgba(130, 245, 173, 0.65)) drop-shadow(0 0 10px rgba(130, 245, 173, 0.28));
+          }
+
+          @keyframes execution-flow-input-square-pulse {
+            0% {
+              fill: #252525;
+            }
+
+            8%,
+            18% {
+              fill: #82F5AD;
+            }
+
+            82%,
+            100% {
+              fill: #252525;
+            }
+          }
+
+          @keyframes execution-flow-input-square-hover-pulse {
+            0%,
+            100% {
+              fill: #3a5e3c;
+              opacity: 0.86;
+            }
+
+            45% {
+              fill: #82F5AD;
+              opacity: 1;
+            }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .execution-flow-input-square {
+              animation: none;
+              fill: #252525;
+            }
+          }
+        `}</style>
+        <g id="Group">
+          <ExecutionFlowInputSquare d={svgPaths.p154fa380} order={0} />
+          <ExecutionFlowInputSquare d={svgPaths.p3ec38f00} order={1} />
+          <ExecutionFlowInputSquare d={svgPaths.p34011b80} order={2} />
+          <ExecutionFlowInputSquare d={svgPaths.p13a07d80} order={3} />
+          <ExecutionFlowInputSquare d={svgPaths.p8ed2f00} order={4} />
+          <ExecutionFlowInputSquare d={svgPaths.p1b97f400} order={5} />
+          <ExecutionFlowInputSquare d={svgPaths.p384c6a00} order={6} />
+          <ExecutionFlowInputSquare d={svgPaths.p3983bd80} order={7} />
+        </g>
+      </g>
+      <defs>
+        <clipPath id="clip0_execution_flow_inputs">
+          <rect fill="white" height="256" width="819.892" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
+  return (
+    <div className="col-1 h-[256px] justify-self-center ml-0 mt-[0.57px] relative row-1 w-[819.892px]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
-          <g id="Group">
-            <path d={svgPaths.p154fa380} fill="var(--fill-0, #82F5AD)" id="Vector" />
-            <path d={svgPaths.p3ec38f00} fill="var(--fill-0, #82F5AD)" id="Vector_2" />
-            <path d={svgPaths.p384c6a00} fill="var(--fill-0, #82F5AD)" id="Vector_3" />
-            <path d={svgPaths.p13a07d80} fill="var(--fill-0, #82F5AD)" id="Vector_4" />
-            <path d={svgPaths.p1b97f400} fill="var(--fill-0, #82F5AD)" id="Vector_5" />
-            <path d={svgPaths.p34011b80} fill="var(--fill-0, #82F5AD)" id="Vector_6" />
-            <path d={svgPaths.p8ed2f00} fill="var(--fill-0, #82F5AD)" id="Vector_7" />
-            <path d={svgPaths.p3983bd80} fill="var(--fill-0, #82F5AD)" id="Vector_8" />
+          <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
+            <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.pe4db960} id="Vector_11" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p510e600} id="Vector_12" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p2e229900} id="Vector_13" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.pc115780} id="Vector_14" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p3bf3d180} id="Vector_15" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p3f53d2c0} id="Vector_16" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p21bd2000} id="Vector_17" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p313dfde0} id="Vector_18" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d="M711.769 127.996H778.918" id="Vector_19" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p5f6cf80} id="Vector_21" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p2a2f8580} id="Vector_22" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p21910e80} id="Vector_23" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p39d77040} id="Vector_24" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p1e4e5a40} id="Vector_25" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.pf569a00} id="Vector_26" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.p35357400} id="Vector_27" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path d={svgPaths.pd678600} id="Vector_28" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
           </g>
-          <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pe4db960} id="Vector_11" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p510e600} id="Vector_12" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p2e229900} id="Vector_13" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pc115780} id="Vector_14" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p3bf3d180} id="Vector_15" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p3f53d2c0} id="Vector_16" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p21bd2000} id="Vector_17" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p313dfde0} id="Vector_18" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d="M711.769 127.996H778.918" id="Vector_19" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p12f7bbf0} fill="var(--fill-0, #82F5AD)" id="Vector_20" />
-          <path d={svgPaths.p5f6cf80} id="Vector_21" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p2a2f8580} id="Vector_22" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p21910e80} id="Vector_23" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p39d77040} id="Vector_24" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p1e4e5a40} id="Vector_25" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pf569a00} id="Vector_26" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.p35357400} id="Vector_27" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <path d={svgPaths.pd678600} id="Vector_28" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          <g id="Group_2">
-            <path d={svgPaths.p3380c5c0} fill="var(--fill-0, #82F5AD)" id="Vector_29" />
-            <path d={svgPaths.p3daf0740} fill="var(--fill-0, #82F5AD)" id="Vector_30" />
-            <path d={svgPaths.p8d83300} fill="var(--fill-0, #82F5AD)" id="Vector_31" />
-            <path d={svgPaths.pe920280} fill="var(--fill-0, #82F5AD)" id="Vector_32" />
-            <path d={svgPaths.p3280f7f0} fill="var(--fill-0, #82F5AD)" id="Vector_33" />
-            <path d={svgPaths.p3216000} fill="var(--fill-0, #82F5AD)" id="Vector_34" />
-            <path d={svgPaths.p273e9000} fill="var(--fill-0, #82F5AD)" id="Vector_35" />
-            <path d={svgPaths.p150b080} fill="var(--fill-0, #82F5AD)" id="Vector_36" />
-            <path d={svgPaths.p2a0b8e20} fill="var(--fill-0, #82F5AD)" id="Vector_37" />
-            <path d={svgPaths.p288df0c0} fill="var(--fill-0, #82F5AD)" id="Vector_38" />
-            <path d={svgPaths.p23cba280} fill="var(--fill-0, #82F5AD)" id="Vector_39" />
-            <path d={svgPaths.pec12580} fill="var(--fill-0, #82F5AD)" id="Vector_40" />
-            <path d={svgPaths.p18023200} fill="var(--fill-0, #82F5AD)" id="Vector_41" />
-            <path d={svgPaths.p327059b0} fill="var(--fill-0, #82F5AD)" id="Vector_42" />
-            <path d={svgPaths.p3acfbc80} fill="var(--fill-0, #82F5AD)" id="Vector_43" />
-            <path d={svgPaths.p3ec56c80} fill="var(--fill-0, #82F5AD)" id="Vector_44" />
-            <path d={svgPaths.p250e9e00} fill="var(--fill-0, #82F5AD)" id="Vector_45" />
-            <path d={svgPaths.p1be45100} fill="var(--fill-0, #82F5AD)" id="Vector_46" />
-            <path d={svgPaths.p1decb600} fill="var(--fill-0, #82F5AD)" id="Vector_47" />
-            <path d={svgPaths.p3eb1bfb0} fill="var(--fill-0, #82F5AD)" id="Vector_48" />
-            <path d={svgPaths.p6c9f0f0} fill="var(--fill-0, #82F5AD)" id="Vector_49" />
-            <path d={svgPaths.p1ac31b00} fill="var(--fill-0, #82F5AD)" id="Vector_50" />
-            <path d={svgPaths.p12da0980} fill="var(--fill-0, #82F5AD)" id="Vector_51" />
-            <path d={svgPaths.p1b738b00} fill="var(--fill-0, #82F5AD)" id="Vector_52" />
-            <path d={svgPaths.p38896440} fill="var(--fill-0, #82F5AD)" id="Vector_53" />
+          <g
+            className="transition-[color,opacity] duration-200"
+            id="Group_2"
+            style={{
+              color: hoveredZone ? "#252525" : "#82F5AD",
+              opacity: hoveredZone ? 0.5 : 1,
+            }}
+          >
+            <path d={svgPaths.p3380c5c0} fill="currentColor" id="Vector_29" />
+            <path d={svgPaths.p3daf0740} fill="currentColor" id="Vector_30" />
+            <path d={svgPaths.p8d83300} fill="currentColor" id="Vector_31" />
+            <path d={svgPaths.pe920280} fill="currentColor" id="Vector_32" />
+            <path d={svgPaths.p3280f7f0} fill="currentColor" id="Vector_33" />
+            <path d={svgPaths.p3216000} fill="currentColor" id="Vector_34" />
+            <path d={svgPaths.p273e9000} fill="currentColor" id="Vector_35" />
+            <path d={svgPaths.p150b080} fill="currentColor" id="Vector_36" />
+            <path d={svgPaths.p2a0b8e20} fill="currentColor" id="Vector_37" />
+            <path d={svgPaths.p288df0c0} fill="currentColor" id="Vector_38" />
+            <path d={svgPaths.p23cba280} fill="currentColor" id="Vector_39" />
+            <path d={svgPaths.pec12580} fill="currentColor" id="Vector_40" />
+            <path d={svgPaths.p18023200} fill="currentColor" id="Vector_41" />
+            <path d={svgPaths.p327059b0} fill="currentColor" id="Vector_42" />
+            <path d={svgPaths.p3acfbc80} fill="currentColor" id="Vector_43" />
+            <path d={svgPaths.p3ec56c80} fill="currentColor" id="Vector_44" />
+            <path d={svgPaths.p250e9e00} fill="currentColor" id="Vector_45" />
+            <path d={svgPaths.p1be45100} fill="currentColor" id="Vector_46" />
+            <path d={svgPaths.p1decb600} fill="currentColor" id="Vector_47" />
+            <path d={svgPaths.p3eb1bfb0} fill="currentColor" id="Vector_48" />
+            <path d={svgPaths.p6c9f0f0} fill="currentColor" id="Vector_49" />
+            <path d={svgPaths.p1ac31b00} fill="currentColor" id="Vector_50" />
+            <path d={svgPaths.p12da0980} fill="currentColor" id="Vector_51" />
+            <path d={svgPaths.p1b738b00} fill="currentColor" id="Vector_52" />
+            <path d={svgPaths.p38896440} fill="currentColor" id="Vector_53" />
           </g>
-          <path d="M476.758 208.821V114.505" id="Vector_54" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+          <path
+            className="transition-opacity duration-200"
+            d="M476.758 208.821V114.505"
+            id="Vector_54"
+            stroke="var(--stroke-0, #252525)"
+            strokeMiterlimit="10"
+            strokeWidth="2.18269"
+            style={{ opacity: hoveredZone ? 0.5 : 1 }}
+          />
         </g>
         <defs>
           <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_0_363" x1="332.379" x2="332.379" y1="6.73522" y2="114.525">
@@ -898,33 +1328,58 @@ function Layer() {
           </clipPath>
         </defs>
       </svg>
-      <ExecutionFlowThreeGlows />
+      <ExecutionFlowThreeGlows isHidden={hoveredZone !== null} />
+      <ExecutionFlowPulseDotsOverlay hoveredZone={hoveredZone} />
+      <ExecutionFlowInputSquaresOverlay hoveredZone={hoveredZone} />
     </div>
   );
 }
 
-function Group() {
+function Group({
+  hoveredZone,
+  setHoveredZone,
+}: {
+  hoveredZone: ExecutionFlowHoverZone;
+  setHoveredZone: (zone: ExecutionFlowHoverZone) => void;
+}) {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 overflow-x-auto max-w-full px-4 md:px-0">
-      <Layer />
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[111px] mt-0 relative row-1 size-[32px]">
+    <div className="grid-cols-[minmax(1052px,1052px)] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 overflow-x-auto max-w-full px-4 md:px-0">
+      <Layer hoveredZone={hoveredZone} />
+      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[154px] mt-0 relative row-1 size-[32px]">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">01</p>
       </div>
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[456.12px] mt-[14.68px] relative row-1 size-[32px]">
+      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[510px] mt-0 relative row-1 size-[32px]">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">02</p>
       </div>
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[790px] mt-[42.68px] relative row-1 size-[32px]">
+      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[866px] mt-0 relative row-1 size-[32px]">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">03</p>
       </div>
+      <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("inputs")} />
+      <div aria-hidden="true" className="absolute left-[356px] top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("nodes")} />
+      <div aria-hidden="true" className="absolute left-[712px] top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("output")} />
     </div>
   );
 }
 
-function Frame31() {
+function getExecutionModelCardClass(zone: Exclude<ExecutionFlowHoverZone, null>, hoveredZone: ExecutionFlowHoverZone) {
+  const base = "content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-[background-color,opacity] duration-200";
+  const background = hoveredZone === zone ? "bg-[#d9fce8]" : "bg-white";
+  const opacity = hoveredZone && hoveredZone !== zone ? "opacity-50" : "opacity-100";
+
+  return `${base} ${background} ${opacity}`;
+}
+
+function Frame31({
+  hoveredZone,
+  setHoveredZone,
+}: {
+  hoveredZone: ExecutionFlowHoverZone;
+  setHoveredZone: (zone: ExecutionFlowHoverZone) => void;
+}) {
   return (
     <div className="content-stretch grid grid-cols-1 gap-[16px] items-start relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
+        <div className={getExecutionModelCardClass("inputs", hoveredZone)} onMouseEnter={() => setHoveredZone("inputs")}>
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -941,7 +1396,7 @@ function Frame31() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
+        <div className={getExecutionModelCardClass("nodes", hoveredZone)} onMouseEnter={() => setHoveredZone("nodes")}>
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -958,7 +1413,7 @@ function Frame31() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
-        <div className="bg-white content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full max-w-none">
+        <div className={getExecutionModelCardClass("output", hoveredZone)} onMouseEnter={() => setHoveredZone("output")}>
           <div className="h-0 relative shrink-0 w-full">
             <div className="absolute inset-[-2.89px_0_0_0]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 340 2.88577">
@@ -979,15 +1434,20 @@ function Frame31() {
 }
 
 function Frame15() {
+  const [hoveredZone, setHoveredZone] = useState<ExecutionFlowHoverZone>(null);
+
   return (
-    <div id="execution-model" className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full">
-      <ScrollFadeIn>
-        <Frame14 />
-      </ScrollFadeIn>
-      <ScrollFadeIn delay={0.1}>
-        <Group />
-      </ScrollFadeIn>
-      <Frame31 />
+    <div
+      id="execution-model"
+      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full"
+    >
+      <Frame14 />
+      <div className="content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
+        <ScrollFadeIn delay={0.2}>
+          <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+        </ScrollFadeIn>
+        <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+      </div>
     </div>
   );
 }
@@ -995,9 +1455,33 @@ function Frame15() {
 function Frame21() {
   return (
     <div className="capitalize content-stretch flex font-['ABC_Gramercy:Regular',sans-serif] gap-[24px] md:gap-[40px] items-center justify-end leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] text-right tracking-[-0.66px] whitespace-nowrap">
-      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/community">Community</a>
-      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/protocol">Protocol</a>
-      <a className="relative shrink-0 transition-colors hover:text-[#82f5ad]" href="/docs">Docs</a>
+      <motion.a
+        animate={{ opacity: 1, y: 0 }}
+        className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
+        href="/community"
+        initial={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.45, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
+      >
+        Community
+      </motion.a>
+      <motion.a
+        animate={{ opacity: 1, y: 0 }}
+        className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
+        href="/protocol"
+        initial={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.45, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
+      >
+        Protocol
+      </motion.a>
+      <motion.a
+        animate={{ opacity: 1, y: 0 }}
+        className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
+        href="/docs"
+        initial={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.45, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
+      >
+        Docs
+      </motion.a>
     </div>
   );
 }
@@ -1005,11 +1489,15 @@ function Frame21() {
 function Frame12() {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0">
-      <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
-        <p className="leading-[0.87] mb-0">Private Inputs.</p>
-        <p className="leading-[0.87]">Collective Outcomes.</p>
-      </div>
-      <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[383.808px]">The Interfold enables independent parties to produce shared, verifiable outcomes from private inputs</p>
+      <ScrollFadeIn className="w-full">
+        <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
+          <p className="leading-[0.87] mb-0">Private Inputs.</p>
+          <p className="leading-[0.87]">Collective Outcomes.</p>
+        </div>
+      </ScrollFadeIn>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[383.808px]">The Interfold enables independent parties to produce shared, verifiable outcomes from private inputs</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -1077,8 +1565,12 @@ function Frame7() {
 function Frame17() {
   return (
     <div className="content-stretch flex flex-col md:flex-row gap-[16px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
-      <Frame6 />
-      <Frame7 />
+      <ScrollFadeIn delay={0.2}>
+        <Frame6 />
+      </ScrollFadeIn>
+      <ScrollFadeIn delay={0.3}>
+        <Frame7 />
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -1086,12 +1578,8 @@ function Frame17() {
 function Frame13() {
   return (
     <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[calc(63px+min(44.444vw,640px))] w-full">
-      <ScrollFadeIn>
-        <Frame12 />
-      </ScrollFadeIn>
-      <ScrollFadeIn delay={0.1}>
-        <Frame17 />
-      </ScrollFadeIn>
+      <Frame12 />
+      <Frame17 />
     </div>
   );
 }
@@ -1109,40 +1597,57 @@ function Frame32() {
             <p className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">The Interfold</p>
           </ScrollFadeIn>
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-6">
-            <p className="mb-0">privacy</p>
-            <p className="mb-0">{`Terms & Conditions`}</p>
-            <p>
-              —<br aria-hidden="true" />
-              {`All Rights Reserved © 2026`}
-            </p>
+            <ScrollFadeIn delay={0.1}>
+              <p className="mb-0">privacy</p>
+            </ScrollFadeIn>
+            <ScrollFadeIn delay={0.2}>
+              <p className="mb-0">{`Terms & Conditions`}</p>
+            </ScrollFadeIn>
+            <ScrollFadeIn delay={0.3}>
+              <p>
+                —<br aria-hidden="true" />
+                {`All Rights Reserved © 2026`}
+              </p>
+            </ScrollFadeIn>
           </div>
         </div>
 
         <div className="flex flex-col gap-12 md:block">
-          <ScrollFadeIn className="md:absolute md:left-[calc(50%+8px)] md:top-6 md:w-[340px]" delay={0.1}>
+          <div className="md:absolute md:left-[calc(50%+8px)] md:top-6 md:w-[340px]">
             <div className="content-stretch flex flex-col gap-[32px] items-start not-italic w-full">
               <div className="flex flex-col gap-[8px] w-full">
+                <ScrollFadeIn delay={0.1}>
                 <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
+                </ScrollFadeIn>
                 <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
-                  <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
-                  <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
-                  <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
+                  <ScrollFadeIn delay={0.2}>
+                    <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
+                  </ScrollFadeIn>
+                  <ScrollFadeIn delay={0.3}>
+                    <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
+                  </ScrollFadeIn>
+                  <ScrollFadeIn delay={0.4}>
+                    <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
+                  </ScrollFadeIn>
                 </div>
               </div>
 
-              <label className="w-full">
-                <span className="sr-only">Enter your email</span>
-                <input
-                  className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
-                  inputMode="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Enter Your Email"
-                  autoComplete="email"
-                  type="text"
-                  value={email}
-                />
-              </label>
+              <ScrollFadeIn className="w-full" delay={0.5}>
+                <label className="w-full">
+                  <span className="sr-only">Enter your email</span>
+                  <input
+                    className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
+                    inputMode="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="Enter Your Email"
+                    autoComplete="email"
+                    type="text"
+                    value={email}
+                  />
+                </label>
+              </ScrollFadeIn>
 
+              <ScrollFadeIn className="w-full" delay={0.6}>
               <button
                 className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors disabled:pointer-events-none disabled:opacity-60 enabled:hover:bg-[#3a5e3c]"
                 disabled={!isValidEmail}
@@ -1167,14 +1672,17 @@ function Frame32() {
                   </motion.span>
                 </div>
               </button>
+              </ScrollFadeIn>
             </div>
-          </ScrollFadeIn>
+          </div>
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:absolute md:bottom-6 md:left-[calc(50%+8px)]">
-            <p>
-              {`Open source protocol. `}
-              <br aria-hidden="true" />
-              Built by Gnosis Guild.
-            </p>
+            <ScrollFadeIn delay={0.7}>
+              <p>
+                {`Open source protocol. `}
+                <br aria-hidden="true" />
+                Built by Gnosis Guild.
+              </p>
+            </ScrollFadeIn>
           </div>
         </div>
       </div>
@@ -1195,9 +1703,23 @@ export default function Desktop() {
       <Frame11 />
       <Frame20 />
       <Frame15 />
-      <div className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full" data-name="Header">
+      <motion.div
+        animate={{ y: 0 }}
+        className="md:absolute relative bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
+        data-name="Header"
+        initial={{ y: "-100%" }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-          <a aria-label="The Interfold home" className="justify-self-start h-[17.239px] w-[120.421px]" data-name="The Interfold" href="/">
+          <motion.a
+            animate={{ opacity: 1, y: 0 }}
+            aria-label="The Interfold home"
+            className="justify-self-start h-[17.239px] w-[120.421px]"
+            data-name="The Interfold"
+            href="/"
+            initial={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.45, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
               <g id="The Interfold">
                 <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
@@ -1213,8 +1735,16 @@ export default function Desktop() {
                 <path d={svgPaths.p12150980} fill="#3A5E3C" />
               </g>
             </svg>
-          </a>
-          <a aria-label="The Interfold home" className="justify-self-center h-[35.071px] w-[45.703px]" data-name="Vector" href="/">
+          </motion.a>
+          <motion.a
+            animate={{ opacity: 1, y: 0 }}
+            aria-label="The Interfold home"
+            className="justify-self-center h-[35.071px] w-[45.703px]"
+            data-name="Vector"
+            href="/"
+            initial={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.45, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="size-full">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
                 <g id="Vector">
@@ -1229,12 +1759,12 @@ export default function Desktop() {
                 </g>
               </svg>
             </div>
-          </a>
+          </motion.a>
           <div className="min-w-0 justify-self-end">
             <Frame21 />
           </div>
         </div>
-      </div>
+      </motion.div>
       <Frame13 />
       <Frame32 />
     </div>
