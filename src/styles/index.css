@@ -1,3 +1,58 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+@keyframes interfold-header-drop {
+  from {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.interfold-header-drop {
+  animation: interfold-header-drop 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interfold-header-drop {
+    animation: none;
+  }
+}
+
+.mobile-possibility-slider .slick-slider {
+  position: relative;
+}
+
+.mobile-possibility-slider .slick-dots {
+  bottom: 18px;
+  z-index: 2;
+}
+
+.mobile-possibility-slider .slick-dots li {
+  height: 14px;
+  margin: 0 3px;
+  width: 14px;
+}
+
+.mobile-possibility-slider .slick-dots li button {
+  height: 14px;
+  width: 14px;
+}
+
+.mobile-possibility-slider .slick-dots li button::before {
+  color: #d9fce8;
+  font-size: 10px;
+  height: 14px;
+  line-height: 14px;
+  opacity: 0.45;
+  width: 14px;
+}
+
+.mobile-possibility-slider .slick-dots li.slick-active button::before {
+  color: #82f5ad;
+  opacity: 1;
+}

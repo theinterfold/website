@@ -221,7 +221,7 @@ export function MobileVersion() {
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white">
       {/* Header */}
-      <div className="sticky top-0 z-50 relative flex items-center justify-center bg-[#d9fce8] px-6 py-4">
+      <div className="interfold-header-drop sticky top-0 z-50 relative flex items-center justify-center bg-[#d9fce8] px-6 py-4">
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
@@ -405,7 +405,7 @@ export function MobileVersion() {
 
       {/* Execution Model Section */}
       <div className="flex flex-col items-center bg-white px-6 py-16">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
+        <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71] opacity-80">
             A new execution Model
           </p>
@@ -415,11 +415,11 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mb-12 w-full max-w-[min(100%-48px,820px)]">
+        <div className="mb-12 w-full max-w-md">
           <MobileExecutionModelGraphic />
         </div>
 
-        <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-6">
+        <div className="mx-auto flex w-full max-w-md flex-col gap-6">
           <div className="space-y-2">
             <div className="h-0.5 w-full bg-[#3a5e3c]" />
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#3a5e3c]">
@@ -462,8 +462,8 @@ export function MobileVersion() {
       </div>
 
       {/* What Becomes Possible Section */}
-      <div className="bg-[#d9fce8] py-16 pb-24">
-        <div className="mx-auto mb-12 max-w-2xl px-6 text-center">
+      <div className="bg-[#d9fce8] px-6 py-16 pb-24">
+        <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             What Becomes Possible
           </p>
@@ -473,9 +473,9 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="w-full">
+        <div className="mx-auto w-full max-w-md">
           <Slider {...carouselSettings}>
-            <div className="px-6">
+            <div>
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -499,7 +499,7 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-6">
+            <div>
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -523,7 +523,7 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-6">
+            <div>
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -552,7 +552,7 @@ export function MobileVersion() {
 
       {/* Participate Section */}
       <div className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
-        <div className="mx-auto mb-12 max-w-2xl">
+        <div className="mx-auto mb-12 w-full max-w-md">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
             Participate
           </p>
@@ -621,7 +621,7 @@ export function MobileVersion() {
 
       {/* Explore Section */}
       <div className="bg-white px-6 py-16">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
+        <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             Explore
           </p>
@@ -631,7 +631,7 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mx-auto flex max-w-md flex-col gap-[16px]">
+        <div className="mx-auto flex w-full max-w-md flex-col gap-[16px]">
           <ExploreCard
             image={imgChatGptImageApr232026060921Pm11}
             title="DOCS"
@@ -663,8 +663,8 @@ export function MobileVersion() {
       </div>
 
       {/* Footer */}
-      <div className="bg-[#d9fce8] px-4 py-6">
-        <div className="mx-auto max-w-md">
+      <div className="bg-[#d9fce8] px-6 py-6">
+        <div className="mobile-possibility-slider mx-auto w-full max-w-md">
           <h2 className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]">
             The Interfold
           </h2>
@@ -710,9 +710,14 @@ export function MobileVersion() {
             </p>
           </button>
 
-          <div className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-            <button className="text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
-            <button className="text-left transition-colors hover:text-[#82f5ad]">Terms & Conditions</button>
+          <div className="mb-6 flex flex-col gap-2">
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
+              Legal
+            </p>
+            <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
+              <button className="text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
+              <button className="text-left transition-colors hover:text-[#82f5ad]">Terms & Conditions</button>
+            </div>
           </div>
 
           <div className="font-['Office_Code_Pro:Medium',sans-serif] mb-4 flex flex-col text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
@@ -755,10 +760,10 @@ function ExploreCard({
     >
       <div className="flex flex-col gap-[16px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-        <div className="h-[71px] w-auto">
+        <div className="h-[71px] w-[55px] overflow-hidden">
           <img
             alt=""
-            className="h-full w-auto object-bottom mix-blend-hard-light"
+            className="h-full w-full object-contain object-bottom mix-blend-hard-light"
             src={image}
           />
         </div>

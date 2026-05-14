@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import * as THREE from "three";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
 import imgImage66 from "./b2a665648dcdbaa537f982baed705f51f9563175.png";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.png";
@@ -9,9 +10,64 @@ import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f7
 import imgChatGptImageApr232026060921Pm11 from "./999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
-function Frame() {
+const friendLogos = [
+  { name: "Mina", href: "https://minaprotocol.com" },
+  { name: "RISC Zero", href: "https://risczero.com" },
+  { name: "Succinct", href: "https://succinct.xyz" },
+  { name: "Session", href: "https://getsession.org" },
+  { name: "Gnosis", href: "https://gnosis.io" },
+  { name: "Nillion", href: "https://nillion.com" },
+];
+
+function FriendLogo({
+  children,
+  friend,
+  hoveredFriend,
+  index,
+  onMouseMove,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  children: ReactNode;
+  friend: (typeof friendLogos)[number];
+  hoveredFriend: number | null;
+  index: number;
+  onMouseMove: (event: MouseEvent<HTMLAnchorElement>, index: number) => void;
+  onMouseEnter: (index: number) => void;
+  onMouseLeave: () => void;
+}) {
+  const isHovered = hoveredFriend === index;
+  const isDimmed = hoveredFriend !== null && !isHovered;
+
   return (
-    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(566px+min(44.444vw,640px))]">
+    <motion.a
+      aria-label={friend.name}
+      className="-m-4 flex shrink-0 origin-center items-center justify-center p-4"
+      href={friend.href}
+      onMouseEnter={() => onMouseEnter(index)}
+      onMouseLeave={onMouseLeave}
+      onMouseMove={(event) => onMouseMove(event, index)}
+      rel="noreferrer"
+      target="_blank"
+      animate={{ opacity: isDimmed ? 0.5 : 1, scale: isHovered ? 1.05 : 1 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
+function Frame() {
+  const [hoveredFriend, setHoveredFriend] = useState<number | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  const handleFriendMove = (event: MouseEvent<HTMLAnchorElement>, index: number) => {
+    setHoveredFriend(index);
+    setTooltipPosition({ x: event.clientX, y: event.clientY });
+  };
+
+  return (
+    <div className="relative md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(503px+min(44.444vw,640px))]">
       <motion.div
         className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -21,43 +77,82 @@ function Frame() {
       >
         <div className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-0 xl:max-w-[1052px]">
           <ScrollFadeIn className="shrink-0" delay={0.05}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
-              <path d={svgPaths.p67816f0} fill="#3A5E3C" />
-              <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
-              <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
-            </svg>
+            <FriendLogo friend={friendLogos[0]} hoveredFriend={hoveredFriend} index={0} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
+                <path d={svgPaths.p67816f0} fill="#3A5E3C" />
+                <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
+                <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.15}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="422 41 46 35">
-              <path d={svgPaths.pfe27200} fill="#3A5E3C" />
-            </svg>
+            <FriendLogo friend={friendLogos[1]} hoveredFriend={hoveredFriend} index={1} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="422 41 46 35">
+                <path d={svgPaths.pfe27200} fill="#3A5E3C" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.25}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="586 41 34 35">
-              <path d={svgPaths.p36323370} fill="#3A5E3C" />
-              <path d={svgPaths.pdec5d70} fill="#3A5E3C" />
-              <path d={svgPaths.p1ce05600} fill="#3A5E3C" />
-              <path d={svgPaths.p3250d600} fill="#3A5E3C" />
-            </svg>
+            <FriendLogo friend={friendLogos[2]} hoveredFriend={hoveredFriend} index={2} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="586 41 34 35">
+                <path d={svgPaths.p36323370} fill="#3A5E3C" />
+                <path d={svgPaths.pdec5d70} fill="#3A5E3C" />
+                <path d={svgPaths.p1ce05600} fill="#3A5E3C" />
+                <path d={svgPaths.p3250d600} fill="#3A5E3C" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.35}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="738 41 164 35">
-              <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
-              <path d={svgPaths.p59a0800} fill="#3A5E3C" />
-            </svg>
+            <FriendLogo friend={friendLogos[3]} hoveredFriend={hoveredFriend} index={3} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="738 41 164 35">
+                <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
+                <path d={svgPaths.p59a0800} fill="#3A5E3C" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.45}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1020 41 34 35">
-              <path clipRule="evenodd" d={svgPaths.p2f408d00} fill="#3A5E3C" fillRule="evenodd" />
-            </svg>
+            <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1020 41 34 35">
+                <path clipRule="evenodd" d={svgPaths.p2f408d00} fill="#3A5E3C" fillRule="evenodd" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.55}>
-            <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1172 41 34 35">
-              <path d={svgPaths.p1b95080} fill="#3A5E3C" />
-            </svg>
+            <FriendLogo friend={friendLogos[5]} hoveredFriend={hoveredFriend} index={5} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1172 41 34 35">
+                <path d={svgPaths.p1b95080} fill="#3A5E3C" />
+              </svg>
+            </FriendLogo>
           </ScrollFadeIn>
         </div>
       </motion.div>
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {hoveredFriend !== null && (
+              <motion.div
+                key="friend-tooltip"
+                className="pointer-events-none fixed z-[9999] overflow-hidden bg-[#3a5e3c] px-3 py-2 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#d9fce8]"
+                initial={{ opacity: 0, scale: 0.96, y: 4 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 4 }}
+                style={{ left: tooltipPosition.x + 18, top: tooltipPosition.y + 18, transformOrigin: "left top" }}
+                transition={{ duration: 0.24, ease: [0.4, 0, 0.2, 1] }}
+              >
+                <motion.span
+                  className="block whitespace-nowrap"
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.18, delay: 0.06, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  {friendLogos[hoveredFriend].name} →
+                </motion.span>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
     </div>
   );
 }
@@ -157,47 +252,47 @@ function Frame25() {
 
 function Frame23() {
   return (
-    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:auto-rows-fr md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
       <ScrollFadeIn className="w-full h-full" delay={0.3}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+        <div className="bg-[#121718] content-stretch flex h-full flex-col items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <ScrollFadeIn className="w-full" delay={0.75}>
             <Frame22 />
           </ScrollFadeIn>
-          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative mt-auto flex min-h-[240px] flex-1 items-center justify-center overflow-hidden rounded-[24px] shrink-0 w-full" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-[104.45%] left-1/2 max-w-none top-[10.39%] w-[185.58%] -translate-x-1/2 lg:left-[-42.93%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm11} />
+                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[185.58%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm11} />
               </div>
             </div>
           </div>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full h-full" delay={0.4}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+        <div className="bg-[#121718] content-stretch flex h-full flex-col items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <ScrollFadeIn className="w-full" delay={0.85}>
             <Frame24 />
           </ScrollFadeIn>
-          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative mt-auto flex min-h-[240px] flex-1 items-center justify-center overflow-hidden rounded-[24px] shrink-0 w-full" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-[87.5%] left-1/2 max-w-none top-[18.03%] w-[155.47%] -translate-x-1/2 lg:left-[-27.87%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm12} />
+                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[155.47%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm12} />
               </div>
             </div>
           </div>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full h-full" delay={0.5}>
-        <div className="bg-[#121718] content-stretch flex flex-col gap-[48px] md:gap-[56px] lg:gap-[80px] items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
+        <div className="bg-[#121718] content-stretch flex h-full flex-col items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <ScrollFadeIn className="w-full" delay={0.95}>
             <Frame25 />
           </ScrollFadeIn>
-          <div className="relative overflow-hidden rounded-[24px] shrink-0 w-full aspect-[0.82] lg:size-[324px]" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
+          <div className="relative mt-auto flex min-h-[240px] flex-1 items-center justify-center overflow-hidden rounded-[24px] shrink-0 w-full" data-name="ChatGPT Image Apr 23, 2026, 05_18_56 PM (1) 1">
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-[89.97%] left-1/2 max-w-none top-[17.63%] w-[159.86%] -translate-x-1/2 lg:left-[-30.06%] lg:translate-x-0" src={imgChatGptImageApr232026051856Pm13} />
+                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[159.86%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm13} />
               </div>
             </div>
           </div>
@@ -209,7 +304,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1604px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1541px+min(44.444vw,640px))] w-full">
       <Frame16 />
       <Frame23 />
     </div>
@@ -294,7 +389,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2588px+min(44.444vw,640px))] w-full">
+    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2525px+min(44.444vw,640px))] w-full">
       <Frame10 />
     </div>
   );
@@ -334,7 +429,7 @@ function Frame3() {
 
 function Frame26() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
+    <div className="bg-white content-stretch flex h-full flex-col gap-[16px] items-start p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -345,7 +440,7 @@ function Frame26() {
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
         <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
-      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
+      <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute inset-[-1px_0_0_0]">
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 1">
@@ -356,15 +451,17 @@ function Frame26() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Technical documentation, references, and implementation details.</p>
       </div>
-      <Frame3 />
+      <div className="mt-auto w-full">
+        <Frame3 />
+      </div>
     </div>
   );
 }
 
 function Frame27() {
   return (
-    <div className="content-stretch flex items-start relative shrink-0 w-full">
-      <div className="content-stretch flex items-center relative shrink-0 w-full">
+    <div className="content-stretch flex h-full items-start relative shrink-0 w-full">
+      <div className="content-stretch flex h-full items-center relative shrink-0 w-full">
         <Frame26 />
       </div>
     </div>
@@ -384,7 +481,7 @@ function Frame4() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Read the blog
+        Read essays
       </AnimatedButtonContent>
     </button>
   );
@@ -392,7 +489,7 @@ function Frame4() {
 
 function Frame28() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
+    <div className="bg-white content-stretch flex h-full flex-col gap-[16px] items-start p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -403,7 +500,7 @@ function Frame28() {
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
         <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
-      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
+      <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute inset-[-1px_0_0_0]">
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 1">
@@ -414,7 +511,9 @@ function Frame28() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
       </div>
-      <Frame4 />
+      <div className="mt-auto w-full">
+        <Frame4 />
+      </div>
     </div>
   );
 }
@@ -432,7 +531,7 @@ function Frame5() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Read the docs
+        Read the blog
       </AnimatedButtonContent>
     </button>
   );
@@ -440,7 +539,7 @@ function Frame5() {
 
 function Frame29() {
   return (
-    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start justify-center p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
+    <div className="bg-white content-stretch flex h-full flex-col gap-[16px] items-start p-[8px] relative shrink-0 w-full max-w-none transition-colors hover:bg-[#d9fce8] focus-within:bg-[#d9fce8]">
       <div className="h-0 relative shrink-0 w-full">
         <div className="absolute inset-[-2.89px_0_0_0]">
           <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 2.88577">
@@ -451,7 +550,7 @@ function Frame29() {
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
         <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
-      <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
+      <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
           <div className="absolute inset-[-1px_0_0_0]">
             <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 324 1">
@@ -462,24 +561,26 @@ function Frame29() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
       </div>
-      <Frame5 />
+      <div className="mt-auto w-full">
+        <Frame5 />
+      </div>
     </div>
   );
 }
 
 function Frame30() {
   return (
-    <div className="content-stretch grid grid-cols-1 gap-[16px] items-start justify-center relative shrink-0 w-full px-4 md:grid-cols-3 md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
-      <ScrollFadeIn className="w-full" delay={0.1}>
+    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch justify-center relative shrink-0 w-full px-4 md:grid-cols-3 md:auto-rows-fr md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
+      <ScrollFadeIn className="h-full w-full" delay={0.1}>
         <Frame27 />
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.2}>
-        <div className="content-stretch flex items-center relative shrink-0 w-full">
+      <ScrollFadeIn className="h-full w-full" delay={0.2}>
+        <div className="content-stretch flex h-full items-center relative shrink-0 w-full">
           <Frame28 />
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.5}>
-        <div className="content-stretch flex items-center relative shrink-0 w-full">
+      <ScrollFadeIn className="h-full w-full" delay={0.5}>
+        <div className="content-stretch flex h-full items-center relative shrink-0 w-full">
           <Frame29 />
         </div>
       </ScrollFadeIn>
@@ -489,7 +590,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3087px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3024px+min(44.444vw,640px))] w-full">
       <Frame18 />
       <Frame30 />
     </div>
@@ -1331,16 +1432,22 @@ function Group({
   hoveredZone: ExecutionFlowHoverZone;
   setHoveredZone: (zone: ExecutionFlowHoverZone) => void;
 }) {
+  const tagClass = (zone: Exclude<ExecutionFlowHoverZone, null>) => {
+    const opacity = hoveredZone && hoveredZone !== zone ? "opacity-50" : "opacity-100";
+
+    return `bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center relative row-1 size-[32px] transition-opacity duration-200 ${opacity}`;
+  };
+
   return (
     <div className="grid-cols-[minmax(1052px,1052px)] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 overflow-x-auto max-w-full px-4 md:px-0">
       <Layer hoveredZone={hoveredZone} />
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[154px] mt-0 relative row-1 size-[32px]">
+      <div className={`${tagClass("inputs")} ml-[154px] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">01</p>
       </div>
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[510px] mt-0 relative row-1 size-[32px]">
+      <div className={`${tagClass("nodes")} ml-[510px] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">02</p>
       </div>
-      <div className="bg-[#3a5e3c] col-1 content-stretch flex items-center justify-center ml-[866px] mt-0 relative row-1 size-[32px]">
+      <div className={`${tagClass("output")} ml-[866px] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">03</p>
       </div>
       <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("inputs")} />
@@ -1428,7 +1535,7 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(681px+min(44.444vw,640px))] w-full"
+      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(618px+min(44.444vw,640px))] w-full"
     >
       <Frame14 />
       <div className="content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
@@ -1544,7 +1651,7 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[calc(63px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[min(44.444vw,640px)] w-full">
       <Frame12 />
       <Frame17 />
     </div>
@@ -1557,7 +1664,7 @@ function Frame32() {
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   return (
-    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3912px+min(44.444vw,640px))] w-full">
+    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3849px+min(44.444vw,640px))] w-full">
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
@@ -1653,17 +1760,9 @@ function Frame32() {
 }
 
 export default function Desktop() {
-  const [headerReady, setHeaderReady] = useState(false);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setHeaderReady(true));
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden bg-[#d9fce8] md:left-1/2 md:top-[63px] md:-translate-x-1/2" data-name="image 66">
+      <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden bg-[#d9fce8] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-0 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken opacity-80" src={imgImage66} />
         </div>
@@ -1673,12 +1772,9 @@ export default function Desktop() {
       <Frame11 />
       <Frame20 />
       <Frame15 />
-      <motion.div
-        animate={{ y: headerReady ? 0 : -72 }}
-        className="md:absolute relative z-50 bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
+      <div
+        className="interfold-header-drop md:absolute relative z-50 bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
         data-name="Header"
-        initial={{ y: -72 }}
-        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
           <motion.a
@@ -1734,7 +1830,7 @@ export default function Desktop() {
             <Frame21 />
           </div>
         </div>
-      </motion.div>
+      </div>
       <Frame13 />
       <Frame32 />
     </div>
