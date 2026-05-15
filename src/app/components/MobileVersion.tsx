@@ -326,7 +326,7 @@ export function MobileVersion() {
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <a
-                className="group w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="group block w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://docs.theinterfold.com/"
                 onMouseEnter={() => setHoveredButton('build')}
                 onMouseLeave={() => setHoveredButton(null)}
@@ -352,7 +352,7 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <a
-                className="group w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="#participate"
                 onMouseEnter={() => setHoveredButton('participate')}
                 onMouseLeave={() => setHoveredButton(null)}
@@ -575,7 +575,7 @@ export function MobileVersion() {
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
             <a
-              className="group w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="group block w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://docs.theinterfold.com/"
               onMouseEnter={() => setHoveredButton('participate-build')}
               onMouseLeave={() => setHoveredButton(null)}
@@ -601,7 +601,7 @@ export function MobileVersion() {
           </div>
           <div className="w-full">
             <a
-              className="group w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="#participate"
               onMouseEnter={() => setHoveredButton('participate-participate')}
               onMouseLeave={() => setHoveredButton(null)}
@@ -689,13 +689,13 @@ export function MobileVersion() {
               Follow us
             </p>
             <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
+              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
                 Telegram
               </a>
-              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
+              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
                 Github
               </a>
-              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
+              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
                 X
               </a>
             </div>

@@ -2,6 +2,12 @@
 @import './tailwind.css';
 @import './theme.css';
 
+html,
+body,
+#root {
+  background: #d9fce8;
+}
+
 @keyframes interfold-header-drop {
   from {
     transform: translate3d(0, -100%, 0);

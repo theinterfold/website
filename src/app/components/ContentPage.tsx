@@ -215,7 +215,7 @@ function Footer() {
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">
               Follow us
             </p>
-            <div className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] capitalize leading-[1.05] tracking-[-0.66px] text-[#3a5e3c]">
+            <div className="mt-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c]">
               <a className="block transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3" rel="noreferrer" target="_blank">Telegram</a>
               <a className="block transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/" rel="noreferrer" target="_blank">Github</a>
               <a className="block transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold" rel="noreferrer" target="_blank">X</a>

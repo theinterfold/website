@@ -1702,7 +1702,7 @@ function Frame32() {
             <ScrollFadeIn delay={0.1}>
               <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
             </ScrollFadeIn>
-            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
+            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px] [&_a]:font-normal">
               <ScrollFadeIn delay={0.2}>
                 <button className="block text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
               </ScrollFadeIn>
@@ -1720,20 +1720,20 @@ function Frame32() {
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>
-                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
+                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">Github</a>
+                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
-                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
+                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
               </ScrollFadeIn>
             </div>
           </div>
 
           <ScrollFadeIn className="w-full" delay={0.5}>
             <form
-              className={`relative -mx-3 px-3 py-2 transition-colors duration-300 ${
+              className={`relative -mx-3 px-3 py-2 transition-colors duration-300 after:absolute after:bottom-[8px] after:left-3 after:right-3 after:z-20 after:border-b after:border-[#3a5e3c] after:content-[''] ${
                 isNewsletterFocused ? "bg-[rgba(193,217,191,0.34)]" : "hover:bg-[rgba(193,217,191,0.2)]"
               }`}
               onSubmit={(event) => event.preventDefault()}
@@ -1742,7 +1742,7 @@ function Frame32() {
               <label className="block w-full">
                 <span className="sr-only">Email for Interfold updates</span>
                 <input
-                  className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100 max-[1180px]:pr-0"
+                  className="font-['ABC_Gramercy:Regular',sans-serif] relative z-10 w-full border-0 bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
                   inputMode="email"
                   onBlur={() => setIsNewsletterFocused(false)}
                   onChange={(event) => setEmail(event.target.value)}
@@ -1757,7 +1757,7 @@ function Frame32() {
                 {hasEmail && (
                   <motion.button
                     animate={{ opacity: 1, x: 0 }}
-                    className={`absolute bottom-[8px] right-3 min-w-[96px] px-3 py-1 transition-colors max-[1180px]:static max-[1180px]:mt-4 max-[1180px]:flex max-[1180px]:h-[52px] max-[1180px]:w-full max-[1180px]:items-center max-[1180px]:justify-center ${
+                    className={`absolute bottom-[8px] right-3 min-w-[96px] px-3 py-1 transition-colors ${
                       isValidEmail ? "bg-[#3a5e3c] text-[#d9fce8]" : "bg-[rgba(193,217,191,0.8)] text-[#687d71]"
                     }`}
                     disabled={!isValidEmail}
