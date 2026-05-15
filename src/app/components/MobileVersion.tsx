@@ -689,13 +689,13 @@ export function MobileVersion() {
               Follow us
             </p>
             <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
+              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
                 Telegram
               </a>
-              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
+              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
                 Github
               </a>
-              <a className="text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
+              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
                 X
               </a>
             </div>

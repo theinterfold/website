@@ -970,7 +970,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
           : "";
 
   return (
-    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+    <svg className={`absolute block inset-0 pointer-events-none size-full overflow-visible ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
       <g clipPath="url(#clip0_execution_flow_pulse_dots)">
         <style>{`
           .execution-flow-pulse-dot {
@@ -1208,7 +1208,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
       </g>
       <defs>
         <clipPath id="clip0_execution_flow_pulse_dots">
-          <rect fill="white" height="256" width="819.892" />
+          <rect fill="white" height="256" width="840" />
         </clipPath>
       </defs>
     </svg>
