@@ -11,6 +11,7 @@ import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44
 import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import imgChatGptImageApr232026060921Pm11 from "../../imports/Desktop/999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
+import { ScrollFadeIn } from "./ScrollFadeIn";
 
 function AnimatedMenuButton({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
   return (
@@ -272,34 +273,48 @@ export function MobileVersion() {
           <div className="absolute right-6 top-4">
             <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
           </div>
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] absolute top-6 uppercase tracking-[1px] text-[#687d71] text-[12px]">
+          <motion.p
+            animate={{ opacity: 1, y: 0 }}
+            className="font-['Office_Code_Pro:Medium',sans-serif] absolute top-6 uppercase tracking-[1px] text-[#687d71] text-[12px]"
+            initial={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             Menu
-          </p>
+          </motion.p>
           <div className="flex flex-col gap-0 p-[0px] m-[0px]">
-            <a
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://docs.theinterfold.com/"
+              initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               Docs
-            </a>
-            <a
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+            </motion.a>
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://blog.theinterfold.com/"
+              initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
+              transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
             >
               Blog
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="#participate"
+              initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
+              transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             >
               Participate
-            </a>
+            </motion.a>
           </div>
         </motion.div>
       )}
@@ -314,7 +329,7 @@ export function MobileVersion() {
           />
         </div>
 
-        <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
+        <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <div className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.92] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <p className="mb-0">Private Inputs.</p>
             <p>Collective Outcomes.</p>
@@ -377,11 +392,11 @@ export function MobileVersion() {
               </a>
             </div>
           </div>
-        </div>
+        </ScrollFadeIn>
       </div>
 
       {/* Logos Section */}
-      <div className="bg-[rgba(193,217,191,0.8)] py-8">
+      <ScrollFadeIn className="bg-[rgba(193,217,191,0.8)] py-8">
         <div className="flex items-center justify-center gap-8 px-6">
           <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
             <path d={svgPaths.p67816f0} fill="#3A5E3C" />
@@ -408,10 +423,10 @@ export function MobileVersion() {
             <path d={svgPaths.p1b95080} fill="#3A5E3C" />
           </svg>
         </div>
-      </div>
+      </ScrollFadeIn>
 
       {/* Execution Model Section */}
-      <div className="flex flex-col items-center bg-white px-6 py-16">
+      <ScrollFadeIn className="flex flex-col items-center bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71] opacity-80">
             A new execution Model
@@ -466,10 +481,10 @@ export function MobileVersion() {
             </p>
           </div>
         </div>
-      </div>
+      </ScrollFadeIn>
 
       {/* What Becomes Possible Section */}
-      <div className="bg-[#d9fce8] px-6 py-16 pb-24">
+      <ScrollFadeIn className="bg-[#d9fce8] px-6 py-16 pb-24">
         <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             What Becomes Possible
@@ -555,22 +570,23 @@ export function MobileVersion() {
             </div>
           </Slider>
         </div>
-      </div>
+      </ScrollFadeIn>
 
       {/* Participate Section */}
-      <div id="participate" className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
-        <div className="mx-auto mb-12 w-full max-w-md">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
-            Participate
-          </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[0.95] tracking-[-0.72px] text-[#d4f6da]">
-            Confidential coordination becomes real through both applications and operators:
-          </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d4f6da]">
-            Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution
-            authority and govern outcome release.
-          </p>
-        </div>
+      <div id="participate">
+        <ScrollFadeIn className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
+          <div className="mx-auto mb-12 w-full max-w-md">
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
+              Participate
+            </p>
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[0.95] tracking-[-0.72px] text-[#d4f6da]">
+              Confidential coordination becomes real through both applications and operators:
+            </p>
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d4f6da]">
+              Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution
+              authority and govern outcome release.
+            </p>
+          </div>
 
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
@@ -626,10 +642,11 @@ export function MobileVersion() {
             </a>
           </div>
         </div>
+        </ScrollFadeIn>
       </div>
 
       {/* Explore Section */}
-      <div className="bg-white px-6 py-16">
+      <ScrollFadeIn className="bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-md text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             Explore
@@ -672,10 +689,10 @@ export function MobileVersion() {
             id="blog"
           />
         </div>
-      </div>
+      </ScrollFadeIn>
 
       {/* Footer */}
-      <div className="bg-[#d9fce8] px-6 py-6">
+      <ScrollFadeIn className="bg-[#d9fce8] px-6 py-6">
         <div className="mobile-possibility-slider mx-auto w-full max-w-md">
           <h2
             className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]"
@@ -782,7 +799,7 @@ export function MobileVersion() {
             <p>Built by Gnosis Guild.</p>
           </div>
         </div>
-      </div>
+      </ScrollFadeIn>
     </div>
   );
 }
