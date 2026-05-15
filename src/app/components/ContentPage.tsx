@@ -187,9 +187,9 @@ function Header() {
           <Mark />
         </a>
         <nav className="hidden justify-self-end gap-5 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.05] tracking-[-0.48px] text-[#3a5e3c] sm:flex sm:gap-8 md:text-[22px] md:tracking-[-0.66px]">
-          <a className="transition-colors hover:text-[#82f5ad]" href="/community">Community</a>
-          <a className="transition-colors hover:text-[#82f5ad]" href="/protocol">Protocol</a>
-          <a className="transition-colors hover:text-[#82f5ad]" href="/docs">Docs</a>
+          <a className="transition-colors hover:text-[#82f5ad]" href="https://docs.theinterfold.com/">Docs</a>
+          <a className="transition-colors hover:text-[#82f5ad]" href="https://blog.theinterfold.com/">Blog</a>
+          <a className="transition-colors hover:text-[#82f5ad]" href="/#participate">Participate</a>
         </nav>
       </div>
     </header>
@@ -216,9 +216,9 @@ function Footer() {
               Follow us
             </p>
             <div className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] capitalize leading-[1.05] tracking-[-0.66px] text-[#3a5e3c]">
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://t.me/" rel="noreferrer" target="_blank">Telegram</a>
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://github.com/" rel="noreferrer" target="_blank">Github</a>
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://x.com/" rel="noreferrer" target="_blank">X</a>
+              <a className="block transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3" rel="noreferrer" target="_blank">Telegram</a>
+              <a className="block transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/" rel="noreferrer" target="_blank">Github</a>
+              <a className="block transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold" rel="noreferrer" target="_blank">X</a>
             </div>
           </div>
           <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c]">

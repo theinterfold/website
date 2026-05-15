@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -202,12 +202,17 @@ export function MobileVersion() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
+  const [isJoinHovered, setIsJoinHovered] = useState(false);
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
+  const hasEmail = email.trim().length > 0;
 
   const carouselSettings = {
+    centerMode: true,
+    centerPadding: '16px',
     dots: true,
     infinite: true,
     speed: 500,
@@ -273,27 +278,27 @@ export function MobileVersion() {
           <div className="flex flex-col gap-0 p-[0px] m-[0px]">
             <a
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="/community"
-              onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: '-0.1em' }}
-            >
-              Community
-            </a>
-            <a
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="/protocol"
-              onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: '-0.1em' }}
-            >
-              Protocol
-            </a>
-            <a
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="/docs"
+              href="https://docs.theinterfold.com/"
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
             >
               Docs
+            </a>
+            <a
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="https://blog.theinterfold.com/"
+              onClick={() => setIsMenuOpen(false)}
+              style={{ wordSpacing: '-0.1em' }}
+            >
+              Blog
+            </a>
+            <a
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="#participate"
+              onClick={() => setIsMenuOpen(false)}
+              style={{ wordSpacing: '-0.1em' }}
+            >
+              Participate
             </a>
           </div>
         </motion.div>
@@ -301,10 +306,10 @@ export function MobileVersion() {
 
       {/* Hero Section */}
       <div className="flex flex-col bg-[#d9fce8]">
-        <div className="relative h-64 w-full overflow-hidden">
+        <div className="relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <img
             alt=""
-            className="h-full w-full object-cover mix-blend-darken opacity-80"
+            className="h-full w-full object-cover mix-blend-darken"
             src={imgImage66}
           />
         </div>
@@ -320,8 +325,9 @@ export function MobileVersion() {
 
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
-              <button
+              <a
                 className="group w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                href="https://docs.theinterfold.com/"
                 onMouseEnter={() => setHoveredButton('build')}
                 onMouseLeave={() => setHoveredButton(null)}
               >
@@ -342,11 +348,12 @@ export function MobileVersion() {
                     →
                   </motion.span>
                 </div>
-              </button>
+              </a>
             </div>
             <div className="w-full">
-              <button
+              <a
                 className="group w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                href="#participate"
                 onMouseEnter={() => setHoveredButton('participate')}
                 onMouseLeave={() => setHoveredButton(null)}
               >
@@ -367,7 +374,7 @@ export function MobileVersion() {
                     →
                   </motion.span>
                 </div>
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -473,9 +480,9 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mx-auto w-full max-w-md">
+        <div className="mobile-what-possible-carousel mx-auto w-full max-w-md">
           <Slider {...carouselSettings}>
-            <div>
+            <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -499,7 +506,7 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div>
+            <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -523,7 +530,7 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div>
+            <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
@@ -551,7 +558,7 @@ export function MobileVersion() {
       </div>
 
       {/* Participate Section */}
-      <div className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
+      <div id="participate" className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
         <div className="mx-auto mb-12 w-full max-w-md">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
             Participate
@@ -567,8 +574,9 @@ export function MobileVersion() {
 
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
-            <button
+            <a
               className="group w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              href="https://docs.theinterfold.com/"
               onMouseEnter={() => setHoveredButton('participate-build')}
               onMouseLeave={() => setHoveredButton(null)}
             >
@@ -589,11 +597,12 @@ export function MobileVersion() {
                   →
                 </motion.span>
               </div>
-            </button>
+            </a>
           </div>
           <div className="w-full">
-            <button
+            <a
               className="group w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              href="#participate"
               onMouseEnter={() => setHoveredButton('participate-participate')}
               onMouseLeave={() => setHoveredButton(null)}
             >
@@ -614,7 +623,7 @@ export function MobileVersion() {
                   →
                 </motion.span>
               </div>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -636,7 +645,8 @@ export function MobileVersion() {
             image={imgChatGptImageApr232026060921Pm11}
             title="DOCS"
             description="Technical documentation, references, and implementation details."
-            cta="Read the docs"
+            cta="Explore Docs"
+            href="https://docs.theinterfold.com/"
             hoveredButton={hoveredButton}
             setHoveredButton={setHoveredButton}
             id="docs"
@@ -646,6 +656,7 @@ export function MobileVersion() {
             title="ESSAYS"
             description="Writing on confidential coordination and the architecture behind the network."
             cta="Read essays"
+            href="https://blog.theinterfold.com/tag/confidential-coordination"
             hoveredButton={hoveredButton}
             setHoveredButton={setHoveredButton}
             id="essays"
@@ -655,6 +666,7 @@ export function MobileVersion() {
             title="BLOG"
             description="Updates, research notes, and ecosystem announcements."
             cta="Read blog"
+            href="https://blog.theinterfold.com/"
             hoveredButton={hoveredButton}
             setHoveredButton={setHoveredButton}
             id="blog"
@@ -665,7 +677,10 @@ export function MobileVersion() {
       {/* Footer */}
       <div className="bg-[#d9fce8] px-6 py-6">
         <div className="mobile-possibility-slider mx-auto w-full max-w-md">
-          <h2 className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]">
+          <h2
+            className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]"
+            style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
+          >
             The Interfold
           </h2>
 
@@ -674,41 +689,78 @@ export function MobileVersion() {
               Follow us
             </p>
             <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <button className="text-left transition-colors hover:text-[#82f5ad]">
+              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
                 Telegram
-              </button>
-              <button className="text-left transition-colors hover:text-[#82f5ad]">
+              </a>
+              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
                 Github
-              </button>
-              <button className="text-left transition-colors hover:text-[#82f5ad]">
+              </a>
+              <a className="text-left transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
                 X
-              </button>
+              </a>
             </div>
           </div>
 
-          <div className="mb-6">
-            <input
-              id="email-input"
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-b border-[#3a5e3c] bg-transparent outline-none text-[#3a5e3c] pb-2 text-[14.429px] placeholder:text-[#3a5e3c] placeholder:capitalize"
-            />
-          </div>
-
-          <button
-            disabled={!isValidEmail(email)}
-            className={`mb-6 flex h-[52px] w-full items-center justify-center bg-[rgba(193,217,191,0.8)] transition-colors group ${
-              isValidEmail(email) ? 'hover:bg-[#3a5e3c] cursor-pointer' : 'cursor-not-allowed opacity-50'
+          <form
+            className={`relative -mx-3 mb-6 px-3 py-2 transition-colors duration-300 ${
+              isNewsletterFocused ? 'bg-[rgba(193,217,191,0.34)]' : 'hover:bg-[rgba(193,217,191,0.2)]'
             }`}
+            onSubmit={(event) => event.preventDefault()}
           >
-            <p className={`font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] capitalize text-[#687d71] ${
-              isValidEmail(email) ? 'transition-colors group-hover:text-[#82f5ad]' : ''
-            }`}>
-              Subscribe
+            <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
+              Updates
             </p>
-          </button>
+            <label className="block w-full">
+              <span className="sr-only">Email for Interfold updates</span>
+              <input
+                id="email-input"
+                type="email"
+                placeholder={isNewsletterFocused ? "" : "Email"}
+                value={email}
+                onBlur={() => setIsNewsletterFocused(false)}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setIsNewsletterFocused(true)}
+                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-b border-[#3a5e3c] bg-transparent outline-none text-[#3a5e3c] pb-2 text-[14.429px] placeholder:text-[#3a5e3c] placeholder:capitalize"
+              />
+            </label>
+            <AnimatePresence>
+              {hasEmail && (
+                <motion.button
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  className={`mt-4 flex h-[52px] w-full origin-top items-center justify-center overflow-hidden transition-colors ${
+                    isValidEmail(email) ? 'bg-[#3a5e3c] text-[#d9fce8]' : 'bg-[rgba(193,217,191,0.8)] text-[#687d71]'
+                  }`}
+                  disabled={!isValidEmail(email)}
+                  exit={{ opacity: 0, scale: 0.965, y: 6 }}
+                  initial={{ opacity: 0, scale: 0.965, y: 6 }}
+                  onMouseEnter={() => setIsJoinHovered(true)}
+                  onMouseLeave={() => setIsJoinHovered(false)}
+                  transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                  type="submit"
+                >
+                  <span className="inline-grid grid-cols-[14px_auto_14px] items-center gap-1">
+                    <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] opacity-0">
+                      →
+                    </span>
+                    <motion.span
+                      animate={{ x: isJoinHovered && isValidEmail(email) ? -8 : 0 }}
+                      className="font-['ABC_Gramercy:Regular',sans-serif] block text-[14.429px] leading-[1.075] capitalize"
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      Join
+                    </motion.span>
+                    <motion.span
+                      animate={{ opacity: isJoinHovered && isValidEmail(email) ? 1 : 0, x: isJoinHovered && isValidEmail(email) ? 0 : -8 }}
+                      className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px]"
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+                </motion.button>
+              )}
+            </AnimatePresence>
+          </form>
 
           <div className="mb-6 flex flex-col gap-2">
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
@@ -740,6 +792,7 @@ function ExploreCard({
   title,
   description,
   cta,
+  href,
   hoveredButton,
   setHoveredButton,
   id
@@ -748,25 +801,27 @@ function ExploreCard({
   title: string;
   description: string;
   cta: string;
+  href: string;
   hoveredButton: string | null;
   setHoveredButton: (id: string | null) => void;
   id: string;
 }) {
   return (
-    <button
+    <a
       className="group w-full bg-white p-[8px] transition-colors hover:bg-[#d9fce8]"
+      href={href}
       onMouseEnter={() => setHoveredButton(id)}
       onMouseLeave={() => setHoveredButton(null)}
     >
       <div className="flex flex-col gap-[16px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-        <div className="h-[71px] w-[55px] overflow-hidden">
-          <img
-            alt=""
-            className="h-full w-full object-contain object-bottom mix-blend-hard-light"
-            src={image}
-          />
-        </div>
+          <div className="h-[71px] relative shrink-0 w-[55px]">
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full"
+              src={image}
+            />
+          </div>
         <div className="flex flex-col gap-[8px]">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">
             {title}
@@ -795,6 +850,6 @@ function ExploreCard({
           </div>
         </div>
       </div>
-    </button>
+    </a>
   );
 }

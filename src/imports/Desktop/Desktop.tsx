@@ -331,8 +331,9 @@ function Frame2() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+      href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -342,7 +343,7 @@ function Frame2() {
       >
         Build on Interfold
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -350,8 +351,9 @@ function Frame1() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[#82f5ad] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+      href="#participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -361,7 +363,7 @@ function Frame1() {
       >
         Participate
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -389,7 +391,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2525px+min(44.444vw,640px))] w-full">
+    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2525px+min(44.444vw,640px))] w-full">
       <Frame10 />
     </div>
   );
@@ -412,8 +414,9 @@ function Frame3() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -421,9 +424,9 @@ function Frame3() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Read essays
+        Explore Docs
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -438,7 +441,7 @@ function Frame26() {
         </div>
       </div>
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -472,8 +475,9 @@ function Frame4() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      href="https://blog.theinterfold.com/tag/confidential-coordination"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -483,7 +487,7 @@ function Frame4() {
       >
         Read essays
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -498,7 +502,7 @@ function Frame28() {
         </div>
       </div>
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -522,8 +526,9 @@ function Frame5() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      href="https://blog.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -533,7 +538,7 @@ function Frame5() {
       >
         Read the blog
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -548,7 +553,7 @@ function Frame29() {
         </div>
       </div>
       <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none mix-blend-hard-light object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -1300,7 +1305,7 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
 
 function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
   return (
-    <div className="col-1 h-[256px] justify-self-center ml-0 mt-[0.57px] relative row-1 w-[819.892px]" data-name="Layer_1">
+    <div className="col-1 aspect-[819.892/256] justify-self-center ml-0 mt-[0.57px] relative row-1 w-[77.936%]" data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
@@ -1439,20 +1444,20 @@ function Group({
   };
 
   return (
-    <div className="grid-cols-[minmax(1052px,1052px)] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 overflow-x-auto max-w-full px-4 md:px-0">
+    <div className="grid-cols-[1fr] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 w-[calc(100vw-64px)] max-w-[1052px]">
       <Layer hoveredZone={hoveredZone} />
-      <div className={`${tagClass("inputs")} ml-[154px] mt-0`}>
+      <div className={`${tagClass("inputs")} ml-[14.639%] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">01</p>
       </div>
-      <div className={`${tagClass("nodes")} ml-[510px] mt-0`}>
+      <div className={`${tagClass("nodes")} ml-[48.479%] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">02</p>
       </div>
-      <div className={`${tagClass("output")} ml-[866px] mt-0`}>
+      <div className={`${tagClass("output")} ml-[82.319%] mt-0`}>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">03</p>
       </div>
-      <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("inputs")} />
-      <div aria-hidden="true" className="absolute left-[356px] top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("nodes")} />
-      <div aria-hidden="true" className="absolute left-[712px] top-0 z-10 h-full w-[340px]" onMouseEnter={() => setHoveredZone("output")} />
+      <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("inputs")} />
+      <div aria-hidden="true" className="absolute left-[33.84%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("nodes")} />
+      <div aria-hidden="true" className="absolute left-[67.681%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("output")} />
     </div>
   );
 }
@@ -1531,6 +1536,7 @@ function Frame31({
 
 function Frame15() {
   const [hoveredZone, setHoveredZone] = useState<ExecutionFlowHoverZone>(null);
+  const executionHoverZones: Exclude<ExecutionFlowHoverZone, null>[] = ["inputs", "nodes", "output"];
 
   return (
     <div
@@ -1538,11 +1544,21 @@ function Frame15() {
       className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(618px+min(44.444vw,640px))] w-full"
     >
       <Frame14 />
-      <div className="content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
+      <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
         <ScrollFadeIn delay={0.2}>
           <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
         </ScrollFadeIn>
         <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
+          {executionHoverZones.map((zone) => (
+            <div
+              aria-hidden="true"
+              className="pointer-events-auto"
+              key={zone}
+              onMouseEnter={() => setHoveredZone(zone)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1554,29 +1570,29 @@ function Frame21() {
       <motion.a
         animate={{ opacity: 1, y: 0 }}
         className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
-        href="/community"
+        href="https://docs.theinterfold.com/"
         initial={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.45, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
       >
-        Community
+        Docs
       </motion.a>
       <motion.a
         animate={{ opacity: 1, y: 0 }}
         className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
-        href="/protocol"
+        href="https://blog.theinterfold.com/"
         initial={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.45, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
       >
-        Protocol
+        Blog
       </motion.a>
       <motion.a
         animate={{ opacity: 1, y: 0 }}
         className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
-        href="/docs"
+        href="#participate"
         initial={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.45, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
       >
-        Docs
+        Participate
       </motion.a>
     </div>
   );
@@ -1602,8 +1618,9 @@ function Frame6() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1613,7 +1630,7 @@ function Frame6() {
       >
         Build on Interfold
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -1621,8 +1638,9 @@ function Frame7() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button
+    <a
       className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      href="#participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1632,7 +1650,7 @@ function Frame7() {
       >
         Participate
       </AnimatedButtonContent>
-    </button>
+    </a>
   );
 }
 
@@ -1660,15 +1678,22 @@ function Frame13() {
 
 function Frame32() {
   const [email, setEmail] = useState("");
-  const [isSubscribeHovered, setIsSubscribeHovered] = useState(false);
+  const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
+  const [isJoinHovered, setIsJoinHovered] = useState(false);
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const hasEmail = email.trim().length > 0;
 
   return (
     <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3849px+min(44.444vw,640px))] w-full">
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
-            <p className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">The Interfold</p>
+            <p
+              className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]"
+              style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
+            >
+              The Interfold
+            </p>
           </ScrollFadeIn>
         </div>
 
@@ -1695,47 +1720,77 @@ function Frame32() {
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>
-                <button className="block text-left transition-colors hover:text-[#82f5ad]">Telegram</button>
+                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <button className="block text-left transition-colors hover:text-[#82f5ad]">Github</button>
+                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
-                <button className="block text-left transition-colors hover:text-[#82f5ad]">X</button>
+                <a className="block text-left transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
               </ScrollFadeIn>
             </div>
           </div>
 
           <ScrollFadeIn className="w-full" delay={0.5}>
-            <label className="w-full">
-              <span className="sr-only">Enter your email</span>
-              <input
-                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-[16px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
-                inputMode="email"
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="Enter Your Email"
-                autoComplete="email"
-                type="text"
-                value={email}
-              />
-            </label>
-          </ScrollFadeIn>
-
-          <ScrollFadeIn className="w-full" delay={0.6}>
-            <button
-              className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors disabled:pointer-events-none disabled:opacity-60 enabled:hover:bg-[#3a5e3c]"
-              disabled={!isValidEmail}
-              onMouseEnter={() => setIsSubscribeHovered(true)}
-              onMouseLeave={() => setIsSubscribeHovered(false)}
+            <form
+              className={`relative -mx-3 px-3 py-2 transition-colors duration-300 ${
+                isNewsletterFocused ? "bg-[rgba(193,217,191,0.34)]" : "hover:bg-[rgba(193,217,191,0.2)]"
+              }`}
+              onSubmit={(event) => event.preventDefault()}
             >
-              <AnimatedButtonContent
-                arrowClassName="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#687d71] transition-colors group-hover:text-[#82f5ad]"
-                isHovered={isSubscribeHovered && isValidEmail}
-                textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#687d71] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-              >
-                Subscribe
-              </AnimatedButtonContent>
-            </button>
+              <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Updates</p>
+              <label className="block w-full">
+                <span className="sr-only">Email for Interfold updates</span>
+                <input
+                  className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-0 border-b border-[#3a5e3c] bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100 max-[1180px]:pr-0"
+                  inputMode="email"
+                  onBlur={() => setIsNewsletterFocused(false)}
+                  onChange={(event) => setEmail(event.target.value)}
+                  onFocus={() => setIsNewsletterFocused(true)}
+                  placeholder={isNewsletterFocused ? "" : "Email"}
+                  autoComplete="email"
+                  type="email"
+                  value={email}
+                />
+              </label>
+              <AnimatePresence>
+                {hasEmail && (
+                  <motion.button
+                    animate={{ opacity: 1, x: 0 }}
+                    className={`absolute bottom-[8px] right-3 min-w-[96px] px-3 py-1 transition-colors max-[1180px]:static max-[1180px]:mt-4 max-[1180px]:flex max-[1180px]:h-[52px] max-[1180px]:w-full max-[1180px]:items-center max-[1180px]:justify-center ${
+                      isValidEmail ? "bg-[#3a5e3c] text-[#d9fce8]" : "bg-[rgba(193,217,191,0.8)] text-[#687d71]"
+                    }`}
+                    disabled={!isValidEmail}
+                    exit={{ opacity: 0, x: 8 }}
+                    initial={{ opacity: 0, x: 8 }}
+                    onMouseEnter={() => setIsJoinHovered(true)}
+                    onMouseLeave={() => setIsJoinHovered(false)}
+                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                    type="submit"
+                  >
+                    <span className="inline-grid grid-cols-[14px_auto_14px] items-center gap-1">
+                      <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] opacity-0">
+                        →
+                      </span>
+                      <motion.span
+                        animate={{ x: isJoinHovered && isValidEmail ? -8 : 0 }}
+                        className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14.429px] text-center whitespace-nowrap"
+                        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                      >
+                        Join
+                      </motion.span>
+                      <motion.span
+                        animate={{ opacity: isJoinHovered && isValidEmail ? 1 : 0, x: isJoinHovered && isValidEmail ? 0 : -8 }}
+                        className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px]"
+                        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                      >
+                        →
+                      </motion.span>
+                    </span>
+                  </motion.button>
+                )}
+              </AnimatePresence>
+            </form>
           </ScrollFadeIn>
         </div>
 
@@ -1762,9 +1817,9 @@ function Frame32() {
 export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative aspect-[1440/640] w-full max-w-[1440px] overflow-hidden bg-[#d9fce8] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
-        <div className="absolute inset-0 overflow-hidden bg-[#d9fce8] pointer-events-none">
-          <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken opacity-80" src={imgImage66} />
+      <div className="md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
+        <div className="absolute inset-y-0 left-1/2 w-full max-w-[1440px] -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
+          <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken" src={imgImage66} />
         </div>
       </div>
       <Frame />

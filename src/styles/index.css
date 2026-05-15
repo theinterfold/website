@@ -27,6 +27,65 @@
   position: relative;
 }
 
+.mobile-what-possible-carousel .slick-slider {
+  position: relative;
+}
+
+.mobile-what-possible-carousel .slick-list {
+  overflow: visible;
+}
+
+.mobile-what-possible-carousel .slick-track {
+  display: flex;
+}
+
+.mobile-what-possible-carousel .slick-slide {
+  opacity: 0.64;
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-what-possible-carousel .slick-slide.slick-active,
+.mobile-what-possible-carousel .slick-slide.slick-current,
+.mobile-what-possible-carousel .slick-slide.slick-center {
+  opacity: 1;
+}
+
+.mobile-what-possible-carousel .slick-slide > div {
+  height: 100%;
+}
+
+.mobile-what-possible-carousel .slick-dots {
+  bottom: auto;
+  margin-top: 12px;
+  position: static;
+  z-index: 2;
+}
+
+.mobile-what-possible-carousel .slick-dots li {
+  height: 16px;
+  margin: 0 4px;
+  width: 16px;
+}
+
+.mobile-what-possible-carousel .slick-dots li button {
+  height: 16px;
+  width: 16px;
+}
+
+.mobile-what-possible-carousel .slick-dots li button::before {
+  color: #3a5e3c;
+  font-size: 11px;
+  height: 16px;
+  line-height: 16px;
+  opacity: 0.4;
+  width: 16px;
+}
+
+.mobile-what-possible-carousel .slick-dots li.slick-active button::before {
+  color: #3a5e3c;
+  opacity: 1;
+}
+
 .mobile-possibility-slider .slick-dots {
   bottom: 18px;
   z-index: 2;
