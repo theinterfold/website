@@ -737,7 +737,7 @@ export function MobileVersion() {
                 onBlur={() => setIsNewsletterFocused(false)}
                 onChange={(e) => setEmail(e.target.value)}
                 onFocus={() => setIsNewsletterFocused(true)}
-                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-b border-[#3a5e3c] bg-transparent outline-none text-[#3a5e3c] pb-2 text-[14.429px] placeholder:text-[#3a5e3c] placeholder:capitalize"
+                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-b border-[#3a5e3c] bg-transparent outline-none text-[#3a5e3c] pb-2 text-[14.429px] leading-[1.3] placeholder:text-[#3a5e3c] placeholder:capitalize"
               />
             </label>
             <AnimatePresence>
@@ -745,7 +745,7 @@ export function MobileVersion() {
                 <motion.button
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   className={`mt-4 flex h-[52px] w-full origin-top items-center justify-center overflow-hidden transition-colors ${
-                    isValidEmail(email) ? 'bg-[#3a5e3c] text-[#d9fce8]' : 'bg-[rgba(193,217,191,0.8)] text-[#687d71]'
+                    isValidEmail(email) ? 'cursor-pointer bg-[#3a5e3c] text-[#d9fce8]' : 'cursor-not-allowed bg-[rgba(193,217,191,0.8)] text-[#687d71]'
                   }`}
                   disabled={!isValidEmail(email)}
                   exit={{ opacity: 0, scale: 0.965, y: 6 }}

@@ -2,6 +2,9 @@ import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import imgSignal from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgNetwork from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgMesh from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
+import { DesktopFooter } from "../../imports/Desktop/Desktop";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 
 type PageKey = "community" | "protocol" | "docs";
@@ -176,23 +179,172 @@ function Mark() {
   );
 }
 
-export function Header() {
+function AnimatedMenuButton({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
   return (
-    <header className="sticky top-0 z-50 h-[63px] bg-[#d9fce8]">
-      <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-        <a aria-label="The Interfold home" className="h-[17.239px] w-[120.421px] justify-self-start" href="/">
-          <Wordmark />
-        </a>
-        <a aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center" href="/">
-          <Mark />
-        </a>
-        <nav className="hidden justify-self-end gap-5 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.05] tracking-[-0.48px] text-[#3a5e3c] sm:flex sm:gap-8 md:text-[22px] md:tracking-[-0.66px]">
-          <a className="transition-colors hover:text-[#82f5ad]" href="https://docs.theinterfold.com/">Docs</a>
-          <a className="transition-colors hover:text-[#82f5ad]" href="https://blog.theinterfold.com/">Blog</a>
-          <a className="transition-colors hover:text-[#82f5ad]" href="/participate">Participate</a>
-        </nav>
-      </div>
-    </header>
+    <button
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      className="hamburger-button relative h-4 w-7"
+      onClick={onClick}
+    >
+      <span className={`hamburger-toggle ${isOpen ? "active-menu" : ""}`}>
+        <i className="hamburger-middle" />
+      </span>
+      <style>{`
+        .hamburger-toggle {
+          display: block;
+          width: 28px;
+          height: 16px;
+          position: relative;
+        }
+
+        .hamburger-toggle::after,
+        .hamburger-toggle::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          height: 0;
+          border-bottom: 2px solid #3a5e3c;
+          width: 100%;
+          left: 0;
+          right: 0;
+          transition: all ease-out 0.3s;
+        }
+
+        .hamburger-toggle::after {
+          top: 100%;
+        }
+
+        .hamburger-middle {
+          display: block;
+          text-indent: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          height: 2px;
+          background-color: #3a5e3c;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          transition: all ease-out 0.1s;
+        }
+
+        .hamburger-toggle.active-menu::after {
+          transform: rotate(-45deg);
+          transform-origin: center;
+          top: 50%;
+        }
+
+        .hamburger-toggle.active-menu::before {
+          transform: rotate(45deg);
+          transform-origin: center;
+          top: 50%;
+        }
+
+        .hamburger-toggle.active-menu .hamburger-middle {
+          opacity: 0;
+        }
+      `}</style>
+    </button>
+  );
+}
+
+export function Header({ animateOpening = false }: { animateOpening?: boolean }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const BrandLink = animateOpening ? motion.a : "a";
+  const MarkLink = animateOpening ? motion.a : "a";
+  const NavLink = animateOpening ? motion.a : "a";
+  const openingMotion = (delay: number) => animateOpening
+    ? {
+        animate: { opacity: 1, y: 0 },
+        initial: { opacity: 0, y: -6 },
+        transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
+      }
+    : {};
+
+  return (
+    <>
+      <header className={`${animateOpening ? "interfold-header-drop" : ""} sticky top-0 z-50 h-[63px] bg-[#d9fce8]`}>
+        <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
+          <BrandLink
+            aria-label="The Interfold home"
+            className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17.239px] w-[120.421px] justify-self-start"}
+            href="/"
+            style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
+            {...openingMotion(0.75)}
+          >
+            {animateOpening ? "The Interfold" : <Wordmark />}
+          </BrandLink>
+          <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center" href="/" {...openingMotion(0.85)}>
+            <Mark />
+          </MarkLink>
+          <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
+            <NavLink className="transition-colors hover:text-[#82f5ad]" href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>Docs</NavLink>
+            <NavLink className="transition-colors hover:text-[#82f5ad]" href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>Blog</NavLink>
+            <NavLink className="transition-colors hover:text-[#82f5ad]" href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
+          </nav>
+          <div className="absolute right-4 md:hidden">
+            <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+          </div>
+        </div>
+      </header>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            animate={{ opacity: 1 }}
+            className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[#d9fce8]"
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="absolute right-6 top-4">
+              <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+            </div>
+            <motion.p
+              animate={{ opacity: 1, y: 0 }}
+              className="font-['Office_Code_Pro:Medium',sans-serif] absolute top-6 text-[12px] uppercase tracking-[1px] text-[#687d71]"
+              initial={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Menu
+            </motion.p>
+            <div className="m-0 flex flex-col gap-0 p-0">
+              <motion.a
+                animate={{ opacity: 1, y: 0 }}
+                className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                href="https://docs.theinterfold.com/"
+                initial={{ opacity: 0, y: 16 }}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ wordSpacing: "-0.1em" }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Docs
+              </motion.a>
+              <motion.a
+                animate={{ opacity: 1, y: 0 }}
+                className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                href="https://blog.theinterfold.com/"
+                initial={{ opacity: 0, y: 16 }}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ wordSpacing: "-0.1em" }}
+                transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Blog
+              </motion.a>
+              <motion.a
+                animate={{ opacity: 1, y: 0 }}
+                className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                href="/participate"
+                initial={{ opacity: 0, y: 16 }}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ wordSpacing: "-0.1em" }}
+                transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Participate
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -427,7 +579,7 @@ export function ContentPage({ page }: { page: PageKey }) {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#d9fce8]">
-      <Header />
+      <Header animateOpening />
 
       <main>
         <section className="bg-[#d9fce8] px-4 py-[88px] md:px-6 md:py-[112px]">
@@ -472,7 +624,7 @@ export function ContentPage({ page }: { page: PageKey }) {
         <FollowOnSection page={page} />
       </main>
 
-      <Footer />
+      <DesktopFooter staticLayout />
     </div>
   );
 }

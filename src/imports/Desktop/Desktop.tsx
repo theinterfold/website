@@ -1743,7 +1743,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
               <label className="block w-full">
                 <span className="sr-only">Email for Interfold updates</span>
                 <input
-                  className="font-['ABC_Gramercy:Regular',sans-serif] relative z-10 w-full border-0 bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.075] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
+                  className="font-['ABC_Gramercy:Regular',sans-serif] relative z-10 w-full border-0 bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.3] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
                   inputMode="email"
                   onBlur={() => setIsNewsletterFocused(false)}
                   onChange={(event) => setEmail(event.target.value)}
@@ -1758,8 +1758,8 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
                 {hasEmail && (
                   <motion.button
                     animate={{ opacity: 1, x: 0 }}
-                    className={`absolute bottom-[8px] right-3 min-w-[96px] px-3 py-1 transition-colors ${
-                      isValidEmail ? "bg-[#3a5e3c] text-[#d9fce8]" : "bg-[rgba(193,217,191,0.8)] text-[#687d71]"
+                    className={`absolute bottom-[8px] right-3 z-30 min-w-[96px] px-3 py-1 transition-colors ${
+                      isValidEmail ? "cursor-pointer bg-[#3a5e3c] text-[#d9fce8]" : "cursor-not-allowed bg-[rgba(193,217,191,0.8)] text-[#687d71]"
                     }`}
                     disabled={!isValidEmail}
                     exit={{ opacity: 0, x: 8 }}
@@ -1823,7 +1823,7 @@ export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
       <div className="md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
-        <div className="absolute inset-y-0 left-1/2 w-full max-w-[1440px] -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
+        <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken" src={imgImage66} />
         </div>
       </div>
