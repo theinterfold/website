@@ -176,7 +176,7 @@ function Mark() {
   );
 }
 
-function Header() {
+export function Header() {
   return (
     <header className="sticky top-0 z-50 h-[63px] bg-[#d9fce8]">
       <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
@@ -189,14 +189,14 @@ function Header() {
         <nav className="hidden justify-self-end gap-5 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.05] tracking-[-0.48px] text-[#3a5e3c] sm:flex sm:gap-8 md:text-[22px] md:tracking-[-0.66px]">
           <a className="transition-colors hover:text-[#82f5ad]" href="https://docs.theinterfold.com/">Docs</a>
           <a className="transition-colors hover:text-[#82f5ad]" href="https://blog.theinterfold.com/">Blog</a>
-          <a className="transition-colors hover:text-[#82f5ad]" href="/#participate">Participate</a>
+          <a className="transition-colors hover:text-[#82f5ad]" href="/participate">Participate</a>
         </nav>
       </div>
     </header>
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="bg-[#d9fce8]">
       <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-12 md:grid-cols-[1fr_1fr] md:px-6">

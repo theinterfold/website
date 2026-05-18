@@ -353,7 +353,7 @@ function Frame1() {
   return (
     <a
       className="group bg-[#82f5ad] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
-      href="#participate"
+      href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1588,7 +1588,7 @@ function Frame21() {
       <motion.a
         animate={{ opacity: 1, y: 0 }}
         className="relative shrink-0 transition-colors hover:text-[#82f5ad]"
-        href="#participate"
+        href="/participate"
         initial={{ opacity: 0, y: -6 }}
         transition={{ duration: 0.45, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
       >
@@ -1640,7 +1640,7 @@ function Frame7() {
   return (
     <a
       className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="#participate"
+      href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1676,7 +1676,7 @@ function Frame13() {
   );
 }
 
-function Frame32() {
+export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
   const [email, setEmail] = useState("");
   const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
   const [isJoinHovered, setIsJoinHovered] = useState(false);
@@ -1684,15 +1684,16 @@ function Frame32() {
   const hasEmail = email.trim().length > 0;
 
   return (
-    <footer className="md:absolute relative bg-[#d9fce8] md:left-0 md:top-[calc(3849px+min(44.444vw,640px))] w-full">
+    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(3849px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
             <p
-              className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]"
+              className="-ml-[8px] capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] tracking-[-1.92px] md:-ml-[12px] md:text-[64px]"
               style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
             >
-              The Interfold
+              <span className="block">The</span>
+              <span className="block pl-[8px] md:pl-[12px]">Interfold</span>
             </p>
           </ScrollFadeIn>
         </div>
@@ -1814,6 +1815,10 @@ function Frame32() {
   );
 }
 
+function Frame32() {
+  return <DesktopFooter />;
+}
+
 export default function Desktop() {
   return (
     <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
@@ -1835,27 +1840,14 @@ export default function Desktop() {
           <motion.a
             animate={{ opacity: 1, y: 0 }}
             aria-label="The Interfold home"
-            className="justify-self-start h-[17.239px] w-[120.421px]"
+            className="justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]"
             data-name="The Interfold"
             href="/"
             initial={{ opacity: 0, y: -6 }}
+            style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
             transition={{ duration: 0.45, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
-            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
-              <g id="The Interfold">
-                <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
-                <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
-                <path d={svgPaths.pc6803c0} fill="#3A5E3C" />
-                <path d={svgPaths.pd8ed180} fill="#3A5E3C" />
-                <path d={svgPaths.p3771fe00} fill="#3A5E3C" />
-                <path d={svgPaths.p2960eb80} fill="#3A5E3C" />
-                <path d={svgPaths.p357bef30} fill="#3A5E3C" />
-                <path d={svgPaths.p2e47ac00} fill="#3A5E3C" />
-                <path d={svgPaths.p254332f0} fill="#3A5E3C" />
-                <path d={svgPaths.p102bd800} fill="#3A5E3C" />
-                <path d={svgPaths.p12150980} fill="#3A5E3C" />
-              </g>
-            </svg>
+            The Interfold
           </motion.a>
           <motion.a
             animate={{ opacity: 1, y: 0 }}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Desktop from '../../imports/Desktop/Desktop';
 import { ContentPage } from './ContentPage';
 import { MobileVersion } from './MobileVersion';
+import { ParticipatePage } from './ParticipatePage';
 
 const MOBILE_BREAKPOINT = 768;
 const CONTENT_PAGES = ['community', 'protocol', 'docs'] as const;
@@ -51,6 +52,10 @@ export function ResponsiveLayout() {
 
   if (contentPage) {
     return <ContentPage page={contentPage} />;
+  }
+
+  if (typeof window !== 'undefined' && window.location.pathname.replace(/^\/+|\/+$/g, '') === 'participate') {
+    return <ParticipatePage />;
   }
 
   return isMobile ? <MobileVersion /> : <Desktop />;

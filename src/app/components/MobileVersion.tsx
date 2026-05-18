@@ -307,7 +307,7 @@ export function MobileVersion() {
             <motion.a
               animate={{ opacity: 1, y: 0 }}
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="#participate"
+              href="/participate"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: '-0.1em' }}
@@ -368,7 +368,7 @@ export function MobileVersion() {
             <div className="w-full">
               <a
                 className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="#participate"
+                href="/participate"
                 onMouseEnter={() => setHoveredButton('participate')}
                 onMouseLeave={() => setHoveredButton(null)}
               >
@@ -618,7 +618,7 @@ export function MobileVersion() {
           <div className="w-full">
             <a
               className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="#participate"
+              href="/participate"
               onMouseEnter={() => setHoveredButton('participate-participate')}
               onMouseLeave={() => setHoveredButton(null)}
             >

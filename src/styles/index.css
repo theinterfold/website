@@ -92,6 +92,16 @@ body,
   opacity: 1;
 }
 
+.participation-pathways-carousel .slick-dots li button::before {
+  color: #121718;
+  opacity: 0.32;
+}
+
+.participation-pathways-carousel .slick-dots li.slick-active button::before {
+  color: #121718;
+  opacity: 1;
+}
+
 .mobile-possibility-slider .slick-dots {
   bottom: 18px;
   z-index: 2;
