@@ -192,18 +192,17 @@ function ActorGlyph({ index }: { index: number }) {
 export function ParticipatePage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
-      <Header animateOpening />
+      <Header animateOpening backgroundClassName="bg-white" />
 
       <main>
-        <div className="relative aspect-[1440/430] w-full overflow-hidden bg-[#d9fce8]">
-          <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
+        <div className="relative aspect-[1440/430] w-full overflow-hidden bg-white">
+          <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-white">
             <img
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken"
+              className="absolute inset-0 h-full w-full object-cover object-center"
               src={imgHero}
             />
           </div>
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(217,252,232,0.72),rgba(217,252,232,0.1)_42%,rgba(217,252,232,0)_68%)]" />
         </div>
 
         <section className="bg-white px-6 py-[64px] text-center md:py-[112px]">
