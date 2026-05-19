@@ -160,7 +160,7 @@ export function MobileVersion() {
 
       {/* Hero Section */}
       <div className="flex flex-col bg-[#d9fce8]">
-        <div className="relative h-64 w-full overflow-hidden bg-[#d9fce8]">
+        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <img
             alt=""
             className="h-full w-full object-cover mix-blend-darken"

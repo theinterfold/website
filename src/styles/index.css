@@ -5,7 +5,17 @@
 html,
 body,
 #root {
-  background: #d9fce8;
+  --interfold-transition-duration: 720ms;
+  --interfold-transition-ease: cubic-bezier(0.55, 0, 0.1, 1);
+  --interfold-page-background: #d9fce8;
+  background-color: var(--interfold-page-background);
+  transition: background-color var(--interfold-transition-duration) var(--interfold-transition-ease);
+}
+
+html.interfold-theme-participate,
+html.interfold-theme-participate body,
+html.interfold-theme-participate #root {
+  --interfold-page-background: #ffffff;
 }
 
 @keyframes interfold-header-drop {
@@ -25,6 +35,141 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .interfold-header-drop {
+    animation: none;
+  }
+
+  html,
+  body,
+  #root {
+    transition: none;
+  }
+}
+
+.interfold-hero-transition {
+  contain: layout;
+  view-transition-name: interfold-hero;
+}
+
+.interfold-header-transition {
+  view-transition-name: interfold-header;
+}
+
+::view-transition-group(root) {
+  z-index: 0;
+}
+
+::view-transition-group(interfold-hero) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-group(interfold-header) {
+  animation: none;
+  z-index: 2;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--interfold-transition-duration);
+  animation-timing-function: var(--interfold-transition-ease);
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation-name: interfold-page-out;
+}
+
+::view-transition-new(root) {
+  animation-name: interfold-page-in;
+}
+
+::view-transition-old(interfold-header),
+::view-transition-new(interfold-header) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(interfold-header) {
+  opacity: 0;
+}
+
+::view-transition-old(interfold-hero),
+::view-transition-new(interfold-hero) {
+  animation-duration: var(--interfold-transition-duration);
+  animation-timing-function: var(--interfold-transition-ease);
+  block-size: 100%;
+  inline-size: 100%;
+  overflow: hidden;
+}
+
+::view-transition-old(interfold-hero) {
+  animation-name: interfold-hero-out;
+}
+
+::view-transition-new(interfold-hero) {
+  animation-name: interfold-hero-in;
+}
+
+@keyframes interfold-hero-out {
+  from {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  to {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.96;
+  }
+}
+
+@keyframes interfold-hero-in {
+  from {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.98;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes interfold-page-out {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -24px, 0);
+  }
+}
+
+@keyframes interfold-page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interfold-header-transition,
+  .interfold-hero-transition {
+    view-transition-name: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(interfold-header),
+  ::view-transition-new(interfold-header),
+  ::view-transition-old(interfold-hero),
+  ::view-transition-new(interfold-hero) {
     animation: none;
   }
 }

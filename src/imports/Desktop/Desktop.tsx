@@ -1821,8 +1821,8 @@ function Frame32() {
 
 export default function Desktop() {
   return (
-    <div className="bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
+    <div className="interfold-page-transition bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
+      <div className="interfold-hero-transition md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken" src={imgImage66} />
         </div>
@@ -1832,52 +1832,6 @@ export default function Desktop() {
       <Frame11 />
       <Frame20 />
       <Frame15 />
-      <div
-        className="interfold-header-drop md:absolute relative z-50 bg-[#d9fce8] h-[63px] md:left-0 md:top-0 w-full"
-        data-name="Header"
-      >
-        <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-          <motion.a
-            animate={{ opacity: 1, y: 0 }}
-            aria-label="The Interfold home"
-            className="justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]"
-            data-name="The Interfold"
-            href="/"
-            initial={{ opacity: 0, y: -6 }}
-            style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
-            transition={{ duration: 0.45, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          >
-            The Interfold
-          </motion.a>
-          <motion.a
-            animate={{ opacity: 1, y: 0 }}
-            aria-label="The Interfold home"
-            className="justify-self-center h-[35.071px] w-[45.703px]"
-            data-name="Vector"
-            href="/"
-            initial={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.45, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="size-full">
-              <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
-                <g id="Vector">
-                  <path d={svgPaths.p2c3ef4f0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p18d4bac0} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p79ece00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p3c15f980} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.pd580300} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p3e19a800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p3fc0d800} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                  <path d={svgPaths.p1f4a0a00} stroke="var(--stroke-0, #3A5E3C)" strokeLinejoin="bevel" strokeWidth="2.88577" />
-                </g>
-              </svg>
-            </div>
-          </motion.a>
-          <div className="min-w-0 justify-self-end">
-            <Frame21 />
-          </div>
-        </div>
-      </div>
       <Frame13 />
       <Frame32 />
     </div>

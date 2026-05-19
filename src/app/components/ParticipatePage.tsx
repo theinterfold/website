@@ -1,7 +1,6 @@
 import imgHero from "../../imports/Desktop/TheInterfold_Participate.png";
 import Slider from "react-slick";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
-import { Header } from "./ContentPage";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 
 const pathways = [
@@ -163,7 +162,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
 
 function ActorGlyph({ index }: { index: number }) {
   return (
-    <div className="relative grid size-[72px] place-items-center rounded-full border border-[#bde7ce] bg-[#eafff2] text-[#3a5e3c]">
+    <div className="relative grid size-[72px] place-items-center rounded-full border border-[#3a5e3c]/20 bg-[#d9fce8] text-[#3a5e3c]">
       {index === 0 ? (
         <div className="h-8 w-6 border-2 border-current">
           <div className="mx-auto mt-2 h-[2px] w-3 bg-current" />
@@ -178,9 +177,9 @@ function ActorGlyph({ index }: { index: number }) {
         </div>
       ) : (
         <div className="relative size-10">
-          <span className="absolute left-1/2 top-0 size-[10px] -translate-x-1/2 rounded-full border-2 border-current bg-[#eafff2]" />
-          <span className="absolute bottom-0 left-0 size-[10px] rounded-full border-2 border-current bg-[#eafff2]" />
-          <span className="absolute bottom-0 right-0 size-[10px] rounded-full border-2 border-current bg-[#eafff2]" />
+          <span className="absolute left-1/2 top-0 size-[10px] -translate-x-1/2 rounded-full border-2 border-current bg-[#d9fce8]" />
+          <span className="absolute bottom-0 left-0 size-[10px] rounded-full border-2 border-current bg-[#d9fce8]" />
+          <span className="absolute bottom-0 right-0 size-[10px] rounded-full border-2 border-current bg-[#d9fce8]" />
           <span className="absolute left-[19px] top-[10px] h-[22px] w-[2px] bg-current" />
           <span className="absolute bottom-[8px] left-[8px] h-[2px] w-6 bg-current" />
         </div>
@@ -191,29 +190,29 @@ function ActorGlyph({ index }: { index: number }) {
 
 export function ParticipatePage() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
-      <Header animateOpening backgroundClassName="bg-white" />
-
+    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
-        <div className="relative aspect-[1440/430] w-full overflow-hidden bg-white">
-          <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-white">
+        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:-mt-[63px] md:aspect-[1440/640] md:h-auto">
+          <div className="h-full w-full overflow-hidden bg-white md:absolute md:inset-y-0 md:left-1/2 md:-translate-x-1/2">
             <img
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center md:absolute md:inset-0"
               src={imgHero}
             />
           </div>
         </div>
 
-        <section className="bg-white px-6 py-[64px] text-center md:py-[112px]">
-          <div className="mx-auto flex max-w-md flex-col items-center gap-2 md:max-w-[760px] md:gap-6">
+        <section className="bg-white px-4 py-[64px] text-center md:py-[112px]">
+          <div className="mx-auto flex max-w-md flex-col items-center gap-[24px] md:max-w-[760px]">
             <ScrollFadeIn className="w-full">
-              <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] md:text-[76px] md:leading-[0.87] md:tracking-[-2.28px]">
-                Participate in the network
+              <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">
+                Participate in
+                <br />
+                the network
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p className="max-w-[560px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] text-[#687d71] md:text-[14px] md:leading-[1.075] md:tracking-[1.4px]">
+              <p className="w-full font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[383.808px]">
                 Interfold is a system for confidential coordination.
                 <br />
                 The network is forming ahead of public testnet.
@@ -224,24 +223,24 @@ export function ParticipatePage() {
           </div>
         </section>
 
-        <section className="bg-[#d9fce8] px-6 py-[64px] md:py-[112px]">
+        <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>Overview</SectionLabel>
-              <p className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] md:mt-6 md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p className="mt-[11.543px] font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px]">
                 Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place.
               </p>
-              <p className="mt-8 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] md:text-[14px] md:leading-[1.45] md:tracking-[1.1px]">
+              <p className="mt-8 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px]">
                 This requires coordination between multiple actors:
               </p>
             </ScrollFadeIn>
 
             <div className="mx-auto mt-16 flex max-w-md flex-col items-center min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-[minmax(0,1fr)_120px_minmax(0,1fr)_120px_minmax(0,1fr)] min-[1100px]:items-start">
               {actors.map(([title, body], index) => (
-                <ScrollFadeIn className="flex w-full max-w-[280px] flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
+                <ScrollFadeIn className="flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
                   <ActorGlyph index={index} />
                   <div className="flex min-w-0 flex-col items-center">
-                    <p className={`mt-6 font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[1.02] tracking-[-0.96px] ${title === "Ciphernode operator committees" ? "max-w-[360px]" : "max-w-[260px]"}`}>
+                    <p className="mt-6 max-w-md font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px]">
                       {title === "Ciphernode operator committees" ? (
                         <>
                           Ciphernode
@@ -252,14 +251,14 @@ export function ParticipatePage() {
                         title
                       )}
                     </p>
-                    <p className="mt-3 max-w-[240px] font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.25] tracking-[1.4px] text-[#687d71]">
+                    <p className="mt-3 max-w-md font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
                       {body}
                     </p>
                   </div>
                 </ScrollFadeIn>
               )).flatMap((actor, index) => (
                 index < actors.length - 1
-                  ? [actor, <div aria-hidden="true" className="my-7 h-14 w-px bg-[#3a5e3c]/35 min-[1100px]:my-0 min-[1100px]:mt-[35px] min-[1100px]:h-px min-[1100px]:w-full min-[1100px]:bg-[#3a5e3c]/55" key={`connector-${index}`} />]
+                  ? [actor, <div aria-hidden="true" className="my-8 h-14 w-px bg-[#3a5e3c]/35 min-[1100px]:my-0 min-[1100px]:mt-8 min-[1100px]:h-px min-[1100px]:w-full min-[1100px]:bg-[#3a5e3c]/55" key={`connector-${index}`} />]
                   : [actor]
               ))}
             </div>
@@ -270,7 +269,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel className="text-[#d9fce8]">Participation pathways</SectionLabel>
-              <p className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] md:mt-6 md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p className="mt-[11.543px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Participation is not one-size-fits-all.
                 <br />
                 Each role has different responsibilities, constraints, and timelines.
@@ -304,15 +303,15 @@ export function ParticipatePage() {
           </div>
         </section>
 
-        <section className="bg-[#121718] px-6 py-[64px] text-[#82f5ad] md:py-[112px]">
+        <section className="bg-[#121718] px-4 py-[64px] text-[#82f5ad] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">What’s next</SectionLabel>
               </ScrollFadeIn>
-              <ScrollFadeIn className="mx-auto mt-5 max-w-[560px]">
-                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[1.02] tracking-[-0.96px] text-[#82f5ad]">
-                The network is progressing toward:
+              <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-md md:w-[597.355px]">
+                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px] text-[#82f5ad]">
+                  The network is progressing toward:
                 </p>
               </ScrollFadeIn>
               <div className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-4">
@@ -323,20 +322,20 @@ export function ParticipatePage() {
 
                   return (
                     <ScrollFadeIn className="relative flex flex-col items-center" delay={index * 0.1} key={item}>
-                      <span className={`relative z-10 grid size-10 place-items-center font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-none tracking-[0.8px] ${isActive ? "bg-[#82f5ad] text-[#121718] shadow-[0_0_24px_rgba(130,245,173,0.22)]" : "bg-[#687d71] text-[#121718]"}`}>
+                      <span className={`relative z-10 grid size-10 place-items-center font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] ${isActive ? "bg-[#82f5ad] text-[#121718]" : "bg-[#687d71] text-[#121718]"}`}>
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className={`mt-4 block size-3 rounded-full ${isActive ? "bg-[#82f5ad]" : "bg-[#687d71]"}`} />
                       <span className={`mt-3 h-8 w-px ${isActive ? "bg-[#82f5ad]/60" : "bg-[#687d71]"}`} />
-                      <p className={`mt-4 max-w-[230px] font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.25] tracking-[1.4px] ${isActive ? "text-[#d9fce8]" : "text-[#d9fce8]/55"}`}>
+                      <p className={`mt-4 max-w-md font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] ${isActive ? "text-[#d9fce8]" : "text-[#d9fce8]/55"}`}>
                         {item}
                       </p>
                     </ScrollFadeIn>
                   );
                 })}
               </div>
-              <ScrollFadeIn className="mx-auto mt-14 max-w-[680px]">
-                <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.45] tracking-[1.1px] text-[#82f5ad]">
+              <ScrollFadeIn className="mx-auto mt-14 max-w-[760px]">
+                <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
                   Access will expand gradually as the system stabilizes.
                   <br />
                   This page will be updated as participation opens.
@@ -346,19 +345,19 @@ export function ParticipatePage() {
           </div>
         </section>
 
-        <section className="bg-[#687d71] px-6 py-[64px] text-center md:py-[112px]">
-          <div className="mx-auto flex max-w-[760px] flex-col items-center gap-8">
+        <section className="bg-[#687d71] px-4 py-[64px] text-center md:py-[112px]">
+          <div className="mx-auto flex max-w-[760px] flex-col items-center">
             <ScrollFadeIn>
               <SectionLabel className="text-[#d9fce8]/70">Participate</SectionLabel>
             </ScrollFadeIn>
-            <ScrollFadeIn>
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[1.02] tracking-[-0.96px] text-[#d9fce8]">
+            <ScrollFadeIn className="mt-[11.543px]">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px] text-[#d9fce8]">
                 If you’re interested in participating, reach out or signal interest.
               </p>
             </ScrollFadeIn>
-            <ScrollFadeIn className="w-full max-w-[288px]">
+            <ScrollFadeIn className="mt-8 w-full max-w-[288px]">
               <a
-                className="group flex h-[52px] w-full items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#d9fce8]"
+                className="group flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] md:w-[288px]"
                 href="mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest"
               >
                 Reach out
