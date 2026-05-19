@@ -291,15 +291,6 @@ export function ParticipatePage() {
                 </ScrollFadeIn>
               ))}
             </div>
-            <div className="mt-16 grid gap-10 min-[1100px]:grid-cols-3 min-[1100px]:gap-4">
-              {pathways.map((pathway, index) => (
-                <ScrollFadeIn className="space-y-4 border-t border-[#d9fce8]/35 pt-6 font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.075] tracking-[-0.6px]" delay={index * 0.1} key={`${pathway.title}-support`}>
-                  {pathway.outro.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </ScrollFadeIn>
-              ))}
-            </div>
           </div>
         </section>
 
