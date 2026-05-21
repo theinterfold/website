@@ -83,7 +83,7 @@ export function SiteMobileHeader({
 
   return (
     <>
-      <div className={`interfold-header-drop sticky top-0 z-50 relative flex items-center justify-center ${backgroundClassName} px-6 py-4 ${className}`}>
+      <div className={`interfold-header-drop sticky top-0 z-50 flex items-center justify-center ${backgroundClassName} px-6 py-4 ${className}`}>
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />

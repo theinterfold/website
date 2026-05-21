@@ -8,9 +8,18 @@ import { ParticipatePage } from './ParticipatePage';
 const MOBILE_BREAKPOINT = 768;
 const CONTENT_PAGES = ['community', 'protocol', 'docs'] as const;
 type ContentPagePath = typeof CONTENT_PAGES[number];
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (callback: () => void) => void;
+type ViewTransitionHandle = {
+  finished: Promise<void>;
 };
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => ViewTransitionHandle;
+};
+
+const CONTENT_ONLY_TRANSITION_CLASS = 'interfold-transition-content-only';
+const CONTENT_ONLY_EXIT_CLASS = 'interfold-transition-content-exit';
+const CONTENT_ONLY_ENTER_CLASS = 'interfold-transition-content-enter';
+const CONTENT_ONLY_EXIT_DURATION_MS = 240;
+const CONTENT_ONLY_ENTER_DURATION_MS = 280;
 
 function getPagePath() {
   if (typeof window === 'undefined') {
@@ -32,6 +41,19 @@ function applyPageTheme(page = getPagePath()) {
   document.documentElement.classList.toggle('interfold-theme-participate', page === 'participate');
 }
 
+function isCurrentHeroVisible() {
+  const hero = document.querySelector('.interfold-hero-transition');
+
+  if (!(hero instanceof HTMLElement)) {
+    return false;
+  }
+
+  const rect = hero.getBoundingClientRect();
+  const headerOffset = 64;
+
+  return rect.bottom > headerOffset && rect.top < window.innerHeight;
+}
+
 export function ResponsiveLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -42,6 +64,8 @@ export function ResponsiveLayout() {
     const currentPath = getPagePath();
     applyPageTheme(currentPath);
     setRoutePath(currentPath);
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
 
     const checkMobile = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
@@ -54,17 +78,57 @@ export function ResponsiveLayout() {
         setRoutePath(nextPath);
       });
     };
+    let transitionClassCleanupTimer: number | undefined;
+    let contentOnlyCommitTimer: number | undefined;
+
+    const clearTransitionModeClasses = () => {
+      document.documentElement.classList.remove(CONTENT_ONLY_TRANSITION_CLASS);
+      document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
+      document.documentElement.classList.remove(CONTENT_ONLY_ENTER_CLASS);
+    };
+
+    const scheduleTransitionClassCleanup = () => {
+      if (transitionClassCleanupTimer) {
+        window.clearTimeout(transitionClassCleanupTimer);
+      }
+
+      transitionClassCleanupTimer = window.setTimeout(clearTransitionModeClasses, CONTENT_ONLY_ENTER_DURATION_MS);
+    };
 
     const startRouteTransition = (commit: () => void) => {
       const viewTransitionDocument = document as ViewTransitionDocument;
       const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      if (!viewTransitionDocument.startViewTransition || shouldReduceMotion) {
+      if (contentOnlyCommitTimer) {
+        window.clearTimeout(contentOnlyCommitTimer);
+      }
+
+      if (shouldReduceMotion) {
         commit();
         return;
       }
 
-      viewTransitionDocument.startViewTransition(commit);
+      clearTransitionModeClasses();
+
+      if (!isCurrentHeroVisible()) {
+        document.documentElement.classList.add(CONTENT_ONLY_TRANSITION_CLASS);
+        document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
+        contentOnlyCommitTimer = window.setTimeout(() => {
+          document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
+          document.documentElement.classList.add(CONTENT_ONLY_ENTER_CLASS);
+          commit();
+          scheduleTransitionClassCleanup();
+        }, CONTENT_ONLY_EXIT_DURATION_MS);
+        return;
+      }
+
+      if (!viewTransitionDocument.startViewTransition) {
+        commit();
+        return;
+      }
+
+      const transition = viewTransitionDocument.startViewTransition(commit);
+      void transition.finished.catch(() => undefined);
     };
 
     const checkRoute = () => {
@@ -103,8 +167,8 @@ export function ResponsiveLayout() {
 
       startRouteTransition(() => {
         window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
-        window.scrollTo(0, 0);
         commitRoutePath();
+        window.scrollTo(0, 0);
       });
     };
 
@@ -117,6 +181,14 @@ export function ResponsiveLayout() {
       window.removeEventListener('resize', checkMobile);
       window.removeEventListener('popstate', checkRoute);
       document.removeEventListener('click', handleInternalLinkClick);
+      if (transitionClassCleanupTimer) {
+        window.clearTimeout(transitionClassCleanupTimer);
+      }
+      if (contentOnlyCommitTimer) {
+        window.clearTimeout(contentOnlyCommitTimer);
+      }
+      clearTransitionModeClasses();
+      window.history.scrollRestoration = previousScrollRestoration;
     };
   }, []);
 
@@ -128,7 +200,7 @@ export function ResponsiveLayout() {
       activePath={routePath}
       animateOpening
       backgroundClassName={isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}
-      desktopPositionClassName={isHome ? 'md:absolute md:left-0 md:top-0' : 'md:sticky md:top-0'}
+      desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
       showMobile={isParticipate}
     />
@@ -143,7 +215,7 @@ export function ResponsiveLayout() {
           activePath=""
           animateOpening
           backgroundClassName="bg-[#d9fce8]"
-          desktopPositionClassName="md:absolute md:left-0 md:top-0"
+          desktopPositionClassName="md:fixed md:left-0 md:top-0"
           showDesktop
           showMobile={false}
         />

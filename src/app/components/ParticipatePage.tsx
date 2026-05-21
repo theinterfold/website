@@ -192,7 +192,7 @@ export function ParticipatePage() {
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
-        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:-mt-[63px] md:aspect-[1440/640] md:h-auto">
+        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:aspect-[1440/640] md:h-auto">
           <div className="h-full w-full overflow-hidden bg-white md:absolute md:inset-y-0 md:left-1/2 md:-translate-x-1/2">
             <img
               alt=""
@@ -212,7 +212,7 @@ export function ParticipatePage() {
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p className="w-full font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[383.808px]">
+              <p className="w-full font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[597.355px]">
                 Interfold is a system for confidential coordination.
                 <br />
                 The network is forming ahead of public testnet.

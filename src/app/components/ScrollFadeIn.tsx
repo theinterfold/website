@@ -1,4 +1,4 @@
-import { useEffect, useRef, ReactNode } from 'react';
+import { useRef, ReactNode } from 'react';
 import { motion, useInView, useReducedMotion } from 'motion/react';
 
 interface ScrollFadeInProps {
