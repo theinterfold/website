@@ -47,11 +47,6 @@ html.interfold-theme-participate #root {
 
 .interfold-hero-transition {
   contain: layout;
-  view-transition-name: interfold-hero;
-}
-
-.interfold-header-transition {
-  view-transition-name: interfold-header;
 }
 
 html.interfold-transition-content-exit .interfold-page-transition {
@@ -66,85 +61,21 @@ html.interfold-transition-content-enter .interfold-page-transition {
   animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
-html.interfold-transition-content-enter .interfold-hero-transition {
+.interfold-route-hero-overlay {
   animation: interfold-hero-in var(--interfold-transition-duration) var(--interfold-transition-ease) both;
-}
-
-::view-transition-group(root) {
-  z-index: 0;
-}
-
-::view-transition-group(interfold-hero) {
-  animation: none;
-  z-index: 2;
-}
-
-::view-transition-group(interfold-header) {
-  animation: none;
-  z-index: 3;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: var(--interfold-transition-duration);
-  animation-timing-function: var(--interfold-transition-ease);
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  animation-name: interfold-page-out;
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  animation-name: interfold-page-in;
-  z-index: 0;
-}
-
-::view-transition-old(interfold-header),
-::view-transition-new(interfold-header) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(interfold-header) {
-  opacity: 0;
-}
-
-::view-transition-old(interfold-hero),
-::view-transition-new(interfold-hero) {
-  animation-duration: var(--interfold-transition-duration);
-  animation-fill-mode: both;
-  animation-timing-function: var(--interfold-transition-ease);
-  block-size: 100%;
-  inline-size: 100%;
-  mix-blend-mode: normal;
+  contain: layout;
+  height: min(44.444vw, 640px);
+  left: 0;
   overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  z-index: 40;
 }
 
-::view-transition-image-pair(interfold-hero) {
-  isolation: isolate;
-}
-
-::view-transition-old(interfold-hero) {
-  animation-name: interfold-hero-out;
-  z-index: 1;
-}
-
-::view-transition-new(interfold-hero) {
-  animation-name: interfold-hero-in;
-  z-index: 2;
-}
-
-@keyframes interfold-hero-out {
-  from {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-
-  to {
-    clip-path: inset(0 0 100% 0);
-    opacity: 0.96;
+@media (max-width: 767px) {
+  .interfold-route-hero-overlay {
+    height: 16rem;
   }
 }
 
@@ -157,30 +88,6 @@ html.interfold-transition-content-enter .interfold-hero-transition {
   to {
     clip-path: inset(0 0 0 0);
     opacity: 1;
-  }
-}
-
-@keyframes interfold-page-out {
-  from {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translate3d(0, -24px, 0);
-  }
-}
-
-@keyframes interfold-page-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 24px, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -197,17 +104,7 @@ html.interfold-transition-content-enter .interfold-hero-transition {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .interfold-header-transition,
-  .interfold-hero-transition {
-    view-transition-name: none;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-old(interfold-header),
-  ::view-transition-new(interfold-header),
-  ::view-transition-old(interfold-hero),
-  ::view-transition-new(interfold-hero) {
+  .interfold-route-hero-overlay {
     animation: none;
   }
 }
