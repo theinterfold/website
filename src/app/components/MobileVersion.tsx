@@ -50,8 +50,6 @@ function MobileExecutionModelGraphic() {
         <path d={svgPaths.pd678600} stroke="#252525" strokeMiterlimit="10" strokeWidth="2.18269" />
         <g>
           <path d={svgPaths.p3380c5c0} fill="#82F5AD" />
-          <path d={svgPaths.p3daf0740} fill="#82F5AD" />
-          <path d={svgPaths.p8d83300} fill="#82F5AD" />
           <path d={svgPaths.pe920280} fill="#82F5AD" />
           <path d={svgPaths.p3280f7f0} fill="#82F5AD" />
           <path d={svgPaths.p3216000} fill="#82F5AD" />
@@ -68,12 +66,6 @@ function MobileExecutionModelGraphic() {
           <path d={svgPaths.p250e9e00} fill="#82F5AD" />
           <path d={svgPaths.p1be45100} fill="#82F5AD" />
           <path d={svgPaths.p1decb600} fill="#82F5AD" />
-          <path d={svgPaths.p3eb1bfb0} fill="#82F5AD" />
-          <path d={svgPaths.p6c9f0f0} fill="#82F5AD" />
-          <path d={svgPaths.p1ac31b00} fill="#82F5AD" />
-          <path d={svgPaths.p12da0980} fill="#82F5AD" />
-          <path d={svgPaths.p1b738b00} fill="#82F5AD" />
-          <path d={svgPaths.p38896440} fill="#82F5AD" />
         </g>
         <path d="M476.758 208.821V114.505" stroke="#252525" strokeMiterlimit="10" strokeWidth="2.18269" />
       </g>

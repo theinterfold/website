@@ -66,6 +66,10 @@ html.interfold-transition-content-enter .interfold-page-transition {
   animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
+html.interfold-transition-content-enter .interfold-hero-transition {
+  animation: interfold-hero-in var(--interfold-transition-duration) var(--interfold-transition-ease) both;
+}
+
 ::view-transition-group(root) {
   z-index: 0;
 }

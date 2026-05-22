@@ -19,7 +19,7 @@ const CONTENT_ONLY_TRANSITION_CLASS = 'interfold-transition-content-only';
 const CONTENT_ONLY_EXIT_CLASS = 'interfold-transition-content-exit';
 const CONTENT_ONLY_ENTER_CLASS = 'interfold-transition-content-enter';
 const CONTENT_ONLY_EXIT_DURATION_MS = 240;
-const CONTENT_ONLY_ENTER_DURATION_MS = 280;
+const CONTENT_ONLY_ENTER_DURATION_MS = 720;
 
 function getPagePath() {
   if (typeof window === 'undefined') {

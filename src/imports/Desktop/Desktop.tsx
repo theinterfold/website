@@ -966,7 +966,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
       : hoveredZone === "output"
         ? "execution-flow-pulse-dots-hover-output"
         : hoveredZone === "inputs"
-          ? "execution-flow-pulse-dots-hidden"
+          ? "execution-flow-pulse-dots-hover-inputs"
           : "";
 
   return (
@@ -983,27 +983,27 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
             fill: #82F5AD;
           }
 
-          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot {
-            opacity: 0;
+            opacity: 0.5;
             animation: none;
           }
 
-          .execution-flow-pulse-dots-hidden .execution-flow-final-dot,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot {
             opacity: 0.5;
             animation: none;
           }
 
-          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot-core,
-          .execution-flow-pulse-dots-hidden .execution-flow-final-dot,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot-core,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot-core {
             fill: #252525 !important;
           }
 
-          .execution-flow-pulse-dots-hidden .execution-flow-pulse-dot-halo,
-          .execution-flow-pulse-dots-hidden .execution-flow-final-dot-halo,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot-halo,
+          .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot-halo,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot-halo {
             opacity: 0;
             animation: none;
@@ -1338,8 +1338,6 @@ function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
             }}
           >
             <path d={svgPaths.p3380c5c0} fill="currentColor" id="Vector_29" />
-            <path d={svgPaths.p3daf0740} fill="currentColor" id="Vector_30" />
-            <path d={svgPaths.p8d83300} fill="currentColor" id="Vector_31" />
             <path d={svgPaths.pe920280} fill="currentColor" id="Vector_32" />
             <path d={svgPaths.p3280f7f0} fill="currentColor" id="Vector_33" />
             <path d={svgPaths.p3216000} fill="currentColor" id="Vector_34" />
@@ -1356,12 +1354,6 @@ function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
             <path d={svgPaths.p250e9e00} fill="currentColor" id="Vector_45" />
             <path d={svgPaths.p1be45100} fill="currentColor" id="Vector_46" />
             <path d={svgPaths.p1decb600} fill="currentColor" id="Vector_47" />
-            <path d={svgPaths.p3eb1bfb0} fill="currentColor" id="Vector_48" />
-            <path d={svgPaths.p6c9f0f0} fill="currentColor" id="Vector_49" />
-            <path d={svgPaths.p1ac31b00} fill="currentColor" id="Vector_50" />
-            <path d={svgPaths.p12da0980} fill="currentColor" id="Vector_51" />
-            <path d={svgPaths.p1b738b00} fill="currentColor" id="Vector_52" />
-            <path d={svgPaths.p38896440} fill="currentColor" id="Vector_53" />
           </g>
           <path
             className="transition-opacity duration-200"
