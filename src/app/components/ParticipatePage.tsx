@@ -192,11 +192,16 @@ export function ParticipatePage() {
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
-        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:aspect-[1440/640] md:h-auto">
-          <div className="h-full w-full overflow-hidden bg-white md:absolute md:inset-y-0 md:left-1/2 md:-translate-x-1/2">
+        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:h-[min(44.444vw,640px)]">
+          <img
+            alt=""
+            className="h-full w-full object-cover object-center md:hidden"
+            src={imgHero}
+          />
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <img
               alt=""
-              className="h-full w-full object-cover object-center md:absolute md:inset-0"
+              className="absolute inset-0 h-full w-full object-cover object-center"
               src={imgHero}
             />
           </div>
