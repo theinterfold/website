@@ -1,11 +1,27 @@
+# The Interfold Website
 
-  # Add Scroll Animations and Responsiveness
+Website for The Interfold, a system for confidential coordination.
 
-  This is a code bundle for Add Scroll Animations and Responsiveness. The original project is available at https://www.figma.com/design/9HCS6Rav6bS3V0Bp0OvnTW/Add-Scroll-Animations-and-Responsiveness.
+The site introduces the Interfold execution model, explains how private inputs can produce shared, verifiable outcomes, and provides routes into the protocol, documentation, blog, and participation.
 
-  ## Running the code
+## Development
 
-  Run `npm i` to install the dependencies.
+Install dependencies:
 
-  Run `npm run dev` to start the development server.
-  
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open the local URL shown in the terminal.
+
+## Design notes
+
+This project uses the Interfold homepage as the source of truth for visual style, typography, spacing, colors, animations, and responsive behavior.
+
+When adding or editing pages, reuse existing styles and components where possible. Avoid introducing one-off values unless strictly necessary.
