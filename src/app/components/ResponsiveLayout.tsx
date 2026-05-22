@@ -16,12 +16,10 @@ type HeroOverlay = {
   top: number;
 };
 
-const CONTENT_ONLY_TRANSITION_CLASS = 'interfold-transition-content-only';
 const CONTENT_ONLY_EXIT_CLASS = 'interfold-transition-content-exit';
-const CONTENT_ONLY_ENTER_CLASS = 'interfold-transition-content-enter';
-const CONTENT_ONLY_EXIT_DURATION_MS = 240;
-const CONTENT_ONLY_ENTER_DURATION_MS = 280;
+const HERO_OVERLAY_ACTIVE_CLASS = 'interfold-route-hero-active';
 const HERO_OVERLAY_DURATION_MS = 720;
+const HERO_ROUTE_COMMIT_DELAY_MS = 160;
 
 function getPagePath() {
   if (typeof window === 'undefined') {
@@ -43,19 +41,6 @@ function applyPageTheme(page = getPagePath()) {
   document.documentElement.classList.toggle('interfold-theme-participate', page === 'participate');
 }
 
-function isCurrentHeroVisible() {
-  const hero = document.querySelector('.interfold-hero-transition');
-
-  if (!(hero instanceof HTMLElement)) {
-    return false;
-  }
-
-  const rect = hero.getBoundingClientRect();
-  const headerOffset = 64;
-
-  return rect.bottom > headerOffset && rect.top < window.innerHeight;
-}
-
 function getCurrentHeroTop() {
   const hero = document.querySelector('.interfold-hero-transition');
 
@@ -75,13 +60,39 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
 
   return (
     <div className={`interfold-route-hero-overlay ${isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}`} style={{ top: `${overlay.top}px` }}>
-      <div className="absolute inset-0 overflow-hidden">
-        <img
-          alt=""
-          className={`absolute inset-0 h-full w-full object-cover object-center ${isParticipate ? '' : 'mix-blend-darken'}`}
-          src={isParticipate ? imgParticipateHero : imgHomeHero}
-        />
-      </div>
+      {isParticipate ? (
+        <>
+          <img
+            alt=""
+            className="h-full w-full object-cover object-center md:hidden"
+            src={imgParticipateHero}
+          />
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
+            <img
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              src={imgParticipateHero}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <img
+            alt=""
+            className="h-full w-full object-cover mix-blend-darken md:hidden"
+            src={imgHomeHero}
+          />
+          <div className="pointer-events-none absolute left-1/2 top-0 hidden aspect-[1440/640] w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
+            <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
+              <img
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken"
+                src={imgHomeHero}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -111,60 +122,40 @@ export function ResponsiveLayout() {
         setRoutePath(nextPath);
       });
     };
-    let transitionClassCleanupTimer: number | undefined;
-    let contentOnlyCommitTimer: number | undefined;
-    let heroOverlayCommitTimer: number | undefined;
+    let heroOverlayRouteTimer: number | undefined;
+    let heroOverlayCleanupTimer: number | undefined;
 
     const clearTransitionModeClasses = () => {
-      document.documentElement.classList.remove(CONTENT_ONLY_TRANSITION_CLASS);
       document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
-      document.documentElement.classList.remove(CONTENT_ONLY_ENTER_CLASS);
-    };
-
-    const scheduleTransitionClassCleanup = () => {
-      if (transitionClassCleanupTimer) {
-        window.clearTimeout(transitionClassCleanupTimer);
-      }
-
-      transitionClassCleanupTimer = window.setTimeout(clearTransitionModeClasses, CONTENT_ONLY_ENTER_DURATION_MS);
+      document.documentElement.classList.remove(HERO_OVERLAY_ACTIVE_CLASS);
     };
 
     const startRouteTransition = (commit: () => void, nextPage = getPagePath()) => {
       const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const nextHeroPage = getHeroPagePath(nextPage);
 
-      if (contentOnlyCommitTimer) {
-        window.clearTimeout(contentOnlyCommitTimer);
+      if (heroOverlayRouteTimer) {
+        window.clearTimeout(heroOverlayRouteTimer);
       }
-      if (heroOverlayCommitTimer) {
-        window.clearTimeout(heroOverlayCommitTimer);
+
+      if (heroOverlayCleanupTimer) {
+        window.clearTimeout(heroOverlayCleanupTimer);
       }
+
+      clearTransitionModeClasses();
 
       if (shouldReduceMotion) {
         commit();
         return;
       }
 
-      clearTransitionModeClasses();
-
-      if (!isCurrentHeroVisible()) {
-        document.documentElement.classList.add(CONTENT_ONLY_TRANSITION_CLASS);
-        document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
-        contentOnlyCommitTimer = window.setTimeout(() => {
-          document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
-          document.documentElement.classList.add(CONTENT_ONLY_ENTER_CLASS);
-          commit();
-          scheduleTransitionClassCleanup();
-        }, CONTENT_ONLY_EXIT_DURATION_MS);
-        return;
-      }
-
-      if (!nextHeroPage) {
+      if (nextHeroPage === null) {
         commit();
         return;
       }
 
       applyPageTheme(nextPage);
+      document.documentElement.classList.add(HERO_OVERLAY_ACTIVE_CLASS);
       flushSync(() => {
         setHeroOverlay({
           page: nextHeroPage,
@@ -172,9 +163,12 @@ export function ResponsiveLayout() {
         });
       });
       document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
-      heroOverlayCommitTimer = window.setTimeout(() => {
+      heroOverlayRouteTimer = window.setTimeout(() => {
         document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
         commit();
+      }, HERO_ROUTE_COMMIT_DELAY_MS);
+      heroOverlayCleanupTimer = window.setTimeout(() => {
+        clearTransitionModeClasses();
         flushSync(() => {
           setHeroOverlay(null);
         });
@@ -231,14 +225,11 @@ export function ResponsiveLayout() {
       window.removeEventListener('resize', checkMobile);
       window.removeEventListener('popstate', checkRoute);
       document.removeEventListener('click', handleInternalLinkClick);
-      if (transitionClassCleanupTimer) {
-        window.clearTimeout(transitionClassCleanupTimer);
+      if (heroOverlayRouteTimer) {
+        window.clearTimeout(heroOverlayRouteTimer);
       }
-      if (contentOnlyCommitTimer) {
-        window.clearTimeout(contentOnlyCommitTimer);
-      }
-      if (heroOverlayCommitTimer) {
-        window.clearTimeout(heroOverlayCommitTimer);
+      if (heroOverlayCleanupTimer) {
+        window.clearTimeout(heroOverlayCleanupTimer);
       }
       clearTransitionModeClasses();
       window.history.scrollRestoration = previousScrollRestoration;

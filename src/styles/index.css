@@ -61,6 +61,10 @@ html.interfold-transition-content-enter .interfold-page-transition {
   animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
+html.interfold-route-hero-active .interfold-page-transition .interfold-hero-transition {
+  visibility: hidden;
+}
+
 .interfold-route-hero-overlay {
   animation: interfold-hero-in var(--interfold-transition-duration) var(--interfold-transition-ease) both;
   contain: layout;
