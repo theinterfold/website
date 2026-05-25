@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -11,8 +11,55 @@ import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44
 import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import imgChatGptImageApr232026060921Pm11 from "../../imports/Desktop/999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
+import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline";
+import legionLogo from "../../imports/Desktop/legion-logo.svg";
+import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
+import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
+import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
+
+function MobilePartnerLogoFrame({
+  children,
+  href,
+  name,
+}: {
+  children: ReactNode;
+  href: string;
+  name: string;
+}) {
+  return (
+    <a
+      aria-label={name}
+      className="flex h-[11px] items-center justify-center sm:h-4"
+      href={href}
+      rel="noreferrer"
+      target="_blank"
+    >
+      {children}
+    </a>
+  );
+}
+
+function MobilePartnerLogoAsset({ src, aspectRatio }: { src: string; aspectRatio: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="block h-full shrink-0 bg-[#3A5E3C]"
+      style={{
+        aspectRatio,
+        WebkitMaskImage: `url(${src})`,
+        WebkitMaskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskSize: "contain",
+        maskImage: `url(${src})`,
+        maskPosition: "center",
+        maskRepeat: "no-repeat",
+        maskSize: "contain",
+      }}
+    />
+  );
+}
 
 function MobileExecutionModelGraphic() {
   return (
@@ -127,6 +174,7 @@ export function MobileVersion() {
   const [email, setEmail] = useState('');
   const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
   const [isJoinHovered, setIsJoinHovered] = useState(false);
+  const possibilityCarouselRef = useMobileCarouselOpacity();
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -155,7 +203,7 @@ export function MobileVersion() {
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <img
             alt=""
-            className="h-full w-full object-cover mix-blend-darken"
+            className="h-full w-full object-cover object-top mix-blend-darken"
             src={imgImage66}
           />
         </div>
@@ -172,24 +220,24 @@ export function MobileVersion() {
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <a
-                className="group block w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://docs.theinterfold.com/"
                 onMouseEnter={() => setHoveredButton('build')}
                 onMouseLeave={() => setHoveredButton(null)}
               >
-                <div className="flex items-center justify-center gap-1">
+                <div className="relative inline-flex items-center justify-center">
                   <motion.p
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                     animate={{ x: hoveredButton === 'build' ? -8 : 0 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                   >
                     Build on Interfold
                   </motion.p>
                   <motion.span
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                    className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: hoveredButton === 'build' ? 1 : 0, x: hoveredButton === 'build' ? 0 : -10 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                   >
                     →
                   </motion.span>
@@ -198,24 +246,24 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <a
-                className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="group flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="/participate"
                 onMouseEnter={() => setHoveredButton('participate')}
                 onMouseLeave={() => setHoveredButton(null)}
               >
-                <div className="flex items-center justify-center gap-1">
+                <div className="relative inline-flex items-center justify-center">
                   <motion.p
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                     animate={{ x: hoveredButton === 'participate' ? -8 : 0 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                   >
                     Participate
                   </motion.p>
                   <motion.span
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                    className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: hoveredButton === 'participate' ? 1 : 0, x: hoveredButton === 'participate' ? 0 : -10 }}
-                    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                   >
                     →
                   </motion.span>
@@ -229,30 +277,28 @@ export function MobileVersion() {
       {/* Logos Section */}
       <ScrollFadeIn className="bg-[rgba(193,217,191,0.8)] py-8">
         <div className="flex items-center justify-center gap-8 px-6">
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
-            <path d={svgPaths.p67816f0} fill="#3A5E3C" />
-            <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
-            <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
-          </svg>
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="422 41 46 35">
-            <path d={svgPaths.pfe27200} fill="#3A5E3C" />
-          </svg>
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="586 41 34 35">
-            <path d={svgPaths.p36323370} fill="#3A5E3C" />
-            <path d={svgPaths.pdec5d70} fill="#3A5E3C" />
-            <path d={svgPaths.p1ce05600} fill="#3A5E3C" />
-            <path d={svgPaths.p3250d600} fill="#3A5E3C" />
-          </svg>
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="738 41 164 35">
-            <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
-            <path d={svgPaths.p59a0800} fill="#3A5E3C" />
-          </svg>
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1020 41 34 35">
-            <path clipRule="evenodd" d={svgPaths.p2f408d00} fill="#3A5E3C" fillRule="evenodd" />
-          </svg>
-          <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1172 41 34 35">
-            <path d={svgPaths.p1b95080} fill="#3A5E3C" />
-          </svg>
+          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon">
+            <MobilePartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko">
+            <MobilePartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://www.metalex.tech/" name="MetaLex">
+            <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
+              <path d={svgPaths.p67816f0} fill="#3A5E3C" />
+              <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
+              <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
+            </svg>
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion">
+            <MobilePartnerLogoAsset aspectRatio="1221 / 311" src={legionLogo} />
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://getsession.org" name="Session">
+            <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
+              <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
+              <path d={svgPaths.p59a0800} fill="#3A5E3C" />
+            </svg>
+          </MobilePartnerLogoFrame>
         </div>
       </ScrollFadeIn>
 
@@ -269,7 +315,7 @@ export function MobileVersion() {
         </div>
 
         <div className="mb-12 w-full max-w-md">
-          <MobileExecutionModelGraphic />
+          <AnimatedExecutionModelGraphic />
         </div>
 
         <div className="mx-auto flex w-full max-w-md flex-col gap-6">
@@ -326,7 +372,7 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mobile-what-possible-carousel mx-auto w-full max-w-md">
+        <div className="mobile-what-possible-carousel mx-auto w-full max-w-md" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
             <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
@@ -422,24 +468,24 @@ export function MobileVersion() {
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
             <a
-              className="group block w-full bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://docs.theinterfold.com/"
               onMouseEnter={() => setHoveredButton('participate-build')}
               onMouseLeave={() => setHoveredButton(null)}
             >
-              <div className="flex items-center justify-center gap-1">
+              <div className="relative inline-flex items-center justify-center">
                 <motion.p
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                   animate={{ x: hoveredButton === 'participate-build' ? -8 : 0 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 >
                   Build on Interfold
                 </motion.p>
                 <motion.span
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: hoveredButton === 'participate-build' ? 1 : 0, x: hoveredButton === 'participate-build' ? 0 : -10 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 >
                   →
                 </motion.span>
@@ -448,24 +494,24 @@ export function MobileVersion() {
           </div>
           <div className="w-full">
             <a
-              className="group block w-full bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="group flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="/participate"
               onMouseEnter={() => setHoveredButton('participate-participate')}
               onMouseLeave={() => setHoveredButton(null)}
             >
-              <div className="flex items-center justify-center gap-1">
+              <div className="relative inline-flex items-center justify-center">
                 <motion.p
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                   animate={{ x: hoveredButton === 'participate-participate' ? -8 : 0 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 >
                   Participate
                 </motion.p>
                 <motion.span
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: hoveredButton === 'participate-participate' ? 1 : 0, x: hoveredButton === 'participate-participate' ? 0 : -10 }}
-                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 >
                   →
                 </motion.span>
@@ -679,19 +725,19 @@ function ExploreCard({
           </p>
         </div>
         <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
-          <div className="flex items-center gap-1">
+          <div className="relative inline-flex items-center justify-center">
             <motion.p
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
               animate={{ x: hoveredButton === id ? -8 : 0 }}
-              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
               {cta}
             </motion.p>
             <motion.span
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
+              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: hoveredButton === id ? 1 : 0, x: hoveredButton === id ? 0 : -10 }}
-              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
               →
             </motion.span>

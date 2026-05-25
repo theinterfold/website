@@ -2,6 +2,7 @@ import imgHero from "../../imports/Desktop/TheInterfold_Participate.png";
 import Slider from "react-slick";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 const pathways = [
   {
@@ -189,19 +190,21 @@ function ActorGlyph({ index }: { index: number }) {
 }
 
 export function ParticipatePage() {
+  const participationCarouselRef = useMobileCarouselOpacity();
+
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:h-[min(44.444vw,640px)]">
           <img
             alt=""
-            className="h-full w-full object-cover object-center md:hidden"
+            className="h-full w-full object-cover object-top md:hidden"
             src={imgHero}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <img
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-cover object-top"
               src={imgHero}
             />
           </div>
@@ -280,7 +283,7 @@ export function ParticipatePage() {
                 Each role has different responsibilities, constraints, and timelines.
               </p>
             </ScrollFadeIn>
-            <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_article>div]:h-[712px] [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[768px]:[&_article>div]:h-[690px] min-[1100px]:hidden">
+            <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_article>div]:h-[712px] [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[768px]:[&_article>div]:h-[690px] min-[1100px]:hidden" ref={participationCarouselRef}>
               <Slider {...carouselSettings}>
                 {pathways.map((pathway) => (
                   <div className="h-full px-1.5" key={pathway.title}>

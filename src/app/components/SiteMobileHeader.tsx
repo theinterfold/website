@@ -124,7 +124,7 @@ export function SiteMobileHeader({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className={`fixed inset-0 z-[60] flex flex-col items-center justify-center ${backgroundClassName}`}
+          className={`fixed inset-0 z-[60] flex h-[100dvh] min-h-screen w-screen flex-col items-center justify-center ${backgroundClassName}`}
         >
           <div className="absolute right-6 top-4">
             <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
@@ -137,32 +137,34 @@ export function SiteMobileHeader({
           >
             Menu
           </motion.p>
-          <div className="flex flex-col gap-0 p-[0px] m-[0px]">
+          <div className="m-[0px] flex flex-col items-center gap-0 p-[0px]">
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://docs.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: "-0.1em" }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
-              Docs
+              <span>Docs</span>
+              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] mb-[-12px] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://blog.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: "-0.1em" }}
               transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
             >
-              Blog
+              <span>Blog</span>
+              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[48px] capitalize tracking-[-2px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="/participate"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}

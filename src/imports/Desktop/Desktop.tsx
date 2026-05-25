@@ -8,16 +8,50 @@ import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb55
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import imgChatGptImageApr232026060921Pm11 from "./999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
+import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
+import legionLogo from "./legion-logo.svg";
+import taikoLogo from "./taiko-h-mono.svg";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 const friendLogos = [
-  { name: "Mina", href: "https://minaprotocol.com" },
-  { name: "RISC Zero", href: "https://risczero.com" },
-  { name: "Succinct", href: "https://succinct.xyz" },
+  { name: "Aragon", href: "https://www.aragon.org/" },
+  { name: "Taiko", href: "https://taiko.xyz/" },
+  { name: "MetaLex", href: "https://www.metalex.tech/" },
+  { name: "Legion", href: "https://legion.cc/" },
   { name: "Session", href: "https://getsession.org" },
-  { name: "Gnosis", href: "https://gnosis.io" },
-  { name: "Nillion", href: "https://nillion.com" },
 ];
+
+function PartnerLogoFrame({ children }: { children: ReactNode }) {
+  return <span className="flex h-4 items-center justify-center sm:h-6 md:h-8">{children}</span>;
+}
+
+function PartnerLogoAsset({
+  src,
+  aspectRatio,
+  maskSize = "contain",
+}: {
+  src: string;
+  aspectRatio: string;
+  maskSize?: string;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className="block h-full shrink-0 bg-[#3A5E3C]"
+      style={{
+        aspectRatio,
+        WebkitMaskImage: `url(${src})`,
+        WebkitMaskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskSize: maskSize,
+        maskImage: `url(${src})`,
+        maskPosition: "center",
+        maskRepeat: "no-repeat",
+        maskSize,
+      }}
+    />
+  );
+}
 
 function FriendLogo({
   children,
@@ -78,50 +112,44 @@ function Frame() {
         <div className="mx-auto flex w-full max-w-[760px] flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-0 xl:max-w-[1052px]">
           <ScrollFadeIn className="shrink-0" delay={0.05}>
             <FriendLogo friend={friendLogos[0]} hoveredFriend={hoveredFriend} index={0} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="235 41 70 35">
-                <path d={svgPaths.p67816f0} fill="#3A5E3C" />
-                <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
-                <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
-              </svg>
+              <PartnerLogoFrame>
+                <PartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
+              </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.15}>
             <FriendLogo friend={friendLogos[1]} hoveredFriend={hoveredFriend} index={1} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="422 41 46 35">
-                <path d={svgPaths.pfe27200} fill="#3A5E3C" />
-              </svg>
+              <PartnerLogoFrame>
+                <PartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
+              </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.25}>
             <FriendLogo friend={friendLogos[2]} hoveredFriend={hoveredFriend} index={2} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="586 41 34 35">
-                <path d={svgPaths.p36323370} fill="#3A5E3C" />
-                <path d={svgPaths.pdec5d70} fill="#3A5E3C" />
-                <path d={svgPaths.p1ce05600} fill="#3A5E3C" />
-                <path d={svgPaths.p3250d600} fill="#3A5E3C" />
-              </svg>
+              <PartnerLogoFrame>
+                <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
+                  <path d={svgPaths.p67816f0} fill="#3A5E3C" />
+                  <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
+                  <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
+                </svg>
+              </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.35}>
             <FriendLogo friend={friendLogos[3]} hoveredFriend={hoveredFriend} index={3} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="738 41 164 35">
-                <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
-                <path d={svgPaths.p59a0800} fill="#3A5E3C" />
-              </svg>
+              <PartnerLogoFrame>
+                <PartnerLogoAsset aspectRatio="1221 / 170" maskSize="auto 183%" src={legionLogo} />
+              </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.45}>
             <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1020 41 34 35">
-                <path clipRule="evenodd" d={svgPaths.p2f408d00} fill="#3A5E3C" fillRule="evenodd" />
-              </svg>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.55}>
-            <FriendLogo friend={friendLogos[5]} hoveredFriend={hoveredFriend} index={5} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <svg className="h-4 sm:h-6 md:h-8 w-auto shrink-0" fill="none" viewBox="1172 41 34 35">
-                <path d={svgPaths.p1b95080} fill="#3A5E3C" />
-              </svg>
+              <PartnerLogoFrame>
+                <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
+                  <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
+                  <path d={svgPaths.p59a0800} fill="#3A5E3C" />
+                </svg>
+              </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
         </div>
@@ -1303,9 +1331,9 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
   );
 }
 
-function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
+function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlowHoverZone; isFullWidth?: boolean }) {
   return (
-    <div className="col-1 aspect-[819.892/256] justify-self-center ml-0 mt-[0.57px] relative row-1 w-[77.936%]" data-name="Layer_1">
+    <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 mt-[0.57px] relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
@@ -1420,6 +1448,10 @@ function Layer({ hoveredZone }: { hoveredZone: ExecutionFlowHoverZone }) {
       <ExecutionFlowInputSquaresOverlay hoveredZone={hoveredZone} />
     </div>
   );
+}
+
+export function AnimatedExecutionModelGraphic() {
+  return <Layer hoveredZone={null} isFullWidth />;
 }
 
 function Group({
@@ -1816,7 +1848,7 @@ export default function Desktop() {
     <div className="interfold-page-transition bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
       <div className="interfold-hero-transition md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
-          <img alt="" className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken" src={imgImage66} />
+          <img alt="" className="absolute inset-0 h-full w-full object-cover object-top mix-blend-darken" src={imgImage66} />
         </div>
       </div>
       <Frame />

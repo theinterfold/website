@@ -64,13 +64,13 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
         <>
           <img
             alt=""
-            className="h-full w-full object-cover object-center md:hidden"
+            className="h-full w-full object-cover object-top md:hidden"
             src={imgParticipateHero}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <img
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 h-full w-full object-cover object-top"
               src={imgParticipateHero}
             />
           </div>
@@ -79,14 +79,14 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
         <>
           <img
             alt=""
-            className="h-full w-full object-cover mix-blend-darken md:hidden"
+            className="h-full w-full object-cover object-top mix-blend-darken md:hidden"
             src={imgHomeHero}
           />
           <div className="pointer-events-none absolute left-1/2 top-0 hidden aspect-[1440/640] w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <img
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover object-center mix-blend-darken"
+                className="absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
                 src={imgHomeHero}
               />
             </div>
