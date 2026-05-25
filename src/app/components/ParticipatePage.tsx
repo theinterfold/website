@@ -8,22 +8,24 @@ const pathways = [
   {
     title: "01. Run a ciphernode",
     copy: [
-      "Ciphernodes are operators in the network.",
-      "They are selected into committees that execute encrypted programs as part of the protocol.",
+      "Ciphernodes are operators in the network, selected into committees that execute encrypted programs as part of the protocol.",
       "Unlike traditional nodes:",
     ],
     bullets: [
       "operators do not see plaintext inputs",
       "operators do not control outcomes",
-      "execution is distributed across multiple parties",
-      "Waiting for Marv point.",
+      "committees are selected per computation",
+      "outcome release requires threshold participation",
     ],
     outro: [
       "Responsibility is shared.",
       "No single node can reconstruct the data or unilaterally affect results.",
       "We are currently preparing the initial operator cohort ahead of invite-only testnet.",
     ],
-    link: "Signal interest in operating a ciphernode",
+    actions: [
+      { label: "Apply here", href: "mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest", primary: true },
+      { label: "Learn more about ciphernodes", href: "https://docs.theinterfold.com/", primary: false },
+    ],
   },
   {
     title: "02. Build and integrate",
@@ -40,10 +42,13 @@ const pathways = [
     outro: [
       "Developers can explore early documentation, collaborate on use case design, and prepare integrations ahead of testnet.",
     ],
-    link: "Get in touch to build on Interfold",
+    actions: [
+      { label: "Explore docs", href: "https://docs.theinterfold.com/", primary: true },
+      { label: "Browse research & documentation", href: "https://docs.theinterfold.com/", primary: false },
+    ],
   },
   {
-    title: "03. Partner and Pilot",
+    title: "03. Partner on a pilot",
     copy: [
       "We are working with early collaborators to test where confidential coordination is needed in practice.",
       "This includes:",
@@ -58,14 +63,17 @@ const pathways = [
       "Participation at this stage is collaborative.",
       "The goal is to test assumptions, define system constraints, and identify meaningful deployments.",
     ],
-    link: "Reach out to collaborate",
+    actions: [
+      { label: "Reach out", href: "mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest", primary: true },
+      { label: "Join Telegram", href: "https://t.me/enclave_e3", primary: false },
+    ],
   },
 ];
 
 const timelineItems = [
   "Invite-only testnet",
   "Initial operator cohort",
-  "Early application deployments",
+  "Mainnet Launch",
 ];
 
 const actors = [
@@ -113,47 +121,61 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
       </>
     ) : pathwayNumber === "03" ? (
       <>
-        Partner and
+        Partner on a
         <br />
-        Pilot
+        pilot
       </>
     ) : (
       pathwayTitle
     );
 
   return (
-    <article className="flex h-full">
-      <div className="flex h-full min-h-[520px] w-full flex-col overflow-hidden rounded-[14px] bg-[#121718] text-[#d9fce8] shadow-[0_26px_70px_rgba(18,23,24,0.34),inset_0_0_90px_rgba(130,245,173,0.08)]">
-        <div className="grid min-h-[128px] grid-cols-[30px_1fr] content-center items-baseline gap-4 bg-[#82f5ad] px-4 py-4 text-[#121718] md:min-h-[138px] md:grid-cols-[34px_1fr] md:gap-5 md:px-5 md:py-5 min-[1100px]:min-h-[132px] min-[1100px]:grid-cols-[32px_1fr] min-[1100px]:gap-4">
-          <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[20px] leading-none tracking-[1px]">
-            {pathwayNumber}.
+    <article className="flex h-[640px]">
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-[20px] bg-[#121718] p-6 text-[#d9fce8]">
+        <div className="shrink-0">
+          <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
+            {pathwayNumber}
           </span>
-          <h2 className="font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.82] tracking-[-1.32px] md:text-[52px] md:tracking-[-1.56px] min-[1100px]:text-[44px] min-[1100px]:tracking-[-1.32px] xl:text-[48px] xl:tracking-[-1.44px]">
+          <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px]">
             {formattedTitle}
           </h2>
         </div>
-        <div className="flex min-h-0 flex-1 flex-col px-6 py-8 md:px-8 md:py-9">
-          <div className="space-y-2 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.075] tracking-[-0.66px] min-[1100px]:min-h-[210px]">
+        <div className="my-7 h-px shrink-0 bg-[#82f5ad]/35" />
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div className="space-y-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
             {pathway.copy.slice(0, -1).map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <div className="flex-1 min-[1100px]:hidden" />
+          <div className="flex-1" />
           <div className="shrink-0">
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.075] tracking-[-0.66px]">
+            <div className="mb-3 h-px bg-[#82f5ad]/35" />
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
               {pathway.copy[pathway.copy.length - 1]}
             </p>
-            <div className="my-7 h-px bg-[#d9fce8]/25" />
-            <ul className="space-y-6">
+            <ul className="mt-5 space-y-3">
               {pathway.bullets.map((bullet) => (
-                <li className="grid grid-cols-[12px_1fr] gap-5" key={bullet}>
-                  <span className="mt-[5px] size-[10px] bg-[#82f5ad]" />
-                  <span className="whitespace-pre-line font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.38] tracking-[2.4px] text-[#d9fce8]">
+                <li className="grid grid-cols-[7px_1fr] gap-3" key={bullet}>
+                  <span className="mt-[5px] size-[5px] rounded-full bg-[#82f5ad]" />
+                  <span className="whitespace-pre-line font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.38] tracking-[2.4px] text-[#82f5ad]">
                     {bullet}
                   </span>
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="mt-7 flex shrink-0 flex-col gap-2">
+            {pathway.actions.map((action) => (
+              <a
+                className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] ${
+                  action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
+                }`}
+                href={action.href}
+                key={action.label}
+              >
+                {action.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -283,7 +305,7 @@ export function ParticipatePage() {
                 Each role has different responsibilities, constraints, and timelines.
               </p>
             </ScrollFadeIn>
-            <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_article>div]:h-[712px] [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[768px]:[&_article>div]:h-[690px] min-[1100px]:hidden" ref={participationCarouselRef}>
+            <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[1100px]:hidden" ref={participationCarouselRef}>
               <Slider {...carouselSettings}>
                 {pathways.map((pathway) => (
                   <div className="h-full px-1.5" key={pathway.title}>

@@ -207,6 +207,20 @@ export function MobileVersion() {
             src={imgImage66}
           />
         </div>
+        <div className="flex h-[32px] w-full shrink-0 items-center justify-center bg-white px-3">
+          <div className="flex items-center justify-center gap-4 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:gap-6 sm:text-[12px] sm:tracking-[1.2px]">
+            <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
+            <span>Live now</span>
+            <a className="inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
+              <span>Aragon demo</span>
+              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+            </a>
+            <a className="inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
+              <span>Network dashboard</span>
+              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+            </a>
+          </div>
+        </div>
 
         <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <div className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.92] tracking-[-1.08px] capitalize text-[#3a5e3c]">
@@ -485,6 +499,32 @@ export function MobileVersion() {
                   className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: hoveredButton === 'participate-build' ? 1 : 0, x: hoveredButton === 'participate-build' ? 0 : -10 }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  →
+                </motion.span>
+              </div>
+            </a>
+          </div>
+          <div className="w-full">
+            <a
+              className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              href="https://t.me/enclave_e3"
+              onMouseEnter={() => setHoveredButton('participate-telegram')}
+              onMouseLeave={() => setHoveredButton(null)}
+            >
+              <div className="relative inline-flex items-center justify-center">
+                <motion.p
+                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  animate={{ x: hoveredButton === 'participate-telegram' ? -8 : 0 }}
+                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  Join Telegram
+                </motion.p>
+                <motion.span
+                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: hoveredButton === 'participate-telegram' ? 1 : 0, x: hoveredButton === 'participate-telegram' ? 0 : -10 }}
                   transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                 >
                   →
