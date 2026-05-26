@@ -8,14 +8,14 @@ const pathways = [
   {
     title: "01. Run a ciphernode",
     copy: [
-      "Ciphernodes are operators in the network, selected into committees that execute encrypted programs as part of the protocol.",
-      "Unlike traditional nodes:",
+      "Ciphernodes are network operators selected into committees that coordinate encrypted execution, threshold enforcement, and outcome release.",
+      "Ciphernodes participate in:",
     ],
     bullets: [
-      "operators do not see plaintext inputs",
-      "operators do not control outcomes",
-      "committees are selected per computation",
-      "outcome release requires threshold participation",
+      "PER-COMPUTATION COMMITTEES",
+      "ENCRYPTED EXECUTION COORDINATION",
+      "THRESHOLD ENFORCEMENT",
+      "OUTCOME RELEASE",
     ],
     outro: [
       "Responsibility is shared.",
@@ -23,7 +23,7 @@ const pathways = [
       "We are currently preparing the initial operator cohort ahead of invite-only testnet.",
     ],
     actions: [
-      { label: "Apply here", href: "mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest", primary: true },
+      { label: "Apply here", href: "https://tally.so/r/meJPjo", primary: true },
       { label: "Learn more about ciphernodes", href: "https://docs.theinterfold.com/", primary: false },
     ],
   },
@@ -44,7 +44,7 @@ const pathways = [
     ],
     actions: [
       { label: "Explore docs", href: "https://docs.theinterfold.com/", primary: true },
-      { label: "Browse research & documentation", href: "https://docs.theinterfold.com/", primary: false },
+      { label: "Chat with us for support", href: "https://t.me/enclave_e3", primary: false },
     ],
   },
   {
@@ -64,7 +64,7 @@ const pathways = [
       "The goal is to test assumptions, define system constraints, and identify meaningful deployments.",
     ],
     actions: [
-      { label: "Reach out", href: "mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest", primary: true },
+      { label: "Reach out", href: "mailto:comms@gnosisguild.org", primary: true },
       { label: "Join Telegram", href: "https://t.me/enclave_e3", primary: false },
     ],
   },
@@ -79,7 +79,7 @@ const timelineItems = [
 const actors = [
   ["Requesters", "Submitting programs"],
   ["Data providers", "Contributing encrypted inputs"],
-  ["Ciphernode operator committees", "Executing the computation"],
+  ["Ciphernode committees", "Coordinating Execution"],
 ];
 
 const carouselSettings = {
@@ -243,11 +243,9 @@ export function ParticipatePage() {
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p className="w-full font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[597.355px]">
-                Interfold is a system for confidential coordination.
-                <br />
-                The network is forming ahead of public testnet.
-                <br />
-                Different participants play different roles.
+                <span className="mb-2 block">Interfold is a system for confidential coordination.</span>
+                <span className="block">The network is forming ahead of public testnet.</span>
+                <span className="block">Different participants play different roles.</span>
               </p>
             </ScrollFadeIn>
           </div>
@@ -271,11 +269,11 @@ export function ParticipatePage() {
                   <ActorGlyph index={index} />
                   <div className="flex min-w-0 flex-col items-center">
                     <p className="mt-6 max-w-md font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px]">
-                      {title === "Ciphernode operator committees" ? (
+                      {title === "Ciphernode committees" ? (
                         <>
                           Ciphernode
-                          <br className="min-[1100px]:hidden" />
-                          operator committees
+                          <br className="min-[1100px]:hidden" />{" "}
+                          committees
                         </>
                       ) : (
                         title
@@ -373,13 +371,18 @@ export function ParticipatePage() {
             </ScrollFadeIn>
             <ScrollFadeIn className="mt-[11.543px]">
               <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px] text-[#d9fce8]">
-                If you’re interested in participating, reach out or signal interest.
+                Help form the network
+              </p>
+            </ScrollFadeIn>
+            <ScrollFadeIn className="mt-4 max-w-[597.355px]" delay={0.1}>
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#d9fce8]">
+                Run a ciphernode, build with Interfold, or explore a pilot for confidential coordination.
               </p>
             </ScrollFadeIn>
             <ScrollFadeIn className="mt-8 w-full max-w-[288px]">
               <a
                 className="group flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] md:w-[288px]"
-                href="mailto:[ADD_EMAIL_HERE]?subject=Interfold%20participation%20interest"
+                href="mailto:comms@gnosisguild.org"
               >
                 Reach out
               </a>

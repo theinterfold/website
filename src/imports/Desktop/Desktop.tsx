@@ -663,7 +663,7 @@ function Frame14() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold introduces a structural fold in digital systems, making coordination possible without third-party custody, data exposure, or trusted hardware. `}</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold introduces confidential coordination in digital systems, making coordination possible without third-party custody, data exposure, or trusted hardware. `}</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1729,13 +1729,13 @@ function LiveNowBar() {
       <div className="flex items-center justify-center gap-12 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] text-[#687d71]">
         <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
         <span>Live now</span>
-        <a className="inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
+        <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
           <span>Aragon demo</span>
-          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+          <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
         </a>
-        <a className="inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
+        <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
           <span>Network dashboard</span>
-          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+          <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
         </a>
       </div>
     </div>
@@ -1872,7 +1872,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
             <p>
               {`Open source protocol. `}
               <br aria-hidden="true" />
-              Built by Gnosis Guild.
+              Built by <a className="transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.
             </p>
           </ScrollFadeIn>
         </div>
