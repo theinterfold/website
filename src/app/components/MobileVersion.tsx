@@ -713,7 +713,7 @@ export function MobileVersion() {
 
           <div className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
             <p>Open source protocol.</p>
-            <p>Built by <a className="transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.</p>
+            <p>Built by <a className="underline underline-offset-2 transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.</p>
           </div>
         </div>
       </ScrollFadeIn>

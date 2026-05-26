@@ -1872,7 +1872,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
             <p>
               {`Open source protocol. `}
               <br aria-hidden="true" />
-              Built by <a className="transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.
+              Built by <a className="underline underline-offset-2 transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.
             </p>
           </ScrollFadeIn>
         </div>
