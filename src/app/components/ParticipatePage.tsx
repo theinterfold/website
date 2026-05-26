@@ -1,6 +1,7 @@
 import imgHero from "../../imports/Desktop/TheInterfold_Participate.png";
 import Slider from "react-slick";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
+import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
@@ -166,15 +167,16 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
           </div>
           <div className="mt-7 flex shrink-0 flex-col gap-2">
             {pathway.actions.map((action) => (
-              <a
+              <HoverArrowLink
                 className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] ${
                   action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
                 }`}
                 href={action.href}
                 key={action.label}
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 {action.label}
-              </a>
+              </HoverArrowLink>
             ))}
           </div>
         </div>
@@ -380,12 +382,13 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
             <ScrollFadeIn className="mt-8 w-full max-w-[288px]">
-              <a
-                className="group flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] md:w-[288px]"
+              <HoverArrowLink
+                className="flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] md:w-[288px]"
                 href="mailto:comms@gnosisguild.org"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Reach out
-              </a>
+              </HoverArrowLink>
             </ScrollFadeIn>
           </div>
         </section>

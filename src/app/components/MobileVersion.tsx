@@ -15,6 +15,7 @@ import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
+import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
@@ -233,56 +234,22 @@ export function MobileVersion() {
 
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
-              <a
-                className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              <HoverArrowLink
+                className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://docs.theinterfold.com/"
-                onMouseEnter={() => setHoveredButton('build')}
-                onMouseLeave={() => setHoveredButton(null)}
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                <div className="relative inline-flex items-center justify-center">
-                  <motion.p
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                    animate={{ x: hoveredButton === 'build' ? -8 : 0 }}
-                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    Build on Interfold
-                  </motion.p>
-                  <motion.span
-                    className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: hoveredButton === 'build' ? 1 : 0, x: hoveredButton === 'build' ? 0 : -10 }}
-                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    →
-                  </motion.span>
-                </div>
-              </a>
+                Build on Interfold
+              </HoverArrowLink>
             </div>
             <div className="w-full">
-              <a
-                className="group flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              <HoverArrowLink
+                className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="/participate"
-                onMouseEnter={() => setHoveredButton('participate')}
-                onMouseLeave={() => setHoveredButton(null)}
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                <div className="relative inline-flex items-center justify-center">
-                  <motion.p
-                    className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                    animate={{ x: hoveredButton === 'participate' ? -8 : 0 }}
-                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    Participate
-                  </motion.p>
-                  <motion.span
-                    className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: hoveredButton === 'participate' ? 1 : 0, x: hoveredButton === 'participate' ? 0 : -10 }}
-                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    →
-                  </motion.span>
-                </div>
-              </a>
+                Participate
+              </HoverArrowLink>
             </div>
           </div>
         </ScrollFadeIn>
@@ -481,82 +448,31 @@ export function MobileVersion() {
 
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
-            <a
-              className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+            <HoverArrowLink
+              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://docs.theinterfold.com/"
-              onMouseEnter={() => setHoveredButton('participate-build')}
-              onMouseLeave={() => setHoveredButton(null)}
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
-              <div className="relative inline-flex items-center justify-center">
-                <motion.p
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  animate={{ x: hoveredButton === 'participate-build' ? -8 : 0 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  Build on Interfold
-                </motion.p>
-                <motion.span
-                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: hoveredButton === 'participate-build' ? 1 : 0, x: hoveredButton === 'participate-build' ? 0 : -10 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  →
-                </motion.span>
-              </div>
-            </a>
+              Build on Interfold
+            </HoverArrowLink>
           </div>
           <div className="w-full">
-            <a
-              className="group flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+            <HoverArrowLink
+              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://t.me/enclave_e3"
-              onMouseEnter={() => setHoveredButton('participate-telegram')}
-              onMouseLeave={() => setHoveredButton(null)}
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
-              <div className="relative inline-flex items-center justify-center">
-                <motion.p
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  animate={{ x: hoveredButton === 'participate-telegram' ? -8 : 0 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  Join Telegram
-                </motion.p>
-                <motion.span
-                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: hoveredButton === 'participate-telegram' ? 1 : 0, x: hoveredButton === 'participate-telegram' ? 0 : -10 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  →
-                </motion.span>
-              </div>
-            </a>
+              Join Telegram
+            </HoverArrowLink>
           </div>
           <div className="w-full">
-            <a
-              className="group flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+            <HoverArrowLink
+              className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="/participate"
-              onMouseEnter={() => setHoveredButton('participate-participate')}
-              onMouseLeave={() => setHoveredButton(null)}
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
-              <div className="relative inline-flex items-center justify-center">
-                <motion.p
-                  className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  animate={{ x: hoveredButton === 'participate-participate' ? -8 : 0 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  Participate
-                </motion.p>
-                <motion.span
-                  className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: hoveredButton === 'participate-participate' ? 1 : 0, x: hoveredButton === 'participate-participate' ? 0 : -10 }}
-                  transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                >
-                  →
-                </motion.span>
-              </div>
-            </a>
+              Participate
+            </HoverArrowLink>
           </div>
         </div>
         </ScrollFadeIn>
@@ -765,23 +681,13 @@ function ExploreCard({
           </p>
         </div>
         <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
-          <div className="relative inline-flex items-center justify-center">
-            <motion.p
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
-              animate={{ x: hoveredButton === id ? -8 : 0 }}
-              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-            >
-              {cta}
-            </motion.p>
-            <motion.span
-              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: hoveredButton === id ? 1 : 0, x: hoveredButton === id ? 0 : -10 }}
-              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-            >
-              →
-            </motion.span>
-          </div>
+          <HoverArrowContent
+            isExternal
+            isHovered={hoveredButton === id}
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
+          >
+            {cta}
+          </HoverArrowContent>
         </div>
       </div>
     </a>

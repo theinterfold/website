@@ -12,6 +12,7 @@ import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
+import { HoverArrowLink } from "../../app/components/HoverArrowLink";
 
 const friendLogos = [
   { name: "Aragon", href: "https://www.aragon.org/" },
@@ -198,44 +199,6 @@ function Frame16() {
   );
 }
 
-function AnimatedButtonContent({
-  children,
-  isHovered,
-  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
-  textClassName,
-}: {
-  children: string;
-  isHovered: boolean;
-  arrowClassName?: string;
-  textClassName: string;
-}) {
-  return (
-    <span className="relative inline-flex items-center justify-center">
-      <motion.span
-        className={textClassName}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
-        animate={{ x: isHovered ? -8 : 0 }}
-        transition={{
-          opacity: { duration: 0.22, delay: 0.14, ease: [0.4, 0, 0.2, 1] },
-          x: { duration: 0.18, ease: [0.4, 0, 0.2, 1] },
-        }}
-      >
-        {children}
-      </motion.span>
-      <motion.span
-        className={arrowClassName}
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-      >
-        →
-      </motion.span>
-    </span>
-  );
-}
-
 function Frame22() {
   return (
     <div className="relative shrink-0 w-full">
@@ -356,62 +319,41 @@ function Frame8() {
 }
 
 function Frame2() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Build on Interfold
-      </AnimatedButtonContent>
-    </a>
+      Build on Interfold
+    </HoverArrowLink>
   );
 }
 
 function Frame1() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[#82f5ad] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[#82f5ad] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
       href="/participate"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Participate
-      </AnimatedButtonContent>
-    </a>
+      Participate
+    </HoverArrowLink>
   );
 }
 
 function FinalTelegramCta() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
       href="https://t.me/enclave_e3"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Join Telegram
-      </AnimatedButtonContent>
-    </a>
+      Join Telegram
+    </HoverArrowLink>
   );
 }
 
@@ -462,22 +404,15 @@ function Frame18() {
 }
 
 function Frame3() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Explore Docs
-      </AnimatedButtonContent>
-    </a>
+      Explore Docs
+    </HoverArrowLink>
   );
 }
 
@@ -523,22 +458,15 @@ function Frame27() {
 }
 
 function Frame4() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://blog.theinterfold.com/tag/confidential-coordination"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Read essays
-      </AnimatedButtonContent>
-    </a>
+      Read essays
+    </HoverArrowLink>
   );
 }
 
@@ -574,22 +502,15 @@ function Frame28() {
 }
 
 function Frame5() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://blog.theinterfold.com/"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Read the blog
-      </AnimatedButtonContent>
-    </a>
+      Read the blog
+    </HoverArrowLink>
   );
 }
 
@@ -1662,42 +1583,28 @@ function Frame12() {
 }
 
 function Frame6() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Build on Interfold
-      </AnimatedButtonContent>
-    </a>
+      Build on Interfold
+    </HoverArrowLink>
   );
 }
 
 function Frame7() {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+    <HoverArrowLink
+      animateInView
+      className="bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="/participate"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
     >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Participate
-      </AnimatedButtonContent>
-    </a>
+      Participate
+    </HoverArrowLink>
   );
 }
 
