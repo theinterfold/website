@@ -1,12 +1,4 @@
 @font-face {
-  font-family: "ABC_Gramercy:Regular";
-  src: url("/fonts/ABCGramercy-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Office_Code_Pro:Medium";
   src: url("/fonts/OfficeCodePro-Medium.woff2") format("woff2");
   font-weight: 500;
@@ -30,17 +22,23 @@
   font-display: swap;
 }
 
+html {
+  font-synthesis: none;
+  font-synthesis-weight: none;
+}
+
 /* Fallbacks for Tailwind arbitrary font-family classes with punctuation-heavy names. */
-[class*="font-['ABC_Gramercy:Regular',sans-serif]"] {
+[class*="font-['ABC_Gramercy:Regular',sans-serif]"],
+[class*="font-['ABC_Gramercy',sans-serif]"],
+text[font-family="ABC Gramercy"] {
   font-family: "ABC_Gramercy", sans-serif;
+  font-optical-sizing: none;
+  font-style: normal;
+  font-weight: 400;
 }
 
 [class*="font-['Office_Code_Pro:Medium',sans-serif]"] {
   font-family: "Office_Code_Pro", sans-serif;
-}
-
-[class*="font-['ABC_Gramercy',sans-serif]"] {
-  font-family: "ABC_Gramercy", sans-serif;
 }
 
 [class*="font-['Office_Code_Pro',sans-serif]"] {

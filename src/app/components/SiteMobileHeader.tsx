@@ -137,10 +137,21 @@ export function SiteMobileHeader({
           >
             Menu
           </motion.p>
-          <div className="m-[0px] flex flex-col items-center gap-0 p-[0px]">
+          <div className="m-[0px] flex flex-col items-center gap-y-2 p-[0px]">
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="/"
+              initial={{ opacity: 0, y: 16 }}
+              onClick={() => setIsMenuOpen(false)}
+              style={{ wordSpacing: "-0.1em" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Home
+            </motion.a>
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://docs.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
@@ -148,11 +159,11 @@ export function SiteMobileHeader({
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <span>Docs</span>
-              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+              <span aria-hidden="true" className="text-[22px] leading-none">↗</span>
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://blog.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
@@ -160,11 +171,11 @@ export function SiteMobileHeader({
               transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
             >
               <span>Blog</span>
-              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+              <span aria-hidden="true" className="text-[22px] leading-none">↗</span>
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="/participate"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}

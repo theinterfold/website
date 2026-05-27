@@ -224,11 +224,11 @@ export function MobileVersion() {
         </div>
 
         <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
-          <div className="font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.92] tracking-[-1.08px] capitalize text-[#3a5e3c]">
+          <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.92] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <p className="mb-0">Private Inputs.</p>
             <p>Collective Outcomes.</p>
           </div>
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+          <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             The Interfold enables independent parties to produce shared, verifiable outcomes from private inputs
           </p>
 
@@ -285,11 +285,11 @@ export function MobileVersion() {
 
       {/* Execution Model Section */}
       <ScrollFadeIn className="flex flex-col items-center bg-white px-6 py-16">
-        <div className="mx-auto mb-12 w-full max-w-md text-center">
+        <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71] opacity-80">
             A new execution Model
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] text-[#3a5e3c]">
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
             The Interfold introduces confidential coordination in digital systems, making coordination possible without
             third-party custody, data exposure, or trusted hardware.
           </p>
@@ -343,11 +343,11 @@ export function MobileVersion() {
 
       {/* What Becomes Possible Section */}
       <ScrollFadeIn className="bg-[#d9fce8] px-6 py-16 pb-24">
-        <div className="mx-auto mb-12 w-full max-w-md text-center">
+        <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             What Becomes Possible
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] text-[#3a5e3c]">
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
             When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination
             systems become possible.
           </p>
@@ -433,11 +433,11 @@ export function MobileVersion() {
       {/* Participate Section */}
       <div id="participate">
         <ScrollFadeIn className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
-          <div className="mx-auto mb-12 w-full max-w-md">
+          <div className="mx-auto mb-12 w-full max-w-[320px]">
             <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
               Participate
             </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[0.95] tracking-[-0.72px] text-[#d4f6da]">
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
               Confidential coordination becomes real through both applications and operators:
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d4f6da]">
@@ -480,11 +480,11 @@ export function MobileVersion() {
 
       {/* Explore Section */}
       <ScrollFadeIn className="bg-white px-6 py-16">
-        <div className="mx-auto mb-12 w-full max-w-md text-center">
+        <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
             Explore
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[0.95] tracking-[-0.72px] text-[#3a5e3c]">
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
             Read the technical documentation, essays, and updates that explain how Interfold works, why confidential
             coordination matters, and what is live now.
           </p>
@@ -681,13 +681,23 @@ function ExploreCard({
           </p>
         </div>
         <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
-          <HoverArrowContent
-            isExternal
-            isHovered={hoveredButton === id}
-            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
-          >
-            {cta}
-          </HoverArrowContent>
+          <div className="relative inline-flex items-center justify-center">
+            <motion.p
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
+              animate={{ x: hoveredButton === id ? -8 : 0 }}
+              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {cta}
+            </motion.p>
+            <motion.span
+              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: hoveredButton === id ? 1 : 0, x: hoveredButton === id ? 0 : -10 }}
+              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+            >
+              →
+            </motion.span>
+          </div>
         </div>
       </div>
     </a>
