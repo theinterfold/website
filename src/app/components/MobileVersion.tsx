@@ -10,11 +10,11 @@ import imgImage66 from "../../imports/Desktop/b2a665648dcdbaa537f982baed705f51f9
 import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
-import imgChatGptImageApr232026060921Pm11 from "../../imports/Desktop/999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
 import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
+import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
 import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
@@ -214,11 +214,11 @@ export function MobileVersion() {
             <span>Live now</span>
             <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
               <span>Aragon demo</span>
-              <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
             </a>
             <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
               <span>Network dashboard</span>
-              <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
             </a>
           </div>
         </div>
@@ -229,7 +229,7 @@ export function MobileVersion() {
             <p>Collective Outcomes.</p>
           </div>
           <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
-            The Interfold enables independent parties to produce shared, verifiable outcomes from private inputs
+            Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
           </p>
 
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
@@ -290,8 +290,8 @@ export function MobileVersion() {
             A new execution Model
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            The Interfold introduces confidential coordination in digital systems, making coordination possible without
-            third-party custody, data exposure, or trusted hardware.
+            The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable
+            outcomes without data custody, input exposure, or trusted hardware.
           </p>
         </div>
 
@@ -492,7 +492,7 @@ export function MobileVersion() {
 
         <div className="mx-auto flex w-full max-w-md flex-col gap-[16px]">
           <ExploreCard
-            image={imgChatGptImageApr232026060921Pm11}
+            kind="docs"
             title="DOCS"
             description="Technical documentation, references, and implementation details."
             cta="Explore Docs"
@@ -502,7 +502,7 @@ export function MobileVersion() {
             id="docs"
           />
           <ExploreCard
-            image={imgChatGptImageApr232026060921Pm11}
+            kind="essays"
             title="ESSAYS"
             description="Writing on confidential coordination and the architecture behind the network."
             cta="Read essays"
@@ -512,7 +512,7 @@ export function MobileVersion() {
             id="essays"
           />
           <ExploreCard
-            image={imgChatGptImageApr232026060921Pm11}
+            kind="blog"
             title="BLOG"
             description="Updates, research notes, and ecosystem announcements."
             cta="Read blog"
@@ -638,7 +638,7 @@ export function MobileVersion() {
 }
 
 function ExploreCard({
-  image,
+  kind,
   title,
   description,
   cta,
@@ -647,7 +647,7 @@ function ExploreCard({
   setHoveredButton,
   id
 }: {
-  image: string;
+  kind: ExploreResourceIconKind;
   title: string;
   description: string;
   cta: string;
@@ -665,12 +665,8 @@ function ExploreCard({
     >
       <div className="flex flex-col gap-[16px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-          <div className="h-[71px] relative shrink-0 w-[55px]">
-            <img
-              alt=""
-              className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full"
-              src={image}
-            />
+          <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+            <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
         <div className="flex flex-col gap-[8px]">
           <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">

@@ -184,28 +184,69 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
 }
 
 function ActorGlyph({ index }: { index: number }) {
+  const iconClass = "h-11 w-12 overflow-visible";
+  const accent = "#82f5ad";
+
   return (
     <div className="relative grid size-[72px] place-items-center rounded-full border border-[#3a5e3c]/20 bg-[#d9fce8] text-[#3a5e3c]">
       {index === 0 ? (
-        <div className="h-8 w-6 border-2 border-current">
-          <div className="mx-auto mt-2 h-[2px] w-3 bg-current" />
-          <div className="mx-auto mt-2 h-[2px] w-3 bg-current" />
-        </div>
+        <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
+          <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <path d="M9.65,28.65c-4.3,0-8.9,3.9-8.9,9.7v3.1h18.1v-3.1c0-5.8-4.9-9.7-9.2-9.7Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <path d="M23.25,11.45V3.65h23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <rect height="22" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="21" x="23.25" y="11.45" />
+          <polyline points="30.55 19.55 27.65 22.35 30.55 25.35" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polyline points="37.15 19.35 40.05 22.45 37.15 25.35" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="32.25" x2="35.35" y1="27.05" y2="17.65" />
+          <circle cx="48.65" cy="3.45" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <path d="M44.25,33.25v7.8h-23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="18.85" cy="41.25" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+        </svg>
       ) : index === 1 ? (
-        <div className="relative size-9">
-          <span className="absolute left-0 top-0 size-[14px] border-2 border-current" />
-          <span className="absolute right-0 top-0 size-[14px] border-2 border-current" />
-          <span className="absolute bottom-0 left-1/2 size-[14px] -translate-x-1/2 border-2 border-current" />
-          <span className="absolute left-[17px] top-[14px] h-3 w-[2px] bg-current" />
-        </div>
+        <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 61.4 54">
+          <polyline points="46.05 18.05 32.05 18.05 32.05 35.15 48.55 35.15 48.55 18.05 46.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polyline points="13.65 7.2 23.65 7.2 32.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polyline points="14.1 46.55 24.1 46.55 32.05 35.15" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="13.65" x2="32.43" y1="26.15" y2="26.15" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="48.85" x2="57.85" y1="26.15" y2="26.15" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="4.95" y2="18.05" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="35.45" y2="47.95" />
+          <rect fill={accent} height="5.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="5.4" x="37.85" y="23.45" />
+          <circle cx="40.45" cy="3.65" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="40.45" cy="49.35" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="59.05" cy="26.15" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <rect height="12.9" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".75" y=".75" />
+          <rect height="13.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="19.45" />
+          <rect height="13.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="39.85" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="22.95" y2="22.95" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="26.15" y2="26.15" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="29.35" y2="29.35" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="43.35" y2="43.35" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="46.55" y2="46.55" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="49.75" y2="49.75" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="4" y2="4" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="7.2" y2="7.2" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="10.4" y2="10.4" />
+        </svg>
       ) : (
-        <div className="relative size-10">
-          <span className="absolute left-1/2 top-0 size-[10px] -translate-x-1/2 rounded-full border-2 border-current bg-[#d9fce8]" />
-          <span className="absolute bottom-0 left-0 size-[10px] rounded-full border-2 border-current bg-[#d9fce8]" />
-          <span className="absolute bottom-0 right-0 size-[10px] rounded-full border-2 border-current bg-[#d9fce8]" />
-          <span className="absolute left-[19px] top-[10px] h-[22px] w-[2px] bg-current" />
-          <span className="absolute bottom-[8px] left-[8px] h-[2px] w-6 bg-current" />
-        </div>
+        <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 45.7 52.21">
+          <polygon points="42.25 36.95 42.25 14.55 22.85 3.35 3.45 14.55 3.45 36.95 22.85 48.15 42.25 36.95" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="22.85" cy="48.76" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="22.85" cy="3.35" fill={accent} r="2.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="3.45" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="5.95" y2="13.35" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="38.66" y2="46.06" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="41.65" x2="33.65" y1="35.95" y2="31.65" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="5.45" x2="12.45" y1="36.05" y2="32.05" />
+          <circle cx="42.25" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polygon points="33.65 31.99 33.65 19.51 22.85 13.28 12.05 19.51 12.05 31.99 22.85 38.22 33.65 31.99" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polygon fill={accent} points="28.35 30.85 17.95 30.85 17.95 20.35 28.25 20.35 28.35 30.85" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polyline points="20.65 24.85 22.55 27.15 25.95 23.25" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="12.05" x2="3.45" y1="19.51" y2="14.55" />
+          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="33.65" x2="42.25" y1="19.51" y2="14.55" />
+          <circle cx="3.45" cy="14.23" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle cx="42.25" cy="14.23" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+        </svg>
       )}
     </div>
   );
@@ -236,16 +277,14 @@ export function ParticipatePage() {
           <div className="mx-auto flex max-w-md flex-col items-center gap-[24px] md:max-w-[760px]">
             <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">
-                Participate in
+                Participate
                 <br />
-                the network
+                In the Network
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[597.355px] md:max-w-none md:text-[14px]">
-                <span className="mb-2 block">Interfold is a system for confidential coordination.</span>
-                <span className="block">The network is forming ahead of public testnet.</span>
-                <span className="block">Different participants play different roles.</span>
+              <p className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
+                A system for confidential coordination. The network is forming ahead of public testnet. Different participants play different roles.
               </p>
             </ScrollFadeIn>
           </div>

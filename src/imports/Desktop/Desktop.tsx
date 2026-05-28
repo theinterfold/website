@@ -7,10 +7,10 @@ import imgImage66 from "./b2a665648dcdbaa537f982baed705f51f9563175.png";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
-import imgChatGptImageApr232026060921Pm11 from "./999c0b9f82c1e2e15b0d5e34e873ebd783b7b03f.png";
 import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
+import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 const friendLogos = [
@@ -491,8 +491,8 @@ function Frame26() {
           </svg>
         </div>
       </div>
-      <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+        <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="docs" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -552,8 +552,8 @@ function Frame28() {
           </svg>
         </div>
       </div>
-      <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+        <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="essays" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -603,8 +603,8 @@ function Frame29() {
           </svg>
         </div>
       </div>
-      <div className="h-[71px] relative shrink-0 w-[55px]" data-name="ChatGPT Image Apr 23, 2026, 06_09_21 PM (1) 1">
-        <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none size-full" src={imgChatGptImageApr232026060921Pm11} />
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+        <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="blog" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
         <div className="h-0 relative shrink-0 w-full">
@@ -663,7 +663,7 @@ function Frame14() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold introduces confidential coordination in digital systems, making coordination possible without third-party custody, data exposure, or trusted hardware. `}</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware. `}</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1655,7 +1655,7 @@ function Frame12() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[383.808px]">The Interfold enables independent parties to produce shared, verifiable outcomes from private inputs</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[383.808px]">Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1731,11 +1731,11 @@ function LiveNowBar() {
         <span>Live now</span>
         <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
           <span>Aragon demo</span>
-          <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
         </a>
         <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
           <span>Network dashboard</span>
-          <span aria-hidden="true" className="relative -top-px font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-none">↗</span>
+          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
         </a>
       </div>
     </div>
