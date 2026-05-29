@@ -203,7 +203,7 @@ function ActorGlyph({ index }: { index: number }) {
           <circle cx="18.85" cy="41.25" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
         </svg>
       ) : index === 1 ? (
-        <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 61.4 54">
+        <svg aria-hidden="true" className={`${iconClass} translate-x-0.5`} fill="none" focusable="false" viewBox="0 0 61.4 54">
           <polyline points="46.05 18.05 32.05 18.05 32.05 35.15 48.55 35.15 48.55 18.05 46.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <polyline points="13.65 7.2 23.65 7.2 32.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <polyline points="14.1 46.55 24.1 46.55 32.05 35.15" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
