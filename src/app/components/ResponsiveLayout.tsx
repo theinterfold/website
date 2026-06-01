@@ -4,8 +4,7 @@ import Desktop from '../../imports/Desktop/Desktop';
 import { ContentPage, Header } from './ContentPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
-import imgHomeHero from '../../imports/Desktop/b2a665648dcdbaa537f982baed705f51f9563175.png';
-import imgParticipateHero from '../../imports/Desktop/TheInterfold_Participate.png';
+import { HeroImage, homeHeroSources, participateHeroSources } from './HeroImage';
 
 const MOBILE_BREAKPOINT = 768;
 const CONTENT_PAGES = ['community', 'protocol', 'docs'] as const;
@@ -62,32 +61,30 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
     <div className={`interfold-route-hero-overlay ${isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}`} style={{ top: `${overlay.top}px` }}>
       {isParticipate ? (
         <>
-          <img
-            alt=""
+          <HeroImage
             className="h-full w-full object-cover object-top md:hidden"
-            src={imgParticipateHero}
+            pictureClassName="block h-full w-full md:hidden"
+            sources={participateHeroSources}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
-            <img
-              alt=""
+            <HeroImage
               className="absolute inset-0 h-full w-full object-cover object-top"
-              src={imgParticipateHero}
+              sources={participateHeroSources}
             />
           </div>
         </>
       ) : (
         <>
-          <img
-            alt=""
+          <HeroImage
             className="h-full w-full object-cover object-top mix-blend-darken md:hidden"
-            src={imgHomeHero}
+            pictureClassName="block h-full w-full md:hidden"
+            sources={homeHeroSources}
           />
           <div className="pointer-events-none absolute left-1/2 top-0 hidden aspect-[1440/640] w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
-              <img
-                alt=""
+              <HeroImage
                 className="absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
-                src={imgHomeHero}
+                sources={homeHeroSources}
               />
             </div>
           </div>

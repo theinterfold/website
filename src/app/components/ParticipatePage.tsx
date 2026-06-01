@@ -1,6 +1,7 @@
-import imgHero from "../../imports/Desktop/TheInterfold_Participate.png";
 import Slider from "react-slick";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
+import { HeroImage, participateHeroSources } from "./HeroImage";
+import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
@@ -166,15 +167,16 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
           </div>
           <div className="mt-7 flex shrink-0 flex-col gap-2">
             {pathway.actions.map((action) => (
-              <a
-                className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] ${
+              <HoverArrowLink
+                className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 transition-colors hover:bg-[#3a5e3c] ${
                   action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
                 }`}
                 href={action.href}
                 key={action.label}
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 {action.label}
-              </a>
+              </HoverArrowLink>
             ))}
           </div>
         </div>
@@ -259,16 +261,15 @@ export function ParticipatePage() {
     <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:h-[min(44.444vw,640px)]">
-          <img
-            alt=""
+          <HeroImage
             className="h-full w-full object-cover object-top md:hidden"
-            src={imgHero}
+            pictureClassName="block h-full w-full md:hidden"
+            sources={participateHeroSources}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
-            <img
-              alt=""
+            <HeroImage
               className="absolute inset-0 h-full w-full object-cover object-top"
-              src={imgHero}
+              sources={participateHeroSources}
             />
           </div>
         </div>
@@ -420,12 +421,13 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
             <ScrollFadeIn className="mt-8 w-full max-w-[288px]">
-              <a
-                className="group flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors hover:bg-[#3a5e3c] hover:text-[#82f5ad] md:w-[288px]"
+              <HoverArrowLink
+                className="flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] transition-colors hover:bg-[#3a5e3c] md:w-[288px]"
                 href="mailto:comms@gnosisguild.org"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Reach out
-              </a>
+              </HoverArrowLink>
             </ScrollFadeIn>
           </div>
         </section>

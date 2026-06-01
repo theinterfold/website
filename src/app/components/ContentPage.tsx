@@ -23,6 +23,17 @@ type PageData = {
   }>;
 };
 
+function NavExternalArrow() {
+  return (
+    <span aria-hidden="true" className="relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none">
+      <span className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1/2 group-focus-visible:-translate-y-1/2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-focus-visible:translate-y-0">
+        <span className="h-[14px] w-[14px] leading-none">↗</span>
+        <span className="h-[14px] w-[14px] leading-none">↗</span>
+      </span>
+    </span>
+  );
+}
+
 const pages: Record<PageKey, PageData> = {
   community: {
     eyebrow: "Community",
@@ -205,7 +216,7 @@ export function Header({
       }
     : {};
   const navLinkClass = "transition-colors hover:text-[#82f5ad]";
-  const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad]";
+  const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "underline decoration-[1px] underline-offset-[5px]" : ""}`;
 
   return (
@@ -229,11 +240,11 @@ export function Header({
             <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
-                <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+                <NavExternalArrow />
               </NavLink>
               <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
                 <span>Blog</span>
-                <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+                <NavExternalArrow />
               </NavLink>
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
             </nav>

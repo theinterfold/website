@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Importar as mesmas imagens e SVGs do desktop
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
-import imgImage66 from "../../imports/Desktop/b2a665648dcdbaa537f982baed705f51f9563175.png";
 import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
@@ -15,6 +14,7 @@ import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
+import { HeroImage, homeHeroSources } from "./HeroImage";
 import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
@@ -202,10 +202,10 @@ export function MobileVersion() {
       {/* Hero Section */}
       <div className="flex flex-col bg-[#d9fce8]">
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
-          <img
-            alt=""
+          <HeroImage
             className="h-full w-full object-cover object-top mix-blend-darken"
-            src={imgImage66}
+            pictureClassName="block h-full w-full"
+            sources={homeHeroSources}
           />
         </div>
         <div className="flex h-[32px] w-full shrink-0 items-center justify-center bg-white px-3">

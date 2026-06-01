@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 import * as THREE from "three";
 import { AnimatePresence, motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
-import imgImage66 from "./b2a665648dcdbaa537f982baed705f51f9563175.png";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
@@ -11,6 +10,8 @@ import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
+import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
+import { HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 const friendLogos = [
@@ -200,39 +201,27 @@ function Frame16() {
 
 function AnimatedButtonContent({
   children,
+  isExternal = false,
   isHovered,
   arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
   textClassName,
 }: {
   children: string;
+  isExternal?: boolean;
   isHovered: boolean;
   arrowClassName?: string;
   textClassName: string;
 }) {
   return (
-    <span className="relative inline-flex items-center justify-center">
-      <motion.span
-        className={textClassName}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.8 }}
-        animate={{ x: isHovered ? -8 : 0 }}
-        transition={{
-          opacity: { duration: 0.22, delay: 0.14, ease: [0.4, 0, 0.2, 1] },
-          x: { duration: 0.18, ease: [0.4, 0, 0.2, 1] },
-        }}
-      >
-        {children}
-      </motion.span>
-      <motion.span
-        className={arrowClassName}
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
-        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-      >
-        →
-      </motion.span>
-    </span>
+    <HoverArrowContent
+      animateInView
+      arrowClassName={arrowClassName}
+      isExternal={isExternal}
+      isHovered={isHovered}
+      textClassName={textClassName}
+    >
+      {children}
+    </HoverArrowContent>
   );
 }
 
@@ -366,6 +355,7 @@ function Frame2() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -406,6 +396,7 @@ function FinalTelegramCta() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -472,6 +463,7 @@ function Frame3() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -533,6 +525,7 @@ function Frame4() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -584,6 +577,7 @@ function Frame5() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -1672,6 +1666,7 @@ function Frame6() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
@@ -1890,7 +1885,11 @@ export default function Desktop() {
     <div className="interfold-page-transition bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
       <div className="interfold-hero-transition md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
-          <img alt="" className="absolute inset-0 h-full w-full object-cover object-top mix-blend-darken" src={imgImage66} />
+          <HeroImage
+            className="h-full w-full object-cover object-top mix-blend-darken"
+            pictureClassName="absolute inset-0"
+            sources={homeHeroSources}
+          />
         </div>
       </div>
       <LiveNowBar />
