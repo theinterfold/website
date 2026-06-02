@@ -76,14 +76,14 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
       ) : (
         <>
           <HeroImage
-            className="h-full w-full object-cover object-top mix-blend-darken md:hidden"
+            className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
             pictureClassName="block h-full w-full md:hidden"
             sources={homeHeroSources}
           />
-          <div className="pointer-events-none absolute left-1/2 top-0 hidden aspect-[1440/640] w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
+          <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <HeroImage
-                className="absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
+                className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
                 sources={homeHeroSources}
               />
             </div>

@@ -7,23 +7,35 @@ import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb55
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
+import aztecLogo from "./aztec-wordmark-dark.svg";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
+import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
-import { HoverArrowContent } from "../../app/components/HoverArrowLink";
+import { ExternalArrowSlide, HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 
 const friendLogos = [
   { name: "Aragon", href: "https://www.aragon.org/" },
   { name: "Taiko", href: "https://taiko.xyz/" },
+  { name: "Aztec", href: "https://aztec.network/" },
   { name: "MetaLex", href: "https://www.metalex.tech/" },
   { name: "Legion", href: "https://legion.cc/" },
   { name: "Session", href: "https://getsession.org" },
 ];
 
-function PartnerLogoFrame({ children }: { children: ReactNode }) {
-  return <span className="flex h-6 items-center justify-center lg:h-8">{children}</span>;
+function PartnerLogoFrame({ children, visualScale = 1 }: { children: ReactNode; visualScale?: number }) {
+  return (
+    <span className="flex h-5 items-center justify-center lg:h-7">
+      <span
+        className="flex h-full items-center justify-center"
+        style={{ transform: `scale(${visualScale})`, transformOrigin: "center" }}
+      >
+        {children}
+      </span>
+    </span>
+  );
 }
 
 function PartnerLogoAsset({
@@ -113,21 +125,28 @@ function Frame() {
         <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
           <ScrollFadeIn className="shrink-0" delay={0.05}>
             <FriendLogo friend={friendLogos[0]} hoveredFriend={hoveredFriend} index={0} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame>
+              <PartnerLogoFrame visualScale={0.92}>
                 <PartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.15}>
             <FriendLogo friend={friendLogos[1]} hoveredFriend={hoveredFriend} index={1} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame>
+              <PartnerLogoFrame visualScale={0.96}>
                 <PartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.25}>
             <FriendLogo friend={friendLogos[2]} hoveredFriend={hoveredFriend} index={2} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame>
+              <PartnerLogoFrame visualScale={0.78}>
+                <PartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} />
+              </PartnerLogoFrame>
+            </FriendLogo>
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.35}>
+            <FriendLogo friend={friendLogos[3]} hoveredFriend={hoveredFriend} index={3} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <PartnerLogoFrame visualScale={1.06}>
                 <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
                   <path d={svgPaths.p67816f0} fill="#3A5E3C" />
                   <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
@@ -136,16 +155,16 @@ function Frame() {
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.35}>
-            <FriendLogo friend={friendLogos[3]} hoveredFriend={hoveredFriend} index={3} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame>
+          <ScrollFadeIn className="shrink-0" delay={0.45}>
+            <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <PartnerLogoFrame visualScale={0.74}>
                 <PartnerLogoAsset aspectRatio="1221 / 170" maskSize="auto 183%" src={legionLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.45}>
-            <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame>
+          <ScrollFadeIn className="shrink-0" delay={0.55}>
+            <FriendLogo friend={friendLogos[5]} hoveredFriend={hoveredFriend} index={5} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <PartnerLogoFrame visualScale={0.88}>
                 <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
                   <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
                   <path d={svgPaths.p59a0800} fill="#3A5E3C" />
@@ -279,7 +298,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[185.58%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm11} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[185.58%] -translate-x-1/2 translate-y-[28px]" src={imgChatGptImageApr232026051856Pm11} />
               </div>
             </div>
           </div>
@@ -294,7 +313,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[155.47%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm12} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[155.47%] -translate-x-1/2 translate-y-[10px]" src={imgChatGptImageApr232026051856Pm12} />
               </div>
             </div>
           </div>
@@ -309,7 +328,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute h-auto left-1/2 max-w-none top-1/2 w-[159.86%] -translate-x-1/2 -translate-y-1/2" src={imgChatGptImageApr232026051856Pm13} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[159.86%] -translate-x-1/2 translate-y-[12px]" src={imgChatGptImageApr232026051856Pm13} />
               </div>
             </div>
           </div>
@@ -1280,8 +1299,8 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
 
           .execution-flow-inputs-hidden .execution-flow-input-square {
             animation: none;
-            fill: #252525;
-            opacity: 0.5;
+            fill: #8a9c90;
+            opacity: 1;
             filter: none;
           }
 
@@ -1724,13 +1743,13 @@ function LiveNowBar() {
       <div className="flex items-center justify-center gap-12 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] text-[#687d71]">
         <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
         <span>Live now</span>
-        <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
+        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
           <span>Aragon demo</span>
-          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
+          <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
         </a>
-        <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
+        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
           <span>Network dashboard</span>
-          <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
+          <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
         </a>
       </div>
     </div>
@@ -1738,12 +1757,6 @@ function LiveNowBar() {
 }
 
 export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
-  const [email, setEmail] = useState("");
-  const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
-  const [isJoinHovered, setIsJoinHovered] = useState(false);
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const hasEmail = email.trim().length > 0;
-
   return (
     <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(3881px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
@@ -1794,65 +1807,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
           </div>
 
           <ScrollFadeIn className="w-full" delay={0.5}>
-            <form
-              className={`relative -mx-3 px-3 py-2 transition-colors duration-300 after:absolute after:bottom-[8px] after:left-3 after:right-3 after:z-20 after:border-b after:border-[#3a5e3c] after:content-[''] ${
-                isNewsletterFocused ? "bg-[rgba(193,217,191,0.34)]" : "hover:bg-[rgba(193,217,191,0.2)]"
-              }`}
-              onSubmit={(event) => event.preventDefault()}
-            >
-              <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Updates</p>
-              <label className="block w-full">
-                <span className="sr-only">Email for Interfold updates</span>
-                <input
-                  className="font-['ABC_Gramercy:Regular',sans-serif] relative z-10 w-full border-0 bg-transparent pb-2 pr-[132px] text-[#3a5e3c] text-[14.429px] leading-[1.3] outline-none placeholder:text-[#3a5e3c] placeholder:opacity-100"
-                  inputMode="email"
-                  onBlur={() => setIsNewsletterFocused(false)}
-                  onChange={(event) => setEmail(event.target.value)}
-                  onFocus={() => setIsNewsletterFocused(true)}
-                  placeholder={isNewsletterFocused ? "" : "Email"}
-                  autoComplete="email"
-                  type="email"
-                  value={email}
-                />
-              </label>
-              <AnimatePresence>
-                {hasEmail && (
-                  <motion.button
-                    animate={{ opacity: 1, x: 0 }}
-                    className={`absolute bottom-[8px] right-3 z-30 min-w-[96px] px-3 py-1 transition-colors ${
-                      isValidEmail ? "cursor-pointer bg-[#3a5e3c] text-[#d9fce8]" : "cursor-not-allowed bg-[rgba(193,217,191,0.8)] text-[#687d71]"
-                    }`}
-                    disabled={!isValidEmail}
-                    exit={{ opacity: 0, x: 8 }}
-                    initial={{ opacity: 0, x: 8 }}
-                    onMouseEnter={() => setIsJoinHovered(true)}
-                    onMouseLeave={() => setIsJoinHovered(false)}
-                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                    type="submit"
-                  >
-                    <span className="inline-grid grid-cols-[14px_auto_14px] items-center gap-1">
-                      <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] opacity-0">
-                        →
-                      </span>
-                      <motion.span
-                        animate={{ x: isJoinHovered && isValidEmail ? -8 : 0 }}
-                        className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14.429px] text-center whitespace-nowrap"
-                        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                      >
-                        Join
-                      </motion.span>
-                      <motion.span
-                        animate={{ opacity: isJoinHovered && isValidEmail ? 1 : 0, x: isJoinHovered && isValidEmail ? 0 : -8 }}
-                        className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px]"
-                        transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-                      >
-                        →
-                      </motion.span>
-                    </span>
-                  </motion.button>
-                )}
-              </AnimatePresence>
-            </form>
+            <GhostSignupForm />
           </ScrollFadeIn>
         </div>
 
@@ -1883,10 +1838,10 @@ function Frame32() {
 export default function Desktop() {
   return (
     <div className="interfold-page-transition bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
-      <div className="interfold-hero-transition md:absolute relative aspect-[1440/640] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
+      <div className="interfold-hero-transition md:absolute relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage
-            className="h-full w-full object-cover object-top mix-blend-darken"
+            className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
             pictureClassName="absolute inset-0"
             sources={homeHeroSources}
           />

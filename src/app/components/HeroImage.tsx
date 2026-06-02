@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import homeHero768 from "../../imports/Desktop/the-interfold-home-hero-768.webp";
 import homeHero1440 from "../../imports/Desktop/the-interfold-home-hero-1440.webp";
 import homeHero2160 from "../../imports/Desktop/the-interfold-home-hero-2160.webp";
@@ -60,10 +60,12 @@ export function HeroImage({
   pictureClassName?: string;
   sources: HeroImageSources;
 }) {
+  const imageRef = useRef<HTMLImageElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(false);
+    const image = imageRef.current;
+    setIsLoaded(Boolean(image?.complete && image.naturalWidth > 0));
   }, [sources.src]);
 
   return (
@@ -77,6 +79,7 @@ export function HeroImage({
         height={sources.height}
         loading="eager"
         onLoad={() => setIsLoaded(true)}
+        ref={imageRef}
         sizes="100vw"
         src={sources.src}
         srcSet={sources.srcSet}

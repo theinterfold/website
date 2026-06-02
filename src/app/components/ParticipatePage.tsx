@@ -9,12 +9,12 @@ const pathways = [
   {
     title: "01. Run a ciphernode",
     copy: [
-      "Ciphernodes are network operators selected into committees that coordinate encrypted execution, threshold enforcement, and outcome release.",
+      "Ciphernodes are network operators selected into committees that participate in distributed key generation, threshold decryption, and outcome release for encrypted computations.",
       "Ciphernodes participate in:",
     ],
     bullets: [
       "PER-COMPUTATION COMMITTEES",
-      "ENCRYPTED EXECUTION COORDINATION",
+      "DISTRIBUTED KEY GENERATION",
       "THRESHOLD ENFORCEMENT",
       "OUTCOME RELEASE",
     ],
@@ -31,7 +31,7 @@ const pathways = [
   {
     title: "02. Build and integrate",
     copy: [
-      "Interfold supports applications that require coordination across multiple private inputs.",
+      "Interfold supports applications where multiple parties need to produce shared outcomes from private inputs.",
       "Early areas of focus include:",
     ],
     bullets: [
@@ -51,7 +51,7 @@ const pathways = [
   {
     title: "03. Partner on a pilot",
     copy: [
-      "We are working with early collaborators to test where confidential coordination is needed in practice.",
+      "We are working with early collaborators to test and deploy confidential coordination in production environments.",
       "This includes:",
     ],
     bullets: [
@@ -72,9 +72,9 @@ const pathways = [
 ];
 
 const timelineItems = [
-  "Invite-only testnet",
-  "Initial operator cohort",
-  "Mainnet Launch",
+  "Internal devnet",
+  "Public testnet",
+  "Mainnet Alpha",
 ];
 
 const actors = [
@@ -278,14 +278,14 @@ export function ParticipatePage() {
           <div className="mx-auto flex max-w-md flex-col items-center gap-[24px] md:max-w-[760px]">
             <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">
-                Participate
+                Different Roles.
                 <br />
-                In the Network
+                Shared Infrastructure.
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
-                A system for confidential coordination. The network is forming ahead of public testnet. Different participants play different roles.
+                Builders, operators, and partners each help bring confidential coordination into practice.
               </p>
             </ScrollFadeIn>
           </div>
@@ -371,14 +371,14 @@ export function ParticipatePage() {
               </ScrollFadeIn>
               <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-[320px] md:w-[597.355px] md:max-w-md">
                 <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.92]">
-                  The network is progressing toward:
+                  The network is forming in stages:
                 </p>
               </ScrollFadeIn>
               <div className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-4">
                 <div className="absolute left-[calc(16.666%+36px)] right-[calc(50%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 <div className="absolute left-[calc(50%+36px)] right-[calc(16.666%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 {timelineItems.map((item, index) => {
-                  const isActive = index === 0;
+                  const isActive = index < 2;
 
                   return (
                     <ScrollFadeIn className="relative flex flex-col items-center" delay={index * 0.1} key={item}>

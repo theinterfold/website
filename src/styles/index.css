@@ -18,6 +18,51 @@ html.interfold-theme-participate #root {
   --interfold-page-background: #ffffff;
 }
 
+.interfold-ghost-signup__embed {
+  color: #3a5e3c;
+  font-family: 'ABC_Gramercy', serif;
+  position: relative;
+  z-index: 30;
+}
+
+.interfold-ghost-signup__embed .gh-signup-root {
+  background: transparent !important;
+  width: 100%;
+}
+
+.interfold-ghost-signup__embed iframe {
+  background: transparent !important;
+  border: 0 !important;
+  display: block;
+  min-height: 58px;
+  position: relative;
+  width: 100% !important;
+}
+
+.interfold-ghost-signup__embed form {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.interfold-ghost-signup__embed input {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #3a5e3c !important;
+  font-family: 'ABC_Gramercy', serif !important;
+}
+
+.interfold-ghost-signup__embed input::placeholder {
+  color: #3a5e3c !important;
+  opacity: 1 !important;
+}
+
+.interfold-home-hero-image {
+  transform: translateX(-1.1%) scale(1.022);
+  transform-origin: center top;
+}
+
 @keyframes interfold-header-drop {
   from {
     transform: translate3d(0, -100%, 0);

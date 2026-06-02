@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,12 +10,14 @@ import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44
 import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline";
+import aztecLogo from "../../imports/Desktop/aztec-wordmark-dark.svg";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
+import { GhostSignupForm } from "./GhostSignupForm";
 import { HeroImage, homeHeroSources } from "./HeroImage";
-import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
@@ -24,20 +26,27 @@ function MobilePartnerLogoFrame({
   children,
   href,
   name,
+  visualScale = 1,
 }: {
   children: ReactNode;
   href: string;
   name: string;
+  visualScale?: number;
 }) {
   return (
     <a
       aria-label={name}
-      className="flex h-[11px] items-center justify-center sm:h-4"
+      className="flex h-[10px] items-center justify-center sm:h-4"
       href={href}
       rel="noreferrer"
       target="_blank"
     >
-      {children}
+      <span
+        className="flex h-full items-center justify-center"
+        style={{ transform: `scale(${visualScale})`, transformOrigin: "center" }}
+      >
+        {children}
+      </span>
     </a>
   );
 }
@@ -172,15 +181,7 @@ function MobileExecutionModelGraphic() {
 
 export function MobileVersion() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
-  const [email, setEmail] = useState('');
-  const [isNewsletterFocused, setIsNewsletterFocused] = useState(false);
-  const [isJoinHovered, setIsJoinHovered] = useState(false);
   const possibilityCarouselRef = useMobileCarouselOpacity();
-
-  const isValidEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-  const hasEmail = email.trim().length > 0;
 
   const carouselSettings = {
     centerMode: true,
@@ -203,7 +204,7 @@ export function MobileVersion() {
       <div className="flex flex-col bg-[#d9fce8]">
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <HeroImage
-            className="h-full w-full object-cover object-top mix-blend-darken"
+            className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
             pictureClassName="block h-full w-full"
             sources={homeHeroSources}
           />
@@ -212,13 +213,13 @@ export function MobileVersion() {
           <div className="flex items-center justify-center gap-4 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:gap-6 sm:text-[12px] sm:tracking-[1.2px]">
             <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
             <span>Live now</span>
-            <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dao.theinterfold.com/">
+            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
               <span>Aragon demo</span>
-              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
+              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
             </a>
-            <a className="inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
+            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
               <span>Network dashboard</span>
-              <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none">↗</span>
+              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
             </a>
           </div>
         </div>
@@ -257,24 +258,27 @@ export function MobileVersion() {
 
       {/* Logos Section */}
       <ScrollFadeIn className="bg-[rgba(193,217,191,0.8)] py-8">
-        <div className="flex items-center justify-center gap-8 px-6">
-          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon">
+        <div className="mx-auto flex w-full max-w-[520px] items-center justify-between gap-4 px-6">
+          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon" visualScale={0.92}>
             <MobilePartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko">
+          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko" visualScale={0.96}>
             <MobilePartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://www.metalex.tech/" name="MetaLex">
+          <MobilePartnerLogoFrame href="https://aztec.network/" name="Aztec" visualScale={0.78}>
+            <MobilePartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} />
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://www.metalex.tech/" name="MetaLex" visualScale={1.06}>
             <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
               <path d={svgPaths.p67816f0} fill="#3A5E3C" />
               <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
               <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
             </svg>
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion">
+          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion" visualScale={0.74}>
             <MobilePartnerLogoAsset aspectRatio="1221 / 311" src={legionLogo} />
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://getsession.org" name="Session">
+          <MobilePartnerLogoFrame href="https://getsession.org" name="Session" visualScale={0.88}>
             <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
               <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
               <path d={svgPaths.p59a0800} fill="#3A5E3C" />
@@ -371,7 +375,7 @@ export function MobileVersion() {
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[16px]"
                       src={imgChatGptImageApr232026051856Pm11}
                     />
                   </div>
@@ -395,7 +399,7 @@ export function MobileVersion() {
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
                       src={imgChatGptImageApr232026051856Pm12}
                     />
                   </div>
@@ -419,7 +423,7 @@ export function MobileVersion() {
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
                       src={imgChatGptImageApr232026051856Pm13}
                     />
                   </div>
@@ -551,66 +555,7 @@ export function MobileVersion() {
             </div>
           </div>
 
-          <form
-            className={`relative -mx-3 mb-6 px-3 py-2 transition-colors duration-300 ${
-              isNewsletterFocused ? 'bg-[rgba(193,217,191,0.34)]' : 'hover:bg-[rgba(193,217,191,0.2)]'
-            }`}
-            onSubmit={(event) => event.preventDefault()}
-          >
-            <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
-              Updates
-            </p>
-            <label className="block w-full">
-              <span className="sr-only">Email for Interfold updates</span>
-              <input
-                id="email-input"
-                type="email"
-                placeholder={isNewsletterFocused ? "" : "Email"}
-                value={email}
-                onBlur={() => setIsNewsletterFocused(false)}
-                onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setIsNewsletterFocused(true)}
-                className="font-['ABC_Gramercy:Regular',sans-serif] w-full border-b border-[#3a5e3c] bg-transparent outline-none text-[#3a5e3c] pb-2 text-[14.429px] leading-[1.3] placeholder:text-[#3a5e3c] placeholder:capitalize"
-              />
-            </label>
-            <AnimatePresence>
-              {hasEmail && (
-                <motion.button
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  className={`mt-4 flex h-[52px] w-full origin-top items-center justify-center overflow-hidden transition-colors ${
-                    isValidEmail(email) ? 'cursor-pointer bg-[#3a5e3c] text-[#d9fce8]' : 'cursor-not-allowed bg-[rgba(193,217,191,0.8)] text-[#687d71]'
-                  }`}
-                  disabled={!isValidEmail(email)}
-                  exit={{ opacity: 0, scale: 0.965, y: 6 }}
-                  initial={{ opacity: 0, scale: 0.965, y: 6 }}
-                  onMouseEnter={() => setIsJoinHovered(true)}
-                  onMouseLeave={() => setIsJoinHovered(false)}
-                  transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  type="submit"
-                >
-                  <span className="inline-grid grid-cols-[14px_auto_14px] items-center gap-1">
-                    <span aria-hidden="true" className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] opacity-0">
-                      →
-                    </span>
-                    <motion.span
-                      animate={{ x: isJoinHovered && isValidEmail(email) ? -8 : 0 }}
-                      className="font-['ABC_Gramercy:Regular',sans-serif] block text-[14.429px] leading-[1.075] capitalize"
-                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      Join
-                    </motion.span>
-                    <motion.span
-                      animate={{ opacity: isJoinHovered && isValidEmail(email) ? 1 : 0, x: isJoinHovered && isValidEmail(email) ? 0 : -8 }}
-                      className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px]"
-                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      →
-                    </motion.span>
-                  </span>
-                </motion.button>
-              )}
-            </AnimatePresence>
-          </form>
+          <GhostSignupForm className="mb-6" />
 
           <div className="mb-6 flex flex-col gap-2">
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">

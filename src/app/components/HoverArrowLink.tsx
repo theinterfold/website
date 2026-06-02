@@ -15,8 +15,27 @@ type HoverArrowLinkProps = Omit<HoverArrowContentProps, "isExternal" | "isHovere
   href: string;
 };
 
+type ExternalArrowSlideProps = {
+  className?: string;
+  rowClassName?: string;
+};
+
 function isExternalDestination(href: string) {
   return /^(?:https?:|mailto:|tel:)/.test(href);
+}
+
+export function ExternalArrowSlide({
+  className = "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none",
+  rowClassName = "h-[14px] w-[14px] leading-none",
+}: ExternalArrowSlideProps) {
+  return (
+    <span aria-hidden="true" className={className}>
+      <span className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1/2 group-focus-visible:-translate-y-1/2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-focus-visible:translate-y-0">
+        <span className={rowClassName}>↗</span>
+        <span className={rowClassName}>↗</span>
+      </span>
+    </span>
+  );
 }
 
 export function HoverArrowContent({

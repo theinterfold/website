@@ -4,6 +4,7 @@ import imgNetwork from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d5
 import imgMesh from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { motion } from "motion/react";
+import { ExternalArrowSlide } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 
@@ -22,17 +23,6 @@ type PageData = {
     body: string;
   }>;
 };
-
-function NavExternalArrow() {
-  return (
-    <span aria-hidden="true" className="relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none">
-      <span className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1/2 group-focus-visible:-translate-y-1/2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-focus-visible:translate-y-0">
-        <span className="h-[14px] w-[14px] leading-none">↗</span>
-        <span className="h-[14px] w-[14px] leading-none">↗</span>
-      </span>
-    </span>
-  );
-}
 
 const pages: Record<PageKey, PageData> = {
   community: {
@@ -177,15 +167,15 @@ function Wordmark() {
 
 function Mark() {
   return (
-    <svg className="block h-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
-      <path d={svgPaths.p2c3ef4f0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p18d4bac0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p79ece00} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p3c15f980} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.pd580300} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p3e19a800} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p3fc0d800} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-      <path d={svgPaths.p1f4a0a00} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
+    <svg className="block h-full w-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 102 89">
+      <path d="M98.46 7.23828L77.25 28.4583L66.64 17.8483L56.03 7.23828L45.43 17.8483L34.82 7.23828L24.21 17.8483L13.61 28.4583L3 39.0583V81.4883L24.21 60.2783L34.82 70.8783L45.43 81.4883L56.03 70.8783L66.64 81.4883L77.25 70.8783L87.85 60.2783L98.46 49.6683V7.23828Z" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M24.21 60.2786L3 39.0586" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M45.4297 17.8516L87.8497 60.2816" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M77.25 28.4609L98.46 49.6709" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M56.0294 70.8809L13.6094 28.4609" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M77.2509 70.8816L24.2109 17.8516" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M45.4309 17.8516L24.2109 39.0616" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+      <path d="M56.0312 70.8819L77.2513 49.6719" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
     </svg>
   );
 }
@@ -240,11 +230,11 @@ export function Header({
             <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
-                <NavExternalArrow />
+                <ExternalArrowSlide />
               </NavLink>
               <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
                 <span>Blog</span>
-                <NavExternalArrow />
+                <ExternalArrowSlide />
               </NavLink>
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
             </nav>

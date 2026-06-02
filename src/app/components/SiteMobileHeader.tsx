@@ -101,15 +101,15 @@ export function SiteMobileHeader({
         </a>
 
         <a aria-label="The Interfold home" className="h-7 w-8" href="/">
-          <svg className="h-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 48.5891 37.1196">
-            <path d={svgPaths.p2c3ef4f0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p18d4bac0} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p79ece00} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p3c15f980} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.pd580300} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p3e19a800} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p3fc0d800} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
-            <path d={svgPaths.p1f4a0a00} stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="2.88577" />
+          <svg className="h-full w-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 102 89">
+            <path d="M98.46 7.23828L77.25 28.4583L66.64 17.8483L56.03 7.23828L45.43 17.8483L34.82 7.23828L24.21 17.8483L13.61 28.4583L3 39.0583V81.4883L24.21 60.2783L34.82 70.8783L45.43 81.4883L56.03 70.8783L66.64 81.4883L77.25 70.8783L87.85 60.2783L98.46 49.6683V7.23828Z" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M24.21 60.2786L3 39.0586" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M45.4297 17.8516L87.8497 60.2816" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M77.25 28.4609L98.46 49.6709" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M56.0294 70.8809L13.6094 28.4609" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M77.2509 70.8816L24.2109 17.8516" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M45.4309 17.8516L24.2109 39.0616" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
+            <path d="M56.0312 70.8819L77.2513 49.6719" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
           </svg>
         </a>
 
