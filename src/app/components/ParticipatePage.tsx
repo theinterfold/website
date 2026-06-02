@@ -137,7 +137,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
           <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
             {pathwayNumber}
           </span>
-          <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.92] tracking-[-0.96px]">
+          <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.95] tracking-[-0.96px]">
             {formattedTitle}
           </h2>
         </div>
@@ -295,7 +295,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>Overview</SectionLabel>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.92]">
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
                 Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place.
               </p>
               <p className="mx-auto mt-8 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-none md:text-[14px]">
@@ -308,7 +308,7 @@ export function ParticipatePage() {
                 <ScrollFadeIn className="flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
                   <ActorGlyph index={index} />
                   <div className="flex min-w-0 flex-col items-center">
-                    <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.92] min-[1100px]:mt-6 min-[1100px]:max-w-md">
+                    <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                       {title === "Ciphernode committees" ? (
                         <>
                           Ciphernode
@@ -370,7 +370,7 @@ export function ParticipatePage() {
                 <SectionLabel className="text-[#d9fce8]/55">What’s next</SectionLabel>
               </ScrollFadeIn>
               <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-[320px] md:w-[597.355px] md:max-w-md">
-                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.92]">
+                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
                   The network is forming in stages:
                 </p>
               </ScrollFadeIn>
@@ -411,7 +411,7 @@ export function ParticipatePage() {
               <SectionLabel className="text-[#d9fce8]/70">Participate</SectionLabel>
             </ScrollFadeIn>
             <ScrollFadeIn className="mt-[11.543px] max-w-[320px] md:max-w-none">
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#d9fce8] md:text-[32px] md:leading-[0.92]">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#d9fce8] md:text-[32px] md:leading-[0.95]">
                 Help form the network
               </p>
             </ScrollFadeIn>

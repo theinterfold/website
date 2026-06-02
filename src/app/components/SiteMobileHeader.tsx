@@ -140,7 +140,7 @@ export function SiteMobileHeader({
           <div className="m-[0px] flex flex-col items-center gap-y-2 p-[0px]">
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
@@ -151,7 +151,7 @@ export function SiteMobileHeader({
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://docs.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
@@ -163,7 +163,7 @@ export function SiteMobileHeader({
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="https://blog.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
@@ -175,7 +175,7 @@ export function SiteMobileHeader({
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.92] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
               href="/participate"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}

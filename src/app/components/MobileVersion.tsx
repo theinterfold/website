@@ -11,6 +11,7 @@ import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf5
 import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline";
 import aztecLogo from "../../imports/Desktop/aztec-wordmark-dark.svg";
+import boundlessLogo from "../../imports/Desktop/boundless-logo.svg";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
@@ -42,8 +43,8 @@ function MobilePartnerLogoFrame({
       target="_blank"
     >
       <span
-        className="flex h-full items-center justify-center"
-        style={{ transform: `scale(${visualScale})`, transformOrigin: "center" }}
+        className="flex items-center justify-center"
+        style={{ height: `${visualScale * 100}%` }}
       >
         {children}
       </span>
@@ -225,7 +226,7 @@ export function MobileVersion() {
         </div>
 
         <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
-          <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.92] tracking-[-1.08px] capitalize text-[#3a5e3c]">
+          <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <p className="mb-0">Private Inputs.</p>
             <p>Collective Outcomes.</p>
           </div>
@@ -259,10 +260,10 @@ export function MobileVersion() {
       {/* Logos Section */}
       <ScrollFadeIn className="bg-[rgba(193,217,191,0.8)] py-8">
         <div className="mx-auto flex w-full max-w-[520px] items-center justify-between gap-4 px-6">
-          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon" visualScale={0.92}>
+          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon" visualScale={0.86}>
             <MobilePartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko" visualScale={0.96}>
+          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko" visualScale={0.9}>
             <MobilePartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
           </MobilePartnerLogoFrame>
           <MobilePartnerLogoFrame href="https://aztec.network/" name="Aztec" visualScale={0.78}>
@@ -275,14 +276,17 @@ export function MobileVersion() {
               <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
             </svg>
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion" visualScale={0.74}>
-            <MobilePartnerLogoAsset aspectRatio="1221 / 311" src={legionLogo} />
+          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion" visualScale={0.58}>
+            <MobilePartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} />
           </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://getsession.org" name="Session" visualScale={0.88}>
+          <MobilePartnerLogoFrame href="https://getsession.org" name="Session" visualScale={0.76}>
             <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
               <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
               <path d={svgPaths.p59a0800} fill="#3A5E3C" />
             </svg>
+          </MobilePartnerLogoFrame>
+          <MobilePartnerLogoFrame href="https://boundless.xyz/" name="Boundless" visualScale={0.54}>
+            <MobilePartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} />
           </MobilePartnerLogoFrame>
         </div>
       </ScrollFadeIn>
@@ -362,7 +366,7 @@ export function MobileVersion() {
             <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
-                  <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
+                  <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Fairer market </p>
                     <p className="whitespace-pre">mechanisms</p>
                   </div>
@@ -386,7 +390,7 @@ export function MobileVersion() {
             <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
-                  <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
+                  <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Stronger democratic </p>
                     <p className="whitespace-pre">systems</p>
                   </div>
@@ -410,7 +414,7 @@ export function MobileVersion() {
             <div className="px-1.5">
               <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
-                  <div className="text-[32px] leading-[0.92] tracking-[-0.96px]">
+                  <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Collaborative </p>
                     <p className="whitespace-pre">Intelligence</p>
                   </div>

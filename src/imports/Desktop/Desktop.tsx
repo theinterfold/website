@@ -8,6 +8,7 @@ import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
 import aragonLogo from "./aragon-ant-logo-full.svg?no-inline";
 import aztecLogo from "./aztec-wordmark-dark.svg";
+import boundlessLogo from "./boundless-logo.svg";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
@@ -23,14 +24,15 @@ const friendLogos = [
   { name: "MetaLex", href: "https://www.metalex.tech/" },
   { name: "Legion", href: "https://legion.cc/" },
   { name: "Session", href: "https://getsession.org" },
+  { name: "Boundless", href: "https://boundless.xyz/" },
 ];
 
 function PartnerLogoFrame({ children, visualScale = 1 }: { children: ReactNode; visualScale?: number }) {
   return (
     <span className="flex h-5 items-center justify-center lg:h-7">
       <span
-        className="flex h-full items-center justify-center"
-        style={{ transform: `scale(${visualScale})`, transformOrigin: "center" }}
+        className="flex items-center justify-center"
+        style={{ height: `${visualScale * 100}%` }}
       >
         {children}
       </span>
@@ -125,14 +127,14 @@ function Frame() {
         <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
           <ScrollFadeIn className="shrink-0" delay={0.05}>
             <FriendLogo friend={friendLogos[0]} hoveredFriend={hoveredFriend} index={0} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.92}>
+              <PartnerLogoFrame visualScale={0.86}>
                 <PartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.15}>
             <FriendLogo friend={friendLogos[1]} hoveredFriend={hoveredFriend} index={1} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.96}>
+              <PartnerLogoFrame visualScale={0.9}>
                 <PartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
@@ -157,18 +159,25 @@ function Frame() {
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.45}>
             <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.74}>
-                <PartnerLogoAsset aspectRatio="1221 / 170" maskSize="auto 183%" src={legionLogo} />
+              <PartnerLogoFrame visualScale={0.58}>
+                <PartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
           <ScrollFadeIn className="shrink-0" delay={0.55}>
             <FriendLogo friend={friendLogos[5]} hoveredFriend={hoveredFriend} index={5} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.88}>
+              <PartnerLogoFrame visualScale={0.76}>
                 <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
                   <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
                   <path d={svgPaths.p59a0800} fill="#3A5E3C" />
                 </svg>
+              </PartnerLogoFrame>
+            </FriendLogo>
+          </ScrollFadeIn>
+          <ScrollFadeIn className="shrink-0" delay={0.65}>
+            <FriendLogo friend={friendLogos[6]} hoveredFriend={hoveredFriend} index={6} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+              <PartnerLogoFrame visualScale={0.54}>
+                <PartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} />
               </PartnerLogoFrame>
             </FriendLogo>
           </ScrollFadeIn>
@@ -212,7 +221,7 @@ function Frame16() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible.</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -249,8 +258,8 @@ function Frame22() {
     <div className="relative shrink-0 w-full">
       <div className="content-stretch flex flex-col font-['ABC_Gramercy:Regular',sans-serif] gap-[8px] items-start not-italic p-[16px] relative size-full text-[#d9fce8]">
         <div className="leading-[0] relative shrink-0 text-[24px] md:text-[28px] lg:text-[32px] tracking-[-0.96px]">
-          <p className="leading-[0.92] mb-0">Fairer market</p>
-          <p className="leading-[0.92]">mechanisms</p>
+          <p className="leading-[0.95] mb-0">Fairer market</p>
+          <p className="leading-[0.95]">mechanisms</p>
         </div>
         <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed auction mechanisms where bids remain private and outcomes are verifiable</p>
       </div>
@@ -263,8 +272,8 @@ function Frame24() {
     <div className="relative shrink-0 w-full">
       <div className="content-stretch flex flex-col font-['ABC_Gramercy:Regular',sans-serif] gap-[8px] items-start not-italic p-[16px] relative size-full text-[#d9fce8]">
         <div className="leading-[0] relative shrink-0 text-[24px] md:text-[28px] lg:text-[32px] tracking-[-0.96px]">
-          <p className="leading-[0.92] mb-0">Stronger democratic</p>
-          <p className="leading-[0.92]">systems</p>
+          <p className="leading-[0.95] mb-0">Stronger democratic</p>
+          <p className="leading-[0.95]">systems</p>
         </div>
         <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Secret ballots with correct, verifiable tallying and no trusted operator</p>
       </div>
@@ -277,8 +286,8 @@ function Frame25() {
     <div className="relative shrink-0 w-full">
       <div className="content-stretch flex flex-col font-['ABC_Gramercy:Regular',sans-serif] gap-[8px] items-start not-italic p-[16px] relative size-full text-[#d9fce8]">
         <div className="leading-[0] relative shrink-0 text-[24px] md:text-[28px] lg:text-[32px] tracking-[-0.96px]">
-          <p className="leading-[0.92] mb-0">Collaborative</p>
-          <p className="leading-[0.92]">Intelligence</p>
+          <p className="leading-[0.95] mb-0">Collaborative</p>
+          <p className="leading-[0.95]">Intelligence</p>
         </div>
         <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute together to produce shared results without exposing data</p>
       </div>
@@ -354,7 +363,7 @@ function Frame8() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">Confidential coordination becomes real through both applications and operators:</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">Confidential coordination becomes real through both applications and operators:</p>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.4}>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
@@ -465,7 +474,7 @@ function Frame18() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now.</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -676,7 +685,7 @@ function Frame14() {
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.92] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware. `}</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware. `}</p>
       </ScrollFadeIn>
     </div>
   );

@@ -291,7 +291,7 @@ function CommunityGraphic() {
           live network
         </p>
         <div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.92] tracking-[-1.2px] text-[#d9fce8]">
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.95] tracking-[-1.2px] text-[#d9fce8]">
             Come in through the work.
           </p>
           <p className="mt-5 font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#d9fce8]">
@@ -336,7 +336,7 @@ function DocsGraphic() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
           index
         </p>
-        <p className="mt-20 font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.92] tracking-[-1.2px]">
+        <p className="mt-20 font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.95] tracking-[-1.2px]">
           The docs page should behave like a reading table.
         </p>
         <p className="mt-6 font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075]">
@@ -356,7 +356,7 @@ function DocsGraphic() {
               {row.label}
             </p>
             <div>
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[0.92] tracking-[-0.7px]">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[0.95] tracking-[-0.7px]">
                 {row.title}
               </p>
               <p className="mt-2 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.075]">
@@ -453,7 +453,7 @@ function FollowOnSection({ page }: { page: PageKey }) {
           <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
             {isCommunity ? "Next gathering point" : "Protocol surface"}
           </p>
-          <h2 className="mt-4 font-['ABC_Gramercy:Regular',sans-serif] text-[48px] leading-[0.92] tracking-[-1.2px] text-[#3a5e3c] md:text-[64px]">
+          <h2 className="mt-4 font-['ABC_Gramercy:Regular',sans-serif] text-[48px] leading-[0.95] tracking-[-1.2px] text-[#3a5e3c] md:text-[64px]">
             {isCommunity ? "A network forms through repeated, useful participation." : "The primitive stays small. The applications can become wide."}
           </h2>
         </ScrollFadeIn>
@@ -485,7 +485,7 @@ export function ContentPage({ page }: { page: PageKey }) {
               <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
                 {data.eyebrow}
               </p>
-              <h1 className="mt-4 max-w-[980px] font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.92] tracking-[-1.92px] text-[#3a5e3c] md:text-[72px]">
+              <h1 className="mt-4 max-w-[980px] font-['ABC_Gramercy:Regular',sans-serif] text-[44px] leading-[0.95] tracking-[-1.92px] text-[#3a5e3c] md:text-[72px]">
                 {data.title}
               </h1>
               <p className="mx-auto mt-8 max-w-[720px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.075] tracking-[-0.45px] text-[#3a5e3c] md:text-[28px]">
@@ -507,7 +507,7 @@ export function ContentPage({ page }: { page: PageKey }) {
               <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]">
                 {data.darkLabel}
               </p>
-              <h2 className="mt-4 font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.92] tracking-[-1.2px] text-[#d9fce8] md:text-[56px]">
+              <h2 className="mt-4 font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.95] tracking-[-1.2px] text-[#d9fce8] md:text-[56px]">
                 {data.darkTitle}
               </h2>
               <p className="mx-auto mt-8 max-w-[720px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.075] tracking-[-0.4px] text-[#d9fce8]">
