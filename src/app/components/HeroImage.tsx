@@ -65,7 +65,11 @@ export function HeroImage({
 
   useEffect(() => {
     const image = imageRef.current;
-    setIsLoaded(Boolean(image?.complete && image.naturalWidth > 0));
+    setIsLoaded(false);
+
+    if (image?.complete && image.naturalWidth > 0) {
+      requestAnimationFrame(() => setIsLoaded(true));
+    }
   }, [sources.src]);
 
   return (
@@ -78,7 +82,11 @@ export function HeroImage({
         fetchPriority="high"
         height={sources.height}
         loading="eager"
-        onLoad={() => setIsLoaded(true)}
+        onLoad={(event) => {
+          if (event.currentTarget.naturalWidth > 0) {
+            setIsLoaded(true);
+          }
+        }}
         ref={imageRef}
         sizes="100vw"
         src={sources.src}
