@@ -25,3 +25,4 @@ Open the local URL shown in the terminal.
 This project uses the Interfold homepage as the source of truth for visual style, typography, spacing, colors, animations, and responsive behavior.
 
 When adding or editing pages, reuse existing styles and components where possible. Avoid introducing one-off values unless strictly necessary.
+
