@@ -63,6 +63,13 @@ html.interfold-theme-participate #root {
   transform-origin: center top;
 }
 
+.interfold-mobile-menu-trigger .hamburger-react {
+  left: 50%;
+  position: absolute !important;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes interfold-header-drop {
   from {
     transform: translate3d(0, -100%, 0);

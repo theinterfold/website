@@ -1,74 +1,29 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
+import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 
-function AnimatedMenuButton({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) {
+function AnimatedMenuButton({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
-    <button
-      onClick={onClick}
-      className="hamburger-button relative h-4 w-7"
-      aria-label={isOpen ? "Close menu" : "Open menu"}
-    >
-      <span
-        className={`hamburger-toggle ${isOpen ? "active-menu" : ""}`}
-      >
-        <i className="hamburger-middle" />
-      </span>
-      <style>{`
-        .hamburger-toggle {
-          display: block;
-          width: 28px;
-          height: 16px;
-          position: relative;
-        }
-
-        .hamburger-toggle::after,
-        .hamburger-toggle::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          height: 0;
-          border-bottom: 2px solid #3a5e3c;
-          width: 100%;
-          left: 0;
-          right: 0;
-          transition: all ease-out 0.3s;
-        }
-
-        .hamburger-toggle::after {
-          top: 100%;
-        }
-
-        .hamburger-middle {
-          display: block;
-          text-indent: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          height: 2px;
-          background-color: #3a5e3c;
-          width: 100%;
-          position: absolute;
-          top: 50%;
-          transition: all ease-out 0.1s;
-        }
-
-        .hamburger-toggle.active-menu::after {
-          transform: rotate(-45deg);
-          transform-origin: center;
-          top: 50%;
-        }
-
-        .hamburger-toggle.active-menu::before {
-          transform: rotate(45deg);
-          transform-origin: center;
-          top: 50%;
-        }
-
-        .hamburger-toggle.active-menu .hamburger-middle {
-          opacity: 0;
-        }
-      `}</style>
-    </button>
+    <div className="interfold-mobile-menu-trigger relative h-4 w-7">
+      <Hamburger
+        toggled={isOpen}
+        toggle={setIsOpen}
+        direction="right"
+        size={28}
+        distance="sm"
+        duration={0.35}
+        color="#3a5e3c"
+        rounded
+        label={isOpen ? "Close menu" : "Open menu"}
+      />
+    </div>
   );
 }
 
@@ -113,22 +68,16 @@ export function SiteMobileHeader({
           </svg>
         </a>
 
-        <div className="absolute right-6">
-          <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
-        </div>
+      </div>
+
+      <div className={`fixed right-6 top-7 z-[70] -translate-y-1/2 ${className}`}>
+        <AnimatedMenuButton isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
       </div>
 
       {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+        <div
           className={`fixed inset-0 z-[60] flex h-[100dvh] min-h-screen w-screen flex-col items-center justify-center ${backgroundClassName}`}
         >
-          <div className="absolute right-6 top-4">
-            <AnimatedMenuButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
-          </div>
           <motion.p
             animate={{ opacity: 1, y: 0 }}
             className="font-['Office_Code_Pro:Medium',sans-serif] absolute top-6 uppercase tracking-[1px] text-[#687d71] text-[12px]"
@@ -185,7 +134,7 @@ export function SiteMobileHeader({
               Participate
             </motion.a>
           </div>
-        </motion.div>
+        </div>
       )}
     </>
   );
