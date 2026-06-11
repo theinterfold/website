@@ -165,6 +165,49 @@ html.interfold-route-hero-active .interfold-page-transition .interfold-hero-tran
   }
 }
 
+@keyframes interfold-logo-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.interfold-logo-marquee {
+  position: relative;
+  width: 100%;
+  /* vertical padding gives the clip box slack so taller logos are never cropped */
+  padding-block: 8px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.interfold-logo-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: interfold-logo-marquee 32s linear infinite;
+  /* paused by default; the --running modifier (added in JS once in view) starts it,
+     and it pauses again off-screen so it never competes with page scrolling */
+  animation-play-state: paused;
+}
+
+.interfold-logo-marquee--running .interfold-logo-marquee__track {
+  animation-play-state: running;
+}
+
+.interfold-logo-marquee:hover .interfold-logo-marquee__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interfold-logo-marquee__track {
+    animation: none;
+  }
+}
+
 .mobile-possibility-slider .slick-slider {
   position: relative;
 }

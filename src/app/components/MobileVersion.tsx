@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
+import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -14,6 +15,7 @@ import aztecLogo from "../../imports/Desktop/aztec-wordmark-dark.svg";
 import boundlessLogo from "../../imports/Desktop/boundless-logo.svg";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
+import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
 import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
 import { GhostSignupForm } from "./GhostSignupForm";
@@ -180,8 +182,35 @@ function MobileExecutionModelGraphic() {
   );
 }
 
+const mobileLogos = [
+  { href: "https://www.aragon.org/", name: "Aragon", visualScale: 0.86, content: <MobilePartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} /> },
+  { href: "https://taiko.xyz/", name: "Taiko", visualScale: 0.9, content: <MobilePartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} /> },
+  { href: "https://aztec.network/", name: "Aztec", visualScale: 0.78, content: <MobilePartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} /> },
+  {
+    href: "https://www.metalex.tech/", name: "MetaLex", visualScale: 1.06, content: (
+      <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
+        <path d={svgPaths.p67816f0} fill="#3A5E3C" />
+        <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
+        <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
+      </svg>
+    )
+  },
+  { href: "https://legion.cc/", name: "Legion", visualScale: 0.58, content: <MobilePartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} /> },
+  {
+    href: "https://getsession.org", name: "Session", visualScale: 0.76, content: (
+      <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
+        <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
+        <path d={svgPaths.p59a0800} fill="#3A5E3C" />
+      </svg>
+    )
+  },
+  { href: "https://boundless.xyz/", name: "Boundless", visualScale: 0.54, content: <MobilePartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} /> },
+  { href: "https://www.encryptedmempool.org/", name: "Encrypt the Mempool", visualScale: 0.9, content: <MobilePartnerLogoAsset aspectRatio="791 / 219" src={etmStackedLogo} /> },
+];
+
 export function MobileVersion() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+  const logoMarquee = useStartOnInView();
   const possibilityCarouselRef = useMobileCarouselOpacity();
 
   const carouselSettings = {
@@ -259,35 +288,18 @@ export function MobileVersion() {
 
       {/* Logos Section */}
       <ScrollFadeIn className="bg-[rgba(193,217,191,0.8)] py-8">
-        <div className="mx-auto flex w-full max-w-[520px] items-center justify-between gap-4 px-6">
-          <MobilePartnerLogoFrame href="https://www.aragon.org/" name="Aragon" visualScale={0.86}>
-            <MobilePartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://taiko.xyz/" name="Taiko" visualScale={0.9}>
-            <MobilePartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://aztec.network/" name="Aztec" visualScale={0.78}>
-            <MobilePartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} />
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://www.metalex.tech/" name="MetaLex" visualScale={1.06}>
-            <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
-              <path d={svgPaths.p67816f0} fill="#3A5E3C" />
-              <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
-              <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
-            </svg>
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://legion.cc/" name="Legion" visualScale={0.58}>
-            <MobilePartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} />
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://getsession.org" name="Session" visualScale={0.76}>
-            <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
-              <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
-              <path d={svgPaths.p59a0800} fill="#3A5E3C" />
-            </svg>
-          </MobilePartnerLogoFrame>
-          <MobilePartnerLogoFrame href="https://boundless.xyz/" name="Boundless" visualScale={0.54}>
-            <MobilePartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} />
-          </MobilePartnerLogoFrame>
+        <div ref={logoMarquee.ref} className={`interfold-logo-marquee w-full${logoMarquee.started ? " interfold-logo-marquee--running" : ""}`}>
+          <div className="interfold-logo-marquee__track">
+            {["a", "b"].map((copy) => (
+              <div key={copy} className="flex shrink-0 items-center gap-x-6 pr-6" aria-hidden={copy === "b"}>
+                {mobileLogos.map((logo, i) => (
+                  <MobilePartnerLogoFrame key={`${copy}-${i}`} href={logo.href} name={logo.name} visualScale={logo.visualScale}>
+                    {logo.content}
+                  </MobilePartnerLogoFrame>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </ScrollFadeIn>
 
