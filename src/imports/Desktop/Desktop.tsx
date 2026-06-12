@@ -161,7 +161,7 @@ function Frame() {
           ))}
         </div>
         {/* below lg: not enough room — gently scroll the logos in a continuous marquee */}
-        <div ref={logoMarquee.ref} className={`interfold-logo-marquee w-full lg:hidden${logoMarquee.started ? " interfold-logo-marquee--running" : ""}`}>
+        <div ref={logoMarquee.ref} className={`interfold-logo-marquee w-full lg:hidden ${logoMarquee.started ? "interfold-logo-marquee--running" : ""}`}>
           <div className="interfold-logo-marquee__track">
             {["a", "b"].map((copy) => (
               <div key={copy} className="flex shrink-0 items-center gap-x-12 pr-12" aria-hidden={copy === "b"}>

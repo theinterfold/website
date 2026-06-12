@@ -39,7 +39,7 @@ function MobilePartnerLogoFrame({
   return (
     <a
       aria-label={name}
-      className="flex h-[10px] items-center justify-center sm:h-4"
+      className="flex h-3.5 items-center justify-center sm:h-5"
       href={href}
       rel="noreferrer"
       target="_blank"
