@@ -11,11 +11,13 @@ import aztecLogo from "./aztec-wordmark-dark.svg";
 import boundlessLogo from "./boundless-logo.svg";
 import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
+import etmStackedLogo from "./encrypt-mempool-stacked.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
 import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { ExternalArrowSlide, HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
+import { useStartOnInView } from "../../app/components/useStartOnInView";
 
 const friendLogos = [
   { name: "Aragon", href: "https://www.aragon.org/" },
@@ -25,6 +27,7 @@ const friendLogos = [
   { name: "Legion", href: "https://legion.cc/" },
   { name: "Session", href: "https://getsession.org" },
   { name: "Boundless", href: "https://boundless.xyz/" },
+  { name: "Encrypt the Mempool", href: "https://www.encryptedmempool.org/" },
 ];
 
 function PartnerLogoFrame({ children, visualScale = 1 }: { children: ReactNode; visualScale?: number }) {
@@ -106,9 +109,32 @@ function FriendLogo({
   );
 }
 
+const logoVisuals: ReactNode[] = [
+  <PartnerLogoFrame visualScale={0.86}><PartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} /></PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.9}><PartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} /></PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.78}><PartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} /></PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={1.06}>
+    <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
+      <path d={svgPaths.p67816f0} fill="#3A5E3C" />
+      <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
+      <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
+    </svg>
+  </PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.58}><PartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} /></PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.76}>
+    <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
+      <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
+      <path d={svgPaths.p59a0800} fill="#3A5E3C" />
+    </svg>
+  </PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.54}><PartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} /></PartnerLogoFrame>,
+  <PartnerLogoFrame visualScale={0.9}><PartnerLogoAsset aspectRatio="791 / 219" src={etmStackedLogo} /></PartnerLogoFrame>,
+];
+
 function Frame() {
   const [hoveredFriend, setHoveredFriend] = useState<number | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const logoMarquee = useStartOnInView();
 
   const handleFriendMove = (event: MouseEvent<HTMLAnchorElement>, index: number) => {
     setHoveredFriend(index);
@@ -124,63 +150,29 @@ function Frame() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
       >
-        <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 px-4 md:flex-nowrap md:justify-between md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
-          <ScrollFadeIn className="shrink-0" delay={0.05}>
-            <FriendLogo friend={friendLogos[0]} hoveredFriend={hoveredFriend} index={0} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.86}>
-                <PartnerLogoAsset aspectRatio="2500 / 621" src={aragonLogo} />
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.15}>
-            <FriendLogo friend={friendLogos[1]} hoveredFriend={hoveredFriend} index={1} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.9}>
-                <PartnerLogoAsset aspectRatio="830 / 228" src={taikoLogo} />
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.25}>
-            <FriendLogo friend={friendLogos[2]} hoveredFriend={hoveredFriend} index={2} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.78}>
-                <PartnerLogoAsset aspectRatio="1170 / 300" src={aztecLogo} />
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.35}>
-            <FriendLogo friend={friendLogos[3]} hoveredFriend={hoveredFriend} index={3} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={1.06}>
-                <svg className="h-full w-auto shrink-0" fill="none" viewBox="235 41 70 35">
-                  <path d={svgPaths.p67816f0} fill="#3A5E3C" />
-                  <path d={svgPaths.p1c53af00} fill="#3A5E3C" />
-                  <path d={svgPaths.p3ba98800} fill="#3A5E3C" />
-                </svg>
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.45}>
-            <FriendLogo friend={friendLogos[4]} hoveredFriend={hoveredFriend} index={4} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.58}>
-                <PartnerLogoAsset aspectRatio="1154 / 170" src={legionLogo} />
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.55}>
-            <FriendLogo friend={friendLogos[5]} hoveredFriend={hoveredFriend} index={5} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.76}>
-                <svg className="h-full w-auto shrink-0" fill="none" viewBox="738 41 164 35">
-                  <path d={svgPaths.p1ebc7480} fill="#3A5E3C" />
-                  <path d={svgPaths.p59a0800} fill="#3A5E3C" />
-                </svg>
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
-          <ScrollFadeIn className="shrink-0" delay={0.65}>
-            <FriendLogo friend={friendLogos[6]} hoveredFriend={hoveredFriend} index={6} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
-              <PartnerLogoFrame visualScale={0.54}>
-                <PartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} />
-              </PartnerLogoFrame>
-            </FriendLogo>
-          </ScrollFadeIn>
+        {/* lg+: static, evenly spaced single row */}
+        <div className="mx-auto hidden w-full items-center justify-between gap-x-8 lg:flex lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
+          {logoVisuals.map((visual, i) => (
+            <ScrollFadeIn key={i} className="shrink-0" delay={0.05 + i * 0.1}>
+              <FriendLogo friend={friendLogos[i]} hoveredFriend={hoveredFriend} index={i} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+                {visual}
+              </FriendLogo>
+            </ScrollFadeIn>
+          ))}
+        </div>
+        {/* below lg: not enough room — gently scroll the logos in a continuous marquee */}
+        <div ref={logoMarquee.ref} className={`interfold-logo-marquee w-full lg:hidden ${logoMarquee.started ? "interfold-logo-marquee--running" : ""}`}>
+          <div className="interfold-logo-marquee__track">
+            {["a", "b"].map((copy) => (
+              <div key={copy} className="flex shrink-0 items-center gap-x-12 pr-12" aria-hidden={copy === "b"}>
+                {logoVisuals.map((visual, i) => (
+                  <FriendLogo key={`${copy}-${i}`} friend={friendLogos[i]} hoveredFriend={hoveredFriend} index={i} onMouseEnter={setHoveredFriend} onMouseLeave={() => setHoveredFriend(null)} onMouseMove={handleFriendMove}>
+                    {visual}
+                  </FriendLogo>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
       {typeof document !== "undefined" &&
