@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import Desktop from '../../imports/Desktop/Desktop';
-import { ContentPage, Header } from './ContentPage';
+import { Header } from './Header';
+import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
 import { HeroImage, homeHeroSources, participateHeroSources } from './HeroImage';
 
 const MOBILE_BREAKPOINT = 768;
-const CONTENT_PAGES = ['community', 'protocol', 'docs'] as const;
-type ContentPagePath = typeof CONTENT_PAGES[number];
 type HeroPagePath = '' | 'participate';
 type HeroOverlay = {
   page: HeroPagePath;
@@ -26,10 +25,6 @@ function getPagePath() {
   }
 
   return window.location.pathname.replace(/^\/+|\/+$/g, '');
-}
-
-function getContentPagePath(page = getPagePath()): ContentPagePath | null {
-  return CONTENT_PAGES.includes(page as ContentPagePath) ? page as ContentPagePath : null;
 }
 
 function applyPageTheme(page = getPagePath()) {
@@ -233,7 +228,6 @@ export function ResponsiveLayout() {
     };
   }, []);
 
-  const contentPage = getContentPagePath(routePath);
   const isHome = routePath === '';
   const isParticipate = routePath === 'participate';
   const sharedHeader = (isParticipate || (!isMobile && isHome)) ? (
@@ -265,8 +259,8 @@ export function ResponsiveLayout() {
     );
   }
 
-  if (contentPage) {
-    return <ContentPage page={contentPage} />;
+  if (routePath === 'fold-auction') {
+    return <FoldAuctionPage />;
   }
 
   if (isParticipate) {

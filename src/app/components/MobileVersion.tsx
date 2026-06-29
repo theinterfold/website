@@ -21,6 +21,7 @@ import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreReso
 import { GhostSignupForm } from "./GhostSignupForm";
 import { HeroImage, homeHeroSources } from "./HeroImage";
 import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
@@ -254,15 +255,17 @@ export function MobileVersion() {
           </div>
         </div>
 
-        <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
+        <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
-            <p className="mb-0">Private Inputs.</p>
-            <p>Collective Outcomes.</p>
+            <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
           </div>
-          <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
-            Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
-          </p>
+          <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
+            <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+              Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
+            </p>
+          </ScrollFadeIn>
 
+          <ScrollFadeIn className="w-full" delay={0.3}>
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <HoverArrowLink
@@ -276,14 +279,15 @@ export function MobileVersion() {
             <div className="w-full">
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="/participate"
+                href="/fold-auction"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                Participate
+                Join the FOLD Auction
               </HoverArrowLink>
             </div>
           </div>
-        </ScrollFadeIn>
+          </ScrollFadeIn>
+        </div>
       </div>
 
       {/* Logos Section */}

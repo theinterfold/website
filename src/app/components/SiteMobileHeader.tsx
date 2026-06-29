@@ -2,6 +2,7 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
+import { InterfoldSymbol } from "./InterfoldSymbol";
 
 function AnimatedMenuButton({
   isOpen,
@@ -55,17 +56,8 @@ export function SiteMobileHeader({
           </svg>
         </a>
 
-        <a aria-label="The Interfold home" className="h-7 w-8" href="/">
-          <svg className="h-full w-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 102 89">
-            <path d="M98.46 7.23828L77.25 28.4583L66.64 17.8483L56.03 7.23828L45.43 17.8483L34.82 7.23828L24.21 17.8483L13.61 28.4583L3 39.0583V81.4883L24.21 60.2783L34.82 70.8783L45.43 81.4883L56.03 70.8783L66.64 81.4883L77.25 70.8783L87.85 60.2783L98.46 49.6683V7.23828Z" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M24.21 60.2786L3 39.0586" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M45.4297 17.8516L87.8497 60.2816" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M77.25 28.4609L98.46 49.6709" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M56.0294 70.8809L13.6094 28.4609" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M77.2509 70.8816L24.2109 17.8516" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M45.4309 17.8516L24.2109 39.0616" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-            <path d="M56.0312 70.8819L77.2513 49.6719" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-          </svg>
+        <a aria-label="The Interfold home" className="h-7 w-8 text-[#3a5e3c]" href="/">
+          <InterfoldSymbol className="h-full w-full" />
         </a>
 
       </div>
@@ -125,11 +117,22 @@ export function SiteMobileHeader({
             <motion.a
               animate={{ opacity: 1, y: 0 }}
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="/participate"
+              href="/fold-auction"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: "-0.1em" }}
               transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Auction
+            </motion.a>
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              href="/participate"
+              initial={{ opacity: 0, y: 16 }}
+              onClick={() => setIsMenuOpen(false)}
+              style={{ wordSpacing: "-0.1em" }}
+              transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
             >
               Participate
             </motion.a>

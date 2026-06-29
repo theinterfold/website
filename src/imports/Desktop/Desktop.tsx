@@ -16,6 +16,8 @@ import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
 import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { ExternalArrowSlide, HoverArrowContent } from "../../app/components/HoverArrowLink";
+import { LineReveal } from "../../app/components/LineReveal";
+import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 import { useStartOnInView } from "../../app/components/useStartOnInView";
 
@@ -208,13 +210,13 @@ function Frame() {
 
 function Frame16() {
   return (
-    <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
+    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible.</p>
-      </ScrollFadeIn>
+      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+        <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." />
+      </p>
     </div>
   );
 }
@@ -350,13 +352,13 @@ function Frame19() {
 
 function Frame8() {
   return (
-    <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[539.639px] px-4 md:px-0">
+    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">Confidential coordination becomes real through both applications and operators:</p>
-      </ScrollFadeIn>
+      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
+        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through both applications and operators:" />
+      </p>
       <ScrollFadeIn className="w-full" delay={0.4}>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
       </ScrollFadeIn>
@@ -369,7 +371,7 @@ function Frame2() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -390,8 +392,8 @@ function Frame1() {
 
   return (
     <a
-      className="group bg-[#82f5ad] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
-      href="/participate"
+      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      href="/fold-auction"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -399,7 +401,7 @@ function Frame1() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Participate
+        Join the FOLD Auction
       </AnimatedButtonContent>
     </a>
   );
@@ -410,7 +412,7 @@ function FinalTelegramCta() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[51.944px] items-center justify-center pl-[69.259px] pr-[66.373px] py-[17.315px] relative shrink-0 w-full md:w-[265.491px] max-w-[265.491px] transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="https://t.me/enclave_e3"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -428,7 +430,7 @@ function FinalTelegramCta() {
 
 function Frame9() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[8.657px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
+    <div className="content-stretch flex flex-col md:flex-row gap-[9px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
       <ScrollFadeIn delay={0.3}>
         <Frame2 />
       </ScrollFadeIn>
@@ -461,13 +463,13 @@ function Frame11() {
 
 function Frame18() {
   return (
-    <div className="content-stretch flex flex-col gap-[11.543px] items-center not-italic relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
+    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now.</p>
-      </ScrollFadeIn>
+      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+        <LineRevealAuto delay={0.1} text="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." />
+      </p>
     </div>
   );
 }
@@ -669,16 +671,16 @@ function Frame20() {
 
 function Frame14() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597.355px] px-4 md:px-0">
+    <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full flex justify-center">
         <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
           <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
           <p className="leading-[1.075] whitespace-pre">execution Model</p>
         </div>
       </ScrollFadeIn>
-      <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">{`The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware. `}</p>
-      </ScrollFadeIn>
+      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
+        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." />
+      </p>
     </div>
   );
 }
@@ -1602,7 +1604,7 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[922.799px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(650px+min(44.444vw,640px))] w-full"
+      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[923px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(650px+min(44.444vw,640px))] w-full"
     >
       <Frame14 />
       <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
@@ -1662,14 +1664,11 @@ function Frame21() {
 function Frame12() {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0">
-      <ScrollFadeIn className="w-full">
-        <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
-          <p className="leading-[0.87] mb-0">Private Inputs.</p>
-          <p className="leading-[0.87]">Collective Outcomes.</p>
-        </div>
-      </ScrollFadeIn>
-      <ScrollFadeIn className="w-full flex justify-center" delay={0.1}>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[383.808px]">Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.</p>
+      <div className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
+        <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
+      </div>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1702,7 +1701,7 @@ function Frame7() {
   return (
     <a
       className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="/participate"
+      href="/fold-auction"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1710,7 +1709,7 @@ function Frame7() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Participate
+        Join the FOLD Auction
       </AnimatedButtonContent>
     </a>
   );
