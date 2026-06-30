@@ -630,7 +630,7 @@ function ExploreCard({
     >
       <div className="flex flex-col gap-[16px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-          <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+          <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
         <div className="flex flex-col gap-[8px]">

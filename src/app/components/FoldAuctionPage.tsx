@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { Header } from "./Header";
@@ -26,12 +26,15 @@ const AUCTION = {
   registrationUrl: TODO_LINK, // TODO: registration / KYC link
   participationGuideUrl: TODO_LINK, // TODO: "How to Participate" guide
   // Learn more
-  auctionFaqUrl: TODO_LINK, // TODO: Auction FAQ
-  tokenFaqUrl: TODO_LINK, // TODO: FOLD Token FAQ
-  tokenomicsUrl: TODO_LINK, // TODO: Tokenomics
+  auctionFaqUrl: "https://docs.theinterfold.com/faq/auction",
+  tokenFaqUrl: "https://docs.theinterfold.com/faq/fold-token",
+  tokenomicsUrl: "https://docs.theinterfold.com/tokenomics",
   auctionTermsUrl: TODO_LINK, // TODO: official Auction Terms
-  auditUrl: TODO_LINK, // TODO: smart-contract audit report
+  auditUrl: TODO_LINK, // TODO: smart-contract audit report — pending sign-off with Auryn
   understandingFoldUrl: "https://blog.theinterfold.com/fold-token-interfold-network/",
+  howItWorksUrl: "https://blog.theinterfold.com/how-interfold-works/",
+  launchPrimerUrl: "https://blog.theinterfold.com/fold-auction-uniswap/",
+  networkAlphaUrl: "https://blog.theinterfold.com/what-is-network-alpha/",
   docsUrl: "https://docs.theinterfold.com/",
   blogUrl: "https://blog.theinterfold.com/",
   // Social
@@ -42,9 +45,9 @@ const AUCTION = {
   officialDomain: "www.theinterfold.com",
   explorerBaseUrl: "https://etherscan.io/token/", // TODO: confirm explorer / network
   // Timeline / details
-  registrationDates: TODO_TEXT, // TODO: registration / KYC date range
-  auctionWindow: TODO_TEXT, // TODO: auction window date range
-  tgeDate: TODO_TEXT, // TODO: target TGE / transferability date
+  registrationDates: "July 6–7",
+  auctionWindow: "Opens July 8 for 48 hours",
+  tgeDate: "August 19",
   // ISO datetime the countdown ticks toward (e.g. "2026-07-15T15:00:00Z").
   // Leave empty to hide the countdown.
   countdownTarget: "", // TODO: set countdown target (ISO 8601)
@@ -100,8 +103,7 @@ const phaseContent: Record<
 
 const phase = phaseContent[PHASE];
 
-const statusStripItems = [
-  phase.statusLead,
+const statusStripDetails = [
   "Registration required",
   "40-day transfer restriction",
   "Use official links only",
@@ -277,6 +279,7 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
 
   return (
     <button
+      aria-label={copied ? "Copied to clipboard" : `Copy ${value}`}
       className="group inline-flex max-w-full items-center gap-2 text-left transition-colors"
       onClick={handleCopy}
       type="button"
@@ -284,15 +287,24 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
       <span className={`break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] transition-colors ${valueColor}`}>
         {value}
       </span>
-      <span className="shrink-0 font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-[#82f5ad]">
-        {copied ? "Copied" : "Copy"}
+      <span aria-hidden="true" className="shrink-0 text-[#82f5ad] transition-colors group-hover:text-[#d9fce8]">
+        {copied ? (
+          <svg className="size-[14px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" viewBox="0 0 24 24">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        ) : (
+          <svg className="size-[14px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+            <rect height="11" rx="2" width="11" x="9" y="9" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        )}
       </span>
     </button>
   );
 }
 
 const detailRows: Array<{ term: string; value: string; href?: string }> = [
-  { term: "Auction format", value: "Uniswap Continuous Clearing Auction" },
+  { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
   { term: "Registration / KYC", value: AUCTION.registrationDates },
   { term: "Auction window", value: AUCTION.auctionWindow },
   { term: "Transfer restriction", value: "40-day cooldown after the auction" },
@@ -301,34 +313,47 @@ const detailRows: Array<{ term: string; value: string; href?: string }> = [
 ];
 
 const checklistItems: string[] = [
-  "A compatible wallet, ready and funded",
-  "Completed registration and KYC / onboarding",
-  "Connection to the correct network",
-  "Only the official links from this page",
+  "Start from the official auction page",
+  "Complete the required registration and KYC flow",
+  "Review the auction mechanics",
+  "Decide your maximum budget before placing a bid",
+  "Use only official links published through verified Interfold channels",
 ];
 
-const timelineItems: Array<{ title: string; body: string; action?: { label: string; href: string } }> = [
+const timelineItems: Array<{
+  title: string;
+  body: string;
+  when?: string;
+  actions?: Array<{ label: string; href: string }>;
+}> = [
   {
     title: "Registration",
+    when: AUCTION.registrationDates,
     body: "Eligible participants complete registration and required onboarding.",
-    action: { label: "Start Registration", href: AUCTION.registrationUrl },
+    actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
     title: "FOLD Auction",
-    body: "The FOLD auction takes place through the Uniswap Continuous Clearing Auction interface.",
-    action: { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
+    when: AUCTION.auctionWindow,
+    body: "The FOLD auction opens through the Uniswap Continuous Clearing Auction interface and runs for 48 hours.",
+    actions: [
+      { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
+      { label: "Read the Launch Primer", href: AUCTION.launchPrimerUrl },
+    ],
   },
   {
-    title: "Cooldown Period",
-    body: "After the auction, FOLD remains subject to a 40-day transfer restriction period.",
+    title: "After Auction",
+    body: "FOLD purchased through the CCA is subject to a 40-day transfer restriction period, except for ciphernode bonding.",
   },
   {
     title: "TGE and Token Transferability",
-    body: "TGE and token transferability are part of the same launch sequence. Following the cooldown period, transferability is expected to activate at the contract level according to the defined token mechanics.",
+    when: AUCTION.tgeDate,
+    body: "Following the cooldown period, token transferability is expected to activate at the contract level. August 19 is the date for transferability and current target for TGE, subject to official terms and final launch conditions.",
   },
   {
     title: "Network Alpha",
-    body: "The Interfold Network Alpha will roll out as the first controlled phase of the network, with selected ciphernodes and early integrations.",
+    body: "Network Alpha is the first coordinated phase of the Interfold network, with selected ciphernodes and early integrations.",
+    actions: [{ label: "Read the Network Alpha primer", href: AUCTION.networkAlphaUrl }],
   },
 ];
 
@@ -336,22 +361,22 @@ const foldRoles: Array<{ number: string; title: string; body: string }> = [
   {
     number: "01",
     title: "Operator Bonding",
-    body: "Ciphernodes bond FOLD to participate in the network and become economically accountable for correct behavior.",
+    body: "Ciphernodes bond FOLD to participate in the network and become economically accountable.",
   },
   {
     number: "02",
-    title: "E3 Request Fees",
-    body: "Applications use FOLD to request encrypted computations through The Interfold.",
+    title: "E3 Request Economics",
+    body: "Applications use FOLD to request ciphernode participation for confidential computations.",
   },
   {
     number: "03",
     title: "Operator Rewards",
-    body: "Ciphernodes earn rewards for participating in E3 setup, execution coordination, and threshold decryption.",
+    body: "Ciphernodes earn rewards for distributed key generation, execution coordination, and threshold decryption.",
   },
   {
     number: "04",
     title: "Governance",
-    body: "FOLD holders participate in governance over network parameters and protocol development.",
+    body: "FOLD holders participate in governance over network parameters and protocol decisions.",
   },
 ];
 
@@ -371,22 +396,22 @@ const faqItems: Array<{ question: string; answer: string }> = [
   {
     question: "How does the clearing price work?",
     answer:
-      "FOLD is distributed through a Continuous Clearing Auction on Uniswap. Participants submit orders during the auction window, and all successful participants receive FOLD at the same final clearing price.",
+      "FOLD is distributed through a Continuous Clearing Auction on Uniswap. Participants submit orders during the auction window, and successful bids clear through the CCA's uniform clearing-price mechanics as demand develops over the auction period.",
   },
   {
     question: "When can I transfer FOLD?",
     answer:
-      "FOLD is subject to a 40-day transfer restriction after the auction. Transferability is expected to activate at the contract level following the cooldown, as part of the TGE.",
+      "FOLD purchased through the CCA is subject to a 40-day transfer restriction after the auction, except for ciphernode bonding. August 19 is the date for transferability and current target for TGE, subject to official terms and final launch conditions.",
   },
   {
     question: "Where do I actually take part?",
     answer:
-      "Only through the official Uniswap CCA interface, reached via the official links on this page. Always verify the contract address before interacting.",
+      "Start from this official auction page. From here, eligible participants can access the official registration flow and Uniswap CCA interface when available. Do not use links from DMs, unofficial Telegram accounts, impersonator X accounts, or copied contract addresses.",
   },
   {
     question: "How do I avoid scams?",
     answer:
-      "Use only the links on this page. Verify the official domain and the contract address against the explorer. The team will never DM you first, and will never ask for your seed phrase or private keys.",
+      "Use only the links on this page and verify contract addresses through official Interfold channels. The team will never DM you first, ask for your seed phrase, or ask for private keys.",
   },
 ];
 
@@ -405,10 +430,7 @@ const linkGroups: Array<{ heading: string; rows: Array<{ label: string; href: st
       { label: "Auction FAQ", href: AUCTION.auctionFaqUrl },
       { label: "Token FAQ", href: AUCTION.tokenFaqUrl },
       { label: "Tokenomics", href: AUCTION.tokenomicsUrl },
-      { label: "Auction Terms", href: AUCTION.auctionTermsUrl },
       { label: "Understanding the FOLD Token", href: AUCTION.understandingFoldUrl },
-      { label: "Docs", href: AUCTION.docsUrl },
-      { label: "Blog", href: AUCTION.blogUrl },
     ],
   },
 ];
@@ -421,7 +443,7 @@ const contractRows: Array<{ label: string; value: string; explorer?: boolean }> 
 
 const credibilityRows: Array<{ label: string; value: string; href?: string }> = [
   { label: "Auction Terms", value: "Read the official terms", href: AUCTION.auctionTermsUrl },
-  { label: "Audit", value: "Smart-contract audit report", href: AUCTION.auditUrl },
+  { label: "Audit & Terms", value: "Token and auction contract audit report", href: AUCTION.auditUrl },
   { label: "Issuer", value: "Interfold Ltd." },
   { label: "Built by", value: "Gnosis Guild" },
 ];
@@ -429,59 +451,145 @@ const credibilityRows: Array<{ label: string; value: string; href?: string }> = 
 // Dark "coin" card: contract info on the front, credibility on the back,
 // flipped in 3D by the button.
 function ContractsCard() {
-  const [flipped, setFlipped] = useState(false);
+  const [rotation, setRotation] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const flipped = rotation % 360 !== 0;
 
-  const flip = (next: boolean) => {
+  // Always advance the rotation clockwise (to the right) by half a turn, so
+  // repeated flips keep spinning the same direction instead of rocking back.
+  const flip = () => {
     if (!shouldReduceMotion) {
       setSpinning(true);
     }
-    setFlipped(next);
+    setRotation((current) => current + 180);
   };
 
+  // Pinned to the bottom-right corner with an equal right/bottom inset, identical on
+  // both faces, so the flip button stays under the cursor across repeated flips.
   const flipButtonClass =
-    "mt-auto inline-flex items-center gap-2 rounded-full border border-[#82f5ad]/40 px-5 py-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] transition-colors hover:bg-[#82f5ad] hover:text-[#121718]";
+    "absolute bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-[#82f5ad]/40 px-5 py-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] transition-colors hover:bg-[#82f5ad] hover:text-[#121718] md:bottom-10 md:right-10";
+  // The shine/glare and the relief light direction both track the cursor via CSS
+  // custom properties updated on pointer move (no React re-render).
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const pointerDefaults = {
+    "--mx": "50%",
+    "--my": "0%",
+    "--emb-hl-x": "0px",
+    "--emb-hl-y": "-0.6px",
+    "--emb-sh-x": "0px",
+    "--emb-sh-y": "0.6px",
+  } as CSSProperties;
+
+  const handlePointer = (event: ReactMouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const mx = (event.clientX - rect.left) / rect.width;
+    const my = (event.clientY - rect.top) / rect.height;
+    const lx = mx - 0.5;
+    const ly = my - 0.5;
+    const k = 1.6;
+    const base = 0.6; // keeps a default top-light bias so the relief never goes flat
+    el.style.setProperty("--mx", `${mx * 100}%`);
+    el.style.setProperty("--my", `${my * 100}%`);
+    el.style.setProperty("--emb-hl-x", `${lx * k}px`);
+    el.style.setProperty("--emb-hl-y", `${ly * k - base}px`);
+    el.style.setProperty("--emb-sh-x", `${-lx * k}px`);
+    el.style.setProperty("--emb-sh-y", `${-ly * k + base}px`);
+  };
+
+  const resetPointer = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    for (const [key, value] of Object.entries(pointerDefaults)) {
+      el.style.setProperty(key, String(value));
+    }
+  };
+
+  // Embossed (raised) symbol on the front; debossed (pressed-in) on the back — so
+  // flipping the card reveals "the other side" of the same relief. The highlight/shadow
+  // offsets come from the cursor-tracked CSS vars, so the relief lighting follows the mouse.
+  const embossRaised = {
+    filter:
+      "drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 0 rgba(255,255,255,0.12)) drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 1px rgba(0,0,0,0.5))",
+  } as const;
+  // Inked (light) raised lettering: the white highlight is invisible on light text, so
+  // the lift comes from a crisp dark edge plus a soft cast shadow, both opposite the light.
+  const embossInkRaised = {
+    filter:
+      "drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(0,0,0,0.55)) drop-shadow(calc(var(--emb-sh-x) * 2) calc(var(--emb-sh-y) * 2) 4px rgba(0,0,0,0.4))",
+  } as const;
+  const embossDeboss = {
+    filter:
+      "drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(255,255,255,0.11)) drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 1px rgba(0,0,0,0.5))",
+  } as const;
+
+  // Lit surface (radial gradient, brighter at top) + beveled edge (top highlight,
+  // hairline inner border, bottom inner shadow) to give the card real material depth.
   const shellClass =
-    "relative h-full overflow-hidden rounded-[28px] bg-[#121718] px-6 py-12 text-[#d9fce8] md:px-12 md:py-14";
+    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] px-6 py-12 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:px-12 md:py-14";
 
   return (
-    <div className="[perspective:1600px]">
+    <div
+      ref={cardRef}
+      className={`w-full [perspective:1600px] ${spinning ? "interfold-card-spinning" : ""}`}
+      onAnimationEnd={(event) => {
+        if (event.animationName === "interfold-card-spin-blur") {
+          setSpinning(false);
+        }
+      }}
+      onMouseMove={handlePointer}
+      onMouseLeave={resetPointer}
+      style={pointerDefaults}
+    >
       <div
-        className={`relative grid transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] motion-reduce:transition-none ${spinning ? "interfold-card-spinning" : ""} ${flipped ? "[transform:rotateY(180deg)]" : ""}`}
-        onAnimationEnd={(event) => {
-          if (event.animationName === "interfold-card-spin-blur") {
-            setSpinning(false);
-          }
-        }}
+        className="relative grid transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] motion-reduce:transition-none"
+        style={{ transform: `rotateY(${rotation}deg)` }}
       >
         {/* Front — contracts */}
         <div aria-hidden={flipped} className={`[grid-area:1/1] [backface-visibility:hidden] ${flipped ? "pointer-events-none" : ""}`}>
           <div className={shellClass}>
-            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-6 h-56 w-56 -translate-x-1/2 rounded-full bg-[#82f5ad]/25 blur-[90px]" />
-            <div className="relative mx-auto flex h-full max-w-[620px] flex-col items-center">
-              <div className="relative mb-8 grid place-items-center">
-                <div aria-hidden="true" className="absolute h-24 w-24 animate-pulse rounded-full bg-[#82f5ad]/30 blur-2xl motion-reduce:animate-none" />
-                <InterfoldSymbol className="relative h-14 w-auto text-[#82f5ad] drop-shadow-[0_0_14px_rgba(130,245,173,0.55)]" />
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 h-40 w-72 -translate-x-1/2 rounded-full bg-[#82f5ad]/12 blur-[100px]" />
+            <div className="relative flex h-full flex-col pb-16">
+              <header className="flex items-center justify-between gap-5">
+                <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#d9fce8] md:text-[64px]" style={embossInkRaised}>
+                  FOLD Token
+                </h3>
+                <div aria-hidden="true" className="shrink-0" style={embossRaised}>
+                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
+                </div>
+              </header>
+              <div className="mt-10 flex items-center gap-3 self-start">
+                <span aria-hidden="true" className="h-px w-7 bg-[#82f5ad]/50" />
+                <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[2px] text-[#d9fce8]/55">
+                  Contracts
+                </span>
               </div>
-              <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
-                Contracts
-              </p>
-              <dl className="mt-6 w-full border-t border-[#d9fce8]/10">
+              <dl className="mt-4 w-full border-t border-[#d9fce8]/10">
                 {contractRows.map((row) => {
                   const isAddress = row.explorer && row.value !== TODO_TEXT;
 
                   return (
-                    <div className="border-b border-[#d9fce8]/10 py-4" key={row.label}>
-                      <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
-                        {row.label}
-                      </dt>
-                      <dd className="mt-2">
-                        <CopyableValue tone="dark" value={row.value} />
-                      </dd>
+                    <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-center" key={row.label}>
+                      <div>
+                        <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
+                          {row.label}
+                        </dt>
+                        <dd className="mt-2">
+                          {row.explorer ? (
+                            <CopyableValue tone="dark" value={row.value} />
+                          ) : (
+                            <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
+                              {row.value}
+                            </span>
+                          )}
+                        </dd>
+                      </div>
                       {isAddress && (
                         <a
-                          className="mt-2 inline-block font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[3px] transition-colors hover:text-[#d9fce8]"
+                          className="justify-self-start font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[3px] transition-colors hover:text-[#d9fce8] md:justify-self-end"
                           href={`${AUCTION.explorerBaseUrl}${row.value}`}
                           rel="noreferrer"
                           target="_blank"
@@ -493,53 +601,71 @@ function ContractsCard() {
                   );
                 })}
               </dl>
-              <button className={flipButtonClass} onClick={() => flip(true)} type="button">
-                View credibility
-                <span aria-hidden="true">↻</span>
-              </button>
             </div>
+            <button className={flipButtonClass} onClick={flip} type="button">
+              View Audit &amp; Terms
+              <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <path d="M21 4v5h-5" />
+              </svg>
+            </button>
           </div>
         </div>
 
         {/* Back — credibility */}
         <div aria-hidden={!flipped} className={`[grid-area:1/1] [transform:rotateY(180deg)] [backface-visibility:hidden] ${flipped ? "" : "pointer-events-none"}`}>
           <div className={shellClass}>
-            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-6 h-56 w-56 -translate-x-1/2 rounded-full bg-[#82f5ad]/20 blur-[90px]" />
-            <div className="relative mx-auto flex h-full max-w-[620px] flex-col items-center">
-              <div className="relative mb-8 grid place-items-center">
-                <InterfoldSymbol className="relative h-10 w-auto text-[#82f5ad]/70" />
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 h-40 w-72 -translate-x-1/2 rounded-full bg-[#82f5ad]/10 blur-[100px]" />
+            <div className="relative flex h-full flex-col pb-16">
+              <header className="flex items-center justify-between gap-5">
+                <div aria-hidden="true" className="shrink-0 -scale-x-100" style={embossDeboss}>
+                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
+                </div>
+                <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#191f20] md:text-[64px] -scale-x-100" style={embossDeboss}>
+                  FOLD Token
+                </h3>
+              </header>
+              <div className="mt-10 flex items-center gap-3 self-start">
+                <span aria-hidden="true" className="h-px w-7 bg-[#82f5ad]/50" />
+                <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[2px] text-[#d9fce8]/55">
+                  Audit &amp; Terms
+                </span>
               </div>
-              <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
-                Credibility
-              </p>
-              <dl className="mt-6 grid w-full gap-x-8 gap-y-5 border-t border-[#d9fce8]/10 pt-5 sm:grid-cols-2">
+              <dl className="mt-4 w-full border-t border-[#d9fce8]/10">
                 {credibilityRows.map((row) => (
-                  <div className="flex flex-col gap-1" key={row.label}>
-                    <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
-                      {row.label}
-                    </dt>
-                    <dd className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.1] text-[#d9fce8]">
-                      {row.href ? (
-                        <a
-                          className="underline decoration-[1px] underline-offset-[4px] transition-colors hover:text-[#82f5ad]"
-                          href={row.href}
-                          rel={row.href.startsWith("http") ? "noreferrer" : undefined}
-                          target={row.href.startsWith("http") ? "_blank" : undefined}
-                        >
-                          {row.value}
-                        </a>
-                      ) : (
-                        row.value
-                      )}
-                    </dd>
+                  <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-center" key={row.label}>
+                    <div>
+                      <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
+                        {row.label}
+                      </dt>
+                      <dd className="mt-2">
+                        {row.href ? (
+                          <a
+                            className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80 underline decoration-[1px] underline-offset-[3px] transition-colors hover:text-[#82f5ad]"
+                            href={row.href}
+                            rel={row.href.startsWith("http") ? "noreferrer" : undefined}
+                            target={row.href.startsWith("http") ? "_blank" : undefined}
+                          >
+                            {row.value}
+                          </a>
+                        ) : (
+                          <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
+                            {row.value}
+                          </span>
+                        )}
+                      </dd>
+                    </div>
                   </div>
                 ))}
               </dl>
-              <button className={flipButtonClass} onClick={() => flip(false)} type="button">
-                View contracts
-                <span aria-hidden="true">↻</span>
-              </button>
             </div>
+            <button className={flipButtonClass} onClick={flip} type="button">
+              View contracts
+              <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <path d="M21 4v5h-5" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -569,14 +695,6 @@ function LinkGroup({ group }: { group: (typeof linkGroups)[number] }) {
         ))}
       </ul>
     </>
-  );
-}
-
-function EligibilityNote({ className = "" }: { className?: string }) {
-  return (
-    <p className={`font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.2px] text-[#687d71] ${className}`}>
-      Not available to persons in the UK or US, or U.S. Persons. Subject to eligibility and jurisdictional restrictions.
-    </p>
   );
 }
 
@@ -628,30 +746,44 @@ export function FoldAuctionPage() {
         </div>
 
         {/* Status strip */}
-        <div className="bg-[#121718] px-4 py-3 text-[#82f5ad]">
-          <div className="mx-auto flex max-w-[1052px] flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
+        <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
+          <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
             <span aria-hidden="true" className="size-[7px] shrink-0 animate-pulse rounded-full bg-[#82f5ad] motion-reduce:animate-none" />
-            {statusStripItems.map((item, index) => (
-              <span className="flex items-center gap-x-3" key={item}>
-                <span>{item}</span>
-                {index < statusStripItems.length - 1 && (
-                  <span aria-hidden="true" className="text-[#687d71]">·</span>
-                )}
+            <span>{phase.statusLead}</span>
+            <span className="group relative inline-flex">
+              <button
+                aria-label={`More details: ${statusStripDetails.join(", ")}`}
+                className="flex size-[16px] items-center justify-center rounded-full border border-[#82f5ad]/50 text-[#82f5ad] transition-colors hover:border-[#82f5ad] hover:bg-[#82f5ad] hover:text-[#121718] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#82f5ad] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121718]"
+                type="button"
+              >
+                <svg aria-hidden="true" className="size-[9px]" viewBox="0 0 8 8" fill="currentColor">
+                  <circle cx="4" cy="1" r="1" />
+                  <rect x="3.25" y="3" width="1.5" height="4" rx="0.5" />
+                </svg>
+              </button>
+              <span
+                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[8px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                role="tooltip"
+              >
+                <span aria-hidden="true" className="absolute -top-[5px] left-1/2 size-[10px] -translate-x-1/2 rotate-45 border-l border-t border-[#82f5ad]/15 bg-[#121718]" />
+                {statusStripDetails.map((detail) => (
+                  <span key={detail}>{detail}</span>
+                ))}
               </span>
-            ))}
+            </span>
           </div>
         </div>
 
         {/* Hero copy */}
-        <section className="bg-[#d9fce8] px-4 py-[64px] text-center md:py-[112px]">
+        <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]">
             <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.9] tracking-[-1.92px] md:text-[64px]">
               <LineRevealAuto text={phase.heroTitle} />
             </h1>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p className="max-w-[520px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
-                FOLD supports The Interfold network: a distributed network for confidential coordination,
-                enabling independent parties to compute together without exposing private inputs.
+                FOLD supports The Interfold network, where independent parties can compute together
+                without exposing private inputs.
               </p>
             </ScrollFadeIn>
             <ScrollFadeIn className="w-full" delay={0.12}>
@@ -661,9 +793,6 @@ export function FoldAuctionPage() {
               <CtaButton href={phase.primaryCta.href}>{phase.primaryCta.label}</CtaButton>
               <CtaButton href={AUCTION.participationGuideUrl} variant="secondary">How to Participate</CtaButton>
             </ScrollFadeIn>
-            <ScrollFadeIn className="w-full" delay={0.17}>
-              <EligibilityNote className="mx-auto max-w-[420px]" />
-            </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-2" delay={0.2}>
               <TextLink href={AUCTION.auctionFaqUrl}>Read the Auction FAQ</TextLink>
             </ScrollFadeIn>
@@ -671,17 +800,17 @@ export function FoldAuctionPage() {
         </section>
 
         {/* Auction details */}
-        <section className="bg-white px-4 py-[64px] md:py-[112px]">
+        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[760px]">
             <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel>Auction Details</SectionLabel>
               </ScrollFadeIn>
               <p className="mx-auto mt-[11.543px] max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="FOLD is being distributed through a Continuous Clearing Auction on Uniswap." />
+                <LineRevealAuto delay={0.08} text="FOLD is being distributed through a Uniswap Continuous Clearing Auction." />
               </p>
               <p className="mx-auto mt-6 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="The auction is designed for price discovery. Participants submit orders during the auction window, and all successful participants receive FOLD at the same final clearing price." />
+                <LineRevealAuto delay={0.2} text="Participants submit orders during the auction window. Successful bids clear through the CCA's uniform clearing-price mechanics, with price discovery unfolding over the auction period." />
               </p>
             </div>
 
@@ -689,7 +818,7 @@ export function FoldAuctionPage() {
               <dl className="border-t border-[#3a5e3c]/30">
                 {detailRows.map((row, index) => (
                   <ScrollFadeIn delay={index * 0.06} key={row.term}>
-                  <div className="grid gap-1 border-b border-[#3a5e3c]/30 py-4 md:grid-cols-[1fr_1.4fr] md:items-baseline">
+                  <div className="grid gap-1 border-b border-[#3a5e3c]/30 py-4 md:grid-cols-2 md:items-baseline">
                     <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
                       {row.term}
                     </dt>
@@ -721,21 +850,24 @@ export function FoldAuctionPage() {
         </section>
 
         {/* How to participate */}
-        <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
+        <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[760px]">
             <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel>How to Participate</SectionLabel>
               </ScrollFadeIn>
               <p className="mx-auto mt-[11.543px] max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="To participate in the FOLD auction, eligible participants must complete the required registration and onboarding process, then submit an order through the official Uniswap CCA interface during the auction window." />
+                <LineRevealAuto delay={0.08} text="Register first. Bid through the official CCA interface." />
+              </p>
+              <p className="mx-auto mt-6 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
+                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. Once the auction opens, participants can submit an order through the official Uniswap CCA interface during the auction window." />
               </p>
             </div>
 
             <div className="mx-auto mt-10 max-w-[520px]">
               <ScrollFadeIn>
                 <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
-                  Before you start
+                  Before Participating
                 </p>
               </ScrollFadeIn>
               <ul className="mt-5 space-y-3">
@@ -760,8 +892,8 @@ export function FoldAuctionPage() {
         </section>
 
         {/* Launch timeline */}
-        <section className="bg-[#687d71] px-4 py-[64px] text-[#d9fce8] md:py-[112px]">
-          <div className="mx-auto max-w-[860px]">
+        <section className="bg-[#687d71] px-4 md:px-8 py-[64px] text-[#d9fce8] md:py-[112px]">
+          <div className="mx-auto max-w-[760px]">
             <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]">Launch Timeline</SectionLabel>
@@ -775,21 +907,31 @@ export function FoldAuctionPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
-                      <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1] tracking-[-0.72px] text-[#d9fce8] md:text-[28px]">
-                        {item.title}
-                      </h3>
+                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                        <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1] tracking-[-0.72px] text-[#d9fce8] md:text-[28px]">
+                          {item.title}
+                        </h3>
+                        {item.when && item.when !== TODO_TEXT && (
+                          <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
+                            {item.when}
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
                         {item.body}
                       </p>
-                      {item.action && (
-                        <div className="mt-4">
-                          <HoverArrowLink
-                            className="inline-flex"
-                            href={item.action.href}
-                            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#d9fce8]"
-                          >
-                            {item.action.label}
-                          </HoverArrowLink>
+                      {item.actions && item.actions.length > 0 && (
+                        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+                          {item.actions.map((action) => (
+                            <HoverArrowLink
+                              className="inline-flex"
+                              href={action.href}
+                              key={action.label}
+                              textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#d9fce8]"
+                            >
+                              {action.label}
+                            </HoverArrowLink>
+                          ))}
                         </div>
                       )}
                     </div>
@@ -810,17 +952,17 @@ export function FoldAuctionPage() {
         </section>
 
         {/* The role of FOLD */}
-        <section className="bg-[#121718] px-4 py-[64px] text-[#d9fce8] md:py-[112px]">
+        <section className="bg-[#121718] px-4 md:px-8 py-[64px] text-[#d9fce8] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <div className="mx-auto max-w-[760px] text-center">
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">The Role of FOLD</SectionLabel>
               </ScrollFadeIn>
               <p className="mx-auto mt-[11.543px] max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="FOLD supports the economic layer of The Interfold network." />
+                <LineRevealAuto delay={0.08} text="FOLD supports participation in The Interfold network." />
               </p>
               <p className="mx-auto mt-6 max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="The Interfold coordinates encrypted computations through E3s: ephemeral Encrypted Execution Environments where private inputs are processed into shared, verifiable outcomes. Ciphernodes participate in the network processes that support E3 setup, execution coordination, and threshold decryption." />
+                <LineRevealAuto delay={0.2} text="Each request forms a ciphernode committee to coordinate key generation, support execution, and perform threshold decryption. FOLD is used to request, reward, bond, and govern this network participation." />
               </p>
             </div>
 
@@ -862,17 +1004,17 @@ export function FoldAuctionPage() {
         </section>
 
         {/* What FOLD supports */}
-        <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
-          <div className="mx-auto max-w-[860px]">
+        <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] md:py-[112px]">
+          <div className="mx-auto max-w-[760px]">
             <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel>What FOLD Supports</SectionLabel>
               </ScrollFadeIn>
               <p className="mx-auto mt-[11.543px] max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="The Interfold enables confidential coordination: systems where multiple parties need one shared result from private inputs." />
+                <LineRevealAuto delay={0.08} text="The Interfold supports systems where multiple parties need one verifiable result without exposing the inputs behind it." />
               </p>
               <p className="mx-auto mt-6 max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="The Interfold makes these systems possible through encrypted execution, verifiable outcomes, and distributed threshold authority." />
+                <LineRevealAuto delay={0.2} text="Private inputs. Shared outcomes." />
               </p>
             </div>
 
@@ -894,7 +1036,7 @@ export function FoldAuctionPage() {
                 This is multiplayer privacy: privacy for systems where many parties need one verifiable result.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-                <TextLink href={AUCTION.docsUrl}>Learn how The Interfold works</TextLink>
+                <TextLink href={AUCTION.howItWorksUrl}>Learn how The Interfold works</TextLink>
                 <TextLink href={AUCTION.docsUrl}>Explore E3 Documentation</TextLink>
               </div>
             </ScrollFadeIn>
@@ -902,7 +1044,7 @@ export function FoldAuctionPage() {
         </section>
 
         {/* FAQ */}
-        <section className="bg-white px-4 py-[64px] md:py-[112px]">
+        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[760px]">
             <div className="text-center">
               <ScrollFadeIn>
@@ -925,7 +1067,7 @@ export function FoldAuctionPage() {
         </section>
 
         {/* Official links & contracts */}
-        <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
+        <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <div className="text-center">
               <ScrollFadeIn>
@@ -949,20 +1091,14 @@ export function FoldAuctionPage() {
               <ContractsCard />
               <p className="mx-auto mt-6 max-w-[620px] text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
                 Always verify links and contract addresses through The Interfold&rsquo;s official channels.
-                The team will never DM you first and will never ask for your seed phrase.
+                The team will never DM you first and will never ask for your seed phrase or private keys.
               </p>
-            </ScrollFadeIn>
-
-            <ScrollFadeIn className="mx-auto mt-12 grid w-full max-w-[760px] grid-cols-1 gap-3 sm:grid-cols-3" delay={0.15}>
-              <CtaButton href={AUCTION.telegramUrl} variant="secondary">Join Telegram</CtaButton>
-              <CtaButton href={AUCTION.discordUrl} variant="secondary">Join Discord</CtaButton>
-              <CtaButton href={AUCTION.xUrl} variant="secondary">Follow on X</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
 
         {/* Important information */}
-        <section className="bg-white px-4 py-[64px] md:py-[96px]">
+        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[96px]">
           <div className="mx-auto max-w-[760px]">
             <ScrollFadeIn>
               <SectionLabel>Important Information</SectionLabel>

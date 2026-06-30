@@ -505,7 +505,7 @@ function Frame26() {
           </svg>
         </div>
       </div>
-      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
         <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="docs" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
@@ -567,7 +567,7 @@ function Frame28() {
           </svg>
         </div>
       </div>
-      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
         <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="essays" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
@@ -619,7 +619,7 @@ function Frame29() {
           </svg>
         </div>
       </div>
-      <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+      <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
         <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind="blog" />
       </div>
       <div className="content-stretch flex min-h-[104px] flex-col gap-[8px] items-start relative shrink-0 w-full">
