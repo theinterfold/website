@@ -63,6 +63,120 @@ html.interfold-theme-participate #root {
   transform-origin: center top;
 }
 
+.actor-glyph__request-code,
+.actor-glyph__provider-source,
+.actor-glyph__provider-core,
+.actor-glyph__committee-ring,
+.actor-glyph__committee-core,
+.actor-glyph__pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes interfold-actor-request-code {
+  0%,
+  12%,
+  42%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  22% {
+    opacity: 0.35;
+    transform: translateX(-1.5px);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateX(1px);
+  }
+}
+
+@keyframes interfold-actor-provider-source {
+  0%,
+  12%,
+  38%,
+  100% {
+    fill: #3a5e3c;
+  }
+
+  23% {
+    fill: rgba(130, 245, 173, 0.24);
+  }
+}
+
+@keyframes interfold-actor-core {
+  0%,
+  38%,
+  62%,
+  100% {
+    transform: scale(1);
+  }
+
+  48% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes interfold-actor-pulse {
+  0%,
+  9%,
+  26%,
+  100% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.42);
+  }
+}
+
+.actor-glyph__request-code {
+  animation: interfold-actor-request-code 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__provider-source {
+  animation: interfold-actor-provider-source 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__provider-source--b {
+  animation-delay: 0.16s;
+}
+
+.actor-glyph__provider-source--c {
+  animation-delay: 0.32s;
+}
+
+.actor-glyph__provider-core,
+.actor-glyph__committee-core {
+  animation: interfold-actor-core 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__pulse {
+  animation: interfold-actor-pulse 4.8s ease-in-out infinite;
+}
+
+.actor-glyph__pulse--b {
+  animation-delay: 0.16s;
+}
+
+.actor-glyph__pulse--c {
+  animation-delay: 0.32s;
+}
+
+.actor-glyph__pulse--d {
+  animation-delay: 0.48s;
+}
+
+.actor-glyph__pulse--e {
+  animation-delay: 0.64s;
+}
+
+.actor-glyph__pulse--f {
+  animation-delay: 0.8s;
+}
+
 .interfold-mobile-menu-trigger .hamburger-react {
   left: 50%;
   position: absolute !important;
@@ -105,6 +219,15 @@ html.interfold-theme-participate #root {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .actor-glyph__request-code,
+  .actor-glyph__provider-source,
+  .actor-glyph__provider-core,
+  .actor-glyph__committee-ring,
+  .actor-glyph__committee-core,
+  .actor-glyph__pulse {
+    animation: none;
+  }
+
   .interfold-card-spinning {
     animation: none;
   }

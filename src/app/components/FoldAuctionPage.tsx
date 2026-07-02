@@ -2,8 +2,8 @@ import { useEffect, useRef, useState, type CSSProperties, type MouseEvent as Rea
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { Header } from "./Header";
-import { HeroImage, homeHeroSources } from "./HeroImage";
-import { HoverArrowLink } from "./HoverArrowLink";
+import { HeroImage, auctionHeroSources } from "./HeroImage";
+import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
 import { ScrollFadeIn } from "./ScrollFadeIn";
@@ -64,6 +64,7 @@ const phaseContent: Record<
   Phase,
   {
     heroTitle: string;
+    heroTitleLines?: string[];
     statusLead: string;
     countdownLabel: string;
     primaryCta: { label: string; href: string };
@@ -82,7 +83,8 @@ const phaseContent: Record<
     primaryCta: { label: "Start Registration", href: AUCTION.registrationUrl },
   },
   live: {
-    heroTitle: "The FOLD Auction Is Live",
+    heroTitle: "The FOLD Auction is Live",
+    heroTitleLines: ["The FOLD", "Auction is Live"],
     statusLead: "FOLD Auction live now",
     countdownLabel: "Auction closes in",
     primaryCta: { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
@@ -104,8 +106,8 @@ const phaseContent: Record<
 const phase = phaseContent[PHASE];
 
 const statusStripDetails = [
-  "Registration required",
-  "40-day transfer restriction",
+  "Verification required",
+  "40-day cooldown period",
   "Use official links only",
 ];
 
@@ -143,13 +145,14 @@ function CtaButton({
 
 function TextLink({ href, children }: { href: string; children: string }) {
   return (
-    <HoverArrowLink
-      className="inline-flex"
+    <UnderlinedArrowLink
+      className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
       href={href}
-      textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#82f5ad]"
+      textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
+      underlineClassName="border-b border-current pb-[4px]"
     >
       {children}
-    </HoverArrowLink>
+    </UnderlinedArrowLink>
   );
 }
 
@@ -305,7 +308,7 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
 
 const detailRows: Array<{ term: string; value: string; href?: string }> = [
   { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
-  { term: "Registration / KYC", value: AUCTION.registrationDates },
+  { term: "Registration / Verification", value: AUCTION.registrationDates },
   { term: "Auction window", value: AUCTION.auctionWindow },
   { term: "Transfer restriction", value: "40-day cooldown after the auction" },
   { term: "Target TGE / transferability", value: AUCTION.tgeDate },
@@ -313,11 +316,10 @@ const detailRows: Array<{ term: string; value: string; href?: string }> = [
 ];
 
 const checklistItems: string[] = [
-  "Start from the official auction page",
-  "Complete the required registration and KYC flow",
+  "Complete the required registration and verification flow",
   "Review the auction mechanics",
   "Decide your maximum budget before placing a bid",
-  "Use only official links published through verified Interfold channels",
+  "Use only the official links on this page",
 ];
 
 const timelineItems: Array<{
@@ -327,9 +329,9 @@ const timelineItems: Array<{
   actions?: Array<{ label: string; href: string }>;
 }> = [
   {
-    title: "Registration",
+    title: "Registration and Verification",
     when: AUCTION.registrationDates,
-    body: "Eligible participants complete registration and required onboarding.",
+    body: "Eligible participants complete registration and required verification before bidding opens.",
     actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
@@ -343,12 +345,12 @@ const timelineItems: Array<{
   },
   {
     title: "After Auction",
-    body: "FOLD purchased through the CCA is subject to a 40-day transfer restriction period, except for ciphernode bonding.",
+    body: "Following the auction, FOLD is subject to a 40-day cooldown period. During this period, general transfers are restricted, though FOLD may be used for ciphernode bonding.",
   },
   {
     title: "TGE and Token Transferability",
     when: AUCTION.tgeDate,
-    body: "Following the cooldown period, token transferability is expected to activate at the contract level. August 19 is the date for transferability and current target for TGE, subject to official terms and final launch conditions.",
+    body: "After the cooldown period ends, general transferability is expected to begin. August 19 is the current date for general transferability and target for TGE, subject to official terms and final launch conditions.",
   },
   {
     title: "Network Alpha",
@@ -382,16 +384,16 @@ const foldRoles: Array<{ number: string; title: string; body: string }> = [
 
 const supportsExamples: Array<{ title: string; body: string }> = [
   { title: "Sealed-bid auctions", body: "without trusted auctioneers" },
-  { title: "Verifiable secret ballots", body: "without revealing individual votes" },
+  { title: "Secret ballots", body: "without revealing individual votes" },
   { title: "Collaborative analysis", body: "without pooling sensitive datasets" },
-  { title: "Multiparty systems", body: "where private inputs produce shared, verifiable outcomes" },
+  { title: "Multiparty systems", body: "with private inputs and verifiable outcomes" },
 ];
 
 const faqItems: Array<{ question: string; answer: string }> = [
   {
     question: "Who can participate?",
     answer:
-      "Eligible participants who complete the required registration and onboarding. Participation is subject to eligibility requirements and jurisdictional restrictions. The auction is not available to persons in the United Kingdom or the United States, U.S. Persons, or persons acting on their behalf.",
+      "Eligible participants who complete the required registration and verification process may participate. Participation is subject to eligibility requirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and other applicable restrictions. Participation may be restricted in certain jurisdictions.",
   },
   {
     question: "How does the clearing price work?",
@@ -401,12 +403,12 @@ const faqItems: Array<{ question: string; answer: string }> = [
   {
     question: "When can I transfer FOLD?",
     answer:
-      "FOLD purchased through the CCA is subject to a 40-day transfer restriction after the auction, except for ciphernode bonding. August 19 is the date for transferability and current target for TGE, subject to official terms and final launch conditions.",
+      "Following the auction, FOLD will be subject to a 40-day cooldown period before general transferability. During this period, general transfers are restricted, though FOLD may be used for ciphernode bonding. August 19 is the date for general transferability and target for TGE, subject to official terms and final launch conditions.",
   },
   {
     question: "Where do I actually take part?",
     answer:
-      "Start from this official auction page. From here, eligible participants can access the official registration flow and Uniswap CCA interface when available. Do not use links from DMs, unofficial Telegram accounts, impersonator X accounts, or copied contract addresses.",
+      "Start from this official auction page. This page provides verified links, participation instructions, contract information, and launch updates. Bidding takes place through the official Uniswap CCA interface. Do not use links from DMs, unofficial Telegram accounts, impersonator X accounts, or copied contract addresses.",
   },
   {
     question: "How do I avoid scams?",
@@ -465,10 +467,8 @@ function ContractsCard() {
     setRotation((current) => current + 180);
   };
 
-  // Pinned to the bottom-right corner with an equal right/bottom inset, identical on
-  // both faces, so the flip button stays under the cursor across repeated flips.
   const flipButtonClass =
-    "absolute bottom-6 right-6 inline-flex items-center gap-2 rounded-full border border-[#82f5ad]/40 px-5 py-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] transition-colors hover:bg-[#82f5ad] hover:text-[#121718] md:bottom-10 md:right-10";
+    "inline-flex items-center gap-2 rounded-full border border-[#82f5ad]/40 px-5 py-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] transition-colors hover:bg-[#82f5ad] hover:text-[#121718]";
   // The shine/glare and the relief light direction both track the cursor via CSS
   // custom properties updated on pointer move (no React re-render).
   const cardRef = useRef<HTMLDivElement>(null);
@@ -515,11 +515,11 @@ function ContractsCard() {
     filter:
       "drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 0 rgba(255,255,255,0.12)) drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 1px rgba(0,0,0,0.5))",
   } as const;
-  // Inked (light) raised lettering: the white highlight is invisible on light text, so
-  // the lift comes from a crisp dark edge plus a soft cast shadow, both opposite the light.
+  // Inked (light) raised lettering: keeps the pale front-face color while adding
+  // a material edge/shadow so the title still reads as embossed.
   const embossInkRaised = {
     filter:
-      "drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(0,0,0,0.55)) drop-shadow(calc(var(--emb-sh-x) * 2) calc(var(--emb-sh-y) * 2) 4px rgba(0,0,0,0.4))",
+      "drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 0 rgba(255,255,255,0.14)) drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(0,0,0,0.7)) drop-shadow(calc(var(--emb-sh-x) * 2) calc(var(--emb-sh-y) * 2) 4px rgba(0,0,0,0.42))",
   } as const;
   const embossDeboss = {
     filter:
@@ -529,12 +529,12 @@ function ContractsCard() {
   // Lit surface (radial gradient, brighter at top) + beveled edge (top highlight,
   // hairline inner border, bottom inner shadow) to give the card real material depth.
   const shellClass =
-    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] px-6 py-12 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:px-12 md:py-14";
+    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] px-6 pb-0 pt-12 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:px-12 md:pb-0 md:pt-14";
 
   return (
     <div
       ref={cardRef}
-      className={`w-full [perspective:1600px] ${spinning ? "interfold-card-spinning" : ""}`}
+      className={`aspect-[1.586/1] min-h-[560px] w-full [perspective:1600px] md:min-h-0 ${spinning ? "interfold-card-spinning" : ""}`}
       onAnimationEnd={(event) => {
         if (event.animationName === "interfold-card-spin-blur") {
           setSpinning(false);
@@ -545,41 +545,114 @@ function ContractsCard() {
       style={pointerDefaults}
     >
       <div
-        className="relative grid transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] motion-reduce:transition-none"
+        className="relative grid h-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [transform-style:preserve-3d] motion-reduce:transition-none"
         style={{ transform: `rotateY(${rotation}deg)` }}
       >
         {/* Front — contracts */}
-        <div aria-hidden={flipped} className={`[grid-area:1/1] [backface-visibility:hidden] ${flipped ? "pointer-events-none" : ""}`}>
+        <div aria-hidden={flipped} className={`h-full [grid-area:1/1] [backface-visibility:hidden] ${flipped ? "pointer-events-none" : ""}`}>
           <div className={shellClass}>
             <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 h-40 w-72 -translate-x-1/2 rounded-full bg-[#82f5ad]/12 blur-[100px]" />
-            <div className="relative flex h-full flex-col pb-16">
+            <div className="relative flex h-full flex-col">
               <header className="flex items-center justify-between gap-5">
                 <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#d9fce8] md:text-[64px]" style={embossInkRaised}>
-                  FOLD Token
+                  <span className="block">Fold</span>
+                  <span className="block">Token</span>
                 </h3>
                 <div aria-hidden="true" className="shrink-0" style={embossRaised}>
                   <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
                 </div>
               </header>
-              <div className="mt-10 flex items-center gap-3 self-start">
-                <span aria-hidden="true" className="h-px w-7 bg-[#82f5ad]/50" />
-                <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[2px] text-[#d9fce8]/55">
-                  Contracts
-                </span>
-              </div>
-              <dl className="mt-4 w-full border-t border-[#d9fce8]/10">
-                {contractRows.map((row) => {
-                  const isAddress = row.explorer && row.value !== TODO_TEXT;
+              <div className="mt-auto w-full">
+                <div className="border-b border-[#d9fce8]/10 py-4">
+                  <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.05] tracking-[-0.45px] text-[#82f5ad] md:text-[20px]">
+                    Contract details
+                  </p>
+                </div>
+                <dl className="w-full">
+                  {contractRows.map((row) => {
+                    const isAddress = row.explorer && row.value !== TODO_TEXT;
 
-                  return (
+                    return (
+                      <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-start" key={row.label}>
+                        <div>
+                          <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
+                            {row.label}
+                          </dt>
+                          <dd className="mt-2">
+                            {row.explorer ? (
+                              <CopyableValue tone="dark" value={row.value} />
+                            ) : (
+                              <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
+                                {row.value}
+                              </span>
+                            )}
+                          </dd>
+                        </div>
+                        {isAddress && (
+                          <UnderlinedArrowLink
+                            className="inline-flex justify-self-start text-[#82f5ad] transition-colors hover:text-[#d9fce8] md:mt-[28px] md:justify-self-end"
+                            href={`${AUCTION.explorerBaseUrl}${row.value}`}
+                            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-current"
+                            underlineClassName="border-b border-current pb-[2px]"
+                          >
+                            View on explorer
+                          </UnderlinedArrowLink>
+                        )}
+                      </div>
+                    );
+                  })}
+                  <div className="flex min-h-[76px] items-center justify-end border-b border-[#d9fce8]/10 py-4">
+                    <button className={flipButtonClass} onClick={flip} type="button">
+                      View Audit &amp; Terms
+                      <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                        <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                        <path d="M21 4v5h-5" />
+                      </svg>
+                    </button>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Back — credibility */}
+        <div aria-hidden={!flipped} className={`h-full [grid-area:1/1] [transform:rotateY(180deg)] [backface-visibility:hidden] ${flipped ? "" : "pointer-events-none"}`}>
+          <div className={shellClass}>
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 h-40 w-72 -translate-x-1/2 rounded-full bg-[#82f5ad]/10 blur-[100px]" />
+            <div className="relative flex h-full flex-col">
+              <header className="flex items-center justify-between gap-5">
+                <div aria-hidden="true" className="shrink-0 -scale-x-100" style={embossDeboss}>
+                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
+                </div>
+                <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#191f20] md:text-[64px] -scale-x-100" style={embossDeboss}>
+                  <span className="block">Fold</span>
+                  <span className="block">Token</span>
+                </h3>
+              </header>
+              <div className="mt-auto w-full">
+                <div className="border-b border-[#d9fce8]/10 py-4">
+                  <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.05] tracking-[-0.45px] text-[#82f5ad] md:text-[20px]">
+                    Audit &amp; terms
+                  </p>
+                </div>
+                <dl className="w-full">
+                  {credibilityRows.map((row) => (
                     <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-center" key={row.label}>
                       <div>
                         <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
                           {row.label}
                         </dt>
                         <dd className="mt-2">
-                          {row.explorer ? (
-                            <CopyableValue tone="dark" value={row.value} />
+                          {row.href ? (
+                            <UnderlinedArrowLink
+                              className="inline-flex text-[#d9fce8]/80 transition-colors hover:text-[#82f5ad]"
+                              href={row.href}
+                              textClassName="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-current"
+                              underlineClassName="border-b border-current pb-[2px]"
+                            >
+                              {row.value}
+                            </UnderlinedArrowLink>
                           ) : (
                             <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
                               {row.value}
@@ -587,85 +660,20 @@ function ContractsCard() {
                           )}
                         </dd>
                       </div>
-                      {isAddress && (
-                        <a
-                          className="justify-self-start font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[3px] transition-colors hover:text-[#d9fce8] md:justify-self-end"
-                          href={`${AUCTION.explorerBaseUrl}${row.value}`}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          View on explorer
-                        </a>
-                      )}
                     </div>
-                  );
-                })}
-              </dl>
-            </div>
-            <button className={flipButtonClass} onClick={flip} type="button">
-              View Audit &amp; Terms
-              <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
-                <path d="M21 4v5h-5" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Back — credibility */}
-        <div aria-hidden={!flipped} className={`[grid-area:1/1] [transform:rotateY(180deg)] [backface-visibility:hidden] ${flipped ? "" : "pointer-events-none"}`}>
-          <div className={shellClass}>
-            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-4 h-40 w-72 -translate-x-1/2 rounded-full bg-[#82f5ad]/10 blur-[100px]" />
-            <div className="relative flex h-full flex-col pb-16">
-              <header className="flex items-center justify-between gap-5">
-                <div aria-hidden="true" className="shrink-0 -scale-x-100" style={embossDeboss}>
-                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
-                </div>
-                <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#191f20] md:text-[64px] -scale-x-100" style={embossDeboss}>
-                  FOLD Token
-                </h3>
-              </header>
-              <div className="mt-10 flex items-center gap-3 self-start">
-                <span aria-hidden="true" className="h-px w-7 bg-[#82f5ad]/50" />
-                <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[2px] text-[#d9fce8]/55">
-                  Audit &amp; Terms
-                </span>
-              </div>
-              <dl className="mt-4 w-full border-t border-[#d9fce8]/10">
-                {credibilityRows.map((row) => (
-                  <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-center" key={row.label}>
-                    <div>
-                      <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55">
-                        {row.label}
-                      </dt>
-                      <dd className="mt-2">
-                        {row.href ? (
-                          <a
-                            className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80 underline decoration-[1px] underline-offset-[3px] transition-colors hover:text-[#82f5ad]"
-                            href={row.href}
-                            rel={row.href.startsWith("http") ? "noreferrer" : undefined}
-                            target={row.href.startsWith("http") ? "_blank" : undefined}
-                          >
-                            {row.value}
-                          </a>
-                        ) : (
-                          <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
-                            {row.value}
-                          </span>
-                        )}
-                      </dd>
-                    </div>
+                  ))}
+                  <div className="flex min-h-[76px] items-center justify-end border-b border-[#d9fce8]/10 py-4">
+                    <button className={flipButtonClass} onClick={flip} type="button">
+                      View contracts
+                      <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                        <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                        <path d="M21 4v5h-5" />
+                      </svg>
+                    </button>
                   </div>
-                ))}
-              </dl>
+                </dl>
+              </div>
             </div>
-            <button className={flipButtonClass} onClick={flip} type="button">
-              View contracts
-              <svg aria-hidden="true" className="size-[13px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
-                <path d="M21 4v5h-5" />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
@@ -733,13 +741,13 @@ export function FoldAuctionPage() {
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
             pictureClassName="block h-full w-full md:hidden"
-            sources={homeHeroSources}
+            sources={auctionHeroSources}
           />
           <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <HeroImage
                 className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
-                sources={homeHeroSources}
+                sources={auctionHeroSources}
               />
             </div>
           </div>
@@ -753,13 +761,12 @@ export function FoldAuctionPage() {
             <span className="group relative inline-flex">
               <button
                 aria-label={`More details: ${statusStripDetails.join(", ")}`}
-                className="flex size-[16px] items-center justify-center rounded-full border border-[#82f5ad]/50 text-[#82f5ad] transition-colors hover:border-[#82f5ad] hover:bg-[#82f5ad] hover:text-[#121718] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#82f5ad] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121718]"
+                className="flex size-[18px] items-center justify-center rounded-full border-[1.5px] border-[#82f5ad]/55 text-[#82f5ad] transition-colors hover:border-[#82f5ad] hover:bg-[#82f5ad] hover:text-[#121718] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#82f5ad] focus-visible:ring-offset-2 focus-visible:ring-offset-[#121718]"
                 type="button"
               >
-                <svg aria-hidden="true" className="size-[9px]" viewBox="0 0 8 8" fill="currentColor">
-                  <circle cx="4" cy="1" r="1" />
-                  <rect x="3.25" y="3" width="1.5" height="4" rx="0.5" />
-                </svg>
+                <span aria-hidden="true" className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] lowercase leading-none tracking-[-0.5px]">
+                  i
+                </span>
               </button>
               <span
                 className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[8px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
@@ -777,11 +784,19 @@ export function FoldAuctionPage() {
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]">
-            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.9] tracking-[-1.92px] md:text-[64px]">
-              <LineRevealAuto text={phase.heroTitle} />
+            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
+              {phase.heroTitleLines ? (
+                <span aria-label={phase.heroTitle} className="block">
+                  {phase.heroTitleLines.map((line, index) => (
+                    <LineRevealAuto delay={index * 0.09} key={line} text={line} />
+                  ))}
+                </span>
+              ) : (
+                <LineRevealAuto text={phase.heroTitle} />
+              )}
             </h1>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p className="max-w-[520px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
+              <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[520px] md:text-[18px]">
                 FOLD supports The Interfold network, where independent parties can compute together
                 without exposing private inputs.
               </p>
@@ -806,11 +821,21 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Auction Details</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="FOLD is being distributed through a Uniswap Continuous Clearing Auction." />
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+                <span className="md:hidden">
+                  <LineRevealAuto delay={0.08} text="FOLD is being distributed" />
+                  <LineRevealAuto delay={0.17} text="through a Uniswap" />
+                  <LineRevealAuto delay={0.26} text="Continuous Clearing Auction." />
+                </span>
+                <span className="hidden md:block">
+                  <LineRevealAuto delay={0.08} text="FOLD is being distributed through a Uniswap Continuous Clearing Auction." />
+                </span>
               </p>
-              <p className="mx-auto mt-6 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
+              <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
                 <LineRevealAuto delay={0.2} text="Participants submit orders during the auction window. Successful bids clear through the CCA's uniform clearing-price mechanics, with price discovery unfolding over the auction period." />
+              </p>
+              <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
+                <LineRevealAuto delay={0.26} text="Bidding takes place through the official Uniswap CCA interface. This page provides verified links and participation updates." />
               </p>
             </div>
 
@@ -824,9 +849,14 @@ export function FoldAuctionPage() {
                     </dt>
                     <dd className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]">
                       {row.href ? (
-                        <a className="underline decoration-[1px] underline-offset-[4px] transition-colors hover:text-[#82f5ad]" href={row.href}>
+                        <UnderlinedArrowLink
+                          className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                          href={row.href}
+                          textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-current"
+                          underlineClassName="border-b border-current pb-[3px]"
+                        >
                           {row.value}
-                        </a>
+                        </UnderlinedArrowLink>
                       ) : (
                         row.value
                       )}
@@ -839,7 +869,7 @@ export function FoldAuctionPage() {
 
             <ScrollFadeIn className="mt-8" delay={0.15}>
               <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
-                Participation is subject to eligibility requirements, jurisdictional restrictions, and completion of the required onboarding process.
+                Participation is subject to eligibility requirements, jurisdictional restrictions, and completion of the required registration and verification process.
               </p>
             </ScrollFadeIn>
 
@@ -856,11 +886,18 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>How to Participate</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="Register first. Bid through the official CCA interface." />
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+                <span className="md:hidden">
+                  <LineRevealAuto delay={0.08} text="Register first." />
+                  <LineRevealAuto delay={0.17} text="Bid through the official" />
+                  <LineRevealAuto delay={0.26} text="Uniswap CCA interface." />
+                </span>
+                <span className="hidden md:block">
+                  <LineRevealAuto delay={0.08} text="Register first. Bid through the official Uniswap CCA interface." />
+                </span>
               </p>
-              <p className="mx-auto mt-6 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. Once the auction opens, participants can submit an order through the official Uniswap CCA interface during the auction window." />
+              <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
+                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. Once bidding opens, participants can submit an order through the official Uniswap CCA interface." />
               </p>
             </div>
 
@@ -884,9 +921,8 @@ export function FoldAuctionPage() {
               </ul>
             </div>
 
-            <ScrollFadeIn className="mx-auto mt-10 grid w-full max-w-[520px] grid-cols-1 gap-3 sm:grid-cols-2" delay={0.15}>
+            <ScrollFadeIn className="mx-auto mt-10 w-full max-w-[288px]" delay={0.15}>
               <CtaButton href={AUCTION.registrationUrl}>Start Registration</CtaButton>
-              <CtaButton href={AUCTION.participationGuideUrl} variant="secondary">Read the Participation Guide</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
@@ -912,7 +948,7 @@ export function FoldAuctionPage() {
                           {item.title}
                         </h3>
                         {item.when && item.when !== TODO_TEXT && (
-                          <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
+                          <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/65">
                             {item.when}
                           </span>
                         )}
@@ -923,14 +959,15 @@ export function FoldAuctionPage() {
                       {item.actions && item.actions.length > 0 && (
                         <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
                           {item.actions.map((action) => (
-                            <HoverArrowLink
-                              className="inline-flex"
+                            <UnderlinedArrowLink
+                              className="inline-flex text-[#82f5ad] transition-colors hover:text-[#d9fce8]"
                               href={action.href}
                               key={action.label}
-                              textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#d9fce8]"
+                              textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
+                              underlineClassName="border-b border-current pb-[4px]"
                             >
                               {action.label}
-                            </HoverArrowLink>
+                            </UnderlinedArrowLink>
                           ))}
                         </div>
                       )}
@@ -940,13 +977,14 @@ export function FoldAuctionPage() {
               ))}
             </ol>
             <ScrollFadeIn className="mt-10 text-center" delay={0.1}>
-              <HoverArrowLink
-                className="inline-flex"
+              <UnderlinedArrowLink
+                className="inline-flex text-[#82f5ad] transition-colors hover:text-[#d9fce8]"
                 href={AUCTION.auctionFaqUrl}
-                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#d9fce8]"
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
+                underlineClassName="border-b border-current pb-[4px]"
               >
                 Read the Auction FAQ
-              </HoverArrowLink>
+              </UnderlinedArrowLink>
             </ScrollFadeIn>
           </div>
         </section>
@@ -958,11 +996,11 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">The Role of FOLD</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="FOLD supports participation in The Interfold network." />
               </p>
-              <p className="mx-auto mt-6 max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="Each request forms a ciphernode committee to coordinate key generation, support execution, and perform threshold decryption. FOLD is used to request, reward, bond, and govern this network participation." />
+              <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:max-w-[640px] md:text-[18px]">
+                <LineRevealAuto delay={0.2} text="Each request forms a ciphernode committee to coordinate distributed key generation, support execution, and perform threshold decryption. FOLD is used to request, reward, bond, and govern this network participation." />
               </p>
             </div>
 
@@ -990,14 +1028,15 @@ export function FoldAuctionPage() {
                 { label: "Read the FOLD Token FAQ", href: AUCTION.tokenFaqUrl },
                 { label: "View Tokenomics", href: AUCTION.tokenomicsUrl },
               ].map((link) => (
-                <HoverArrowLink
-                  className="inline-flex"
+                <UnderlinedArrowLink
+                  className="inline-flex text-[#82f5ad] transition-colors hover:text-[#d9fce8]"
                   href={link.href}
                   key={link.label}
-                  textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] underline decoration-[1px] underline-offset-[5px] transition-colors group-hover:text-[#d9fce8]"
+                  textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
+                  underlineClassName="border-b border-current pb-[4px]"
                 >
                   {link.label}
-                </HoverArrowLink>
+                </UnderlinedArrowLink>
               ))}
             </ScrollFadeIn>
           </div>
@@ -1010,19 +1049,18 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>What FOLD Supports</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
-                <LineRevealAuto delay={0.08} text="The Interfold supports systems where multiple parties need one verifiable result without exposing the inputs behind it." />
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
+                <LineRevealAuto delay={0.08} text="Private inputs. Shared outcomes." />
               </p>
-              <p className="mx-auto mt-6 max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="Private inputs. Shared outcomes." />
+              <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71] md:max-w-[640px] md:text-[18px]">
+                <LineRevealAuto delay={0.2} text="The Interfold supports systems where multiple parties need one verifiable result without exposing the inputs behind it." />
               </p>
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-2">
               {supportsExamples.map((example, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={example.title}>
-                  <div className="grid h-full grid-cols-[7px_1fr] gap-3 rounded-[16px] bg-white p-5">
-                    <span className="mt-[9px] size-[5px] rounded-full bg-[#82f5ad]" />
+                  <div className="h-full rounded-[16px] bg-white p-5">
                     <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.1] text-[#3a5e3c] md:text-[20px]">
                       <span>{example.title}</span> <span className="text-[#687d71]">{example.body}</span>
                     </p>
@@ -1032,7 +1070,7 @@ export function FoldAuctionPage() {
             </div>
 
             <ScrollFadeIn className="mt-10 text-center" delay={0.1}>
-              <p className="mx-auto max-w-[640px] font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.1] tracking-[-0.6px] md:text-[24px]">
+              <p className="mx-auto max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.1] tracking-[-0.6px] md:max-w-[640px] md:text-[24px]">
                 This is multiplayer privacy: privacy for systems where many parties need one verifiable result.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
@@ -1073,7 +1111,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Official Links &amp; Contract Information</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="Use only official Interfold links when participating in the FOLD auction." />
               </p>
             </div>
@@ -1087,9 +1125,11 @@ export function FoldAuctionPage() {
               </ScrollFadeIn>
             </div>
 
-            <ScrollFadeIn className="mt-10" delay={0.1}>
+            <ScrollFadeIn className="relative z-0 mx-auto mt-10 max-w-[860px]" delay={0.1}>
               <ContractsCard />
-              <p className="mx-auto mt-6 max-w-[620px] text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+            </ScrollFadeIn>
+            <ScrollFadeIn className="relative z-10 mx-auto max-w-[620px] pt-36 md:pt-44" delay={0.16}>
+              <p className="text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
                 Always verify links and contract addresses through The Interfold&rsquo;s official channels.
                 The team will never DM you first and will never ask for your seed phrase or private keys.
               </p>
@@ -1116,19 +1156,16 @@ export function FoldAuctionPage() {
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.16}>
                 <p>
-                  <span className="text-[#3a5e3c]">Information for Persons in the United Kingdom and the United States.</span>{" "}
-                  This communication is directed only at persons outside the United Kingdom and the United States. Persons in the
-                  United Kingdom, persons in the United States, U.S. Persons, and persons acting for or on behalf of any such person
-                  are not permitted to participate in the FOLD public auction and must not act upon this communication in relation to
-                  the FOLD public auction.
+                  <span className="text-[#3a5e3c]">Eligibility notice.</span>{" "}
+                  Participation in the FOLD auction is subject to eligibility requirements, jurisdictional restrictions, verification
+                  procedures, AML/sanctions screening, and other applicable restrictions. Participation may be restricted in certain
+                  jurisdictions.
                 </p>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.22}>
                 <p>
-                  <span className="text-[#3a5e3c]">Issuer notice.</span>{" "}
-                  The FOLD auction will be conducted by Interfold Ltd. (the &ldquo;Issuer&rdquo;). Participation in the FOLD auction
-                  will be subject to the official Auction Terms, eligibility requirements, and verification procedures published
-                  before registration opens.
+                  Participation in the FOLD auction will be subject to the official Auction Terms, eligibility requirements, and
+                  verification procedures.
                 </p>
               </ScrollFadeIn>
             </div>

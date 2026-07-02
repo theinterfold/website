@@ -33,12 +33,12 @@ const pop: Variants = {
   },
 };
 
-// Stroked line work — round joins/caps keep corners reading closed while drawing.
+// Stroked line work uses square corners and clean, flat line endings.
 const stroke = {
   stroke: "currentColor",
   strokeWidth: 1.5,
-  strokeLinecap: "round",
-  strokeLinejoin: "round",
+  strokeLinecap: "butt",
+  strokeLinejoin: "miter",
 } as const;
 
 // Pop shapes scale around their own center rather than the SVG origin.
@@ -126,13 +126,13 @@ export function ExploreResourceIcon({
     >
       <motion.polygon variants={draw} points=".75 .75 .75 55.75 41.05 55.75 41.05 10.15 32.25 .75 .75 .75" {...stroke} />
       <motion.polyline variants={draw} points="31.95 .85 31.95 10.45 40.75 10.45" {...stroke} />
-      <motion.rect variants={pop} style={popStyle} fill={accent} height="5.4" width="5.4" x="6.95" y="7.45" {...stroke} />
-      <motion.rect variants={pop} style={popStyle} fill={accent} height="21.6" width="28.9" x="6.95" y="16.9" {...stroke} />
-      <motion.rect variants={pop} style={popStyle} fill={accent} height="6.8" width="6.4" x="6.95" y="42.55" {...stroke} />
-      <motion.line variants={draw} x1="18.25" x2="35.85" y1="43.65" y2="43.65" {...stroke} />
-      <motion.line variants={draw} x1="18.25" x2="27.55" y1="47.75" y2="47.75" {...stroke} />
-      <motion.line variants={draw} x1="6.95" x2="35.85" y1="38.5" y2="16.9" {...stroke} />
-      <motion.line variants={draw} x1="35.85" x2="6.95" y1="38.5" y2="16.9" {...stroke} />
+      <motion.rect variants={pop} style={popStyle} fill={accent} height="5.4" width="5.4" x="6.45" y="7.45" {...stroke} />
+      <motion.rect variants={pop} style={popStyle} fill={accent} height="21.6" width="28.9" x="6.45" y="16.9" {...stroke} />
+      <motion.rect variants={pop} style={popStyle} fill={accent} height="6.8" width="6.4" x="6.45" y="42.55" {...stroke} />
+      <motion.line variants={draw} x1="17.75" x2="35.35" y1="43.65" y2="43.65" {...stroke} />
+      <motion.line variants={draw} x1="17.75" x2="27.05" y1="47.75" y2="47.75" {...stroke} />
+      <motion.line variants={draw} x1="6.45" x2="35.35" y1="38.5" y2="16.9" {...stroke} />
+      <motion.line variants={draw} x1="35.35" x2="6.45" y1="38.5" y2="16.9" {...stroke} />
     </motion.svg>
   );
 }
