@@ -33,11 +33,11 @@ const pop: Variants = {
   },
 };
 
-// Stroked line work uses square corners and clean, flat line endings.
+// Stroked line work uses square corners and closed line endings.
 const stroke = {
   stroke: "currentColor",
   strokeWidth: 1.5,
-  strokeLinecap: "butt",
+  strokeLinecap: "square",
   strokeLinejoin: "miter",
 } as const;
 
