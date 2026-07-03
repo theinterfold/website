@@ -5,10 +5,10 @@ import { Header } from './Header';
 import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
-import { HeroImage, homeHeroSources, participateHeroSources } from './HeroImage';
+import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources } from './HeroImage';
 
 const MOBILE_BREAKPOINT = 768;
-type HeroPagePath = '' | 'participate';
+type HeroPagePath = '' | 'participate' | 'fold-auction';
 type HeroOverlay = {
   page: HeroPagePath;
   top: number;
@@ -35,10 +35,14 @@ function applyPageTheme(page = getPagePath()) {
   document.documentElement.classList.toggle('interfold-theme-participate', page === 'participate');
 }
 
-function getCurrentHeroTop() {
+function getHeroOverlayTop(nextPage: HeroPagePath) {
   const hero = document.querySelector('.interfold-hero-transition');
 
-  if (!(hero instanceof HTMLElement) || window.innerWidth >= MOBILE_BREAKPOINT) {
+  if (window.innerWidth >= MOBILE_BREAKPOINT) {
+    return nextPage === 'fold-auction' ? 63 : 0;
+  }
+
+  if (!(hero instanceof HTMLElement)) {
     return 0;
   }
 
@@ -46,11 +50,12 @@ function getCurrentHeroTop() {
 }
 
 function getHeroPagePath(page: string): HeroPagePath | null {
-  return page === '' || page === 'participate' ? page : null;
+  return page === '' || page === 'participate' || page === 'fold-auction' ? page : null;
 }
 
 function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
   const isParticipate = overlay.page === 'participate';
+  const sources = overlay.page === 'fold-auction' ? auctionHeroSources : homeHeroSources;
 
   return (
     <div className={`interfold-route-hero-overlay ${isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}`} style={{ top: `${overlay.top}px` }}>
@@ -73,13 +78,13 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
             pictureClassName="block h-full w-full md:hidden"
-            sources={homeHeroSources}
+            sources={sources}
           />
           <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-full -translate-x-1/2 overflow-hidden bg-[#121718] md:block">
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <HeroImage
                 className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
-                sources={homeHeroSources}
+                sources={sources}
               />
             </div>
           </div>
@@ -151,7 +156,7 @@ export function ResponsiveLayout() {
       flushSync(() => {
         setHeroOverlay({
           page: nextHeroPage,
-          top: getCurrentHeroTop(),
+          top: getHeroOverlayTop(nextHeroPage),
         });
       });
       document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
@@ -191,7 +196,7 @@ export function ResponsiveLayout() {
 
       const nextRoute = url.pathname.replace(/^\/+|\/+$/g, '');
 
-      if (nextRoute !== '' && nextRoute !== 'participate') {
+      if (getHeroPagePath(nextRoute) === null) {
         return;
       }
 
@@ -230,14 +235,15 @@ export function ResponsiveLayout() {
 
   const isHome = routePath === '';
   const isParticipate = routePath === 'participate';
-  const sharedHeader = (isParticipate || (!isMobile && isHome)) ? (
+  const isFoldAuction = routePath === 'fold-auction';
+  const sharedHeader = (isParticipate || isFoldAuction || (!isMobile && isHome)) ? (
     <Header
       activePath={routePath}
       animateOpening
       backgroundClassName={isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
-      showMobile={isParticipate}
+      showMobile={isParticipate || isFoldAuction}
     />
   ) : null;
 
@@ -260,7 +266,13 @@ export function ResponsiveLayout() {
   }
 
   if (routePath === 'fold-auction') {
-    return <FoldAuctionPage />;
+    return (
+      <>
+        {sharedHeader}
+        <FoldAuctionPage />
+        {heroOverlay && <HeroTransitionOverlay overlay={heroOverlay} />}
+      </>
+    );
   }
 
   if (isParticipate) {

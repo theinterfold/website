@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
-import { Header } from "./Header";
 import { HeroImage, auctionHeroSources } from "./HeroImage";
 import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
@@ -732,12 +731,10 @@ export function FoldAuctionPage() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
-      <Header activePath="fold-auction" animateOpening />
-
+    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c] md:pt-[63px]">
       <main>
         {/* Hero visual band — same treatment as the homepage hero */}
-        <div className="relative h-64 w-full overflow-hidden bg-[#d9fce8] md:h-[min(44.444vw,640px)]">
+        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8] md:h-[min(44.444vw,640px)]">
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
             pictureClassName="block h-full w-full md:hidden"
@@ -1128,8 +1125,8 @@ export function FoldAuctionPage() {
             <ScrollFadeIn className="relative z-0 mx-auto mt-10 max-w-[860px]" delay={0.1}>
               <ContractsCard />
             </ScrollFadeIn>
-            <ScrollFadeIn className="relative z-10 mx-auto max-w-[620px] pt-36 md:pt-44" delay={0.16}>
-              <p className="text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+            <ScrollFadeIn className="pointer-events-none relative z-10 mx-auto max-w-[620px] pt-36 md:pt-44" delay={0.16}>
+              <p className="pointer-events-auto text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
                 Always verify links and contract addresses through The Interfold&rsquo;s official channels.
                 The team will never DM you first and will never ask for your seed phrase or private keys.
               </p>
