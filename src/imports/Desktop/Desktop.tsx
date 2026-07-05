@@ -32,6 +32,9 @@ const friendLogos = [
   { name: "Encrypt the Mempool", href: "https://www.encryptedmempool.org/" },
 ];
 
+const THREE_COLUMN_GRID_CLASS =
+  "grid w-full grid-cols-1 gap-[16px] px-4 md:grid-cols-3 md:px-8 lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0";
+
 function PartnerLogoFrame({ children, visualScale = 1 }: { children: ReactNode; visualScale?: number }) {
   return (
     <span className="flex h-5 items-center justify-center lg:h-7">
@@ -291,7 +294,7 @@ function Frame25() {
 
 function Frame23() {
   return (
-    <div className="content-stretch grid grid-cols-1 gap-[16px] items-stretch relative shrink-0 w-full px-4 md:grid-cols-3 md:auto-rows-fr md:px-8 lg:h-[550px] lg:w-[1052px] lg:max-w-[calc(100%_-_64px)] lg:px-0">
+    <div className={`${THREE_COLUMN_GRID_CLASS} content-stretch items-stretch relative shrink-0 md:auto-rows-fr lg:h-[550px]`}>
       <ScrollFadeIn className="w-full h-full" delay={0.3}>
         <div className="bg-[#121718] content-stretch flex h-full flex-col items-start overflow-hidden p-[8px] relative rounded-[24px] shrink-0 w-full max-w-none lg:h-[550px]">
           <ScrollFadeIn className="w-full" delay={0.75}>
@@ -301,7 +304,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[185.58%] -translate-x-1/2 translate-y-[28px]" src={imgChatGptImageApr232026051856Pm11} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[185.58%] -translate-x-1/2 translate-y-[28px]" decoding="async" loading="lazy" src={imgChatGptImageApr232026051856Pm11} />
               </div>
             </div>
           </div>
@@ -316,7 +319,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[155.47%] -translate-x-1/2 translate-y-[10px]" src={imgChatGptImageApr232026051856Pm12} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[155.47%] -translate-x-1/2 translate-y-[10px]" decoding="async" loading="lazy" src={imgChatGptImageApr232026051856Pm12} />
               </div>
             </div>
           </div>
@@ -331,7 +334,7 @@ function Frame23() {
             <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[24px]">
               <div className="absolute bg-[#121718] inset-0 rounded-[24px]" />
               <div className="absolute inset-0 mix-blend-plus-lighter overflow-hidden rounded-[24px]">
-                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[159.86%] -translate-x-1/2 translate-y-[12px]" src={imgChatGptImageApr232026051856Pm13} />
+                <img alt="" className="absolute bottom-0 h-auto left-1/2 max-w-none w-[159.86%] -translate-x-1/2 translate-y-[12px]" decoding="async" loading="lazy" src={imgChatGptImageApr232026051856Pm13} />
               </div>
             </div>
           </div>
@@ -371,7 +374,7 @@ function Frame2() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -392,7 +395,7 @@ function Frame1() {
 
   return (
     <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="/fold-auction"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -412,7 +415,7 @@ function FinalTelegramCta() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://t.me/enclave_e3"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -430,14 +433,14 @@ function FinalTelegramCta() {
 
 function Frame9() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[9px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
-      <ScrollFadeIn delay={0.3}>
+    <div className={`${THREE_COLUMN_GRID_CLASS} items-center`}>
+      <ScrollFadeIn className="w-full" delay={0.3}>
         <Frame2 />
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.4}>
+      <ScrollFadeIn className="w-full" delay={0.4}>
         <FinalTelegramCta />
       </ScrollFadeIn>
-      <ScrollFadeIn delay={0.5}>
+      <ScrollFadeIn className="w-full" delay={0.5}>
         <Frame1 />
       </ScrollFadeIn>
     </div>
@@ -446,7 +449,7 @@ function Frame9() {
 
 function Frame10() {
   return (
-    <div className="content-stretch flex flex-col gap-[96px] items-center justify-center relative shrink-0">
+    <div className="content-stretch flex w-full flex-col items-center justify-center gap-[96px] relative shrink-0">
       <Frame8 />
       <Frame9 />
     </div>
@@ -1788,7 +1791,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
           </div>
         </div>
 
-        <div className="content-stretch flex flex-col gap-[32px] items-start not-italic w-full md:col-start-4 md:row-start-1">
+        <div className="content-stretch flex flex-col gap-[8px] items-start not-italic w-full md:col-start-4 md:row-start-1">
           <div className="flex flex-col gap-[8px] w-full">
             <ScrollFadeIn delay={0.1}>
             <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
@@ -1805,25 +1808,17 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
               </ScrollFadeIn>
             </div>
           </div>
+        </div>
 
+        <div className="interfold-footer-baseline-item interfold-footer-signup w-full md:col-span-2 md:col-start-3 md:row-start-2 xl:col-span-1 xl:col-start-4">
           <ScrollFadeIn className="w-full" delay={0.5}>
-            <GhostSignupForm />
+            <GhostSignupForm className="interfold-footer-signup-form md:py-0" />
           </ScrollFadeIn>
         </div>
 
-        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-1 md:row-start-2 md:self-end">
+        <div className="interfold-footer-baseline-item font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-1 md:row-start-2">
           <ScrollFadeIn delay={0.7}>
             <p>{`All Rights Reserved © 2026`}</p>
-          </ScrollFadeIn>
-        </div>
-
-        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-2 md:row-start-2 md:self-end">
-          <ScrollFadeIn delay={0.8}>
-            <p>
-              {`Open source protocol. `}
-              <br aria-hidden="true" />
-              Built by <a className="underline underline-offset-2 transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.
-            </p>
           </ScrollFadeIn>
         </div>
       </div>
@@ -1837,7 +1832,7 @@ function Frame32() {
 
 export default function Desktop() {
   return (
-    <div className="interfold-page-transition bg-[#d9fce8] relative w-full min-h-screen md:size-full overflow-x-hidden" data-name="Desktop">
+    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-hidden bg-[#d9fce8] md:min-h-[calc(4293px+min(44.444vw,640px))]" data-name="Desktop">
       <div className="interfold-hero-transition md:absolute relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage

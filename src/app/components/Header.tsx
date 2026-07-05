@@ -54,9 +54,9 @@ export function Header({
 
   return (
     <>
-      {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="md:hidden" />}
+      {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="xl:hidden" />}
       {showDesktop && (
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-300 md:block`}>
+        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-300 xl:block`}>
           <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
             <BrandLink
               aria-label="The Interfold home"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import Desktop from '../../imports/Desktop/Desktop';
+import { AuctionLegalPage } from './AuctionLegalPage';
 import { Header } from './Header';
 import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
@@ -236,14 +237,15 @@ export function ResponsiveLayout() {
   const isHome = routePath === '';
   const isParticipate = routePath === 'participate';
   const isFoldAuction = routePath === 'fold-auction';
-  const sharedHeader = (isParticipate || isFoldAuction || (!isMobile && isHome)) ? (
+  const isAuctionLegal = routePath === 'auction/legal';
+  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)) ? (
     <Header
-      activePath={routePath}
+      activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
-      backgroundClassName={isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}
+      backgroundClassName={isParticipate || isAuctionLegal ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
-      showMobile={isParticipate || isFoldAuction}
+      showMobile={isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)}
     />
   ) : null;
 
@@ -271,6 +273,15 @@ export function ResponsiveLayout() {
         {sharedHeader}
         <FoldAuctionPage />
         {heroOverlay && <HeroTransitionOverlay overlay={heroOverlay} />}
+      </>
+    );
+  }
+
+  if (isAuctionLegal) {
+    return (
+      <>
+        {sharedHeader}
+        <AuctionLegalPage />
       </>
     );
   }

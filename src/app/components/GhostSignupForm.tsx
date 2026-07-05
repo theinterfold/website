@@ -2,70 +2,35 @@ import { useEffect, useRef } from "react";
 
 const GHOST_SIGNUP_SCRIPT = "https://cdn.jsdelivr.net/ghost/signup-form@~0.3/umd/signup-form.min.js";
 const GHOST_SITE = "https://blog.theinterfold.com/";
-const GHOST_FRAME_STYLE_ID = "interfold-ghost-signup-frame-style";
-const GHOST_FRAME_STYLES = `
+const GHOST_FORM_BACKGROUND = "#f2fff7";
+const GHOST_FORM_BUTTON = "#82f5ad";
+const GHOST_FORM_BUTTON_TEXT = "#121718";
+const GHOST_FORM_TEXT = "#3a5e3c";
+const GHOST_FRAME_STYLE_ID = "interfold-ghost-signup-color-style";
+const GHOST_FRAME_COLOR_STYLES = `
   html,
   body {
     background: transparent !important;
-    color: #3a5e3c !important;
-    font-family: "ABC_Gramercy", Georgia, serif !important;
-    margin: 0 !important;
-  }
-
-  * {
-    box-sizing: border-box !important;
-    font-family: "ABC_Gramercy", Georgia, serif !important;
   }
 
   form,
   .gh-signup-form,
-  .gh-form {
-    align-items: flex-end !important;
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    display: flex !important;
-    gap: 8px !important;
-    padding: 0 !important;
-  }
-
+  .gh-form,
   input,
   input[type="email"] {
-    background: transparent !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    color: #3a5e3c !important;
-    flex: 1 1 auto !important;
-    font-size: 14.429px !important;
-    height: auto !important;
-    line-height: 1.3 !important;
-    min-height: 29px !important;
-    outline: 0 !important;
-    padding: 0 0 8px !important;
+    background: ${GHOST_FORM_BACKGROUND} !important;
+    color: ${GHOST_FORM_TEXT} !important;
   }
 
   input::placeholder {
-    color: #3a5e3c !important;
-    opacity: 1 !important;
+    color: #687d71 !important;
+    opacity: 0.72 !important;
   }
 
   button,
   button[type="submit"] {
-    background: #3a5e3c !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    color: #d9fce8 !important;
-    flex: 0 0 auto !important;
-    font-size: 14.429px !important;
-    height: auto !important;
-    line-height: 1.075 !important;
-    min-height: 29px !important;
-    min-width: 96px !important;
-    padding: 4px 12px !important;
-    text-transform: capitalize !important;
+    background: ${GHOST_FORM_BUTTON} !important;
+    color: ${GHOST_FORM_BUTTON_TEXT} !important;
   }
 `;
 
@@ -92,6 +57,11 @@ export function GhostSignupForm({ className = "" }: { className?: string }) {
       iframe.style.minHeight = "58px";
       iframe.style.width = "100%";
 
+      if (iframe.dataset.interfoldSignupListener !== "true") {
+        iframe.dataset.interfoldSignupListener = "true";
+        iframe.addEventListener("load", styleGhostFrame);
+      }
+
       try {
         const frameDocument = iframe.contentDocument ?? iframe.contentWindow?.document;
 
@@ -102,22 +72,11 @@ export function GhostSignupForm({ className = "" }: { className?: string }) {
         if (!frameDocument.getElementById(GHOST_FRAME_STYLE_ID)) {
           const style = frameDocument.createElement("style");
           style.id = GHOST_FRAME_STYLE_ID;
-          style.textContent = GHOST_FRAME_STYLES;
+          style.textContent = GHOST_FRAME_COLOR_STYLES;
           frameDocument.head.appendChild(style);
         }
-
-        const input = frameDocument.querySelector<HTMLInputElement>("input[type='email'], input");
-        const button = frameDocument.querySelector<HTMLButtonElement>("button[type='submit'], button");
-
-        if (input) {
-          input.placeholder = "Email";
-        }
-
-        if (button) {
-          button.textContent = "Join";
-        }
       } catch {
-        // Ghost may lock down the iframe in some browsers; the official embed still handles signup.
+        // Keep the official embed usable if the iframe becomes inaccessible.
       }
     };
 
@@ -129,19 +88,33 @@ export function GhostSignupForm({ className = "" }: { className?: string }) {
     const script = document.createElement("script");
     script.async = true;
     script.src = GHOST_SIGNUP_SCRIPT;
-    script.dataset.backgroundColor = "#d9fce8";
-    script.dataset.buttonColor = "#3a5e3c";
-    script.dataset.buttonText = "Join";
-    script.dataset.buttonTextColor = "#d9fce8";
-    script.dataset.placeholder = "Email";
+    script.dataset.backgroundColor = GHOST_FORM_BACKGROUND;
+    script.dataset.buttonColor = GHOST_FORM_BUTTON;
+    script.dataset.buttonText = "Subscribe";
+    script.dataset.buttonTextColor = GHOST_FORM_BUTTON_TEXT;
+    script.dataset.placeholder = "Your email address";
     script.dataset.site = GHOST_SITE;
-    script.dataset.textColor = "#3a5e3c";
+    script.dataset.textColor = GHOST_FORM_TEXT;
     script.dataset.locale = "en";
 
     embed.appendChild(script);
+    const restyleOnVisibility = () => {
+      window.requestAnimationFrame(styleGhostFrame);
+    };
+    const restyleOnFocus = () => {
+      window.requestAnimationFrame(styleGhostFrame);
+    };
+    const retryDelays = [0, 120, 400, 1000, 2000];
+    const retryTimers = retryDelays.map((delay) => window.setTimeout(styleGhostFrame, delay));
+
+    document.addEventListener("visibilitychange", restyleOnVisibility);
+    window.addEventListener("focus", restyleOnFocus);
     window.requestAnimationFrame(styleGhostFrame);
 
     return () => {
+      retryTimers.forEach((timer) => window.clearTimeout(timer));
+      document.removeEventListener("visibilitychange", restyleOnVisibility);
+      window.removeEventListener("focus", restyleOnFocus);
       observer.disconnect();
       embed.innerHTML = "";
     };
@@ -153,9 +126,9 @@ export function GhostSignupForm({ className = "" }: { className?: string }) {
         Updates
       </p>
       <div
-        className="interfold-ghost-signup__embed"
+        className="interfold-ghost-signup__embed md:mx-auto md:max-w-[440px]"
         ref={embedRef}
-        style={{ minHeight: 58, maxWidth: 440, margin: "0 auto", width: "100%" }}
+        style={{ minHeight: 58, width: "100%" }}
       />
     </div>
   );

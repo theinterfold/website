@@ -23,12 +23,12 @@ const AUCTION = {
   // Participate
   uniswapCcaUrl: TODO_LINK, // TODO: official Uniswap CCA link
   registrationUrl: TODO_LINK, // TODO: registration / KYC link
-  participationGuideUrl: TODO_LINK, // TODO: "How to Participate" guide
+  participationGuideUrl: "https://blog.theinterfold.com/how-to-participate-in-the-fold-auction/",
   // Learn more
   auctionFaqUrl: "https://docs.theinterfold.com/faq/auction",
   tokenFaqUrl: "https://docs.theinterfold.com/faq/fold-token",
   tokenomicsUrl: "https://docs.theinterfold.com/tokenomics",
-  auctionTermsUrl: TODO_LINK, // TODO: official Auction Terms
+  auctionTermsUrl: "/auction/legal",
   auditUrl: TODO_LINK, // TODO: smart-contract audit report — pending sign-off with Auryn
   understandingFoldUrl: "https://blog.theinterfold.com/fold-token-interfold-network/",
   howItWorksUrl: "https://blog.theinterfold.com/how-interfold-works/",
@@ -307,7 +307,7 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
 
 const detailRows: Array<{ term: string; value: string; href?: string }> = [
   { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
-  { term: "Registration / Verification", value: AUCTION.registrationDates },
+  { term: "Registration / Pre-Bidding", value: AUCTION.registrationDates },
   { term: "Auction window", value: AUCTION.auctionWindow },
   { term: "Transfer restriction", value: "40-day cooldown after the auction" },
   { term: "Target TGE / transferability", value: AUCTION.tgeDate },
@@ -328,9 +328,9 @@ const timelineItems: Array<{
   actions?: Array<{ label: string; href: string }>;
 }> = [
   {
-    title: "Registration and Verification",
+    title: "Registration / Pre-Bidding",
     when: AUCTION.registrationDates,
-    body: "Eligible participants complete registration and required verification before bidding opens.",
+    body: "Eligible participants complete verification, then may submit pre-bids before the auction opens.",
     actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
@@ -446,7 +446,6 @@ const credibilityRows: Array<{ label: string; value: string; href?: string }> = 
   { label: "Auction Terms", value: "Read the official terms", href: AUCTION.auctionTermsUrl },
   { label: "Audit & Terms", value: "Token and auction contract audit report", href: AUCTION.auditUrl },
   { label: "Issuer", value: "Interfold Ltd." },
-  { label: "Built by", value: "Gnosis Guild" },
 ];
 
 // Dark "coin" card: contract info on the front, credibility on the back,
@@ -518,7 +517,7 @@ function ContractsCard() {
   // a material edge/shadow so the title still reads as embossed.
   const embossInkRaised = {
     filter:
-      "drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 0 rgba(255,255,255,0.14)) drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(0,0,0,0.7)) drop-shadow(calc(var(--emb-sh-x) * 2) calc(var(--emb-sh-y) * 2) 4px rgba(0,0,0,0.42))",
+      "drop-shadow(var(--emb-hl-x) var(--emb-hl-y) 0 rgba(217,252,232,0.38)) drop-shadow(calc(var(--emb-hl-x) * 2) calc(var(--emb-hl-y) * 2) 2px rgba(217,252,232,0.16)) drop-shadow(var(--emb-sh-x) var(--emb-sh-y) 0 rgba(0,0,0,0.95)) drop-shadow(calc(var(--emb-sh-x) * 2) calc(var(--emb-sh-y) * 2) 3px rgba(0,0,0,0.7)) drop-shadow(calc(var(--emb-sh-x) * 3) calc(var(--emb-sh-y) * 3) 8px rgba(0,0,0,0.5))",
   } as const;
   const embossDeboss = {
     filter:
@@ -528,7 +527,7 @@ function ContractsCard() {
   // Lit surface (radial gradient, brighter at top) + beveled edge (top highlight,
   // hairline inner border, bottom inner shadow) to give the card real material depth.
   const shellClass =
-    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] px-6 pb-0 pt-12 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:px-12 md:pb-0 md:pt-14";
+    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] p-6 pb-0 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:p-12 md:pb-0";
 
   return (
     <div
@@ -558,7 +557,7 @@ function ContractsCard() {
                   <span className="block">Token</span>
                 </h3>
                 <div aria-hidden="true" className="shrink-0" style={embossRaised}>
-                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
+                  <InterfoldSymbol className="h-[61px] w-auto text-[#d9fce8] md:h-[102px]" />
                 </div>
               </header>
               <div className="mt-auto w-full">
@@ -622,7 +621,7 @@ function ContractsCard() {
             <div className="relative flex h-full flex-col">
               <header className="flex items-center justify-between gap-5">
                 <div aria-hidden="true" className="shrink-0 -scale-x-100" style={embossDeboss}>
-                  <InterfoldSymbol className="h-12 w-auto text-[#191f20] md:h-16" />
+                  <InterfoldSymbol className="h-[61px] w-auto text-[#191f20] md:h-[102px]" />
                 </div>
                 <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[38px] leading-[0.8] tracking-[-1.8px] text-[#191f20] md:text-[64px] -scale-x-100" style={embossDeboss}>
                   <span className="block">Fold</span>
@@ -805,9 +804,6 @@ export function FoldAuctionPage() {
               <CtaButton href={phase.primaryCta.href}>{phase.primaryCta.label}</CtaButton>
               <CtaButton href={AUCTION.participationGuideUrl} variant="secondary">How to Participate</CtaButton>
             </ScrollFadeIn>
-            <ScrollFadeIn className="flex w-full flex-wrap items-center justify-center gap-x-6 gap-y-3 pt-2" delay={0.2}>
-              <TextLink href={AUCTION.auctionFaqUrl}>Read the Auction FAQ</TextLink>
-            </ScrollFadeIn>
           </div>
         </section>
 
@@ -894,7 +890,9 @@ export function FoldAuctionPage() {
                 </span>
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. Once bidding opens, participants can submit an order through the official Uniswap CCA interface." />
+                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. During the registration window (July 6–7)," />
+                <LineRevealAuto delay={0.29} text="verified participants may submit pre-bids through the official Uniswap CCA interface." />
+                <LineRevealAuto delay={0.38} text="Once the auction opens on Wednesday (July 8), participants may continue bidding through the same official interface." />
               </p>
             </div>
 
@@ -973,16 +971,6 @@ export function FoldAuctionPage() {
                 </ScrollFadeIn>
               ))}
             </ol>
-            <ScrollFadeIn className="mt-10 text-center" delay={0.1}>
-              <UnderlinedArrowLink
-                className="inline-flex text-[#82f5ad] transition-colors hover:text-[#d9fce8]"
-                href={AUCTION.auctionFaqUrl}
-                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
-                underlineClassName="border-b border-current pb-[4px]"
-              >
-                Read the Auction FAQ
-              </UnderlinedArrowLink>
-            </ScrollFadeIn>
           </div>
         </section>
 
@@ -1161,8 +1149,11 @@ export function FoldAuctionPage() {
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.22}>
                 <p>
-                  Participation in the FOLD auction will be subject to the official Auction Terms, eligibility requirements, and
-                  verification procedures.
+                  Participation in the FOLD auction will be subject to the official{" "}
+                  <a className="border-b border-current text-[#3a5e3c] transition-colors hover:text-[#82f5ad]" href={AUCTION.auctionTermsUrl}>
+                    Auction Terms
+                  </a>
+                  , eligibility requirements, and verification procedures.
                 </p>
               </ScrollFadeIn>
             </div>

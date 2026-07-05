@@ -39,6 +39,24 @@ html.interfold-theme-participate #root {
   width: 100% !important;
 }
 
+@media (min-width: 768px) and (max-width: 1279px) {
+  .interfold-footer-signup .interfold-ghost-signup__embed {
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .interfold-footer-baseline-item {
+    align-self: last baseline;
+  }
+
+  .interfold-footer-signup-form .interfold-ghost-signup__embed {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: baseline;
+  }
+}
+
 .interfold-ghost-signup__embed form {
   background: transparent !important;
   border: 0 !important;

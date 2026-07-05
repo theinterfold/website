@@ -16,9 +16,8 @@ import boundlessLogo from "../../imports/Desktop/boundless-logo.svg";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
-import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
+import { AnimatedExecutionModelGraphic, DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
-import { GhostSignupForm } from "./GhostSignupForm";
 import { HeroImage, homeHeroSources } from "./HeroImage";
 import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { LineReveal } from "./LineReveal";
@@ -396,6 +395,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[16px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm11}
                     />
                   </div>
@@ -420,6 +421,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm12}
                     />
                   </div>
@@ -444,6 +447,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm13}
                     />
                   </div>
@@ -548,56 +553,7 @@ export function MobileVersion() {
         </div>
       </ScrollFadeIn>
 
-      {/* Footer */}
-      <ScrollFadeIn className="bg-[#d9fce8] px-6 py-6">
-        <div className="mobile-possibility-slider mx-auto w-full max-w-md">
-          <h2
-            className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]"
-            style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
-          >
-            The Interfold
-          </h2>
-
-          <div className="mb-6 flex flex-col gap-2">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
-              Follow us
-            </p>
-            <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
-                Telegram
-              </a>
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
-                Github
-              </a>
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
-                X
-              </a>
-            </div>
-          </div>
-
-          <GhostSignupForm className="mb-6" />
-
-          <div className="mb-6 flex flex-col gap-2">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
-              Legal
-            </p>
-            <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <button className="text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
-              <button className="text-left transition-colors hover:text-[#82f5ad]">Terms & Conditions</button>
-            </div>
-          </div>
-
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] mb-4 flex flex-col text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
-            <p>—</p>
-            <p>All Rights Reserved © 2026</p>
-          </div>
-
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
-            <p>Open source protocol.</p>
-            <p>Built by <a className="underline underline-offset-2 transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.</p>
-          </div>
-        </div>
-      </ScrollFadeIn>
+      <DesktopFooter staticLayout />
     </div>
   );
 }
