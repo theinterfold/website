@@ -311,6 +311,7 @@ const detailRows: Array<{ term: string; value: string; href?: string }> = [
   { term: "Auction window", value: AUCTION.auctionWindow },
   { term: "Transfer restriction", value: "40-day cooldown after the auction" },
   { term: "Target TGE / transferability", value: AUCTION.tgeDate },
+  { term: "Issuer", value: "Interfold Ltd." },
   { term: "Venue", value: "Uniswap CCA interface", href: AUCTION.uniswapCcaUrl },
 ];
 
@@ -890,9 +891,8 @@ export function FoldAuctionPage() {
                 </span>
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
-                <LineRevealAuto delay={0.2} text="Eligible participants must complete registration and verification before participating in the FOLD auction. During the registration window (July 6–7)," />
-                <LineRevealAuto delay={0.29} text="verified participants may submit pre-bids through the official Uniswap CCA interface." />
-                <LineRevealAuto delay={0.38} text="Once the auction opens on Wednesday (July 8), participants may continue bidding through the same official interface." />
+                <LineRevealAuto delay={0.2} text={"Eligible participants must complete registration and verification before participating in the FOLD auction. During the registration window (July 6\u2060–\u20607), verified participants may submit pre-bids through the official Uniswap CCA interface."} />
+                <LineRevealAuto delay={0.29} text="Once the auction opens on Wednesday (July 8), participants may continue bidding through the same official interface." />
               </p>
             </div>
 

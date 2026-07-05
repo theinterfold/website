@@ -98,10 +98,14 @@ const termsSections: LegalSection[] = [
         "located in, resident in, organized in, or acting on behalf of a person or entity located in a restricted jurisdiction;",
         "participating on behalf of a person or entity that is not eligible to participate;",
         "under the age of majority in your jurisdiction; or",
-        "otherwise prohibited from participating under applicable law, these Terms, or any determination made by any applicable party or provider in their respective discretion.",
+        "otherwise prohibited from participating under applicable law, these Terms, or any determination made by an applicable party or provider in its respective discretion.",
       ]),
+      paragraph("Participation may be restricted in certain jurisdictions, including the United Kingdom."),
       paragraph(
-        "Participation may be restricted in certain jurisdictions, including the United Kingdom. EU participation may be subject to limits of fewer than 149 persons per member state.",
+        "The offer of FOLD to persons resident in the European Union is made in reliance on the exemption set forth in Article 4(2)(a) of Regulation (EU) 2023/1114 of the European Parliament and of the Council of 31 May 2023 on markets in crypto-assets (the “MiCAR”). Pursuant to Article 4(2)(a) of MiCAR, the offer is directed at fewer than 150 natural or legal persons per Member State, where such persons are acting on their own account.",
+      ),
+      paragraph(
+        "Under this exemption, as provided in Article 4(2) of MiCAR, the Issuer is not required to: (i) draw up a crypto-asset white paper in accordance with Article 6 of MiCAR; (ii) notify such white paper to the competent authority of the relevant Member State in accordance with Article 8 of MiCAR; (iii) publish such white paper in accordance with Article 9 of MiCAR; or (iv) publish marketing communications in accordance with Article 9 of MiCAR. Accordingly, the Issuer will limit the number of participants resident in any single EU Member State to fewer than 150 persons. If you are an EU resident, your eligibility to participate in the FOLD auction may be restricted to ensure compliance with this limitation. No crypto-asset white paper has been drawn up or notified to any competent authority in any EU Member State in connection with this offer. EU residents should carefully consider whether participation in the FOLD auction is appropriate in light of their individual circumstances.",
       ),
       paragraph(
         "Completing registration or KYC does not guarantee eligibility to participate. The Issuer, Predicate, Uniswap, wallet-screening providers, or other service providers may reject, block, or restrict participation where required or appropriate under applicable requirements.",
@@ -397,7 +401,7 @@ const termsSections: LegalSection[] = [
       ),
       subheading("20.3 Binding Confidential Arbitration"),
       paragraph(
-        "Any dispute, claim, or controversy arising out of or relating to these Terms, the FOLD auction, FOLD, or your participation in the FOLD auction shall be resolved by confidential, binding arbitration to be seated in the British Virgin Islands and conducted in the English language by a panel of three arbitrators pursuant to the rules of the International Chamber of Commerce (the “Rules”). The arbitrators shall be appointed in accordance with the procedures set out in the Rules. The award or decision of a majority of the arbitrators shall be final and binding upon the parties and the parties expressly waive any right under the laws of any jurisdiction to appeal or otherwise challenge the award, ruling or decision of such majority. The judgment of any award or decision may be entered in any court having competent jurisdiction to the extent necessary. No party hereto shall (or shall permit its representatives to) commence, continue or pursue any dispute in any court; provided, however, that the issuer shall be entitled to seek a preliminary injunction, temporary restraining order or similar provisional relief to prevent threatened or ongoing breaches of these Terms or to provisionally enforce specifically these Terms, this being in addition to any other remedy to which each party is entitled at law or in equity.",
+        "Any dispute, claim, or controversy arising out of or relating to these Terms, the FOLD auction, FOLD, or your participation in the FOLD auction shall be resolved by confidential, binding arbitration to be seated in the British Virgin Islands and conducted in the English language by a panel of three arbitrators pursuant to the rules of the International Chamber of Commerce (the “Rules”). The arbitrators shall be appointed in accordance with the procedures set out in the Rules. The award or decision of a majority of the arbitrators shall be final and binding upon the parties and the parties expressly waive any right under the laws of any jurisdiction to appeal or otherwise challenge the award, ruling or decision of such majority. The judgment of any award or decision may be entered in any court having competent jurisdiction to the extent necessary. No party hereto shall (or shall permit its representatives to) commence, continue or pursue any dispute in any court; provided, however, that the Issuer shall be entitled to seek a preliminary injunction, temporary restraining order or similar provisional relief to prevent threatened or ongoing breaches of these Terms or to provisionally enforce specifically these Terms, this being in addition to any other remedy to which each party is entitled at law or in equity.",
       ),
       subheading("20.4 Jury Trial Waiver"),
       paragraph(
@@ -411,7 +415,7 @@ const termsSections: LegalSection[] = [
         "You may bring claims against the Issuer only in your individual capacity and not as a plaintiff or class member in any purported class or representative proceeding.",
       ),
       paragraph(
-        "If this class action waiver is finally determined to be unenforceable, then the arbitration provisions shall not apply to any dispute that would be required to proceed on a class basis, and such dispute shall be resolved exclusively in the courts of Delaware.",
+        "If this class action waiver is finally determined to be unenforceable, then the arbitration provisions shall not apply to any dispute that would be required to proceed on a class basis, and such dispute shall be resolved exclusively in the courts of the British Virgin Islands.",
       ),
     ],
   },
@@ -437,14 +441,6 @@ const termsSections: LegalSection[] = [
             underlineClassName="border-b border-current pb-[3px]"
           >
             Official Interfold auction page
-          </UnderlinedArrowLink>
-          <UnderlinedArrowLink
-            className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-            href="https://docs.theinterfold.com"
-            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-current"
-            underlineClassName="border-b border-current pb-[3px]"
-          >
-            Official Interfold documentation
           </UnderlinedArrowLink>
         </span>,
       ),
@@ -532,9 +528,36 @@ export function AuctionLegalPage() {
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-white text-[#3a5e3c] md:pt-[63px]">
       <main>
-        <section className="bg-white px-4 pb-[48px] pt-[64px] md:px-8 md:pb-[56px] md:pt-[112px]">
+        <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
-            <div className="rounded-[28px] bg-[#d9fce8] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_22px_60px_-45px_rgba(58,94,60,0.45)] md:p-10">
+            <SectionLabel>Terms</SectionLabel>
+            <h2 className="mx-auto mt-[11.543px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
+              FOLD Auction Terms
+            </h2>
+            <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">
+              Last updated: <span className="text-[#3a5e3c]">July 4 2026</span>
+            </p>
+          </ScrollFadeIn>
+        </section>
+
+        <section className="bg-white px-4 pb-[64px] pt-[32px] md:px-8 md:pb-[96px] md:pt-[48px]">
+          <div className="mx-auto max-w-[1052px]">
+            <div className="mx-auto max-w-[760px] space-y-6 pb-16 font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.35] md:pb-24 md:text-[24px]">
+              <p>Your participation in the FOLD auction is subject to these FOLD Auction Terms (the “Terms”). Please read these Terms carefully before participating.</p>
+              <p>By registering for, bidding in, claiming FOLD from, or otherwise participating in the FOLD auction, you acknowledge that you have read, understood, and agree to these Terms, the official auction materials, and any additional instructions published through verified Interfold channels.</p>
+              <p>If you do not understand or agree to these Terms, do not participate in the FOLD auction.</p>
+              <p>The FOLD auction will be conducted by <strong>Interfold Ltd.</strong> (the “Issuer,” “we,” “us,” or “our”). References to “you” mean the person or entity participating in the auction. If you participate on behalf of an entity, you represent and warrant that you are authorized to bind that entity to these Terms.</p>
+            </div>
+
+            {termsSections.map((section) => (
+              <LegalSectionRow key={section.number} section={section} />
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-white px-4 pb-[64px] md:px-8 md:pb-[96px]">
+          <ScrollFadeIn className="mx-auto max-w-[760px]">
+            <div className="rounded-[28px] bg-[#d9fce8] p-6 md:p-10">
               <SectionLabel>Important Information</SectionLabel>
               <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
                 <p>The FOLD auction, TGE, token transferability, and Network Alpha are distinct parts of the launch sequence.</p>
@@ -556,33 +579,6 @@ export function AuctionLegalPage() {
               </div>
             </div>
           </ScrollFadeIn>
-        </section>
-
-        <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
-          <ScrollFadeIn className="mx-auto max-w-[760px]">
-            <SectionLabel>Terms</SectionLabel>
-            <h2 className="mx-auto mt-[11.543px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
-              FOLD Auction Terms
-            </h2>
-            <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">
-              Last updated: <span className="text-[#3a5e3c]">[DATE]</span>
-            </p>
-          </ScrollFadeIn>
-        </section>
-
-        <section className="bg-white px-4 pb-[64px] pt-[32px] md:px-8 md:pb-[96px] md:pt-[48px]">
-          <div className="mx-auto max-w-[1052px]">
-            <div className="mx-auto max-w-[760px] space-y-6 pb-16 font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.35] md:pb-24 md:text-[24px]">
-              <p>Your participation in the FOLD auction is subject to these FOLD Auction Terms (the “Terms”). Please read these Terms carefully before participating.</p>
-              <p>By registering for, bidding in, claiming FOLD from, or otherwise participating in the FOLD auction, you acknowledge that you have read, understood, and agree to these Terms, the official auction materials, and any additional instructions published through verified Interfold channels.</p>
-              <p>If you do not understand or agree to these Terms, do not participate in the FOLD auction.</p>
-              <p>The FOLD auction will be conducted by <strong>Interfold Ltd.</strong> (the “Issuer,” “we,” “us,” or “our”). References to “you” mean the person or entity participating in the auction. If you participate on behalf of an entity, you represent and warrant that you are authorized to bind that entity to these Terms.</p>
-            </div>
-
-            {termsSections.map((section) => (
-              <LegalSectionRow key={section.number} section={section} />
-            ))}
-          </div>
         </section>
       </main>
 
