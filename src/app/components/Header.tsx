@@ -47,16 +47,16 @@ export function Header({
         transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
       }
     : {};
-  const navLinkClass = "transition-colors hover:text-[#82f5ad]";
+  const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
   const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
-  const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "underline decoration-[1px] underline-offset-[5px]" : ""}`;
-  const auctionLinkClass = `${navLinkClass} ${activePath === "fold-auction" ? "underline decoration-[1px] underline-offset-[5px]" : ""}`;
+  const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
+  const auctionLinkClass = `${navLinkClass} ${activePath === "fold-auction" ? "is-active" : ""}`;
 
   return (
     <>
       {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="xl:hidden" />}
       {showDesktop && (
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-300 xl:block`}>
+        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms] xl:block`}>
           <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
             <BrandLink
               aria-label="The Interfold home"
@@ -67,7 +67,7 @@ export function Header({
             >
               {animateOpening ? "The Interfold" : <Wordmark />}
             </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center text-[#3a5e3c]" href="/" {...openingMotion(0.85)}>
+            <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
               <InterfoldSymbol className="block h-full w-full" />
             </MarkLink>
             <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">

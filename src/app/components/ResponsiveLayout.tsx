@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
 import Desktop from '../../imports/Desktop/Desktop';
 import { AuctionLegalPage } from './AuctionLegalPage';
@@ -11,14 +11,23 @@ import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources 
 const MOBILE_BREAKPOINT = 768;
 type HeroPagePath = '' | 'participate' | 'fold-auction';
 type HeroOverlay = {
+  fromPage: HeroPagePath | null;
+  fromTop: number;
+  id: number;
   page: HeroPagePath;
   top: number;
 };
 
 const CONTENT_ONLY_EXIT_CLASS = 'interfold-transition-content-exit';
+const CONTENT_ONLY_ENTER_CLASS = 'interfold-transition-content-enter';
+const FULL_PAGE_EXIT_CLASS = 'interfold-transition-page-exit';
+const FULL_PAGE_ENTER_CLASS = 'interfold-transition-page-enter';
 const HERO_OVERLAY_ACTIVE_CLASS = 'interfold-route-hero-active';
 const HERO_OVERLAY_DURATION_MS = 720;
-const HERO_ROUTE_COMMIT_DELAY_MS = 160;
+const HERO_ROUTE_COMMIT_DELAY_MS = 40;
+const HERO_OVERLAY_CLEANUP_DELAY_MS = 760;
+const PAGE_FADE_COMMIT_DELAY_MS = 220;
+const PAGE_FADE_CLEANUP_DELAY_MS = 520;
 
 function getPagePath() {
   if (typeof window === 'undefined') {
@@ -40,7 +49,7 @@ function getHeroOverlayTop(nextPage: HeroPagePath) {
   const hero = document.querySelector('.interfold-hero-transition');
 
   if (window.innerWidth >= MOBILE_BREAKPOINT) {
-    return nextPage === 'fold-auction' ? 63 : 0;
+    return 0;
   }
 
   if (!(hero instanceof HTMLElement)) {
@@ -54,22 +63,24 @@ function getHeroPagePath(page: string): HeroPagePath | null {
   return page === '' || page === 'participate' || page === 'fold-auction' ? page : null;
 }
 
-function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
-  const isParticipate = overlay.page === 'participate';
-  const sources = overlay.page === 'fold-auction' ? auctionHeroSources : homeHeroSources;
+function HeroTransitionVisual({ page }: { page: HeroPagePath }) {
+  const isParticipate = page === 'participate';
+  const sources = page === 'fold-auction' ? auctionHeroSources : homeHeroSources;
 
   return (
-    <div className={`interfold-route-hero-overlay ${isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}`} style={{ top: `${overlay.top}px` }}>
+    <div className={`size-full ${isParticipate ? 'bg-white' : 'bg-[#d9fce8]'}`}>
       {isParticipate ? (
         <>
           <HeroImage
             className="h-full w-full object-cover object-top md:hidden"
+            fadeIn={false}
             pictureClassName="block h-full w-full md:hidden"
             sources={participateHeroSources}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <HeroImage
               className="absolute inset-0 h-full w-full object-cover object-top"
+              fadeIn={false}
               sources={participateHeroSources}
             />
           </div>
@@ -78,6 +89,7 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
         <>
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
+            fadeIn={false}
             pictureClassName="block h-full w-full md:hidden"
             sources={sources}
           />
@@ -85,6 +97,7 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <HeroImage
                 className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
+                fadeIn={false}
                 sources={sources}
               />
             </div>
@@ -95,16 +108,34 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
   );
 }
 
+function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
+  return (
+    <div className="interfold-route-hero-overlay">
+      {overlay.fromPage !== null && (
+        <div className="interfold-route-hero-layer" style={{ top: `${overlay.fromTop}px` }}>
+          <HeroTransitionVisual page={overlay.fromPage} />
+        </div>
+      )}
+      <div className="interfold-route-hero-layer interfold-route-hero-overlay__incoming" style={{ top: `${overlay.top}px` }}>
+        <HeroTransitionVisual page={overlay.page} />
+      </div>
+    </div>
+  );
+}
+
 export function ResponsiveLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [routePath, setRoutePath] = useState(getPagePath);
   const [heroOverlay, setHeroOverlay] = useState<HeroOverlay | null>(null);
+  const heroTransitionId = useRef(0);
+  const routePathRef = useRef(getPagePath());
 
   useEffect(() => {
     setIsClient(true);
     const currentPath = getPagePath();
     applyPageTheme(currentPath);
+    routePathRef.current = currentPath;
     setRoutePath(currentPath);
     const previousScrollRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
@@ -116,6 +147,7 @@ export function ResponsiveLayout() {
     const commitRoutePath = () => {
       const nextPath = getPagePath();
       applyPageTheme(nextPath);
+      routePathRef.current = nextPath;
       flushSync(() => {
         setRoutePath(nextPath);
       });
@@ -125,6 +157,9 @@ export function ResponsiveLayout() {
 
     const clearTransitionModeClasses = () => {
       document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
+      document.documentElement.classList.remove(CONTENT_ONLY_ENTER_CLASS);
+      document.documentElement.classList.remove(FULL_PAGE_EXIT_CLASS);
+      document.documentElement.classList.remove(FULL_PAGE_ENTER_CLASS);
       document.documentElement.classList.remove(HERO_OVERLAY_ACTIVE_CLASS);
     };
 
@@ -152,10 +187,32 @@ export function ResponsiveLayout() {
         return;
       }
 
+      const currentHero = document.querySelector('.interfold-hero-transition');
+      const shouldUseHeroTransition = currentHero instanceof HTMLElement && window.scrollY <= 8;
+
+      if (!shouldUseHeroTransition) {
+        applyPageTheme(nextPage);
+        document.documentElement.classList.add(FULL_PAGE_EXIT_CLASS);
+        heroOverlayRouteTimer = window.setTimeout(() => {
+          document.documentElement.classList.remove(FULL_PAGE_EXIT_CLASS);
+          document.documentElement.classList.add(FULL_PAGE_ENTER_CLASS);
+          commit();
+        }, PAGE_FADE_COMMIT_DELAY_MS);
+        heroOverlayCleanupTimer = window.setTimeout(() => {
+          clearTransitionModeClasses();
+        }, PAGE_FADE_CLEANUP_DELAY_MS);
+        return;
+      }
+
       applyPageTheme(nextPage);
       document.documentElement.classList.add(HERO_OVERLAY_ACTIVE_CLASS);
+      heroTransitionId.current += 1;
+      const fromPage = getHeroPagePath(routePathRef.current);
       flushSync(() => {
         setHeroOverlay({
+          fromPage,
+          fromTop: fromPage === null ? getHeroOverlayTop(nextHeroPage) : getHeroOverlayTop(fromPage),
+          id: heroTransitionId.current,
           page: nextHeroPage,
           top: getHeroOverlayTop(nextHeroPage),
         });
@@ -163,6 +220,7 @@ export function ResponsiveLayout() {
       document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
       heroOverlayRouteTimer = window.setTimeout(() => {
         document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
+        document.documentElement.classList.add(CONTENT_ONLY_ENTER_CLASS);
         commit();
       }, HERO_ROUTE_COMMIT_DELAY_MS);
       heroOverlayCleanupTimer = window.setTimeout(() => {
@@ -170,7 +228,7 @@ export function ResponsiveLayout() {
         flushSync(() => {
           setHeroOverlay(null);
         });
-      }, HERO_OVERLAY_DURATION_MS);
+      }, HERO_OVERLAY_CLEANUP_DELAY_MS);
     };
 
     const checkRoute = () => {
@@ -238,11 +296,12 @@ export function ResponsiveLayout() {
   const isParticipate = routePath === 'participate';
   const isFoldAuction = routePath === 'fold-auction';
   const isAuctionLegal = routePath === 'auction/legal';
+  const headerBackgroundPath = heroOverlay?.page ?? routePath;
   const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)) ? (
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
-      backgroundClassName={isParticipate || isAuctionLegal ? 'bg-white' : 'bg-[#d9fce8]'}
+      backgroundClassName={headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
       showMobile={isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)}
@@ -272,7 +331,7 @@ export function ResponsiveLayout() {
       <>
         {sharedHeader}
         <FoldAuctionPage />
-        {heroOverlay && <HeroTransitionOverlay overlay={heroOverlay} />}
+        {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
       </>
     );
   }
@@ -291,7 +350,7 @@ export function ResponsiveLayout() {
       <>
         {sharedHeader}
         <ParticipatePage />
-        {heroOverlay && <HeroTransitionOverlay overlay={heroOverlay} />}
+        {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
       </>
     );
   }
@@ -300,7 +359,7 @@ export function ResponsiveLayout() {
     <>
       {sharedHeader}
       {isMobile ? <MobileVersion /> : <Desktop />}
-      {heroOverlay && <HeroTransitionOverlay overlay={heroOverlay} />}
+      {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
     </>
   );
 }

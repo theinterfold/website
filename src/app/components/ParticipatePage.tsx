@@ -273,12 +273,14 @@ export function ParticipatePage() {
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:h-[min(44.444vw,640px)]">
           <HeroImage
             className="h-full w-full object-cover object-top md:hidden"
+            fadeIn={false}
             pictureClassName="block h-full w-full md:hidden"
             sources={participateHeroSources}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <HeroImage
               className="absolute inset-0 h-full w-full object-cover object-top"
+              fadeIn={false}
               sources={participateHeroSources}
             />
           </div>

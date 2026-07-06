@@ -1837,6 +1837,7 @@ export default function Desktop() {
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage
             className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
+            fadeIn={false}
             sources={homeHeroSources}
           />
         </div>

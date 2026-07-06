@@ -39,7 +39,7 @@ export function SiteMobileHeader({
 
   return (
     <>
-      <div className={`interfold-header-drop sticky top-0 z-50 flex items-center justify-center ${backgroundClassName} px-6 py-4 ${className}`}>
+      <div className={`interfold-header-drop sticky top-0 z-50 flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms] ${className}`}>
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
@@ -56,7 +56,7 @@ export function SiteMobileHeader({
           </svg>
         </a>
 
-        <a aria-label="The Interfold home" className="h-7 w-8 text-[#3a5e3c]" href="/">
+        <a aria-label="The Interfold home" className="h-7 w-8 text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/">
           <InterfoldSymbol className="h-full w-full" />
         </a>
 
@@ -68,7 +68,7 @@ export function SiteMobileHeader({
 
       {isMenuOpen && (
         <div
-          className={`fixed inset-0 z-[60] flex h-[100dvh] min-h-screen w-screen flex-col items-center justify-center ${backgroundClassName}`}
+          className={`fixed inset-0 z-[60] flex h-[100dvh] min-h-screen w-screen flex-col items-center justify-center ${backgroundClassName} transition-colors duration-[720ms]`}
         >
           <motion.p
             animate={{ opacity: 1, y: 0 }}

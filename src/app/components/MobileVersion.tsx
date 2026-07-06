@@ -235,6 +235,7 @@ export function MobileVersion() {
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
+            fadeIn={false}
             pictureClassName="block h-full w-full"
             sources={homeHeroSources}
           />

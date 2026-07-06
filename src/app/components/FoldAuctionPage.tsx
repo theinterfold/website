@@ -21,15 +21,15 @@ const PHASE: Phase = "live"; // TODO: set to the current launch phase
 
 const AUCTION = {
   // Participate
-  uniswapCcaUrl: TODO_LINK, // TODO: official Uniswap CCA link
-  registrationUrl: TODO_LINK, // TODO: registration / KYC link
+  uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
+  registrationUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
   participationGuideUrl: "https://blog.theinterfold.com/how-to-participate-in-the-fold-auction/",
   // Learn more
   auctionFaqUrl: "https://docs.theinterfold.com/faq/auction",
   tokenFaqUrl: "https://docs.theinterfold.com/faq/fold-token",
   tokenomicsUrl: "https://docs.theinterfold.com/tokenomics",
   auctionTermsUrl: "/auction/legal",
-  auditUrl: TODO_LINK, // TODO: smart-contract audit report — pending sign-off with Auryn
+  auditUrl: "https://github.com/theinterfold/interfold/pull/1641",
   understandingFoldUrl: "https://blog.theinterfold.com/fold-token-interfold-network/",
   howItWorksUrl: "https://blog.theinterfold.com/how-interfold-works/",
   launchPrimerUrl: "https://blog.theinterfold.com/fold-auction-uniswap/",
@@ -42,7 +42,7 @@ const AUCTION = {
   xUrl: "https://x.com/theinterfold",
   // Verification
   officialDomain: "www.theinterfold.com",
-  explorerBaseUrl: "https://etherscan.io/token/", // TODO: confirm explorer / network
+  explorerBaseUrl: "https://etherscan.io/address/",
   // Timeline / details
   registrationDates: "July 6–7",
   auctionWindow: "Opens July 8 for 48 hours",
@@ -50,10 +50,9 @@ const AUCTION = {
   // ISO datetime the countdown ticks toward (e.g. "2026-07-15T15:00:00Z").
   // Leave empty to hide the countdown.
   countdownTarget: "", // TODO: set countdown target (ISO 8601)
-  // Contracts — PLACEHOLDER values (realistic format, for layout only).
-  foldContract: "0xF01Dc0ffEE254729296A45A3885639AC7E10F9d4", // TODO: real FOLD token contract address
-  auctionContract: "0xA0C710dDEe2c9B3E6f5B8A14c2D7e9F013Ab45C6", // TODO: real auction contract address / link
-  network: "Ethereum Mainnet", // TODO: confirm network
+  foldContract: "0xb10AfC08888a2f9946BDc991F4B0c8D3CE02F9f9",
+  auctionContract: "0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
+  network: "Ethereum Mainnet",
 };
 
 const META_DESCRIPTION =
@@ -307,11 +306,13 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
 
 const detailRows: Array<{ term: string; value: string; href?: string }> = [
   { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
+  { term: "Ticker", value: "FOLD" },
   { term: "Registration / Pre-Bidding", value: AUCTION.registrationDates },
   { term: "Auction window", value: AUCTION.auctionWindow },
   { term: "Transfer restriction", value: "40-day cooldown after the auction" },
   { term: "Target TGE / transferability", value: AUCTION.tgeDate },
   { term: "Issuer", value: "Interfold Ltd." },
+  { term: "Network", value: AUCTION.network },
   { term: "Venue", value: "Uniswap CCA interface", href: AUCTION.uniswapCcaUrl },
 ];
 
@@ -731,12 +732,13 @@ export function FoldAuctionPage() {
   }, []);
 
   return (
-    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c] md:pt-[63px]">
+    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
       <main>
         {/* Hero visual band — same treatment as the homepage hero */}
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8] md:h-[min(44.444vw,640px)]">
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken md:hidden"
+            fadeIn={false}
             pictureClassName="block h-full w-full md:hidden"
             sources={auctionHeroSources}
           />
@@ -744,6 +746,7 @@ export function FoldAuctionPage() {
             <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8]">
               <HeroImage
                 className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
+                fadeIn={false}
                 sources={auctionHeroSources}
               />
             </div>
@@ -892,6 +895,8 @@ export function FoldAuctionPage() {
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
                 <LineRevealAuto delay={0.2} text={"Eligible participants must complete registration and verification before participating in the FOLD auction. During the registration window (July 6\u2060–\u20607), verified participants may submit pre-bids through the official Uniswap CCA interface."} />
+              </p>
+              <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[600px] md:text-[18px]">
                 <LineRevealAuto delay={0.29} text="Once the auction opens on Wednesday (July 8), participants may continue bidding through the same official interface." />
               </p>
             </div>

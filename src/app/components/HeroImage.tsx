@@ -96,11 +96,13 @@ export function preloadHeroImage(sources: HeroImageSources) {
 export function HeroImage({
   alt = "",
   className,
+  fadeIn = true,
   pictureClassName = "contents",
   sources,
 }: {
   alt?: string;
   className: string;
+  fadeIn?: boolean;
   pictureClassName?: string;
   sources: HeroImageSources;
 }) {
@@ -125,7 +127,7 @@ export function HeroImage({
       )}
       <img
         alt={alt}
-        className={`${className} transition-opacity duration-300 ease-out motion-reduce:transition-none ${isLoaded ? "opacity-100" : "opacity-0"}`}
+        className={`${className} ${fadeIn ? `transition-opacity duration-300 ease-out motion-reduce:transition-none ${isLoaded ? "opacity-100" : "opacity-0"}` : "opacity-100"}`}
         decoding="async"
         fetchPriority="high"
         height={sources.height}
