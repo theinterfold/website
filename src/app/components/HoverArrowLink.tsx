@@ -38,6 +38,10 @@ function isExternalDestination(href: string) {
   return /^(?:https?:|mailto:|tel:)/.test(href);
 }
 
+function opensInNewTab(href: string) {
+  return /^https?:/.test(href);
+}
+
 export function ArrowSlide({
   className = "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none",
   rowClassName = "h-[14px] w-[14px] leading-none",
@@ -103,6 +107,7 @@ export function HoverArrowLink({
   animateInView,
 }: HoverArrowLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const openInNewTab = opensInNewTab(href);
 
   return (
     <a
@@ -110,6 +115,8 @@ export function HoverArrowLink({
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      rel={openInNewTab ? "noopener noreferrer" : undefined}
+      target={openInNewTab ? "_blank" : undefined}
     >
       <HoverArrowContent
         animateInView={animateInView}
@@ -134,13 +141,14 @@ export function UnderlinedArrowLink({
   underlineClassName = "border-b border-current pb-[3px]",
 }: UnderlinedArrowLinkProps) {
   const isExternal = isExternalDestination(href);
+  const openInNewTab = opensInNewTab(href);
 
   return (
     <a
       className={`group items-center gap-1 ${underlineClassName} ${className}`}
       href={href}
-      rel={isExternal ? "noreferrer" : undefined}
-      target={isExternal ? "_blank" : undefined}
+      rel={openInNewTab ? "noopener noreferrer" : undefined}
+      target={openInNewTab ? "_blank" : undefined}
     >
       <span className={textClassName}>{children}</span>
       <ArrowSlide className={arrowClassName} isExternal={isExternal} rowClassName={arrowRowClassName} />

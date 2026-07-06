@@ -21,15 +21,15 @@ const PHASE: Phase = "live"; // TODO: set to the current launch phase
 
 const AUCTION = {
   // Participate
-  uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
-  registrationUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
+  uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0x687Cc38d8279dF3352b64cF3EC1fe8e033933595",
+  registrationUrl: "https://app.uniswap.org/explore/auctions/ethereum/0x687Cc38d8279dF3352b64cF3EC1fe8e033933595",
   participationGuideUrl: "https://blog.theinterfold.com/how-to-participate-in-the-fold-auction/",
   // Learn more
   auctionFaqUrl: "https://docs.theinterfold.com/faq/auction",
   tokenFaqUrl: "https://docs.theinterfold.com/faq/fold-token",
   tokenomicsUrl: "https://docs.theinterfold.com/tokenomics",
   auctionTermsUrl: "/auction/legal",
-  auditUrl: "https://github.com/theinterfold/interfold/pull/1641",
+  auditUrl: "https://github.com/theinterfold/interfold/blob/main/packages/interfold-contracts/audits/20260702_audit_token_zenith.pdf",
   understandingFoldUrl: "https://blog.theinterfold.com/fold-token-interfold-network/",
   howItWorksUrl: "https://blog.theinterfold.com/how-interfold-works/",
   launchPrimerUrl: "https://blog.theinterfold.com/fold-auction-uniswap/",
@@ -50,8 +50,8 @@ const AUCTION = {
   // ISO datetime the countdown ticks toward (e.g. "2026-07-15T15:00:00Z").
   // Leave empty to hide the countdown.
   countdownTarget: "", // TODO: set countdown target (ISO 8601)
-  foldContract: "0xb10AfC08888a2f9946BDc991F4B0c8D3CE02F9f9",
-  auctionContract: "0xD9E8355f9f57185928347a5BdDEe1640006b16e58",
+  foldContract: "0xE172e9B6cfBeeB5593bDcE3f077356FDb33af904",
+  auctionContract: "0x687Cc38d8279dF3352b64cF3EC1fe8e033933595",
   network: "Ethereum Mainnet",
 };
 
@@ -438,9 +438,9 @@ const linkGroups: Array<{ heading: string; rows: Array<{ label: string; href: st
   },
 ];
 
-const contractRows: Array<{ label: string; value: string; explorer?: boolean }> = [
-  { label: "FOLD token contract", value: AUCTION.foldContract, explorer: true },
-  { label: "Auction contract", value: AUCTION.auctionContract, explorer: true },
+const contractRows: Array<{ label: string; value: string; explorerHref?: string }> = [
+  { label: "FOLD token contract", value: AUCTION.foldContract, explorerHref: `${AUCTION.explorerBaseUrl}${AUCTION.foldContract}` },
+  { label: "Auction contract", value: AUCTION.auctionContract, explorerHref: AUCTION.uniswapCcaUrl },
   { label: "Network", value: AUCTION.network },
 ];
 
@@ -570,7 +570,7 @@ function ContractsCard() {
                 </div>
                 <dl className="w-full">
                   {contractRows.map((row) => {
-                    const isAddress = row.explorer && row.value !== TODO_TEXT;
+                    const isAddress = Boolean(row.explorerHref) && row.value !== TODO_TEXT;
 
                     return (
                       <div className="grid gap-x-6 gap-y-3 border-b border-[#d9fce8]/10 py-4 md:grid-cols-[1fr_auto] md:items-start" key={row.label}>
@@ -579,7 +579,7 @@ function ContractsCard() {
                             {row.label}
                           </dt>
                           <dd className="mt-2">
-                            {row.explorer ? (
+                            {row.explorerHref ? (
                               <CopyableValue tone="dark" value={row.value} />
                             ) : (
                               <span className="break-all font-['Office_Code_Pro:Medium',sans-serif] text-[13px] leading-[1.4] tracking-[0.5px] text-[#d9fce8]/80">
@@ -591,7 +591,7 @@ function ContractsCard() {
                         {isAddress && (
                           <UnderlinedArrowLink
                             className="inline-flex justify-self-start text-[#82f5ad] transition-colors hover:text-[#d9fce8] md:mt-[28px] md:justify-self-end"
-                            href={`${AUCTION.explorerBaseUrl}${row.value}`}
+                            href={row.explorerHref}
                             textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-none tracking-[1.4px] text-current"
                             underlineClassName="border-b border-current pb-[2px]"
                           >

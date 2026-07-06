@@ -132,6 +132,46 @@ export function ResponsiveLayout() {
   const routePathRef = useRef(getPagePath());
 
   useEffect(() => {
+    const configureExternalLink = (anchor: HTMLAnchorElement) => {
+      const url = new URL(anchor.href, window.location.href);
+      const isExternalHttpLink =
+        (url.protocol === 'http:' || url.protocol === 'https:') &&
+        url.origin !== window.location.origin;
+
+      if (!isExternalHttpLink) {
+        return;
+      }
+
+      anchor.target = '_blank';
+      anchor.rel = Array.from(new Set(`${anchor.rel} noopener noreferrer`.trim().split(/\s+/))).join(' ');
+    };
+
+    const configureTree = (root: ParentNode) => {
+      if (root instanceof HTMLAnchorElement) {
+        configureExternalLink(root);
+      }
+
+      root.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(configureExternalLink);
+    };
+
+    configureTree(document);
+
+    const observer = new MutationObserver((records) => {
+      records.forEach((record) => {
+        record.addedNodes.forEach((node) => {
+          if (node instanceof Element) {
+            configureTree(node);
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     setIsClient(true);
     const currentPath = getPagePath();
     applyPageTheme(currentPath);
