@@ -1,12 +1,12 @@
-import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
-import imgSignal from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
-import imgNetwork from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
-import imgMesh from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
-import { DesktopFooter } from "../../imports/Desktop/Desktop";
-import { motion } from "motion/react";
-import { ExternalArrowSlide } from "./HoverArrowLink";
-import { ScrollFadeIn } from "./ScrollFadeIn";
-import { SiteMobileHeader } from "./SiteMobileHeader";
+// ARCHIVED — these content pages (/community, /protocol, /docs) are no longer
+// in use and are not routed. Kept for reference/restore. The shared Header now
+// lives in src/app/components/Header.tsx.
+import imgSignal from "@/imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
+import imgNetwork from "@/imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
+import imgMesh from "@/imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
+import { DesktopFooter } from "@/imports/Desktop/Desktop";
+import { ScrollFadeIn } from "@/app/components/ScrollFadeIn";
+import { Header } from "@/app/components/Header";
 
 type PageKey = "community" | "protocol" | "docs";
 
@@ -146,140 +146,6 @@ const docsRows = [
     detail: "Responsibilities, threshold assumptions, testing, and release discipline.",
   },
 ];
-
-function Wordmark() {
-  return (
-    <svg className="block h-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
-      <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
-      <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
-      <path d={svgPaths.pc6803c0} fill="#3A5E3C" />
-      <path d={svgPaths.pd8ed180} fill="#3A5E3C" />
-      <path d={svgPaths.p3771fe00} fill="#3A5E3C" />
-      <path d={svgPaths.p2960eb80} fill="#3A5E3C" />
-      <path d={svgPaths.p357bef30} fill="#3A5E3C" />
-      <path d={svgPaths.p2e47ac00} fill="#3A5E3C" />
-      <path d={svgPaths.p254332f0} fill="#3A5E3C" />
-      <path d={svgPaths.p102bd800} fill="#3A5E3C" />
-      <path d={svgPaths.p12150980} fill="#3A5E3C" />
-    </svg>
-  );
-}
-
-function Mark() {
-  return (
-    <svg className="block h-full w-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 102 89">
-      <path d="M98.46 7.23828L77.25 28.4583L66.64 17.8483L56.03 7.23828L45.43 17.8483L34.82 7.23828L24.21 17.8483L13.61 28.4583L3 39.0583V81.4883L24.21 60.2783L34.82 70.8783L45.43 81.4883L56.03 70.8783L66.64 81.4883L77.25 70.8783L87.85 60.2783L98.46 49.6683V7.23828Z" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M24.21 60.2786L3 39.0586" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M45.4297 17.8516L87.8497 60.2816" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M77.25 28.4609L98.46 49.6709" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M56.0294 70.8809L13.6094 28.4609" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M77.2509 70.8816L24.2109 17.8516" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M45.4309 17.8516L24.2109 39.0616" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-      <path d="M56.0312 70.8819L77.2513 49.6719" stroke="#3A5E3C" strokeLinejoin="bevel" strokeWidth="6" />
-    </svg>
-  );
-}
-
-export function Header({
-  activePath = "",
-  animateOpening = false,
-  backgroundClassName = "bg-[#d9fce8]",
-  desktopPositionClassName = "md:sticky md:top-0",
-  showDesktop = true,
-  showMobile = true,
-}: {
-  activePath?: string;
-  animateOpening?: boolean;
-  backgroundClassName?: string;
-  desktopPositionClassName?: string;
-  showDesktop?: boolean;
-  showMobile?: boolean;
-}) {
-  const BrandLink = animateOpening ? motion.a : "a";
-  const MarkLink = animateOpening ? motion.a : "a";
-  const NavLink = animateOpening ? motion.a : "a";
-  const openingMotion = (delay: number) => animateOpening
-    ? {
-        animate: { opacity: 1, y: 0 },
-        initial: { opacity: 0, y: -6 },
-        transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
-      }
-    : {};
-  const navLinkClass = "transition-colors hover:text-[#82f5ad]";
-  const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
-  const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "underline decoration-[1px] underline-offset-[5px]" : ""}`;
-
-  return (
-    <>
-      {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="md:hidden" />}
-      {showDesktop && (
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-300 md:block`}>
-          <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-            <BrandLink
-              aria-label="The Interfold home"
-              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17.239px] w-[120.421px] justify-self-start"}
-              href="/"
-              style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
-              {...openingMotion(0.75)}
-            >
-              {animateOpening ? "The Interfold" : <Wordmark />}
-            </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center" href="/" {...openingMotion(0.85)}>
-              <Mark />
-            </MarkLink>
-            <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
-              <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
-                <span>Docs</span>
-                <ExternalArrowSlide />
-              </NavLink>
-              <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
-                <span>Blog</span>
-                <ExternalArrowSlide />
-              </NavLink>
-              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
-            </nav>
-          </div>
-        </header>
-      )}
-    </>
-  );
-}
-
-export function Footer() {
-  return (
-    <footer className="bg-[#d9fce8]">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-12 md:grid-cols-[1fr_1fr] md:px-6">
-        <div className="flex min-h-[240px] flex-col justify-between">
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] text-[#3a5e3c] md:text-[64px]">
-            The Interfold
-          </p>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c]">
-            <p className="mb-0">privacy</p>
-            <p className="mb-0">Terms & Conditions</p>
-            <p>All Rights Reserved © 2026</p>
-          </div>
-        </div>
-        <div className="flex min-h-[240px] flex-col justify-between md:pl-2">
-          <div>
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">
-              Follow us
-            </p>
-            <div className="mt-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c]">
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3" rel="noreferrer" target="_blank">Telegram</a>
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/" rel="noreferrer" target="_blank">Github</a>
-              <a className="block transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold" rel="noreferrer" target="_blank">X</a>
-            </div>
-          </div>
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c]">
-            Open source protocol.
-            <br />
-            Built by Gnosis Guild.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 function CommunityGraphic() {
   return (

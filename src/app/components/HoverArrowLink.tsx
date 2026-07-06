@@ -20,22 +20,47 @@ type ExternalArrowSlideProps = {
   rowClassName?: string;
 };
 
+type ArrowSlideProps = ExternalArrowSlideProps & {
+  isExternal?: boolean;
+};
+
+type UnderlinedArrowLinkProps = {
+  children: string;
+  className?: string;
+  href: string;
+  textClassName: string;
+  arrowClassName?: string;
+  arrowRowClassName?: string;
+  underlineClassName?: string;
+};
+
 function isExternalDestination(href: string) {
   return /^(?:https?:|mailto:|tel:)/.test(href);
 }
 
-export function ExternalArrowSlide({
+function opensInNewTab(href: string) {
+  return /^https?:/.test(href);
+}
+
+export function ArrowSlide({
   className = "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none",
   rowClassName = "h-[14px] w-[14px] leading-none",
-}: ExternalArrowSlideProps) {
+  isExternal = false,
+}: ArrowSlideProps) {
+  const arrow = isExternal ? "↗" : "→";
+
   return (
     <span aria-hidden="true" className={className}>
       <span className="flex flex-col transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1/2 group-focus-visible:-translate-y-1/2 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-focus-visible:translate-y-0">
-        <span className={rowClassName}>↗</span>
-        <span className={rowClassName}>↗</span>
+        <span className={rowClassName}>{arrow}</span>
+        <span className={rowClassName}>{arrow}</span>
       </span>
     </span>
   );
+}
+
+export function ExternalArrowSlide(props: ExternalArrowSlideProps) {
+  return <ArrowSlide {...props} isExternal />;
 }
 
 export function HoverArrowContent({
@@ -82,6 +107,7 @@ export function HoverArrowLink({
   animateInView,
 }: HoverArrowLinkProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const openInNewTab = opensInNewTab(href);
 
   return (
     <a
@@ -89,6 +115,8 @@ export function HoverArrowLink({
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      rel={openInNewTab ? "noopener noreferrer" : undefined}
+      target={openInNewTab ? "_blank" : undefined}
     >
       <HoverArrowContent
         animateInView={animateInView}
@@ -99,6 +127,31 @@ export function HoverArrowLink({
       >
         {children}
       </HoverArrowContent>
+    </a>
+  );
+}
+
+export function UnderlinedArrowLink({
+  children,
+  className = "inline-flex",
+  href,
+  textClassName,
+  arrowClassName = "relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none",
+  arrowRowClassName = "h-[13px] w-[13px] leading-none",
+  underlineClassName = "border-b border-current pb-[3px]",
+}: UnderlinedArrowLinkProps) {
+  const isExternal = isExternalDestination(href);
+  const openInNewTab = opensInNewTab(href);
+
+  return (
+    <a
+      className={`group items-center gap-1 ${underlineClassName} ${className}`}
+      href={href}
+      rel={openInNewTab ? "noopener noreferrer" : undefined}
+      target={openInNewTab ? "_blank" : undefined}
+    >
+      <span className={textClassName}>{children}</span>
+      <ArrowSlide className={arrowClassName} isExternal={isExternal} rowClassName={arrowRowClassName} />
     </a>
   );
 }

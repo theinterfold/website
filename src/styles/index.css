@@ -39,6 +39,24 @@ html.interfold-theme-participate #root {
   width: 100% !important;
 }
 
+@media (min-width: 768px) and (max-width: 1279px) {
+  .interfold-footer-signup .interfold-ghost-signup__embed {
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .interfold-footer-baseline-item {
+    align-self: last baseline;
+  }
+
+  .interfold-footer-signup-form .interfold-ghost-signup__embed {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: baseline;
+  }
+}
+
 .interfold-ghost-signup__embed form {
   background: transparent !important;
   border: 0 !important;
@@ -63,11 +81,159 @@ html.interfold-theme-participate #root {
   transform-origin: center top;
 }
 
+.actor-glyph__request-code,
+.actor-glyph__provider-source,
+.actor-glyph__provider-core,
+.actor-glyph__committee-ring,
+.actor-glyph__committee-core,
+.actor-glyph__pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes interfold-actor-request-code {
+  0%,
+  12%,
+  42%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  22% {
+    opacity: 0.35;
+    transform: translateX(-1.5px);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateX(1px);
+  }
+}
+
+@keyframes interfold-actor-provider-source {
+  0%,
+  12%,
+  38%,
+  100% {
+    fill: #3a5e3c;
+  }
+
+  23% {
+    fill: rgba(130, 245, 173, 0.24);
+  }
+}
+
+@keyframes interfold-actor-core {
+  0%,
+  38%,
+  62%,
+  100% {
+    transform: scale(1);
+  }
+
+  48% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes interfold-actor-pulse {
+  0%,
+  9%,
+  26%,
+  100% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.42);
+  }
+}
+
+.actor-glyph__request-code {
+  animation: interfold-actor-request-code 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__provider-source {
+  animation: interfold-actor-provider-source 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__provider-source--b {
+  animation-delay: 0.16s;
+}
+
+.actor-glyph__provider-source--c {
+  animation-delay: 0.32s;
+}
+
+.actor-glyph__provider-core,
+.actor-glyph__committee-core {
+  animation: interfold-actor-core 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__pulse {
+  animation: interfold-actor-pulse 4.8s ease-in-out infinite;
+}
+
+.actor-glyph__pulse--b {
+  animation-delay: 0.16s;
+}
+
+.actor-glyph__pulse--c {
+  animation-delay: 0.32s;
+}
+
+.actor-glyph__pulse--d {
+  animation-delay: 0.48s;
+}
+
+.actor-glyph__pulse--e {
+  animation-delay: 0.64s;
+}
+
+.actor-glyph__pulse--f {
+  animation-delay: 0.8s;
+}
+
 .interfold-mobile-menu-trigger .hamburger-react {
   left: 50%;
   position: absolute !important;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+@keyframes interfold-top-nav-line-in {
+  from {
+    opacity: 1;
+    transform: scaleX(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.interfold-top-nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.interfold-top-nav-link::after {
+  background: currentColor;
+  bottom: -5px;
+  content: "";
+  height: 1px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left center;
+  width: 100%;
+}
+
+.interfold-top-nav-link.is-active::after {
+  animation: interfold-top-nav-line-in 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 
 @keyframes interfold-header-drop {
@@ -83,6 +249,40 @@ html.interfold-theme-participate #root {
 .interfold-header-drop {
   animation: interfold-header-drop 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
   will-change: transform;
+}
+
+/* Motion blur for the flipping contracts card. */
+@keyframes interfold-card-spin-blur {
+  0% {
+    filter: blur(0);
+  }
+
+  45% {
+    filter: blur(5px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
+}
+
+.interfold-card-spinning {
+  animation: interfold-card-spin-blur 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actor-glyph__request-code,
+  .actor-glyph__provider-source,
+  .actor-glyph__provider-core,
+  .actor-glyph__committee-ring,
+  .actor-glyph__committee-core,
+  .actor-glyph__pulse {
+    animation: none;
+  }
+
+  .interfold-card-spinning {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -101,7 +301,8 @@ html.interfold-theme-participate #root {
   contain: layout;
 }
 
-html.interfold-transition-content-exit .interfold-page-transition {
+html.interfold-transition-content-exit .interfold-page-transition > :not(main):not(.interfold-hero-transition),
+html.interfold-transition-content-exit .interfold-page-transition > main > :not(.interfold-hero-transition) {
   opacity: 0;
   transform: translate3d(0, -24px, 0);
   transition:
@@ -109,28 +310,46 @@ html.interfold-transition-content-exit .interfold-page-transition {
     transform 240ms var(--interfold-transition-ease);
 }
 
-html.interfold-transition-content-enter .interfold-page-transition {
+html.interfold-transition-content-enter .interfold-page-transition > :not(main):not(.interfold-hero-transition),
+html.interfold-transition-content-enter .interfold-page-transition > main > :not(.interfold-hero-transition) {
   animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
-html.interfold-route-hero-active .interfold-page-transition .interfold-hero-transition {
-  visibility: hidden;
+html.interfold-transition-page-exit .interfold-page-transition {
+  opacity: 0;
+  transform: translate3d(0, -18px, 0);
+  transition:
+    opacity 220ms var(--interfold-transition-ease),
+    transform 220ms var(--interfold-transition-ease);
+}
+
+html.interfold-transition-page-enter .interfold-page-transition {
+  animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
 .interfold-route-hero-overlay {
-  animation: interfold-hero-in var(--interfold-transition-duration) var(--interfold-transition-ease) both;
   contain: layout;
-  height: min(44.444vw, 640px);
-  left: 0;
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
   position: fixed;
-  right: 0;
   z-index: 40;
 }
 
+.interfold-route-hero-layer {
+  height: min(44.444vw, 640px);
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+}
+
+.interfold-route-hero-overlay__incoming {
+  animation: interfold-hero-in var(--interfold-transition-duration) var(--interfold-transition-ease) both;
+}
+
 @media (max-width: 767px) {
-  .interfold-route-hero-overlay {
+  .interfold-route-hero-layer {
     height: 16rem;
   }
 }
@@ -203,6 +422,12 @@ html.interfold-route-hero-active .interfold-page-transition .interfold-hero-tran
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .interfold-top-nav-link.is-active::after {
+    animation: none;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
   .interfold-logo-marquee__track {
     animation: none;
   }

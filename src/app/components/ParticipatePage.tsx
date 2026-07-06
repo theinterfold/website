@@ -186,23 +186,25 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
 }
 
 function ActorGlyph({ index }: { index: number }) {
-  const iconClass = "h-11 w-12 overflow-visible";
+  const iconClass = "actor-glyph__svg h-11 w-12 overflow-visible";
   const accent = "#82f5ad";
 
   return (
-    <div className="relative grid size-[72px] place-items-center rounded-full border border-[#3a5e3c]/20 bg-[#d9fce8] text-[#3a5e3c]">
+    <div className="actor-glyph relative grid size-[76px] place-items-center rounded-full bg-[#3a5e3c] text-white">
       {index === 0 ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <path d="M9.65,28.65c-4.3,0-8.9,3.9-8.9,9.7v3.1h18.1v-3.1c0-5.8-4.9-9.7-9.2-9.7Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <path d="M23.25,11.45V3.65h23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <rect height="22" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="21" x="23.25" y="11.45" />
-          <polyline points="30.55 19.55 27.65 22.35 30.55 25.35" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <polyline points="37.15 19.35 40.05 22.45 37.15 25.35" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="32.25" x2="35.35" y1="27.05" y2="17.65" />
-          <circle cx="48.65" cy="3.45" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <g className="actor-glyph__request-code">
+            <polyline points="30.55 19.55 27.65 22.35 30.55 25.35" stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" />
+            <polyline points="37.15 19.35 40.05 22.45 37.15 25.35" stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" />
+            <line stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" x1="32.25" x2="35.35" y1="27.05" y2="17.65" />
+          </g>
+          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="48.65" cy="3.45" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <path d="M44.25,33.25v7.8h-23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="18.85" cy="41.25" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="18.85" cy="41.25" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
         </svg>
       ) : index === 1 ? (
         <svg aria-hidden="true" className={`${iconClass} translate-x-0.5`} fill="none" focusable="false" viewBox="0 0 61.4 54">
@@ -213,41 +215,49 @@ function ActorGlyph({ index }: { index: number }) {
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="48.85" x2="57.85" y1="26.15" y2="26.15" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="4.95" y2="18.05" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="35.45" y2="47.95" />
-          <rect fill={accent} height="5.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="5.4" x="37.85" y="23.45" />
-          <circle cx="40.45" cy="3.65" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="40.45" cy="49.35" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="59.05" cy="26.15" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <rect height="12.9" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".75" y=".75" />
-          <rect height="13.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="19.45" />
-          <rect height="13.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="39.85" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="22.95" y2="22.95" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="26.15" y2="26.15" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="29.35" y2="29.35" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="43.35" y2="43.35" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="46.55" y2="46.55" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="49.75" y2="49.75" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="4" y2="4" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="7.2" y2="7.2" />
-          <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="10.4" y2="10.4" />
+          <rect className="actor-glyph__provider-core" fill={accent} height="5.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="5.4" x="37.85" y="23.45" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="40.45" cy="3.65" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--c" cx="40.45" cy="49.35" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="59.05" cy="26.15" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <g className="actor-glyph__provider-source actor-glyph__provider-source--a">
+            <rect height="12.9" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".75" y=".75" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="4" y2="4" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="7.2" y2="7.2" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="10.4" y2="10.4" />
+          </g>
+          <g className="actor-glyph__provider-source actor-glyph__provider-source--b">
+            <rect height="13.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="19.45" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="22.95" y2="22.95" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="26.15" y2="26.15" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="29.35" y2="29.35" />
+          </g>
+          <g className="actor-glyph__provider-source actor-glyph__provider-source--c">
+            <rect height="13.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".85" y="39.85" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="43.35" y2="43.35" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="46.55" y2="46.55" />
+            <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="49.75" y2="49.75" />
+          </g>
         </svg>
       ) : (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 45.7 52.21">
-          <polygon points="42.25 36.95 42.25 14.55 22.85 3.35 3.45 14.55 3.45 36.95 22.85 48.15 42.25 36.95" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="22.85" cy="48.76" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="22.85" cy="3.35" fill={accent} r="2.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="3.45" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <polygon className="actor-glyph__committee-ring" points="42.25 36.95 42.25 14.55 22.85 3.35 3.45 14.55 3.45 36.95 22.85 48.15 42.25 36.95" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--d" cx="22.85" cy="48.76" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="22.85" cy="3.35" fill={accent} r="2.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--c" cx="3.45" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="5.95" y2="13.35" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="38.66" y2="46.06" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="41.65" x2="33.65" y1="35.95" y2="31.65" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="5.45" x2="12.45" y1="36.05" y2="32.05" />
-          <circle cx="42.25" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--e" cx="42.25" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <polygon points="33.65 31.99 33.65 19.51 22.85 13.28 12.05 19.51 12.05 31.99 22.85 38.22 33.65 31.99" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <polygon fill={accent} points="28.35 30.85 17.95 30.85 17.95 20.35 28.25 20.35 28.35 30.85" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <polyline points="20.65 24.85 22.55 27.15 25.95 23.25" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <g className="actor-glyph__committee-core">
+            <polygon fill={accent} points="28.35 30.85 17.95 30.85 17.95 20.35 28.25 20.35 28.35 30.85" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+            <polyline points="20.65 24.85 22.55 27.15 25.95 23.25" stroke="#3a5e3c" strokeMiterlimit="10" strokeWidth="1.5" />
+          </g>
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="12.05" x2="3.45" y1="19.51" y2="14.55" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="33.65" x2="42.25" y1="19.51" y2="14.55" />
-          <circle cx="3.45" cy="14.23" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle cx="42.25" cy="14.23" fill="#d9fce8" r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="3.45" cy="14.23" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--f" cx="42.25" cy="14.23" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
         </svg>
       )}
     </div>
@@ -263,12 +273,14 @@ export function ParticipatePage() {
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-white md:h-[min(44.444vw,640px)]">
           <HeroImage
             className="h-full w-full object-cover object-top md:hidden"
+            fadeIn={false}
             pictureClassName="block h-full w-full md:hidden"
             sources={participateHeroSources}
           />
           <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full -translate-x-1/2 overflow-hidden bg-white md:block">
             <HeroImage
               className="absolute inset-0 h-full w-full object-cover object-top"
+              fadeIn={false}
               sources={participateHeroSources}
             />
           </div>
@@ -303,31 +315,38 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
 
-            <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-[minmax(0,1fr)_120px_minmax(0,1fr)_120px_minmax(0,1fr)] min-[1100px]:items-start min-[1100px]:pt-0">
+            <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-3 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
               {actors.map(([title, body], index) => (
-                <ScrollFadeIn className="flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
-                  <ActorGlyph index={index} />
-                  <div className="flex min-w-0 flex-col items-center">
-                    <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
-                      {title === "Ciphernode committees" ? (
-                        <>
-                          Ciphernode
-                          <br className="min-[1100px]:hidden" />{" "}
-                          committees
-                        </>
-                      ) : (
-                        title
-                      )}
-                    </p>
-                    <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
-                      {body}
-                    </p>
-                  </div>
-                </ScrollFadeIn>
-              )).flatMap((actor, index) => (
-                index < actors.length - 1
-                  ? [actor, <div aria-hidden="true" className="my-4 h-8 w-px bg-[#3a5e3c]/35 min-[1100px]:my-0 min-[1100px]:mt-8 min-[1100px]:h-px min-[1100px]:w-full min-[1100px]:bg-[#3a5e3c]/55" key={`connector-${index}`} />]
-                  : [actor]
+                <div className="contents" key={title}>
+                  <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none">
+                    <ActorGlyph index={index} />
+                    {index < actors.length - 1 && (
+                      <div
+                        aria-hidden="true"
+                        className="absolute left-[calc(50%+38px)] top-[38px] hidden h-px w-[calc(100%+1rem-76px)] bg-[#3a5e3c]/55 min-[1100px]:block"
+                      />
+                    )}
+                    <div className="flex min-w-0 flex-col items-center">
+                      <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
+                        {title === "Ciphernode committees" ? (
+                          <>
+                            Ciphernode
+                            <br className="min-[1100px]:hidden" />{" "}
+                            committees
+                          </>
+                        ) : (
+                          title
+                        )}
+                      </p>
+                      <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
+                        {body}
+                      </p>
+                    </div>
+                  </ScrollFadeIn>
+                  {index < actors.length - 1 && (
+                    <div aria-hidden="true" className="my-4 h-8 w-px bg-[#3a5e3c]/45 min-[1100px]:hidden" />
+                  )}
+                </div>
               ))}
             </div>
           </div>

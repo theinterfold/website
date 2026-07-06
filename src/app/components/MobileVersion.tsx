@@ -16,11 +16,11 @@ import boundlessLogo from "../../imports/Desktop/boundless-logo.svg";
 import legionLogo from "../../imports/Desktop/legion-logo.svg";
 import taikoLogo from "../../imports/Desktop/taiko-h-mono.svg";
 import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
-import { AnimatedExecutionModelGraphic } from "../../imports/Desktop/Desktop";
+import { AnimatedExecutionModelGraphic, DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
-import { GhostSignupForm } from "./GhostSignupForm";
 import { HeroImage, homeHeroSources } from "./HeroImage";
 import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
@@ -235,6 +235,7 @@ export function MobileVersion() {
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
           <HeroImage
             className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
+            fadeIn={false}
             pictureClassName="block h-full w-full"
             sources={homeHeroSources}
           />
@@ -254,15 +255,17 @@ export function MobileVersion() {
           </div>
         </div>
 
-        <ScrollFadeIn className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
+        <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
-            <p className="mb-0">Private Inputs.</p>
-            <p>Collective Outcomes.</p>
+            <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
           </div>
-          <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
-            Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
-          </p>
+          <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
+            <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+              Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
+            </p>
+          </ScrollFadeIn>
 
+          <ScrollFadeIn className="w-full" delay={0.3}>
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <HoverArrowLink
@@ -276,14 +279,15 @@ export function MobileVersion() {
             <div className="w-full">
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="/participate"
+                href="/fold-auction"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                Participate
+                Join the FOLD Auction
               </HoverArrowLink>
             </div>
           </div>
-        </ScrollFadeIn>
+          </ScrollFadeIn>
+        </div>
       </div>
 
       {/* Logos Section */}
@@ -392,6 +396,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[16px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm11}
                     />
                   </div>
@@ -416,6 +422,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm12}
                     />
                   </div>
@@ -440,6 +448,8 @@ export function MobileVersion() {
                     <img
                       alt=""
                       className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
+                      decoding="async"
+                      loading="lazy"
                       src={imgChatGptImageApr232026051856Pm13}
                     />
                   </div>
@@ -544,56 +554,7 @@ export function MobileVersion() {
         </div>
       </ScrollFadeIn>
 
-      {/* Footer */}
-      <ScrollFadeIn className="bg-[#d9fce8] px-6 py-6">
-        <div className="mobile-possibility-slider mx-auto w-full max-w-md">
-          <h2
-            className="font-['ABC_Gramercy:Regular',sans-serif] mb-8 text-[40px] leading-[0.87] tracking-[-1.2px] capitalize text-[#3a5e3c]"
-            style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
-          >
-            The Interfold
-          </h2>
-
-          <div className="mb-6 flex flex-col gap-2">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
-              Follow us
-            </p>
-            <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">
-                Telegram
-              </a>
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">
-                Github
-              </a>
-              <a className="text-left !text-base !font-medium !leading-[1.5] !tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">
-                X
-              </a>
-            </div>
-          </div>
-
-          <GhostSignupForm className="mb-6" />
-
-          <div className="mb-6 flex flex-col gap-2">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-[1.075] tracking-[1.4px] uppercase text-[#252525]">
-              Legal
-            </p>
-            <div className="font-['ABC_Gramercy:Regular',sans-serif] flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-              <button className="text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
-              <button className="text-left transition-colors hover:text-[#82f5ad]">Terms & Conditions</button>
-            </div>
-          </div>
-
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] mb-4 flex flex-col text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
-            <p>—</p>
-            <p>All Rights Reserved © 2026</p>
-          </div>
-
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">
-            <p>Open source protocol.</p>
-            <p>Built by <a className="underline underline-offset-2 transition-colors hover:text-[#82f5ad]" href="https://www.gnosisguild.org/">Gnosis Guild</a>.</p>
-          </div>
-        </div>
-      </ScrollFadeIn>
+      <DesktopFooter staticLayout />
     </div>
   );
 }
@@ -626,7 +587,7 @@ function ExploreCard({
     >
       <div className="flex flex-col gap-[16px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-          <div className="flex h-[71px] w-[55px] shrink-0 items-end">
+          <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
         <div className="flex flex-col gap-[8px]">
