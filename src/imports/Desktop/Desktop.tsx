@@ -404,7 +404,7 @@ function Frame1() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Join the FOLD Auction
+        Participate
       </AnimatedButtonContent>
     </a>
   );
@@ -1712,7 +1712,7 @@ function Frame7() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Join the FOLD Auction
+        Participate
       </AnimatedButtonContent>
     </a>
   );
