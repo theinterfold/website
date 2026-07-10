@@ -339,14 +339,12 @@ const timelineItems: Array<{
     title: "Registration / Pre-Bidding",
     when: AUCTION.registrationDates,
     body: "Eligible participants complete verification, then may submit pre-bids before the auction opens.",
-    actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
     title: "FOLD Auction",
     when: AUCTION.auctionWindow,
     body: "The FOLD auction opens through the Uniswap Continuous Clearing Auction interface and runs for 48 hours.",
     actions: [
-      { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
       { label: "Read the Launch Primer", href: AUCTION.launchPrimerUrl },
     ],
   },
