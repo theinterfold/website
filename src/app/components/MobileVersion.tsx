@@ -282,7 +282,7 @@ export function MobileVersion() {
                 href="/fold-auction"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                Join the FOLD Auction
+                Participate
               </HoverArrowLink>
             </div>
           </div>

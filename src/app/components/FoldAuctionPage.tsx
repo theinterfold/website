@@ -17,7 +17,7 @@ const TODO_TEXT = "TBA"; // TODO: replace with the real value
 // Drives the hero title, status strip and primary CTA. Set this to the
 // current launch phase before deploying.
 type Phase = "pre-reg" | "registration" | "live" | "ended" | "cooldown";
-const PHASE: Phase = "live"; // TODO: set to the current launch phase
+const PHASE: Phase = "ended"; // TODO: set to the current launch phase
 
 const AUCTION = {
   // Participate
@@ -45,7 +45,7 @@ const AUCTION = {
   explorerBaseUrl: "https://etherscan.io/address/",
   // Timeline / details
   registrationDates: "July 6–7",
-  auctionWindow: "Opens July 8 for 48 hours",
+  auctionWindow: "July 8–10",
   tgeDate: "August 19",
   // ISO datetime the countdown ticks toward (e.g. "2026-07-15T15:00:00Z").
   // Leave empty to hide the countdown.
@@ -56,7 +56,7 @@ const AUCTION = {
 };
 
 const META_DESCRIPTION =
-  "The FOLD auction is distributed through a Continuous Clearing Auction on Uniswap. Registration required. Use official links only.";
+  "The FOLD auction has closed after surpassing the 400 ETH target through the Uniswap CCA. Use official links only.";
 
 const phaseContent: Record<
   Phase,
@@ -64,6 +64,7 @@ const phaseContent: Record<
     heroTitle: string;
     heroTitleLines?: string[];
     statusLead: string;
+    statusLeadLines?: string[];
     countdownLabel: string;
     primaryCta: { label: string; href: string };
   }
@@ -88,10 +89,11 @@ const phaseContent: Record<
     primaryCta: { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
   },
   ended: {
-    heroTitle: "The FOLD Auction Has Ended",
-    statusLead: "Auction ended",
+    heroTitle: "The $FOLD Auction Has Closed",
+    heroTitleLines: ["The $FOLD", "Auction Has Closed"],
+    statusLead: "$FOLD auction closed · 400 ETH target surpassed",
     countdownLabel: "",
-    primaryCta: { label: "Read the Auction FAQ", href: AUCTION.auctionFaqUrl },
+    primaryCta: { label: "View the Auction", href: AUCTION.uniswapCcaUrl },
   },
   cooldown: {
     heroTitle: "FOLD Is in the Cooldown Period",
@@ -102,9 +104,13 @@ const phaseContent: Record<
 };
 
 const phase = phaseContent[PHASE];
+const heroSecondaryCta = PHASE === "ended"
+  ? { label: "Read the Auction FAQ", href: AUCTION.auctionFaqUrl }
+  : { label: "How to Participate", href: AUCTION.participationGuideUrl };
+const auctionActionLabel = PHASE === "ended" ? "View the Auction" : "Join the FOLD Auction";
 
 const statusStripDetails = [
-  "Verification required",
+  "Results will be shared once finalized",
   "40-day cooldown period",
   "Use official links only",
 ];
@@ -333,14 +339,12 @@ const timelineItems: Array<{
     title: "Registration / Pre-Bidding",
     when: AUCTION.registrationDates,
     body: "Eligible participants complete verification, then may submit pre-bids before the auction opens.",
-    actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
     title: "FOLD Auction",
     when: AUCTION.auctionWindow,
     body: "The FOLD auction opens through the Uniswap Continuous Clearing Auction interface and runs for 48 hours.",
     actions: [
-      { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl },
       { label: "Read the Launch Primer", href: AUCTION.launchPrimerUrl },
     ],
   },
@@ -757,7 +761,7 @@ export function FoldAuctionPage() {
         <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
           <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
             <span aria-hidden="true" className="size-[7px] shrink-0 animate-pulse rounded-full bg-[#82f5ad] motion-reduce:animate-none" />
-            <span>{phase.statusLead}</span>
+            <span className="whitespace-nowrap">{phase.statusLead}</span>
             <span className="group relative inline-flex">
               <button
                 aria-label={`More details: ${statusStripDetails.join(", ")}`}
@@ -806,7 +810,7 @@ export function FoldAuctionPage() {
             </ScrollFadeIn>
             <ScrollFadeIn className="mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3 sm:grid-cols-2" delay={0.15}>
               <CtaButton href={phase.primaryCta.href}>{phase.primaryCta.label}</CtaButton>
-              <CtaButton href={AUCTION.participationGuideUrl} variant="secondary">How to Participate</CtaButton>
+              <CtaButton href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
@@ -871,7 +875,7 @@ export function FoldAuctionPage() {
             </ScrollFadeIn>
 
             <ScrollFadeIn className="mx-auto mt-8 w-full max-w-[288px]" delay={0.2}>
-              <CtaButton href={AUCTION.uniswapCcaUrl}>Join the FOLD Auction</CtaButton>
+              <CtaButton href={AUCTION.uniswapCcaUrl}>{auctionActionLabel}</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
@@ -922,7 +926,7 @@ export function FoldAuctionPage() {
             </div>
 
             <ScrollFadeIn className="mx-auto mt-10 w-full max-w-[288px]" delay={0.15}>
-              <CtaButton href={AUCTION.registrationUrl}>Start Registration</CtaButton>
+              <CtaButton href={AUCTION.uniswapCcaUrl}>{auctionActionLabel}</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
