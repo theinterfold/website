@@ -1,4 +1,4 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
@@ -37,6 +37,34 @@ export function SiteMobileHeader({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const scrollY = window.scrollY;
+    const previousBodyPosition = document.body.style.position;
+    const previousBodyTop = document.body.style.top;
+    const previousBodyWidth = document.body.style.width;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.position = previousBodyPosition;
+      document.body.style.top = previousBodyTop;
+      document.body.style.width = previousBodyWidth;
+      document.body.style.overflow = previousBodyOverflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [isMenuOpen]);
+
   return (
     <>
       <div className={`interfold-header-drop sticky top-0 z-50 flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms] ${className}`}>
@@ -68,7 +96,7 @@ export function SiteMobileHeader({
 
       {isMenuOpen && (
         <div
-          className={`fixed inset-0 z-[60] flex h-[100dvh] min-h-screen w-screen flex-col items-center justify-center ${backgroundClassName} transition-colors duration-[720ms]`}
+          className={`interfold-mobile-menu-overlay fixed inset-0 z-[60] flex w-full flex-col items-center justify-center overflow-hidden ${backgroundClassName} transition-colors duration-[720ms]`}
         >
           <motion.p
             animate={{ opacity: 1, y: 0 }}
