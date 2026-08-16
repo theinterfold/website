@@ -45,12 +45,14 @@ function applyPageTheme(page = getPagePath()) {
   document.documentElement.classList.toggle('interfold-theme-participate', page === 'participate');
 }
 
+// Where to draw the transition's hero band, so it lands exactly on top of the
+// real one. This used to shortcut to 0 above the mobile breakpoint, which only
+// happened to be right on wide screens, where the hero does start at the top of
+// the viewport. At tablet widths the header sits above the hero and pushes it
+// down ~60px, so the overlay was drawn that much too high and the image visibly
+// jumped as the transition handed over. Measure it instead of assuming.
 function getHeroOverlayTop(nextPage: HeroPagePath) {
   const hero = document.querySelector('.interfold-hero-transition');
-
-  if (window.innerWidth >= MOBILE_BREAKPOINT) {
-    return 0;
-  }
 
   if (!(hero instanceof HTMLElement)) {
     return 0;
