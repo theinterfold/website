@@ -6,6 +6,7 @@ import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { PreviewNotesOverlay } from "./previewNotes";
 
 // =============================================================================
 // AUCTION 2 CONFIGURATION — single source of truth for the live Auction 2 page.
@@ -103,160 +104,36 @@ const statusStripDetails = [
   "Use official links only",
 ];
 
-// =============================================================================
-// PREVIEW REVIEW NOTES — REMOVE BEFORE THIS GOES LIVE
-//
-// Numbered pins rendered next to the parts of the page that are still open
-// questions, so they can be read straight off the preview. Flip
-// SHOW_REVIEW_NOTES to false to hide every pin at once. To remove them for
-// good, delete this block, the ReviewNotesOverlay component, the
-// <ReviewNotesOverlay /> at the bottom of the page and the four
-// data-review-note attributes in the markup.
-//
-// The pins never touch the layout: they are drawn by a fixed overlay, and the
-// anchors are data attributes on elements that already existed.
-// =============================================================================
-const SHOW_REVIEW_NOTES = true; // TODO: set to false before deploying
-
-const REVIEW_NOTES = {
-  links: {
+// Preview-only notes for Marvin. Removed together with the previewNotes module.
+const PREVIEW_NOTES = {
+  changes: {
     n: 1,
-    title: "Both buttons are dead",
+    title: "What changed in this version",
     body: [
-      "Still waiting on the Auction 2 links, so every participate CTA is disabled rather than pointing at an Auction 1 destination.",
-      "Missing: the Uniswap CCA link (auryn/hmza — registration uses the same one), the participation documentation link, and the audit report. Contract details are in note 2.",
+      "Your review notes are all in: the one-line hero and new intro, \"FOLD Auction 2 is being distributed…\", \"Register and complete verification\", the pre-bid sentence gone, \"…and official terms\" on the checklist, Registration / Verification on step 01, Network Alpha step removed, and the role-of-FOLD and Important Information sentences replaced.",
+      "Times are in: opens Aug 17 at 14:00 UTC (10 AM ET), closes Aug 19 at 13:00 UTC (9 AM ET). The opening moved from Aug 15 to Aug 17, so that changed everywhere on the page.",
+      "Dropped from the details table: Status, General transferability and Unix timestamp. Transferability still reads in full in the timeline. The countdown is gone too.",
+      "The Auction Terms page has your 7 edits applied — open /auction/legal to review it.",
+    ],
+  },
+  links: {
+    n: 2,
+    title: "Still waiting on links",
+    body: [
+      "Every participate CTA is disabled rather than pointing at an Auction 1 destination.",
+      "Missing: the Uniswap CCA link (registration uses the same one, as you confirmed), the participation documentation link, and the audit report — you wrote \"should be same?\" with a question mark, so tell us yes and it points back at the Auction 1 PDF.",
     ],
   },
   contracts: {
-    n: 2,
-    title: "Contract and audit missing — and the terms are Auction 1's",
+    n: 3,
+    title: "Contract missing — and the terms link",
     body: [
-      "The Auction 2 contract address, its explorer link and the applicable audit report are all pending, so those rows show TBA and the links are inactive.",
-      "The Auction Terms links here and in Important Information still point at /auction/legal, which has NOT been updated for Auction 2 — it carries the July dates and the 40-day cooldown. Left linked so the page is not published with no terms at all, but that page needs updating or replacing before this goes live.",
+      "The Auction 2 contract address and its explorer link are pending, so that row shows TBA.",
+      "Auction Terms still point at /auction/legal, which now has your 7 edits applied but has not been re-reviewed by you.",
       "The FOLD token contract is unchanged from Auction 1 and is correct as shown.",
     ],
   },
 } as const;
-
-// The pins are drawn by a fixed overlay that measures [data-review-note]
-// anchors, rather than being placed inline. That keeps the page markup and
-// layout byte-for-byte what it was: the anchors are bare data attributes, which
-// render nothing, and the pins themselves are out of flow.
-type ReviewNoteId = keyof typeof REVIEW_NOTES;
-type Pin = { id: ReviewNoteId; x: number; y: number };
-
-function ReviewNotesOverlay() {
-  const [pins, setPins] = useState<Pin[]>([]);
-  const [openId, setOpenId] = useState<ReviewNoteId | null>(null);
-
-  useEffect(() => {
-    if (!SHOW_REVIEW_NOTES) {
-      return;
-    }
-
-    let frame = 0;
-    const measure = () => {
-      frame = 0;
-      const next: Pin[] = [];
-      document.querySelectorAll<HTMLElement>("[data-review-note]").forEach((anchor) => {
-        const rect = anchor.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > window.innerHeight) {
-          return;
-        }
-        (anchor.dataset.reviewNote ?? "")
-          .split(",")
-          .map((key) => key.trim())
-          .filter((key): key is ReviewNoteId => key in REVIEW_NOTES)
-          .forEach((id, index) => {
-            next.push({
-              id,
-              x: Math.min(rect.right + 12 + index * 28, window.innerWidth - 30),
-              y: Math.min(Math.max(rect.top, 10), window.innerHeight - 30),
-            });
-          });
-      });
-      setPins(next);
-    };
-
-    const schedule = () => {
-      if (!frame) {
-        frame = window.requestAnimationFrame(measure);
-      }
-    };
-
-    measure();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    const observer = new ResizeObserver(schedule);
-    observer.observe(document.body);
-
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      observer.disconnect();
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-    };
-  }, []);
-
-  if (!SHOW_REVIEW_NOTES) {
-    return null;
-  }
-
-  const openPin = pins.find((pin) => pin.id === openId);
-  const note = openId ? REVIEW_NOTES[openId] : null;
-  const width = Math.min(340, window.innerWidth * 0.78);
-  const left = openPin
-    ? Math.min(Math.max(openPin.x - width / 2, 12), window.innerWidth - width - 12)
-    : 0;
-
-  return (
-    <div className="pointer-events-none fixed inset-0 z-[80]">
-      {pins.map((pin) => {
-        const isOpen = pin.id === openId;
-
-        return (
-          <button
-            aria-expanded={isOpen}
-            aria-label={`Preview note ${REVIEW_NOTES[pin.id].n}: ${REVIEW_NOTES[pin.id].title}`}
-            className={`pointer-events-auto fixed flex size-[22px] cursor-pointer items-center justify-center rounded-full border-[1.5px] border-[#c2410c] font-['Office_Code_Pro:Medium',sans-serif] text-[11px] leading-none shadow-[0_2px_8px_rgba(0,0,0,0.25)] transition-colors ${
-              isOpen ? "bg-[#c2410c] text-[#fff7ed]" : "bg-[#fff7ed] text-[#c2410c] hover:bg-[#fed7aa]"
-            }`}
-            key={pin.id}
-            onClick={() => setOpenId((current) => (current === pin.id ? null : pin.id))}
-            style={{ left: pin.x, top: pin.y }}
-            type="button"
-          >
-            {REVIEW_NOTES[pin.id].n}
-          </button>
-        );
-      })}
-
-      {note && openPin && (
-        <div
-          className="pointer-events-auto fixed rounded-[8px] border-2 border-[#c2410c] bg-[#fff7ed] px-4 py-3 text-left shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
-          style={{ left, top: Math.min(openPin.y + 30, window.innerHeight - 40), width }}
-        >
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[9px] uppercase leading-none tracking-[1.4px] text-[#c2410c]">
-            Note {note.n} · for Marvin
-          </p>
-          <p className="mt-2 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.1] text-[#7c2d12]">
-            {note.title}
-          </p>
-          {note.body.map((paragraph) => (
-            <p
-              className="mt-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] leading-[1.5] text-[#7c2d12]"
-              key={paragraph}
-            >
-              {paragraph}
-            </p>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
   return (
@@ -911,7 +788,7 @@ export function FoldAuctionPage() {
 
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
-          <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]" data-review-note="links">
+          <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]" data-preview-note="changes,links">
             <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
               <LineRevealAuto text={AUCTION.heroTitle} />
             </h1>
@@ -1222,7 +1099,7 @@ export function FoldAuctionPage() {
         {/* Official links & contracts */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
-            <div className="text-center" data-review-note="contracts">
+            <div className="text-center" data-preview-note="contracts">
               <ScrollFadeIn>
                 <SectionLabel>Official Links &amp; Contract Information</SectionLabel>
               </ScrollFadeIn>
@@ -1298,8 +1175,8 @@ export function FoldAuctionPage() {
 
       <DesktopFooter staticLayout />
 
-      {/* Preview-only — see SHOW_REVIEW_NOTES above. */}
-      <ReviewNotesOverlay />
+      {/* Preview-only — see previewNotes.tsx. */}
+      <PreviewNotesOverlay notes={PREVIEW_NOTES} />
     </div>
   );
 }
