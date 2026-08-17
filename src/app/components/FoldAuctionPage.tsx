@@ -415,11 +415,13 @@ const credibilityRows: Array<{ label: string; value: string; href?: string }> = 
     value: "Read the official terms",
     href: isPending(AUCTION.auctionTermsUrl) ? undefined : AUCTION.auctionTermsUrl,
   },
-  {
-    label: "Audit & Terms",
-    value: "Token and auction contract audit report",
-    href: isPending(AUCTION.auditUrl) ? undefined : AUCTION.auditUrl,
-  },
+  // The audit row is dropped while auditUrl is pending: without a link it reads
+  // as a promise of an audit report that cannot be opened. Auction 2 deployed a
+  // new auction contract, so we cannot point it at Auction 1's report until that
+  // report is confirmed to cover it.
+  ...(isPending(AUCTION.auditUrl)
+    ? []
+    : [{ label: "Audit & Terms", value: "Token and auction contract audit report", href: AUCTION.auditUrl }]),
   { label: "Issuer", value: "Interfold Ltd." },
 ];
 

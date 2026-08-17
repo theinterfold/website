@@ -14,10 +14,9 @@ type LegalSection = {
   blocks: LegalBlock[];
 };
 
-// Kept as a two-argument call so the previous wording stays recorded next to
-// the new one in source. Renders the new text only.
-const was = (_previous: string, content: ReactNode): ReactNode => content;
-
+// Where a paragraph replaced earlier wording, the previous text is recorded in a
+// `// Was:` comment directly above it. Comments only — a string literal would be
+// shipped in the production bundle.
 const paragraph = (content: ReactNode): LegalBlock => ({ type: "paragraph", content });
 const list = (items: ReactNode[]): LegalBlock => ({ type: "list", items });
 const subheading = (content: ReactNode): LegalBlock => ({ type: "subheading", content });
@@ -66,7 +65,9 @@ const termsSections: LegalSection[] = [
     number: "04",
     title: "Auction Overview",
     blocks: [
-      paragraph(was('The initial auction distribution of FOLD will take place through a Uniswap Continuous Clearing Auction.', "FOLD Auction 2 will take place through a Uniswap Continuous Clearing Auction.")),
+      // Was: "The initial auction distribution of FOLD will take place through a
+      // Uniswap Continuous Clearing Auction."
+      paragraph("FOLD Auction 2 will take place through a Uniswap Continuous Clearing Auction."),
       paragraph("The expected auction sequence is:"),
       list([
         <><strong>Aug 17 at ~14:06 UTC (~10:06 AM ET):</strong> FOLD Auction 2 opens;</>,
@@ -74,15 +75,18 @@ const termsSections: LegalSection[] = [
         <><strong>Aug 19 at 14:00 UTC (10 AM ET):</strong> general FOLD transferability can be enabled; and</>,
         <><strong>Aug 19 at ~14:11 UTC (~10:11 AM ET):</strong> claiming is expected to become available.</>,
       ]),
+      // Was: "The auction, TGE, and Network Alpha are separate milestones. The
+      // auction is a token distribution event. TGE is expected to correspond with
+      // the beginning of general token transferability. Network Alpha is the
+      // staged rollout of the Interfold network itself."
       paragraph(
-        was('The auction, TGE, and Network Alpha are separate milestones. The auction is a token distribution event. TGE is expected to correspond with the beginning of general token transferability. Network Alpha is the staged rollout of the Interfold network itself.', "FOLD Auction 2, general FOLD transferability, and Network Alpha are separate milestones within the broader Interfold launch sequence."),
+        "FOLD Auction 2, general FOLD transferability, and Network Alpha are separate milestones within the broader Interfold launch sequence.",
       ),
+      // Both paragraphs below are new in Auction 2 — there was no equivalent.
       paragraph(
-        was("", "FOLD Auction 2 is limited to 2% of total FOLD supply, is denominated in USDC, and has a floor of 0.02154816 USDC / FOLD."),
+        "FOLD Auction 2 is limited to 2% of total FOLD supply, is denominated in USDC, and has a floor of 0.02154816 USDC / FOLD.",
       ),
-      paragraph(
-        was("", "50% of Auction 2 proceeds will be dedicated to long-term onchain liquidity support."),
-      ),
+      paragraph("50% of Auction 2 proceeds will be dedicated to long-term onchain liquidity support."),
       paragraph(
         "Any dates or timelines are expected dates only and may change due to technical, operational, legal, security, or other conditions.",
       ),
@@ -186,8 +190,11 @@ const termsSections: LegalSection[] = [
     title: "No Guarantee of Allocation, Price, or Value",
     blocks: [
       paragraph("Participation in the auction does not guarantee that you will receive any FOLD allocation."),
+      // Was: "The starting price or starting FDV for the auction is simply the
+      // starting price for the auction and does not represent any projection,
+      // estimate, or guarantee of FOLD's actual price or value."
       paragraph(
-        was('The starting price or starting FDV for the auction is simply the starting price for the auction and does not represent any projection, estimate, or guarantee of FOLD’s actual price or value.', "The auction clearing price will be determined through the auction process. The auction floor does not represent any projection, estimate, or guarantee of FOLD’s actual price or value."),
+        "The auction clearing price will be determined through the auction process. The auction floor does not represent any projection, estimate, or guarantee of FOLD’s actual price or value.",
       ),
       paragraph(
         "FOLD may have little or no value. The value of digital assets can be volatile and may decrease significantly, including to zero.",
@@ -213,14 +220,23 @@ const termsSections: LegalSection[] = [
       paragraph(
         "After the auction concludes, successful participants are expected to be able to claim FOLD and any unused funds through the official Uniswap auction interface, subject to final auction mechanics and official instructions.",
       ),
+      // Was: "FOLD purchased through the CCA will be subject to a 40-day cooldown
+      // period. During this period, general transfers are restricted. FOLD may be
+      // used for ciphernode bonding."
       paragraph(
-        was('FOLD purchased through the CCA will be subject to a 40-day cooldown period. During this period, general transfers are restricted. FOLD may be used for ciphernode bonding.', "Claiming is expected to become available at around 14:11 UTC (10:11 AM ET) on Aug 19, roughly an hour after FOLD Auction 2 closes."),
+        "Claiming is expected to become available at around 14:11 UTC (10:11 AM ET) on Aug 19, roughly an hour after FOLD Auction 2 closes.",
       ),
+      // Was: "After the cooldown period ends, general transferability is expected
+      // to begin. August 19 is the scheduled date for FOLD transferability and the
+      // current target for TGE, subject to official terms and final launch
+      // conditions."
       paragraph(
-        was('After the cooldown period ends, general transferability is expected to begin. August 19 is the scheduled date for FOLD transferability and the current target for TGE, subject to official terms and final launch conditions.', "General FOLD transferability can be enabled at or after Aug 19 at 14:00 UTC (10 AM ET). Claiming and general FOLD transferability are separate actions."),
+        "General FOLD transferability can be enabled at or after Aug 19 at 14:00 UTC (10 AM ET). Claiming and general FOLD transferability are separate actions.",
       ),
+      // Our own edit, not one of Marvin's seven: the previous sentence named TGE,
+      // which no longer appears anywhere else in these Terms.
       paragraph(
-        was("OUR WORDING, NOT YOURS. Was: 'The timing of claiming, transferability, TGE, and related launch steps may depend on technical, operational, legal, security, or other conditions.'", "The timing of claiming, general FOLD transferability, and related launch steps may depend on technical, operational, legal, security, or other conditions."),
+        "The timing of claiming, general FOLD transferability, and related launch steps may depend on technical, operational, legal, security, or other conditions.",
       ),
     ],
   },
@@ -228,12 +244,18 @@ const termsSections: LegalSection[] = [
     number: "10",
     title: "Network Alpha",
     blocks: [
-      paragraph(was("OUR WORDING, NOT YOURS. Was: 'Network Alpha is separate from the FOLD auction and TGE.' This one was not on your list -- we changed it so a lone TGE would not survive after removing the others.", "Network Alpha is separate from FOLD Auction 2 and general FOLD transferability.")),
+      // Our own edit, not one of Marvin's seven. Was: "Network Alpha is separate
+      // from the FOLD auction and TGE." Changed so a lone TGE reference would not
+      // survive after the others were removed.
+      paragraph("Network Alpha is separate from FOLD Auction 2 and general FOLD transferability."),
       paragraph(
         "Network Alpha is the first coordinated mainnet phase of the Interfold network. It is expected to involve early ciphernodes, initial integrations, E3 execution flows, and production validation under controlled conditions.",
       ),
+      // Was: "Network Alpha is not live as of the publication of these Terms.
+      // Production ciphernode participation is not yet open unless otherwise
+      // stated in official Interfold materials."
       paragraph(
-        was('Network Alpha is not live as of the publication of these Terms. Production ciphernode participation is not yet open unless otherwise stated in official Interfold materials.', "Production ciphernode participation is not open unless otherwise stated in official Interfold materials."),
+        "Production ciphernode participation is not open unless otherwise stated in official Interfold materials.",
       ),
       paragraph(
         "The network is designed for permissionless operator participation, but early operation may require coordination with selected operators, technical requirements, bonding requirements, and operational procedures.",
