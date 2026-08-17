@@ -35,7 +35,14 @@ const AUCTION = {
   // apart only out of caution, and because it had a pre-bid window; Auction 2
   // has neither.
   registrationUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
-  participationGuideUrl: PENDING_LINK, // TODO: Auction 2 participation documentation link
+  // Intentionally empty — not an unfinished TODO. Auction 1 pointed this at
+  // blog.theinterfold.com/how-to-participate-in-the-fold-auction/, which still
+  // opens with a post-auction notice and describes the 400 ETH target, the
+  // 40-day cooldown and TGE. Linking it during Auction 2 would send readers to a
+  // page saying the auction has closed, and no rewrite is planned. The hero CTA
+  // and the Participate list both fall back cleanly; if a new guide is ever
+  // written, setting this URL is the only change needed.
+  participationGuideUrl: PENDING_LINK,
   // /auction/legal now carries Marvin's Auction 2 edits, so this points at the
   // current terms rather than Auction 1's.
   auctionTermsUrl: "/auction/legal",
