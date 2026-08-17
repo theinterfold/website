@@ -94,7 +94,13 @@ const opensWhen = AUCTION.opensTime === PENDING_TEXT ? `${AUCTION.opensDate} at 
 const closesWhen = AUCTION.closesTime === PENDING_TEXT ? `${AUCTION.closesDate} at ${PENDING_TEXT}` : `${AUCTION.closesDate} at ${AUCTION.closesTime}`;
 
 const heroPrimaryCta = { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl };
-const heroSecondaryCta = { label: "How to Participate", href: AUCTION.participationGuideUrl };
+// The live Auction 1 page pointed this at the participation guide, which for
+// Auction 2 has not been written yet. Rather than hide it, it points at the
+// Auction FAQ — which is what the currently published page does too. Swap it
+// back to participationGuideUrl once those docs exist.
+const heroSecondaryCta = isPending(AUCTION.participationGuideUrl)
+  ? { label: "Read the Auction FAQ", href: AUCTION.auctionFaqUrl }
+  : { label: "How to Participate", href: AUCTION.participationGuideUrl };
 const auctionActionLabel = "Join the FOLD Auction";
 
 // Auction 1's middle line was the 40-day cooldown, which no longer applies.
@@ -770,19 +776,9 @@ export function FoldAuctionPage() {
                 confidential coordination.
               </p>
             </ScrollFadeIn>
-            {/* The secondary CTA is dropped entirely while its link is pending,
-                rather than sitting there greyed out next to a live auction. The
-                grid collapses to a single centred button when that happens. */}
-            <ScrollFadeIn
-              className={`mx-auto grid w-full gap-3 grid-cols-1 ${
-                isPending(heroSecondaryCta.href) ? "max-w-[288px]" : "max-w-[520px] sm:grid-cols-2"
-              }`}
-              delay={0.15}
-            >
+            <ScrollFadeIn className="mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3 sm:grid-cols-2" delay={0.15}>
               <CtaButton href={heroPrimaryCta.href}>{heroPrimaryCta.label}</CtaButton>
-              {!isPending(heroSecondaryCta.href) && (
-                <CtaButton href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</CtaButton>
-              )}
+              <CtaButton href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</CtaButton>
             </ScrollFadeIn>
           </div>
         </section>
