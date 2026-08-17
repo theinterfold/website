@@ -770,9 +770,19 @@ export function FoldAuctionPage() {
                 confidential coordination.
               </p>
             </ScrollFadeIn>
-            <ScrollFadeIn className="mx-auto grid w-full max-w-[520px] grid-cols-1 gap-3 sm:grid-cols-2" delay={0.15}>
+            {/* The secondary CTA is dropped entirely while its link is pending,
+                rather than sitting there greyed out next to a live auction. The
+                grid collapses to a single centred button when that happens. */}
+            <ScrollFadeIn
+              className={`mx-auto grid w-full gap-3 grid-cols-1 ${
+                isPending(heroSecondaryCta.href) ? "max-w-[288px]" : "max-w-[520px] sm:grid-cols-2"
+              }`}
+              delay={0.15}
+            >
               <CtaButton href={heroPrimaryCta.href}>{heroPrimaryCta.label}</CtaButton>
-              <CtaButton href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</CtaButton>
+              {!isPending(heroSecondaryCta.href) && (
+                <CtaButton href={heroSecondaryCta.href} variant="secondary">{heroSecondaryCta.label}</CtaButton>
+              )}
             </ScrollFadeIn>
           </div>
         </section>
