@@ -39,7 +39,10 @@ const AUCTION = {
   // /auction/legal now carries Marvin's Auction 2 edits, so this points at the
   // current terms rather than Auction 1's.
   auctionTermsUrl: "/auction/legal",
-  auditUrl: PENDING_LINK, // TODO: audit report applicable to Auction 2
+  // Zenith's audit of the FOLD token. Carried over from Auction 1 deliberately:
+  // its scope is the token contract, which is unchanged, so it applies to
+  // Auction 2 unmodified. Not an Auction 1 leftover — see credibilityRows.
+  auditUrl: "https://github.com/theinterfold/interfold/blob/main/packages/interfold-contracts/audits/20260702_audit_token_zenith.pdf",
 
   // --- Learn more (general, unchanged) --------------------------------------
   auctionFaqUrl: "https://docs.theinterfold.com/faq/auction",
@@ -415,13 +418,14 @@ const credibilityRows: Array<{ label: string; value: string; href?: string }> = 
     value: "Read the official terms",
     href: isPending(AUCTION.auctionTermsUrl) ? undefined : AUCTION.auctionTermsUrl,
   },
-  // The audit row is dropped while auditUrl is pending: without a link it reads
-  // as a promise of an audit report that cannot be opened. Auction 2 deployed a
-  // new auction contract, so we cannot point it at Auction 1's report until that
-  // report is confirmed to cover it.
+  // The FOLD token contract is unchanged across auctions, so Zenith's token
+  // audit applies to Auction 2 as-is. It is scoped to the token only — the repo's
+  // audits/README.md lists it as the single audit, scope "FOLD token" — so the
+  // label says token, not "token and auction contract" as it did for Auction 1.
+  // There is no audit of the auction contract to link to.
   ...(isPending(AUCTION.auditUrl)
     ? []
-    : [{ label: "Audit & Terms", value: "Token and auction contract audit report", href: AUCTION.auditUrl }]),
+    : [{ label: "Audit & Terms", value: "FOLD token audit report (Zenith)", href: AUCTION.auditUrl }]),
   { label: "Issuer", value: "Interfold Ltd." },
 ];
 
