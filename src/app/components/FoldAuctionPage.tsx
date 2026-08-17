@@ -6,7 +6,6 @@ import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
 import { ScrollFadeIn } from "./ScrollFadeIn";
-import { PreviewNotesOverlay } from "./previewNotes";
 
 // =============================================================================
 // AUCTION 2 CONFIGURATION — single source of truth for the live Auction 2 page.
@@ -30,17 +29,15 @@ const AUCTION = {
   heroTitle: "FOLD Auction 2 is Live",
   statusLead: "FOLD Auction 2 live now",
 
-  // --- Participate (Auction 2 specific — all pending) -----------------------
-  uniswapCcaUrl: PENDING_LINK, // TODO: Auction 2 direct Uniswap CCA link (auryn/hmza)
+  // --- Participate (Auction 2 specific) --------------------------------------
+  uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
   // Confirmed the same destination as the auction itself. Auction 1 kept them
   // apart only out of caution, and because it had a pre-bid window; Auction 2
-  // has neither. Set this to whatever uniswapCcaUrl becomes.
-  registrationUrl: PENDING_LINK,
+  // has neither.
+  registrationUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
   participationGuideUrl: PENDING_LINK, // TODO: Auction 2 participation documentation link
-  // Deliberately still pointing at the Auction 1 terms page, so the auction is
-  // not published with no terms linked at all. That page has NOT been updated
-  // for Auction 2 — it still carries the July dates and the 40-day cooldown.
-  // TODO: replace with the Auction 2 Auction Terms link, or update /auction/legal.
+  // /auction/legal now carries Marvin's Auction 2 edits, so this points at the
+  // current terms rather than Auction 1's.
   auctionTermsUrl: "/auction/legal",
   auditUrl: PENDING_LINK, // TODO: audit report applicable to Auction 2
 
@@ -64,9 +61,11 @@ const AUCTION = {
 
   // --- Auction 2 terms ------------------------------------------------------
   opensDate: "Aug 17",
-  opensTime: "14:00 UTC (10 AM ET)",
+  // The contract deployed with a ~6 minute offset, so these are the block
+  // estimates rather than round numbers.
+  opensTime: "~14:06 UTC (~10:06 AM ET)",
   closesDate: "Aug 19",
-  closesTime: "13:00 UTC (9 AM ET)",
+  closesTime: "~13:06 UTC (~9:06 AM ET)",
   auctionWindow: "Aug 17 – Aug 19",
   allocation: "2% of total FOLD supply",
   denomination: "USDC",
@@ -75,14 +74,14 @@ const AUCTION = {
   // Transferability is no longer a row in the details table — it lives in the
   // Token Transferability step of the timeline, which carries the full times.
   transferabilityDate: "Aug 19",
-  claiming: "Expected to open immediately after the auction closes",
+  claiming: "Expected ~14:11 UTC (~10:11 AM ET) on Aug 19",
 
 
   // --- Contracts ------------------------------------------------------------
   // FOLD token contract is unchanged across auctions.
   foldContract: "0xE172e9B6cfBeeB5593bDcE3f077356FDb33af904",
-  auctionContract: PENDING_TEXT, // TODO: Auction 2 auction contract address
-  auctionExplorerUrl: PENDING_LINK, // TODO: Auction 2 contract explorer link
+  auctionContract: "0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
+  auctionExplorerUrl: "https://etherscan.io/address/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
   network: "Ethereum Mainnet",
 };
 
@@ -103,37 +102,6 @@ const statusStripDetails = [
   "Verification required",
   "Use official links only",
 ];
-
-// Preview-only notes for Marvin. Removed together with the previewNotes module.
-const PREVIEW_NOTES = {
-  changes: {
-    n: 1,
-    title: "What changed in this version",
-    body: [
-      "Your review notes are all in: the one-line hero and new intro, \"FOLD Auction 2 is being distributed…\", \"Register and complete verification\", the pre-bid sentence gone, \"…and official terms\" on the checklist, Registration / Verification on step 01, Network Alpha step removed, and the role-of-FOLD and Important Information sentences replaced.",
-      "Times are in: opens Aug 17 at 14:00 UTC (10 AM ET), closes Aug 19 at 13:00 UTC (9 AM ET). The opening moved from Aug 15 to Aug 17, so that changed everywhere on the page.",
-      "Dropped from the details table: Status, General transferability and Unix timestamp. Transferability still reads in full in the timeline. The countdown is gone too.",
-      "The Auction Terms page has your 7 edits applied — open /auction/legal to review it.",
-    ],
-  },
-  links: {
-    n: 2,
-    title: "Still waiting on links",
-    body: [
-      "Every participate CTA is disabled rather than pointing at an Auction 1 destination.",
-      "Missing: the Uniswap CCA link (registration uses the same one, as you confirmed), the participation documentation link, and the audit report — you wrote \"should be same?\" with a question mark, so tell us yes and it points back at the Auction 1 PDF.",
-    ],
-  },
-  contracts: {
-    n: 3,
-    title: "Contract missing — and the terms link",
-    body: [
-      "The Auction 2 contract address and its explorer link are pending, so that row shows TBA.",
-      "Auction Terms still point at /auction/legal, which now has your 7 edits applied but has not been re-reviewed by you.",
-      "The FOLD token contract is unchanged from Auction 1 and is correct as shown.",
-    ],
-  },
-} as const;
 
 function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
   return (
@@ -293,11 +261,11 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
   );
 }
 
-const detailRows: Array<{ term: string; value: string; href?: string; was?: string }> = [
+const detailRows: Array<{ term: string; value: string; href?: string}> = [
   { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
   { term: "Ticker", value: "FOLD" },
-  { term: "Opens", value: opensWhen, was: "Aug 15 at TBA" },
-  { term: "Closes", value: closesWhen, was: "Aug 19 at TBA" },
+  { term: "Opens", value: opensWhen },
+  { term: "Closes", value: closesWhen },
   { term: "Allocation", value: AUCTION.allocation },
   { term: "Denomination", value: AUCTION.denomination },
   { term: "Floor", value: AUCTION.floorPrice },
@@ -310,9 +278,9 @@ const detailRows: Array<{ term: string; value: string; href?: string; was?: stri
     : [{ term: "Venue", value: "Uniswap CCA interface", href: AUCTION.uniswapCcaUrl }]),
 ];
 
-const checklistItems: Array<string | { text: string; was: string }> = [
+const checklistItems: string[] = [
   "Complete the required registration and verification flow",
-  { text: "Review the auction mechanics and official terms", was: "Review the auction mechanics" },
+  "Review the auction mechanics and official terms",
   "Decide your maximum budget before placing a bid",
   "Use only the official links on this page",
 ];
@@ -322,24 +290,21 @@ const timelineItems: Array<{
   body: string;
   when?: string;
   actions?: Array<{ label: string; href: string }>;
-  was?: string;
 }> = [
   {
     title: "Registration / Verification",
     body: "Complete registration and verification to become eligible to participate once the auction opens.",
-    was: "Registration / Pre-Bidding — Eligible participants complete verification, then may submit pre-bids before the auction opens.",
     actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
     title: "FOLD Auction",
     when: AUCTION.auctionWindow,
     body: "The FOLD auction opens through the Uniswap Continuous Clearing Auction interface.",
-    was: "Was Aug 15 - Aug 19. The opening moved to Aug 17.",
     actions: [{ label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl }],
   },
   {
     title: "Claiming",
-    body: "Claiming is expected to open immediately after the auction closes.",
+    body: "Claiming is expected to become available at around 14:11 UTC (10:11 AM ET) on Aug 19, roughly an hour after the auction closes.",
   },
   {
     title: "Token Transferability",
@@ -791,12 +756,12 @@ export function FoldAuctionPage() {
 
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
-          <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]" data-preview-note="changes,links">
-            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]" data-preview-was="The FOLD Auction 2 is Live (on two lines)">
+          <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]">
+            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
               <LineRevealAuto text={AUCTION.heroTitle} />
             </h1>
             <ScrollFadeIn className="flex w-full flex-col items-center gap-4" delay={0.1}>
-              <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[520px] md:text-[18px]" data-preview-was="FOLD supports The Interfold network, where independent parties can compute together without exposing private inputs.">
+              <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[520px] md:text-[18px]">
                 A limited second auction to broaden distribution and help bootstrap deeper,
                 longer-term onchain liquidity.
               </p>
@@ -845,7 +810,7 @@ export function FoldAuctionPage() {
                     <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
                       {row.term}
                     </dt>
-                    <dd className="whitespace-pre-line font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]" data-preview-was={row.was}>
+                    <dd className="whitespace-pre-line font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]">
                       {row.href ? (
                         <UnderlinedArrowLink
                           className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
@@ -910,11 +875,11 @@ export function FoldAuctionPage() {
               </ScrollFadeIn>
               <ul className="mt-5 space-y-3">
                 {checklistItems.map((item, index) => (
-                  <li key={typeof item === "string" ? item : item.text}>
+                  <li key={item}>
                     <ScrollFadeIn className="grid grid-cols-[7px_1fr] gap-3" delay={0.05 + index * 0.08}>
                       <span className="mt-[9px] size-[5px] rounded-full bg-[#82f5ad]" />
-                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]" data-preview-was={typeof item === "string" ? undefined : item.was}>
-                        {typeof item === "string" ? item : item.text}
+                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]">
+                        {item}
                       </span>
                     </ScrollFadeIn>
                   </li>
@@ -957,7 +922,7 @@ export function FoldAuctionPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]" data-preview-was={item.was}>
+                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
                         {item.body}
                       </p>
                       {actions.length > 0 && (
@@ -1102,7 +1067,7 @@ export function FoldAuctionPage() {
         {/* Official links & contracts */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
-            <div className="text-center" data-preview-note="contracts">
+            <div className="text-center">
               <ScrollFadeIn>
                 <SectionLabel>Official Links &amp; Contract Information</SectionLabel>
               </ScrollFadeIn>
@@ -1142,7 +1107,7 @@ export function FoldAuctionPage() {
             <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
               <ScrollFadeIn delay={0.04}>
                 <p>
-                  <span data-preview-was="The FOLD auction, TGE, token transferability, and Network Alpha are distinct parts of the launch sequence.">The FOLD auction, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</span>
+                  <span>The FOLD auction, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</span>
                 </p>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.1}>
@@ -1178,8 +1143,6 @@ export function FoldAuctionPage() {
 
       <DesktopFooter staticLayout />
 
-      {/* Preview-only — see previewNotes.tsx. */}
-      <PreviewNotesOverlay notes={PREVIEW_NOTES} />
     </div>
   );
 }

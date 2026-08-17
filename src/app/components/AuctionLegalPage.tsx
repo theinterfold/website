@@ -2,7 +2,6 @@ import { useEffect, type ReactNode } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { UnderlinedArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
-import { PreviewNotesOverlay } from "./previewNotes";
 
 type LegalBlock =
   | { type: "paragraph"; content: ReactNode }
@@ -15,11 +14,9 @@ type LegalSection = {
   blocks: LegalBlock[];
 };
 
-// Preview-only: marks text that changed in this round and carries what it said
-// before, for the hover in previewNotes.tsx. Delete with the rest of the notes.
-const was = (previous: string, content: ReactNode): ReactNode => (
-  <span data-preview-was={previous}>{content}</span>
-);
+// Kept as a two-argument call so the previous wording stays recorded next to
+// the new one in source. Renders the new text only.
+const was = (_previous: string, content: ReactNode): ReactNode => content;
 
 const paragraph = (content: ReactNode): LegalBlock => ({ type: "paragraph", content });
 const list = (items: ReactNode[]): LegalBlock => ({ type: "list", items });
@@ -72,9 +69,10 @@ const termsSections: LegalSection[] = [
       paragraph(was('The initial auction distribution of FOLD will take place through a Uniswap Continuous Clearing Auction.', "FOLD Auction 2 will take place through a Uniswap Continuous Clearing Auction.")),
       paragraph("The expected auction sequence is:"),
       list([
-        <span data-preview-was="July 6-7: registration and verification window;"><strong>Aug 17 at 14:00 UTC (10 AM ET):</strong> FOLD Auction 2 opens;</span>,
-        <span data-preview-was="July 8-10: FOLD auction on Uniswap;"><strong>Aug 19 at 13:00 UTC (9 AM ET):</strong> FOLD Auction 2 closes and claiming is expected to become available; and</span>,
-        <span data-preview-was="after the auction: 40-day cooldown period; and August 19: scheduled date for general FOLD transferability and current target for TGE."><strong>Aug 19 at 14:00 UTC (10 AM ET):</strong> general FOLD transferability can be enabled.</span>,
+        <><strong>Aug 17 at ~14:06 UTC (~10:06 AM ET):</strong> FOLD Auction 2 opens;</>,
+        <><strong>Aug 19 at ~13:06 UTC (~9:06 AM ET):</strong> FOLD Auction 2 closes;</>,
+        <><strong>Aug 19 at 14:00 UTC (10 AM ET):</strong> general FOLD transferability can be enabled; and</>,
+        <><strong>Aug 19 at ~14:11 UTC (~10:11 AM ET):</strong> claiming is expected to become available.</>,
       ]),
       paragraph(
         was('The auction, TGE, and Network Alpha are separate milestones. The auction is a token distribution event. TGE is expected to correspond with the beginning of general token transferability. Network Alpha is the staged rollout of the Interfold network itself.', "FOLD Auction 2, general FOLD transferability, and Network Alpha are separate milestones within the broader Interfold launch sequence."),
@@ -216,7 +214,7 @@ const termsSections: LegalSection[] = [
         "After the auction concludes, successful participants are expected to be able to claim FOLD and any unused funds through the official Uniswap auction interface, subject to final auction mechanics and official instructions.",
       ),
       paragraph(
-        was('FOLD purchased through the CCA will be subject to a 40-day cooldown period. During this period, general transfers are restricted. FOLD may be used for ciphernode bonding.', "Claiming is expected to become available immediately after FOLD Auction 2 closes on Aug 19 at 13:00 UTC (9 AM ET)."),
+        was('FOLD purchased through the CCA will be subject to a 40-day cooldown period. During this period, general transfers are restricted. FOLD may be used for ciphernode bonding.', "Claiming is expected to become available at around 14:11 UTC (10:11 AM ET) on Aug 19, roughly an hour after FOLD Auction 2 closes."),
       ),
       paragraph(
         was('After the cooldown period ends, general transferability is expected to begin. August 19 is the scheduled date for FOLD transferability and the current target for TGE, subject to official terms and final launch conditions.', "General FOLD transferability can be enabled at or after Aug 19 at 14:00 UTC (10 AM ET). Claiming and general FOLD transferability are separate actions."),
@@ -547,7 +545,7 @@ export function AuctionLegalPage() {
               FOLD Auction Terms
             </h2>
             <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">
-              Last updated: <span className="text-[#3a5e3c]" data-preview-was="Last updated: July 4 2026">Aug 16 2026</span>
+              Last updated: <span className="text-[#3a5e3c]">Aug 16 2026</span>
             </p>
           </ScrollFadeIn>
         </section>
@@ -572,7 +570,7 @@ export function AuctionLegalPage() {
             <div className="rounded-[28px] bg-[#d9fce8] p-6 md:p-10">
               <SectionLabel>Important Information</SectionLabel>
               <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
-                <p data-preview-was="The FOLD auction, TGE, token transferability, and Network Alpha are distinct parts of the launch sequence.">FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</p>
+                <p>FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</p>
                 <p>Official information will be published only through The Interfold’s verified channels.</p>
                 <p>
                   <span className="text-[#3a5e3c]">Eligibility notice.</span> Participation in the FOLD auction is subject to eligibility requirements,
@@ -596,9 +594,6 @@ export function AuctionLegalPage() {
 
       <DesktopFooter staticLayout />
 
-      {/* Preview-only — see previewNotes.tsx. Highlights the changed passages;
-          hovering one shows what it said before. */}
-      <PreviewNotesOverlay notes={{}} />
     </div>
   );
 }
