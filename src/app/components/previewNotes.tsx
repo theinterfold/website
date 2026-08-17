@@ -28,6 +28,93 @@ export type PreviewNotes = Readonly<Record<string, PreviewNote>>;
 
 type Pin = { id: string; x: number; y: number };
 
+// -----------------------------------------------------------------------------
+// Changed-text highlighting.
+//
+// Put data-preview-was="the previous wording" on any element whose text changed.
+// It gets highlighted, and hovering it shows what it used to say. The attribute
+// renders nothing on its own, so as with the pins the markup is unaffected once
+// SHOW_PREVIEW_NOTES is off.
+// -----------------------------------------------------------------------------
+const HIGHLIGHT_STYLE = `
+[data-preview-was] {
+  background-color: rgba(253, 186, 116, 0.38);
+  box-shadow: 0 0 0 2px rgba(253, 186, 116, 0.38);
+  border-radius: 2px;
+  cursor: help;
+}
+[data-preview-was]:hover {
+  background-color: rgba(251, 146, 60, 0.55);
+  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.55);
+}
+`;
+
+function ChangedTextHighlights() {
+  const [hovered, setHovered] = useState<{ was: string; x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    if (!SHOW_PREVIEW_NOTES) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.textContent = HIGHLIGHT_STYLE;
+    document.head.appendChild(style);
+
+    const show = (event: Event) => {
+      const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("[data-preview-was]");
+      if (!target) {
+        return;
+      }
+      const rect = target.getBoundingClientRect();
+      setHovered({
+        was: target.dataset.previewWas ?? "",
+        x: rect.left + rect.width / 2,
+        y: rect.bottom,
+      });
+    };
+    const hide = (event: Event) => {
+      const related = (event as MouseEvent).relatedTarget as HTMLElement | null;
+      if (related?.closest?.("[data-preview-was]")) {
+        return;
+      }
+      setHovered(null);
+    };
+
+    document.addEventListener("mouseover", show);
+    document.addEventListener("mouseout", hide);
+    window.addEventListener("scroll", () => setHovered(null), { passive: true });
+
+    return () => {
+      document.removeEventListener("mouseover", show);
+      document.removeEventListener("mouseout", hide);
+      style.remove();
+    };
+  }, []);
+
+  if (!SHOW_PREVIEW_NOTES || !hovered) {
+    return null;
+  }
+
+  const width = Math.min(420, window.innerWidth * 0.86);
+  const left = Math.min(Math.max(hovered.x - width / 2, 12), window.innerWidth - width - 12);
+  const top = Math.min(hovered.y + 8, window.innerHeight - 60);
+
+  return (
+    <div
+      className="pointer-events-none fixed z-[90] rounded-[8px] border-2 border-[#c2410c] bg-[#fff7ed] px-4 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+      style={{ left, top, width }}
+    >
+      <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[9px] uppercase leading-none tracking-[1.4px] text-[#c2410c]">
+        Previously
+      </p>
+      <p className="mt-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] leading-[1.5] text-[#7c2d12]">
+        {hovered.was || "(not on the page before)"}
+      </p>
+    </div>
+  );
+}
+
 export function PreviewNotesOverlay({ notes }: { notes: PreviewNotes }) {
   const [pins, setPins] = useState<Pin[]>([]);
   const [openId, setOpenId] = useState<string | null>(null);
@@ -96,6 +183,7 @@ export function PreviewNotesOverlay({ notes }: { notes: PreviewNotes }) {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[80]">
+      <ChangedTextHighlights />
       {pins.map((pin) => {
         const isOpen = pin.id === openId;
 

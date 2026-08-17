@@ -293,11 +293,11 @@ function CopyableValue({ value, tone = "light" }: { value: string; tone?: "light
   );
 }
 
-const detailRows: Array<{ term: string; value: string; href?: string }> = [
+const detailRows: Array<{ term: string; value: string; href?: string; was?: string }> = [
   { term: "Auction format", value: "Continuous Clearing Auction (CCA)" },
   { term: "Ticker", value: "FOLD" },
-  { term: "Opens", value: opensWhen },
-  { term: "Closes", value: closesWhen },
+  { term: "Opens", value: opensWhen, was: "Aug 15 at TBA" },
+  { term: "Closes", value: closesWhen, was: "Aug 19 at TBA" },
   { term: "Allocation", value: AUCTION.allocation },
   { term: "Denomination", value: AUCTION.denomination },
   { term: "Floor", value: AUCTION.floorPrice },
@@ -310,9 +310,9 @@ const detailRows: Array<{ term: string; value: string; href?: string }> = [
     : [{ term: "Venue", value: "Uniswap CCA interface", href: AUCTION.uniswapCcaUrl }]),
 ];
 
-const checklistItems: string[] = [
+const checklistItems: Array<string | { text: string; was: string }> = [
   "Complete the required registration and verification flow",
-  "Review the auction mechanics and official terms",
+  { text: "Review the auction mechanics and official terms", was: "Review the auction mechanics" },
   "Decide your maximum budget before placing a bid",
   "Use only the official links on this page",
 ];
@@ -322,16 +322,19 @@ const timelineItems: Array<{
   body: string;
   when?: string;
   actions?: Array<{ label: string; href: string }>;
+  was?: string;
 }> = [
   {
     title: "Registration / Verification",
     body: "Complete registration and verification to become eligible to participate once the auction opens.",
+    was: "Registration / Pre-Bidding — Eligible participants complete verification, then may submit pre-bids before the auction opens.",
     actions: [{ label: "Start Registration", href: AUCTION.registrationUrl }],
   },
   {
     title: "FOLD Auction",
     when: AUCTION.auctionWindow,
     body: "The FOLD auction opens through the Uniswap Continuous Clearing Auction interface.",
+    was: "Was Aug 15 - Aug 19. The opening moved to Aug 17.",
     actions: [{ label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl }],
   },
   {
@@ -789,11 +792,11 @@ export function FoldAuctionPage() {
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]" data-preview-note="changes,links">
-            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
+            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]" data-preview-was="The FOLD Auction 2 is Live (on two lines)">
               <LineRevealAuto text={AUCTION.heroTitle} />
             </h1>
             <ScrollFadeIn className="flex w-full flex-col items-center gap-4" delay={0.1}>
-              <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[520px] md:text-[18px]">
+              <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:max-w-[520px] md:text-[18px]" data-preview-was="FOLD supports The Interfold network, where independent parties can compute together without exposing private inputs.">
                 A limited second auction to broaden distribution and help bootstrap deeper,
                 longer-term onchain liquidity.
               </p>
@@ -842,7 +845,7 @@ export function FoldAuctionPage() {
                     <dt className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
                       {row.term}
                     </dt>
-                    <dd className="whitespace-pre-line font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]">
+                    <dd className="whitespace-pre-line font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]" data-preview-was={row.was}>
                       {row.href ? (
                         <UnderlinedArrowLink
                           className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
@@ -907,11 +910,11 @@ export function FoldAuctionPage() {
               </ScrollFadeIn>
               <ul className="mt-5 space-y-3">
                 {checklistItems.map((item, index) => (
-                  <li key={item}>
+                  <li key={typeof item === "string" ? item : item.text}>
                     <ScrollFadeIn className="grid grid-cols-[7px_1fr] gap-3" delay={0.05 + index * 0.08}>
                       <span className="mt-[9px] size-[5px] rounded-full bg-[#82f5ad]" />
-                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]">
-                        {item}
+                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]" data-preview-was={typeof item === "string" ? undefined : item.was}>
+                        {typeof item === "string" ? item : item.text}
                       </span>
                     </ScrollFadeIn>
                   </li>
@@ -954,7 +957,7 @@ export function FoldAuctionPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
+                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]" data-preview-was={item.was}>
                         {item.body}
                       </p>
                       {actions.length > 0 && (
@@ -1139,7 +1142,7 @@ export function FoldAuctionPage() {
             <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
               <ScrollFadeIn delay={0.04}>
                 <p>
-                  The FOLD auction, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.
+                  <span data-preview-was="The FOLD auction, TGE, token transferability, and Network Alpha are distinct parts of the launch sequence.">The FOLD auction, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</span>
                 </p>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.1}>
