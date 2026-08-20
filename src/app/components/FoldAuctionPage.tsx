@@ -32,7 +32,12 @@ const AUCTION = {
   // Was: "FOLD Auction 2 live now". Same two-part shape the page used when
   // Auction 1 closed ("$FOLD auction closed \u00b7 400 ETH target surpassed"), but the
   // second half is the action still open rather than a result.
-  statusLead: "$FOLD auctions closed \u00b7 Claiming open",
+  //
+  // Held as two fields because the strip renders them differently by width: one
+  // line joined by a middle dot on desktop, two lines on mobile. Auction 1's
+  // version was short enough to fit either way; this one is not.
+  statusLead: "$FOLD auctions closed",
+  statusLeadSecondary: "Claiming open",
 
   // --- Participate (Auction 2 specific) --------------------------------------
   uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
@@ -761,9 +766,15 @@ export function FoldAuctionPage() {
         {/* Status strip */}
         <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
           <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
-            {/* Solid, not pulsing: the pulse is the page's "we are live" signal. */}
-            <span aria-hidden="true" className="size-[7px] shrink-0 rounded-full bg-[#82f5ad]" />
-            <span>{AUCTION.statusLead}</span>
+            {/* The status dot is gone: it was a liveness indicator, and nothing here is live. */}
+            <span>
+              {AUCTION.statusLead}
+              {/* Middle dot on one line at md and up; a hard break below it, where the
+                  two halves would otherwise wrap mid-phrase. */}
+              <span className="hidden md:inline">{" \u00b7 "}</span>
+              <br className="md:hidden" />
+              {AUCTION.statusLeadSecondary}
+            </span>
             <span className="group relative inline-flex">
               <button
                 aria-label={`More details: ${statusStripDetails.join(", ")}`}
