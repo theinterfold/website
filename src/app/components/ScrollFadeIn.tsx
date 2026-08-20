@@ -26,6 +26,7 @@ export function ScrollFadeIn({ children, delay = 0, className }: ScrollFadeInPro
     }
 
     requestReveal({
+      node,
       y: node.getBoundingClientRect().top + window.scrollY,
       delayMs: delay * 1000,
       spanMs: 0,

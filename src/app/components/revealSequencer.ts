@@ -17,6 +17,8 @@
 // their delays imply; when they play is decided here.
 
 type RevealRequest = {
+  /** The block itself. Only read to check it is still on the page. */
+  node: Element;
   /** Absolute document position of the block, used to order the queue. */
   y: number;
   /** The authored delay, in ms. Only breaks ties between blocks at equal y. */
@@ -60,6 +62,15 @@ function tick() {
 
   while (queue.length > 0 && now >= nextReleaseAt) {
     const request = queue.shift() as RevealRequest;
+
+    // Gone from the page — almost always a route change, which leaves the
+    // outgoing page's blocks queued behind. Drop it without spending a turn,
+    // otherwise the page just arrived waits out a running order belonging to
+    // the page the reader has left.
+    if (!request.node.isConnected) {
+      continue;
+    }
+
     request.start(0);
 
     // Judged here, at release, rather than when the block asked to join —

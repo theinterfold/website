@@ -39,6 +39,7 @@ export function LineRevealAuto({
     }
 
     requestReveal({
+      node,
       y: node.getBoundingClientRect().top + window.scrollY,
       delayMs: delay * 1000,
       spanMs: Math.max(lines.length - 1, 0) * stagger * 1000,
