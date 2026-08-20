@@ -1,5 +1,6 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
+import { requestReveal } from "./revealSequencer";
 
 // Reveals a single string one *rendered* line at a time. It measures where the
 // text actually wraps (re-measuring on resize and after fonts load), then
@@ -22,6 +23,28 @@ export function LineRevealAuto({
   const isInView = useInView(wrapperRef, { once: true, amount: 0.5 });
   const shouldReduceMotion = useReducedMotion();
   const words = text.split(" ");
+  // Base delay handed back by the sequencer; each line staggers on top of it.
+  const [revealDelay, setRevealDelay] = useState<number | null>(null);
+
+  // Wait for a slot in the page-wide running order rather than starting the
+  // moment this block scrolls into view. Reserves enough time for every line,
+  // so whatever follows does not start until this block has finished.
+  useEffect(() => {
+    if (!isInView || !lines || shouldReduceMotion || revealDelay !== null) {
+      return;
+    }
+    const node = wrapperRef.current;
+    if (!node) {
+      return;
+    }
+
+    requestReveal({
+      y: node.getBoundingClientRect().top + window.scrollY,
+      delayMs: delay * 1000,
+      spanMs: Math.max(lines.length - 1, 0) * stagger * 1000,
+      start: setRevealDelay,
+    });
+  }, [delay, isInView, lines, revealDelay, shouldReduceMotion, stagger]);
 
   useLayoutEffect(() => {
     const node = measureRef.current;
@@ -112,12 +135,12 @@ export function LineRevealAuto({
         <span aria-label={text} className="block">
           {lines.map((line, index) => (
             <motion.span
-              animate={shouldReduceMotion || isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              animate={shouldReduceMotion || revealDelay !== null ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               aria-hidden="true"
               className="block"
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               key={index}
-              transition={{ duration: 0.6, delay: delay + index * stagger, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: (revealDelay ?? 0) + index * stagger, ease: [0.22, 1, 0.36, 1] }}
             >
               {line}
             </motion.span>
