@@ -26,8 +26,13 @@ const isPending = (href: string) => !href || href === PENDING_LINK;
 
 const AUCTION = {
   // --- Identity -------------------------------------------------------------
-  heroTitle: "FOLD Auction 2 is Live",
-  statusLead: "FOLD Auction 2 live now",
+  // Was: "FOLD Auction 2 is Live". Plural and unqualified on purpose \u2014 it covers
+  // both auctions, not just this one.
+  heroTitle: "$FOLD Auctions are closed",
+  // Was: "FOLD Auction 2 live now". Same two-part shape the page used when
+  // Auction 1 closed ("$FOLD auction closed \u00b7 400 ETH target surpassed"), but the
+  // second half is the action still open rather than a result.
+  statusLead: "$FOLD auctions closed \u00b7 Claiming open",
 
   // --- Participate (Auction 2 specific) --------------------------------------
   uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
@@ -95,35 +100,18 @@ const AUCTION = {
   network: "Ethereum Mainnet",
 };
 
-// =============================================================================
-// POST-AUCTION NOTICE
-//
-// Auction 2 closed on Aug 19 at ~13:06 UTC. Rather than rewrite the page into a
-// past-tense record, the page below is left as it ran and this notice sits above
-// it. The only people still arriving are claimers, so the notice exists to get
-// them to the claim flow and to tell everyone else that what follows is a record
-// rather than live instructions.
-//
-// To take it down, set `show` to false — nothing else needs touching.
-// =============================================================================
-const AUCTION_NOTICE = {
-  show: true,
-  label: "Update",
-  headline: "FOLD Auction 2 has completed.",
-  body: "Bidding closed on Aug 19 at ~13:06 UTC (~9:06 AM ET). Claiming opened at ~14:11 UTC (~10:11 AM ET) and runs through the same Uniswap CCA interface used for bidding \u2014 connect the wallet you bid with.",
-  footnote: "Everything below describes the auction as it ran.",
-  ctaLabel: "Claim Your FOLD",
-};
-
 const PAGE_TITLE = "FOLD Auction 2 · The Interfold";
 const META_DESCRIPTION =
-  "The FOLD Auction 2 is live. FOLD is distributed through a Continuous Clearing Auction on Uniswap. Registration required. Use official links only.";
+  "The $FOLD auctions are closed. FOLD was distributed through a Continuous Clearing Auction on Uniswap, and successful bidders can now claim. Use official links only.";
 
 // Composed date strings, tolerant of a still-pending time.
 const opensWhen = AUCTION.opensTime === PENDING_TEXT ? `${AUCTION.opensDate} at ${PENDING_TEXT}` : `${AUCTION.opensDate} at ${AUCTION.opensTime}`;
 const closesWhen = AUCTION.closesTime === PENDING_TEXT ? `${AUCTION.closesDate} at ${PENDING_TEXT}` : `${AUCTION.closesDate} at ${AUCTION.closesTime}`;
 
-const heroPrimaryCta = { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl };
+// Same Uniswap CCA URL, different job: that page is now where claiming happens.
+// This is the page's only claim link now that the update box is gone.
+// Was: "Join the FOLD Auction".
+const heroPrimaryCta = { label: "Claim Your FOLD", href: AUCTION.uniswapCcaUrl };
 // The live Auction 1 page pointed this at the participation guide, which for
 // Auction 2 has not been written yet. Rather than hide it, it points at the
 // Auction FAQ — which is what the currently published page does too. Swap it
@@ -133,43 +121,16 @@ const heroSecondaryCta = isPending(AUCTION.participationGuideUrl)
   : { label: "How to Participate", href: AUCTION.participationGuideUrl };
 const auctionActionLabel = "Join the FOLD Auction";
 
-// Auction 1's middle line was the 40-day cooldown, which no longer applies.
+// The strip now carries the post-auction detail, the way it did when Auction 1
+// closed. That version read "Results will be shared once finalized / 40-day
+// cooldown period / Use official links only"; the cooldown is gone and there are
+// no results to share yet, so these two lines cover claiming instead. The last
+// line is unchanged from both previous versions.
 const statusStripDetails = [
-  "Verification required",
+  "Claiming runs through the official Uniswap CCA interface",
+  "Connect the wallet you bid with",
   "Use official links only",
 ];
-
-// Sits between the status strip and the hero. Deliberately the only part of the
-// page written in the past tense.
-function PostAuctionNotice() {
-  if (!AUCTION_NOTICE.show) {
-    return null;
-  }
-
-  return (
-    <section className="bg-[#d9fce8] px-4 pt-[40px] md:px-8 md:pt-[56px]">
-      <div className="mx-auto max-w-[760px] rounded-[20px] bg-white p-6 md:p-8">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
-          {AUCTION_NOTICE.label}
-        </p>
-        <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[1] tracking-[-0.84px] text-[#3a5e3c] md:text-[32px]">
-          {AUCTION_NOTICE.headline}
-        </h2>
-        <p className="mt-4 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.25] text-[#3a5e3c] md:text-[18px]">
-          {AUCTION_NOTICE.body}
-        </p>
-        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4">
-          {!isPending(AUCTION.uniswapCcaUrl) && (
-            <TextLink href={AUCTION.uniswapCcaUrl}>{AUCTION_NOTICE.ctaLabel}</TextLink>
-          )}
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
-            {AUCTION_NOTICE.footnote}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
   return (
@@ -800,7 +761,8 @@ export function FoldAuctionPage() {
         {/* Status strip */}
         <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
           <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
-            <span aria-hidden="true" className="size-[7px] shrink-0 animate-pulse rounded-full bg-[#82f5ad] motion-reduce:animate-none" />
+            {/* Solid, not pulsing: the pulse is the page's "we are live" signal. */}
+            <span aria-hidden="true" className="size-[7px] shrink-0 rounded-full bg-[#82f5ad]" />
             <span>{AUCTION.statusLead}</span>
             <span className="group relative inline-flex">
               <button
@@ -824,8 +786,6 @@ export function FoldAuctionPage() {
             </span>
           </div>
         </div>
-
-        <PostAuctionNotice />
 
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
