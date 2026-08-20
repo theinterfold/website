@@ -8,23 +8,22 @@
 // start counting from the same instant and the blocks animate on top of each
 // other. The running order collapses exactly when the motion is most visible.
 //
-// So blocks ask this module for a slot instead. Requests that land in the same
-// frame are put in document order and played one after another: a paragraph
-// never begins while the paragraph above it is still arriving, at any scroll
-// speed.
+// So blocks join a queue here instead, and this module releases them one at a
+// time, in document order: a paragraph never begins while the paragraph above
+// it is still arriving, at any scroll speed.
 //
 // Note this makes the authored `delay` props ordering hints rather than
 // timings. Two blocks at the same vertical position still play in the order
-// their delays imply; the actual wait is decided here.
+// their delays imply; when they play is decided here.
 
 type RevealRequest = {
-  /** Absolute document position of the element, used to order the batch. */
+  /** Absolute document position of the block, used to order the queue. */
   y: number;
-  /** The authored delay, in ms. Only breaks ties between elements at equal y. */
+  /** The authored delay, in ms. Only breaks ties between blocks at equal y. */
   delayMs: number;
-  /** How long this element's own internal stagger runs, in ms. */
+  /** How long this block's own internal stagger runs, in ms. */
   spanMs: number;
-  /** Called with the wait this element should use, in seconds. */
+  /** Called when the block's turn comes. */
   start: (delaySeconds: number) => void;
 };
 
@@ -33,54 +32,60 @@ type RevealRequest = {
 // block rather than as another line of the previous one.
 const STEP_MS = 140;
 
-// Longest queue allowed to build up. A hard flick can bring dozens of blocks
-// into view while the scroll is still moving, and without this the last of them
-// would animate seconds after everything came to rest. Past this point the
-// running order starts afresh rather than stretching further.
-const MAX_BACKLOG_MS = 900;
+// How far above the viewport a block has to be before it counts as scrolled
+// past. Generous, so a tall block whose top has just gone off screen — and
+// whose lower half is still being read — is still paced normally.
+const PAST_MARGIN_PX = 320;
 
-let pending: RevealRequest[] = [];
+// Blocks waiting for their turn, kept in document order.
+let queue: RevealRequest[] = [];
+// Arrived since the last frame, not yet merged into the queue.
+let incoming: RevealRequest[] = [];
 let frame: number | null = null;
-// When the running order is next free, on the performance.now() clock.
-let nextFreeAt = 0;
+// When the next block may be released, on the performance.now() clock.
+let nextReleaseAt = 0;
 
-function flush() {
+function tick() {
   frame = null;
 
-  const batch = pending;
-  pending = [];
-
-  // Top to bottom. Equal positions — a two-column grid row, or a wrapper and
-  // the block inside it — fall back to the order the delays imply.
-  batch.sort((a, b) => a.y - b.y || a.delayMs - b.delayMs);
-
-  const now = performance.now();
-  if (nextFreeAt < now || nextFreeAt - now > MAX_BACKLOG_MS) {
-    nextFreeAt = now;
+  if (incoming.length) {
+    // Merge and re-sort rather than append: scrolling upwards brings in blocks
+    // that belong ahead of ones already waiting.
+    queue = queue.concat(incoming).sort((a, b) => a.y - b.y || a.delayMs - b.delayMs);
+    incoming = [];
   }
 
+  const now = performance.now();
   const viewportTop = window.scrollY;
 
-  batch.forEach((request) => {
-    // Already scrolled past. Nobody is looking at it, so let it appear at once
-    // rather than holding up the blocks that are actually on screen.
-    if (request.y < viewportTop) {
-      request.start(0);
-      return;
+  while (queue.length > 0 && now >= nextReleaseAt) {
+    const request = queue.shift() as RevealRequest;
+    request.start(0);
+
+    // Judged here, at release, rather than when the block asked to join —
+    // which is the whole reason for the queue. On the way down a block is
+    // always still on screen at the moment it asks, so a check made back then
+    // never catches anything. By the time its turn comes the reader may be
+    // long past it, and then it should cost the queue nothing: otherwise
+    // flicking through a long page spends the running order on blocks nobody
+    // watched, and the content the reader actually stops on arrives more than
+    // a second after the scroll settles.
+    if (request.y < viewportTop - PAST_MARGIN_PX) {
+      continue;
     }
 
-    const waitMs = Math.max(0, nextFreeAt - now);
-    request.start(waitMs / 1000);
-    nextFreeAt = now + waitMs + request.spanMs + STEP_MS;
-  });
+    nextReleaseAt = now + request.spanMs + STEP_MS;
+  }
+
+  if (queue.length > 0) {
+    frame = requestAnimationFrame(tick);
+  }
 }
 
 export function requestReveal(request: RevealRequest) {
-  pending.push(request);
+  incoming.push(request);
 
   if (frame === null) {
-    // Collect everything that crossed the threshold in this frame before
-    // deciding the order — a fast scroll delivers them a few at a time.
-    frame = requestAnimationFrame(flush);
+    frame = requestAnimationFrame(tick);
   }
 }
