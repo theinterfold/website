@@ -95,6 +95,26 @@ const AUCTION = {
   network: "Ethereum Mainnet",
 };
 
+// =============================================================================
+// POST-AUCTION NOTICE
+//
+// Auction 2 closed on Aug 19 at ~13:06 UTC. Rather than rewrite the page into a
+// past-tense record, the page below is left as it ran and this notice sits above
+// it. The only people still arriving are claimers, so the notice exists to get
+// them to the claim flow and to tell everyone else that what follows is a record
+// rather than live instructions.
+//
+// To take it down, set `show` to false — nothing else needs touching.
+// =============================================================================
+const AUCTION_NOTICE = {
+  show: true,
+  label: "Update",
+  headline: "FOLD Auction 2 has completed.",
+  body: "Bidding closed on Aug 19 at ~13:06 UTC (~9:06 AM ET). Claiming opened at ~14:11 UTC (~10:11 AM ET) and runs through the same Uniswap CCA interface used for bidding \u2014 connect the wallet you bid with.",
+  footnote: "Everything below describes the auction as it ran.",
+  ctaLabel: "Claim Your FOLD",
+};
+
 const PAGE_TITLE = "FOLD Auction 2 · The Interfold";
 const META_DESCRIPTION =
   "The FOLD Auction 2 is live. FOLD is distributed through a Continuous Clearing Auction on Uniswap. Registration required. Use official links only.";
@@ -118,6 +138,38 @@ const statusStripDetails = [
   "Verification required",
   "Use official links only",
 ];
+
+// Sits between the status strip and the hero. Deliberately the only part of the
+// page written in the past tense.
+function PostAuctionNotice() {
+  if (!AUCTION_NOTICE.show) {
+    return null;
+  }
+
+  return (
+    <section className="bg-[#d9fce8] px-4 pt-[40px] md:px-8 md:pt-[56px]">
+      <div className="mx-auto max-w-[760px] rounded-[20px] bg-white p-6 md:p-8">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71]">
+          {AUCTION_NOTICE.label}
+        </p>
+        <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[1] tracking-[-0.84px] text-[#3a5e3c] md:text-[32px]">
+          {AUCTION_NOTICE.headline}
+        </h2>
+        <p className="mt-4 max-w-[600px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.25] text-[#3a5e3c] md:text-[18px]">
+          {AUCTION_NOTICE.body}
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-4">
+          {!isPending(AUCTION.uniswapCcaUrl) && (
+            <TextLink href={AUCTION.uniswapCcaUrl}>{AUCTION_NOTICE.ctaLabel}</TextLink>
+          )}
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+            {AUCTION_NOTICE.footnote}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
   return (
@@ -772,6 +824,8 @@ export function FoldAuctionPage() {
             </span>
           </div>
         </div>
+
+        <PostAuctionNotice />
 
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
