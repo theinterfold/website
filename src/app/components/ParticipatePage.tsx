@@ -4,7 +4,7 @@ import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
-import { TITLE_BLOCK_GAP } from "./titleBlock";
+import { SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 // `outro` used to live on each pathway and was never rendered — dead strings
@@ -394,7 +394,7 @@ export function ParticipatePage() {
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p data-preview-was="Builders, operators, and partners each help bring confidential coordination into practice." className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
+              <p data-preview-was="Builders, operators, and partners each help bring confidential coordination into practice." className={`w-full max-w-[320px] ${SUPPORTING_LINE} text-[#687d71] md:w-[440px] md:max-w-none`}>
                 Confidential coordination depends on multiple roles working together.
               </p>
             </ScrollFadeIn>
@@ -408,7 +408,7 @@ export function ParticipatePage() {
               <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
                 Interfold enables programs to compute over encrypted inputs without exposing the underlying data or placing decryption control in a single party.
               </p>
-              <p className="mx-auto mt-8 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-none md:text-[14px]">
+              <p className={`mx-auto mt-8 max-w-[320px] ${SUPPORTING_LINE} md:max-w-none`}>
                 This requires coordination between multiple actors:
               </p>
             </ScrollFadeIn>
@@ -569,7 +569,7 @@ export function ParticipatePage() {
                 </ScrollFadeIn>
               </div>
               <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
-                <p data-preview-note="alphaCtas" data-preview-was="Access will expand gradually as the system stabilizes. This page will be updated as participation opens." className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
+                <p data-preview-note="alphaCtas" data-preview-was="Access will expand gradually as the system stabilizes. This page will be updated as participation opens." className={`${SUPPORTING_LINE} text-[#82f5ad]`}>
                   Network Alpha is live on Ethereum mainnet.
                   <br />
                   More operators join, more applications and E3s go live, and governance comes online from here.

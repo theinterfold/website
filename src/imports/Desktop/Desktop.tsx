@@ -18,7 +18,7 @@ import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
 import { SectionLabel } from "../../app/components/SectionLabel";
-import { TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
+import { SUPPORTING_LINE, TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 import { useStartOnInView } from "../../app/components/useStartOnInView";
@@ -1698,7 +1698,7 @@ function Frame12() {
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
-        <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.2] relative shrink-0 text-[#687d71] text-[18px] w-full md:w-[440px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
+        <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>
     </div>
   );
