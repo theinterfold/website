@@ -470,7 +470,7 @@ export function MobileVersion() {
       <div id="participate">
         <ScrollFadeIn className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
           <div className="mx-auto mb-12 w-full max-w-[320px]">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]/55">
               Participate
             </p>
             <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">

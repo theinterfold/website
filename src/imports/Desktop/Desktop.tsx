@@ -358,7 +358,7 @@ function Frame8() {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#d4f6da]/55 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it." />

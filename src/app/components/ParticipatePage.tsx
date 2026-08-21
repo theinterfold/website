@@ -472,7 +472,7 @@ export function ParticipatePage() {
         <section className="bg-[#687d71] px-6 py-[64px] text-[#d9fce8] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
-              <SectionLabel className="text-[#d9fce8]">Participate</SectionLabel>
+              <SectionLabel className="text-[#d9fce8]/55">Participate</SectionLabel>
               <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Help form the network
               </p>
