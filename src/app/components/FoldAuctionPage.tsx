@@ -1160,7 +1160,7 @@ export function FoldAuctionPage() {
         </section>
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
 
     </div>
   );

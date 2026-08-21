@@ -614,7 +614,7 @@ export function AuctionLegalPage() {
         </section>
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
 
     </div>
   );

@@ -149,7 +149,7 @@ function Frame() {
   };
 
   return (
-    <div className="relative isolate bg-[#d9fce8] md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(518px+min(44.444vw,640px))]">
+    <div className="relative isolate bg-[#d9fce8] w-full">
       <motion.div
         className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -348,7 +348,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1704px+min(44.444vw,640px))] w-full">
+    <div className="relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center py-[64px] md:py-[112px] w-full">
       <Frame16 />
       <Frame23 />
     </div>
@@ -457,7 +457,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2688px+min(44.444vw,640px))] w-full">
+    <div id="participate" className="relative bg-[#121718] content-stretch flex flex-col items-center justify-center py-[64px] md:py-[112px] w-full">
       <Frame10 />
     </div>
   );
@@ -664,7 +664,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3187px+min(44.444vw,640px))] w-full">
+    <div className="relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] w-full">
       <Frame18 />
       <Frame30 />
     </div>
@@ -1628,7 +1628,7 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[1071px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(633px+min(44.444vw,640px))] w-full"
+      className="relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center py-[64px] md:py-[112px] w-full"
     >
       <Frame14 />
       <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
@@ -1786,16 +1786,16 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[518px] md:top-[min(44.444vw,640px)] w-full">
+    <div className="relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center py-[64px] md:py-[112px] w-full">
       <Frame12 />
       <Frame17 />
     </div>
   );
 }
 
-export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
+export function DesktopFooter() {
   return (
-    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(4012px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
+    <footer className="relative bg-[#d9fce8] w-full">
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
@@ -1866,8 +1866,8 @@ function Frame32() {
 
 export default function Desktop() {
   return (
-    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-clip bg-[#d9fce8] md:min-h-[calc(4261px+min(44.444vw,640px))]" data-name="Desktop">
-      <div className="interfold-hero-transition md:absolute relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
+    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-clip bg-[#d9fce8]" data-name="Desktop">
+      <div className="interfold-hero-transition relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718]" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage
             className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
@@ -1876,12 +1876,16 @@ export default function Desktop() {
           />
         </div>
       </div>
+      {/* Reading order is now the order on screen. It used to be
+          Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
+          Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block
+          was placed by an absolute top and the markup order did not matter. */}
+      <Frame13 />
       <Frame />
+      <Frame15 />
       <Frame19 />
       <Frame11 />
       <Frame20 />
-      <Frame15 />
-      <Frame13 />
       <Frame32 />
     </div>
   );

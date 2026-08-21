@@ -600,7 +600,7 @@ export function ParticipatePage() {
 
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
     </div>
   );
 }

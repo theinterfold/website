@@ -553,7 +553,7 @@ export function MobileVersion() {
         </div>
       </ScrollFadeIn>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
     </div>
   );
 }
