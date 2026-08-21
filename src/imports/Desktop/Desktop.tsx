@@ -346,7 +346,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1573px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1721px+min(44.444vw,640px))] w-full">
       <Frame16 />
       <Frame23 />
     </div>
@@ -379,7 +379,7 @@ function Frame2() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Build on Interfold
       </AnimatedButtonContent>
@@ -399,7 +399,7 @@ function Frame1() {
     >
       <AnimatedButtonContent
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Participate
       </AnimatedButtonContent>
@@ -420,7 +420,7 @@ function FinalTelegramCta() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Run a ciphernode
       </AnimatedButtonContent>
@@ -455,7 +455,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2557px+min(44.444vw,640px))] w-full">
+    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2705px+min(44.444vw,640px))] w-full">
       <Frame10 />
     </div>
   );
@@ -487,7 +487,7 @@ function Frame3() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Explore Docs
       </AnimatedButtonContent>
@@ -549,7 +549,7 @@ function Frame4() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read essays
       </AnimatedButtonContent>
@@ -601,7 +601,7 @@ function Frame5() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read the blog
       </AnimatedButtonContent>
@@ -662,7 +662,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3056px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3204px+min(44.444vw,640px))] w-full">
       <Frame18 />
       <Frame30 />
     </div>
@@ -1597,6 +1597,30 @@ function Frame31({
   );
 }
 
+// // REVIEW COLOUR — amber, not a palette colour. Marks this CTA as newly added
+// so it is obvious in the preview. Swap to the normal secondary button styling
+// (bg-[rgba(193,217,191,0.8)], text-[#3a5e3c]) before this is merged.
+function HowItWorksCta() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <a
+      className="group bg-[#f0803c] outline-2 outline-dashed outline-offset-2 outline-[#7a3a00] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#7a3a00]"
+      href="https://blog.theinterfold.com/how-interfold-works/"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatedButtonContent
+        isExternal
+        isHovered={isHovered}
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#241000] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#f0803c]"
+      >
+        How Interfold Works
+      </AnimatedButtonContent>
+    </a>
+  );
+}
+
 function Frame15() {
   const [hoveredZone, setHoveredZone] = useState<ExecutionFlowHoverZone>(null);
   const executionHoverZones: Exclude<ExecutionFlowHoverZone, null>[] = ["inputs", "nodes", "output"];
@@ -1604,7 +1628,7 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[923px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(650px+min(44.444vw,640px))] w-full"
+      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[1071px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(650px+min(44.444vw,640px))] w-full"
     >
       <Frame14 />
       <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
@@ -1612,6 +1636,9 @@ function Frame15() {
           <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
         </ScrollFadeIn>
         <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+        <ScrollFadeIn delay={0.4}>
+          <HowItWorksCta />
+        </ScrollFadeIn>
         <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
           {executionHoverZones.map((zone) => (
             <div
@@ -1687,7 +1714,7 @@ function Frame6() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Build on Interfold
       </AnimatedButtonContent>
@@ -1707,7 +1734,7 @@ function Frame7() {
     >
       <AnimatedButtonContent
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Participate
       </AnimatedButtonContent>
@@ -1728,7 +1755,7 @@ function FrameRunCiphernode() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Run a ciphernode
       </AnimatedButtonContent>
@@ -1784,7 +1811,7 @@ function LiveNowBar() {
 
 export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
   return (
-    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(3881px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
+    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(4029px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>

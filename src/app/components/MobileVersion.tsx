@@ -271,7 +271,7 @@ export function MobileVersion() {
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://docs.theinterfold.com/getting-started"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Build on Interfold
               </HoverArrowLink>
@@ -280,7 +280,7 @@ export function MobileVersion() {
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://dashboard.theinterfold.com/#operator"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Run a ciphernode
               </HoverArrowLink>
@@ -289,7 +289,7 @@ export function MobileVersion() {
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="/participate"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Participate
               </HoverArrowLink>
@@ -370,6 +370,19 @@ export function MobileVersion() {
               Results can be verified without revealing the private inputs behind them.
             </p>
           </div>
+        </div>
+
+        {/* REVIEW COLOUR — amber, not a palette colour. Marks this CTA as newly
+            added so it is obvious in the preview. Swap to the normal secondary
+            button styling before this is merged. */}
+        <div className="mx-auto mt-10 w-[min(100%-96px,540px)]">
+          <HoverArrowLink
+            className="flex w-full items-center justify-center bg-[#f0803c] px-6 py-4 outline-2 outline-dashed outline-offset-2 outline-[#7a3a00] transition-colors hover:bg-[#7a3a00]"
+            href="https://blog.theinterfold.com/how-interfold-works/"
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#241000] transition-colors group-hover:text-[#f0803c]"
+          >
+            How Interfold Works
+          </HoverArrowLink>
         </div>
       </ScrollFadeIn>
 
@@ -484,7 +497,7 @@ export function MobileVersion() {
             <HoverArrowLink
               className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://docs.theinterfold.com/getting-started"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
               Build on Interfold
             </HoverArrowLink>
@@ -493,7 +506,7 @@ export function MobileVersion() {
             <HoverArrowLink
               className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://dashboard.theinterfold.com/#operator"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
               Run a ciphernode
             </HoverArrowLink>
@@ -502,7 +515,7 @@ export function MobileVersion() {
             <HoverArrowLink
               className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="/participate"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
               Participate
             </HoverArrowLink>
@@ -603,7 +616,7 @@ function ExploreCard({
         <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
           <div className="relative inline-flex items-center justify-center">
             <motion.p
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
               animate={{ x: hoveredButton === id ? -8 : 0 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
