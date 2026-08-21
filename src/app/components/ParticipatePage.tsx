@@ -105,6 +105,55 @@ const actors: Array<{ title: string; role: string; detail: string; glyph: ActorG
   },
 ];
 
+// Marvin's intro says "two forms of network participation" while there are three
+// cards: transferring is not participation, it is just what the token also does.
+// Kept as written; worth a second look with him.
+const foldActions = [
+  {
+    title: "Bond FOLD",
+    copy: [
+      "Bond FOLD to become eligible to run a ciphernode.",
+      "Bonded operators can be selected into computation-specific committees responsible for distributed key generation, threshold decryption, and other network duties.",
+    ],
+    actions: [
+      { label: "Bond FOLD", href: "https://dashboard.theinterfold.com/#operator", primary: true },
+      { label: "Learn about ciphernodes", href: "https://docs.theinterfold.com/ciphernode-operators", primary: false },
+    ],
+  },
+  {
+    title: "Lock FOLD",
+    copy: [
+      "Lock FOLD to participate in Interfold governance and receive governance weight.",
+      "Confidential, receipt-free voting is being brought onchain through the Interfold governance system.",
+    ],
+    actions: [
+      { label: "Lock FOLD", href: "https://governance.theinterfold.com", primary: true },
+      {
+        label: "Learn about confidential governance",
+        href: "https://blog.theinterfold.com/verifiable-secret-ballots-with-interfold-and-aragon/",
+        primary: false,
+      },
+    ],
+  },
+  {
+    title: "Transfer FOLD",
+    // The token address matches the one on the auction page.
+    copy: ["FOLD is generally transferable on Ethereum mainnet."],
+    actions: [
+      {
+        label: "Swap on Uniswap",
+        href: "https://app.uniswap.org/explore/tokens/ethereum/0xe172e9b6cfbeeb5593bdce3f077356fdb33af904",
+        primary: true,
+      },
+      {
+        label: "View market",
+        href: "https://dexscreener.com/ethereum/0x909e4a022a7505d44b19b36fe76ee18567379ee4c9697438acde2e159c006c32",
+        primary: false,
+      },
+    ],
+  },
+];
+
 const carouselSettings = {
   centerMode: true,
   centerPadding: "16px",
@@ -202,6 +251,36 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
             ))}
           </div>
         </div>
+      </div>
+    </article>
+  );
+}
+
+function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
+  return (
+    <article className="flex h-full flex-col rounded-[20px] bg-white p-6">
+      <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.95] tracking-[-0.96px]">
+        {item.title}
+      </h3>
+      <div className="my-7 h-px bg-[#3a5e3c]/20" />
+      <div className="space-y-3 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
+        {item.copy.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+      <div className="mt-auto flex flex-col gap-2 pt-7">
+        {item.actions.map((action) => (
+          <HoverArrowLink
+            className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 text-center transition-colors hover:bg-[#3a5e3c] ${
+              action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
+            }`}
+            href={action.href}
+            key={action.label}
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+          >
+            {action.label}
+          </HoverArrowLink>
+        ))}
       </div>
     </article>
   );
@@ -401,6 +480,27 @@ export function ParticipatePage() {
               {pathways.map((pathway, index) => (
                 <ScrollFadeIn className="h-full w-full" delay={index * 0.1} key={pathway.title}>
                   <ParticipationCard pathway={pathway} />
+                </ScrollFadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
+          <div className="mx-auto max-w-[1052px]">
+            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
+              <SectionLabel>FOLD</SectionLabel>
+              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+                Operate. Govern. Transfer.
+              </p>
+              <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] md:max-w-[597.355px]">
+                FOLD supports two forms of network participation: operating and governing.
+              </p>
+            </ScrollFadeIn>
+            <div className="mx-auto mt-16 grid max-w-md gap-4 md:max-w-none md:grid-cols-3">
+              {foldActions.map((item, index) => (
+                <ScrollFadeIn className="h-full w-full" delay={index * 0.1} key={item.title}>
+                  <FoldCard item={item} />
                 </ScrollFadeIn>
               ))}
             </div>
