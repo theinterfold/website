@@ -216,7 +216,7 @@ function Frame16() {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
       <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible." />
@@ -466,7 +466,7 @@ function Frame18() {
   return (
     <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
       <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Go deeper into how Interfold works, why confidential coordination matters, and what is live now." />
@@ -674,7 +674,7 @@ function Frame14() {
   return (
     <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
       <ScrollFadeIn className="w-full flex justify-center">
-        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
+        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
           <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
           <p className="leading-[1.075] whitespace-pre">execution Model</p>
         </div>

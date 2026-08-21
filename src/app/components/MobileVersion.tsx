@@ -308,7 +308,7 @@ export function MobileVersion() {
       {/* Execution Model Section */}
       <ScrollFadeIn className="flex flex-col items-center bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71] opacity-80">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90] opacity-80">
             A new execution Model
           </p>
           <p data-preview-was="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
@@ -375,7 +375,7 @@ export function MobileVersion() {
       {/* What Becomes Possible Section */}
       <ScrollFadeIn className="bg-[#d9fce8] px-6 py-16 pb-24">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             What Becomes Possible
           </p>
           <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
@@ -513,7 +513,7 @@ export function MobileVersion() {
       {/* Explore Section */}
       <ScrollFadeIn className="bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             Explore
           </p>
           <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
