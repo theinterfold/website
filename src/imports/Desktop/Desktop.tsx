@@ -217,7 +217,7 @@ function Frame16() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+      <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible." />
       </p>
     </div>
@@ -258,7 +258,7 @@ function Frame22() {
           <p className="leading-[0.95] mb-0">Fairer market</p>
           <p className="leading-[0.95]">mechanisms</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
+        <p data-preview-was="Sealed auction mechanisms where bids remain private and outcomes are verifiable" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
       </div>
     </div>
   );
@@ -272,7 +272,7 @@ function Frame24() {
           <p className="leading-[0.95] mb-0">Stronger democratic</p>
           <p className="leading-[0.95]">systems</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
+        <p data-preview-was="Secret ballots with correct, verifiable tallying and no trusted operator" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
       </div>
     </div>
   );
@@ -286,7 +286,7 @@ function Frame25() {
           <p className="leading-[0.95] mb-0">Collaborative</p>
           <p className="leading-[0.95]">Intelligence</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
+        <p data-preview-was="Multiple parties compute together to produce shared results without exposing data" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
       </div>
     </div>
   );
@@ -359,7 +359,7 @@ function Frame8() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
+      <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it." />
       </p>
     </div>
@@ -467,7 +467,7 @@ function Frame18() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+      <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Go deeper into how Interfold works, why confidential coordination matters, and what is live now." />
       </p>
     </div>
@@ -678,7 +678,7 @@ function Frame14() {
           <p className="leading-[1.075] whitespace-pre">execution Model</p>
         </div>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
+      <p data-preview-was="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
         <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, allowing multiple parties to compute over encrypted inputs and produce shared, verifiable outcomes." />
       </p>
     </div>
@@ -1553,10 +1553,10 @@ function Frame31({
           </div>
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px]">01</p>
-            <p className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
+            <p data-preview-was="Confidential inputs" className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
             <p className="leading-[1.075] text-[14px]">inputs</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Sensitive data remains private during execution.</p>
+          <p data-preview-was="Data remains private throughout execution" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Sensitive data remains private during execution.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
@@ -1571,9 +1571,9 @@ function Frame31({
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">02</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Threshold `}</p>
-            <p className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
+            <p data-preview-was="Threshold enforcement" className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
+          <p data-preview-was="A subset of nodes governs execution and release" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
@@ -1590,22 +1590,20 @@ function Frame31({
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Verifiable `}</p>
             <p className="leading-[1.075] text-[14px] whitespace-pre">outcomes</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
+          <p data-preview-was="Results are verifiable without revealing inputs" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
         </div>
       </ScrollFadeIn>
     </div>
   );
 }
 
-// // REVIEW COLOUR — amber, not a palette colour. Marks this CTA as newly added
-// so it is obvious in the preview. Swap to the normal secondary button styling
-// (bg-[rgba(193,217,191,0.8)], text-[#3a5e3c]) before this is merged.
 function HowItWorksCta() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a
-      className="group bg-[#f0803c] outline-2 outline-dashed outline-offset-2 outline-[#7a3a00] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#7a3a00]"
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      data-preview-note="howItWorks"
       href="https://blog.theinterfold.com/how-interfold-works/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1613,7 +1611,7 @@ function HowItWorksCta() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#241000] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#f0803c]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         How Interfold Works
       </AnimatedButtonContent>
@@ -1695,7 +1693,7 @@ function Frame12() {
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
+        <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1767,7 +1765,7 @@ function Frame17() {
   return (
     // Three 288px buttons do not fit one row until well past the md breakpoint,
     // so this wraps and centres rather than overflowing between 768px and ~940px.
-    <div className="content-stretch flex flex-col md:flex-row md:flex-wrap gap-[16px] items-center justify-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
+    <div data-preview-note="heroCtas" className="content-stretch flex flex-col md:flex-row md:flex-wrap gap-[16px] items-center justify-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
       <ScrollFadeIn delay={0.2}>
         <Frame6 />
       </ScrollFadeIn>
@@ -1832,7 +1830,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
                 <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
+                <a data-preview-note="footerGithub" data-preview-was="https://github.com/gnosisguild/enclave/" className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
                 <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>

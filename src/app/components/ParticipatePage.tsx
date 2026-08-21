@@ -397,7 +397,7 @@ export function ParticipatePage() {
               </h1>
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
-              <p className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
+              <p data-preview-was="Builders, operators, and partners each help bring confidential coordination into practice." className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
                 Confidential coordination depends on multiple roles working together.
               </p>
             </ScrollFadeIn>
@@ -408,7 +408,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>Overview</SectionLabel>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
+              <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
                 Interfold enables programs to compute over encrypted inputs without exposing the underlying data or placing decryption control in a single party.
               </p>
               <p className="mx-auto mt-8 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-none md:text-[14px]">
@@ -442,7 +442,10 @@ export function ParticipatePage() {
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
                         {role}
                       </p>
-                      <p className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md">
+                      <p
+                        data-preview-note={title === "Compute providers" ? "computeProviders" : undefined}
+                        className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md"
+                      >
                         {detail}
                       </p>
                     </div>
@@ -455,6 +458,7 @@ export function ParticipatePage() {
             </div>
 
             <ScrollFadeIn className="mt-14 flex justify-center" delay={0.1}>
+              <div data-preview-note="howItWorksParticipate">
               <HoverArrowLink
                 className="flex h-[46px] w-full max-w-[320px] items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
                 href="https://blog.theinterfold.com/how-interfold-works/"
@@ -462,6 +466,7 @@ export function ParticipatePage() {
               >
                 How Interfold works
               </HoverArrowLink>
+              </div>
             </ScrollFadeIn>
           </div>
         </section>
@@ -470,7 +475,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel className="text-[#d9fce8]">Participate</SectionLabel>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Help form the network
               </p>
               <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] md:max-w-[597.355px]">
@@ -500,7 +505,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>FOLD</SectionLabel>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-note="foldSection" className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Operate. Govern. Transfer.
               </p>
               <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] md:max-w-[597.355px]">
@@ -524,7 +529,7 @@ export function ParticipatePage() {
                 <SectionLabel className="text-[#d9fce8]/55">Now live</SectionLabel>
               </ScrollFadeIn>
               <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-[320px] md:w-[597.355px] md:max-w-md">
-                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
+                <p data-preview-was="The network is forming in stages: (eyebrow was WHAT'S NEXT, and only the first two stages were marked as reached)" className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
                   The network has entered its next stage:
                 </p>
               </ScrollFadeIn>
@@ -561,13 +566,13 @@ export function ParticipatePage() {
                   </span>
                   <span className="mt-4 block size-3 rounded-full border border-dotted border-[#687d71]" />
                   <span className="mt-3 h-8 w-px bg-[#687d71]" />
-                  <p className="mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:text-[14px]">
+                  <p data-preview-note="continues" className="mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:text-[14px]">
                     Network formation continues
                   </p>
                 </ScrollFadeIn>
               </div>
               <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
-                <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
+                <p data-preview-note="alphaCtas" data-preview-was="Access will expand gradually as the system stabilizes. This page will be updated as participation opens." className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
                   Network Alpha is live on Ethereum mainnet.
                   <br />
                   More operators join, more applications and E3s go live, and governance comes online from here.

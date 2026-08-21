@@ -73,7 +73,7 @@ export function Header({
             <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
               <InterfoldSymbol className="block h-full w-full" />
             </MarkLink>
-            <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
+            <nav data-preview-note="nav" className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
                 <ExternalArrowSlide />
