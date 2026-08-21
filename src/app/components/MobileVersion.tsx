@@ -384,7 +384,8 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mobile-what-possible-carousel -mx-1.5 w-[calc(100%+12px)]" ref={possibilityCarouselRef}>
+        <div className="mx-auto w-full max-w-md">
+          <div className="mobile-what-possible-carousel -mx-1.5 w-[calc(100%+12px)]" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
             <div className="h-full px-1.5">
               <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
@@ -464,6 +465,7 @@ export function MobileVersion() {
               </div>
             </div>
           </Slider>
+          </div>
         </div>
       </ScrollFadeIn>
 

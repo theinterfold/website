@@ -479,7 +479,8 @@ export function ParticipatePage() {
                 Operate infrastructure, build applications, or bring a real-world use case.
               </p>
             </ScrollFadeIn>
-            <div className="mobile-what-possible-carousel participation-pathways-carousel -mx-1.5 mt-16 w-[calc(100%+12px)] max-w-none [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[1100px]:hidden" ref={participationCarouselRef}>
+            <div className="mx-auto mt-16 w-full max-w-md min-[1100px]:hidden">
+              <div className="mobile-what-possible-carousel participation-pathways-carousel -mx-1.5 w-[calc(100%+12px)] [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch" ref={participationCarouselRef}>
               <Slider {...carouselSettings}>
                 {pathways.map((pathway) => (
                   <div className="h-full px-1.5" key={pathway.title}>
@@ -487,6 +488,7 @@ export function ParticipatePage() {
                   </div>
                 ))}
               </Slider>
+              </div>
             </div>
             <div className="mt-16 hidden grid-cols-3 gap-4 min-[1100px]:grid">
               {pathways.map((pathway, index) => (
@@ -534,7 +536,7 @@ export function ParticipatePage() {
                   object rather than as loose marks on the section background.
                   24px is the radius the cards already use — the only large radius
                   in the system. #1c2426 is the panel tone from the auction page. */}
-              <div className="mt-16 rounded-[24px] bg-[#1c2426] px-6 py-12 md:px-10 md:py-14">
+              <div className="mx-auto mt-16 max-w-md rounded-[24px] bg-[#1c2426] px-6 py-12 md:max-w-none md:px-10 md:py-14">
               {/* Four columns, but only three stages: the fourth is the continuation
                   marker below. The connector percentages are column centres, so they
                   move whenever the column count does. */}
