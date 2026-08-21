@@ -243,9 +243,9 @@ export function MobileVersion() {
         <div className="flex h-[32px] w-full shrink-0 items-center justify-center bg-white px-3">
           <div className="flex items-center justify-center gap-4 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:gap-6 sm:text-[12px] sm:tracking-[1.2px]">
             <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
-            <span>Live now</span>
-            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
-              <span>Aragon demo</span>
+            <span>Network Alpha · Live on mainnet</span>
+            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://governance.theinterfold.com">
+              <span>Governance</span>
               <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
             </a>
             <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
@@ -261,7 +261,7 @@ export function MobileVersion() {
           </div>
           <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
             <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
-              Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
+              Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.
             </p>
           </ScrollFadeIn>
 
@@ -270,7 +270,7 @@ export function MobileVersion() {
             <div className="w-full">
               <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="https://docs.theinterfold.com/"
+                href="https://docs.theinterfold.com/getting-started"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Build on Interfold
@@ -278,8 +278,17 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <HoverArrowLink
+                className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                href="https://dashboard.theinterfold.com/#operator"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+              >
+                Run a ciphernode
+              </HoverArrowLink>
+            </div>
+            <div className="w-full">
+              <HoverArrowLink
                 className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="/fold-auction"
+                href="/participate"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Participate
@@ -314,8 +323,7 @@ export function MobileVersion() {
             A new execution Model
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable
-            outcomes without data custody, input exposure, or trusted hardware.
+            The Interfold brings confidential coordination to digital systems, allowing multiple parties to compute over encrypted inputs and produce shared, verifiable outcomes.
           </p>
         </div>
 
@@ -330,10 +338,10 @@ export function MobileVersion() {
               01
             </p>
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase">
-              Confidential inputs
+              Encrypted inputs
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              Data remains private throughout execution
+              Sensitive data remains private during execution.
             </p>
           </div>
 
@@ -343,10 +351,10 @@ export function MobileVersion() {
               02
             </p>
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase">
-              Threshold enforcement
+              Threshold decryption
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              A subset of nodes governs execution and release
+              Ciphernode committees use threshold decryption so no single party controls decryption.
             </p>
           </div>
 
@@ -359,7 +367,7 @@ export function MobileVersion() {
               Verifiable outcomes
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              Results are verifiable without revealing inputs
+              Results can be verified without revealing the private inputs behind them.
             </p>
           </div>
         </div>
@@ -372,8 +380,7 @@ export function MobileVersion() {
             What Becomes Possible
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination
-            systems become possible.
+            When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible.
           </p>
         </div>
 
@@ -387,7 +394,7 @@ export function MobileVersion() {
                     <p className="whitespace-pre">mechanisms</p>
                   </div>
                   <p className="text-[14.429px] leading-[1.075]">
-                    Sealed auction mechanisms where bids remain private and outcomes are verifiable
+                    Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
                 <div className="relative h-[324px] w-full overflow-hidden">
@@ -413,7 +420,7 @@ export function MobileVersion() {
                     <p className="whitespace-pre">systems</p>
                   </div>
                   <p className="text-[14.429px] leading-[1.075]">
-                    Secret ballots with correct, verifiable tallying and no trusted operator
+                    Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
                 <div className="relative h-[324px] w-full overflow-hidden">
@@ -439,7 +446,7 @@ export function MobileVersion() {
                     <p className="whitespace-pre">Intelligence</p>
                   </div>
                   <p className="text-[14.429px] leading-[1.075]">
-                    Multiple parties compute together to produce shared results without exposing data
+                    Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
                 <div className="relative h-[324px] w-full overflow-hidden">
@@ -467,12 +474,8 @@ export function MobileVersion() {
             <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
               Participate
             </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
-              Confidential coordination becomes real through both applications and operators:
-            </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d4f6da]">
-              Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution
-              authority and govern outcome release.
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
+              Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it.
             </p>
           </div>
 
@@ -480,7 +483,7 @@ export function MobileVersion() {
           <div className="w-full">
             <HoverArrowLink
               className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="https://docs.theinterfold.com/"
+              href="https://docs.theinterfold.com/getting-started"
               textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
               Build on Interfold
@@ -489,10 +492,10 @@ export function MobileVersion() {
           <div className="w-full">
             <HoverArrowLink
               className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="https://t.me/enclave_e3"
+              href="https://dashboard.theinterfold.com/#operator"
               textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
-              Join Telegram
+              Run a ciphernode
             </HoverArrowLink>
           </div>
           <div className="w-full">
@@ -515,8 +518,7 @@ export function MobileVersion() {
             Explore
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            Read the technical documentation, essays, and updates that explain how Interfold works, why confidential
-            coordination matters, and what is live now.
+            Go deeper into how Interfold works, why confidential coordination matters, and what is live now.
           </p>
         </div>
 
@@ -545,7 +547,7 @@ export function MobileVersion() {
             kind="blog"
             title="BLOG"
             description="Updates, research notes, and ecosystem announcements."
-            cta="Read blog"
+            cta="Read the blog"
             href="https://blog.theinterfold.com/"
             hoveredButton={hoveredButton}
             setHoveredButton={setHoveredButton}

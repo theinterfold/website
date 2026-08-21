@@ -142,17 +142,8 @@ export function SiteMobileHeader({
               <span>Blog</span>
               <span aria-hidden="true" className="text-[22px] leading-none">↗</span>
             </motion.a>
-            <motion.a
-              animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
-              href="/fold-auction"
-              initial={{ opacity: 0, y: 16 }}
-              onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: "-0.1em" }}
-              transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Auction
-            </motion.a>
+            {/* Auction removed from the menu after Auction 2 closed. /fold-auction is
+                still live and still the claim route — reachable by direct link only. */}
             <motion.a
               animate={{ opacity: 1, y: 0 }}
               className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
@@ -160,7 +151,7 @@ export function SiteMobileHeader({
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
               style={{ wordSpacing: "-0.1em" }}
-              transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             >
               Participate
             </motion.a>

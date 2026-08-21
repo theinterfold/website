@@ -50,7 +50,6 @@ export function Header({
   const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
   const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
-  const auctionLinkClass = `${navLinkClass} ${activePath === "fold-auction" ? "is-active" : ""}`;
 
   return (
     <>
@@ -79,8 +78,9 @@ export function Header({
                 <span>Blog</span>
                 <ExternalArrowSlide />
               </NavLink>
-              <NavLink aria-current={activePath === "fold-auction" ? "page" : undefined} className={auctionLinkClass} href="/fold-auction" {...openingMotion(1.15)}>Auction</NavLink>
-              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.25)}>Participate</NavLink>
+              {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
+                  still live and still the claim route — reachable by direct link only. */}
+              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
             </nav>
           </div>
         </header>

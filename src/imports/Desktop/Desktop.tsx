@@ -218,7 +218,7 @@ function Frame16() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." />
+        <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible." />
       </p>
     </div>
   );
@@ -258,7 +258,7 @@ function Frame22() {
           <p className="leading-[0.95] mb-0">Fairer market</p>
           <p className="leading-[0.95]">mechanisms</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed auction mechanisms where bids remain private and outcomes are verifiable</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
       </div>
     </div>
   );
@@ -272,7 +272,7 @@ function Frame24() {
           <p className="leading-[0.95] mb-0">Stronger democratic</p>
           <p className="leading-[0.95]">systems</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Secret ballots with correct, verifiable tallying and no trusted operator</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
       </div>
     </div>
   );
@@ -286,7 +286,7 @@ function Frame25() {
           <p className="leading-[0.95] mb-0">Collaborative</p>
           <p className="leading-[0.95]">Intelligence</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute together to produce shared results without exposing data</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
       </div>
     </div>
   );
@@ -360,11 +360,8 @@ function Frame8() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through both applications and operators:" />
+        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it." />
       </p>
-      <ScrollFadeIn className="w-full" delay={0.4}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
-      </ScrollFadeIn>
     </div>
   );
 }
@@ -375,7 +372,7 @@ function Frame2() {
   return (
     <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="https://docs.theinterfold.com/"
+      href="https://docs.theinterfold.com/getting-started"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -396,7 +393,7 @@ function Frame1() {
   return (
     <a
       className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="/fold-auction"
+      href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -416,7 +413,7 @@ function FinalTelegramCta() {
   return (
     <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="https://t.me/enclave_e3"
+      href="https://dashboard.theinterfold.com/#operator"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -425,7 +422,7 @@ function FinalTelegramCta() {
         isHovered={isHovered}
         textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Join Telegram
+        Run a ciphernode
       </AnimatedButtonContent>
     </a>
   );
@@ -471,7 +468,7 @@ function Frame18() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." />
+        <LineRevealAuto delay={0.1} text="Go deeper into how Interfold works, why confidential coordination matters, and what is live now." />
       </p>
     </div>
   );
@@ -682,7 +679,7 @@ function Frame14() {
         </div>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
-        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." />
+        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, allowing multiple parties to compute over encrypted inputs and produce shared, verifiable outcomes." />
       </p>
     </div>
   );
@@ -1556,10 +1553,10 @@ function Frame31({
           </div>
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px]">01</p>
-            <p className="leading-[1.075] mb-0 text-[14px]">Confidential</p>
+            <p className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
             <p className="leading-[1.075] text-[14px]">inputs</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Data remains private throughout execution</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Sensitive data remains private during execution.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
@@ -1574,9 +1571,9 @@ function Frame31({
           <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">02</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Threshold `}</p>
-            <p className="leading-[1.075] text-[14px] whitespace-pre">enforcement</p>
+            <p className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">A subset of nodes governs execution and release</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
@@ -1593,7 +1590,7 @@ function Frame31({
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Verifiable `}</p>
             <p className="leading-[1.075] text-[14px] whitespace-pre">outcomes</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results are verifiable without revealing inputs</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
         </div>
       </ScrollFadeIn>
     </div>
@@ -1671,7 +1668,7 @@ function Frame12() {
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1683,7 +1680,7 @@ function Frame6() {
   return (
     <a
       className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="https://docs.theinterfold.com/"
+      href="https://docs.theinterfold.com/getting-started"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1704,7 +1701,7 @@ function Frame7() {
   return (
     <a
       className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="/fold-auction"
+      href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -1718,13 +1715,39 @@ function Frame7() {
   );
 }
 
+function FrameRunCiphernode() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <a
+      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      href="https://dashboard.theinterfold.com/#operator"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatedButtonContent
+        isExternal
+        isHovered={isHovered}
+        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Run a ciphernode
+      </AnimatedButtonContent>
+    </a>
+  );
+}
+
 function Frame17() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[16px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
+    // Three 288px buttons do not fit one row until well past the md breakpoint,
+    // so this wraps and centres rather than overflowing between 768px and ~940px.
+    <div className="content-stretch flex flex-col md:flex-row md:flex-wrap gap-[16px] items-center justify-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
       <ScrollFadeIn delay={0.2}>
         <Frame6 />
       </ScrollFadeIn>
       <ScrollFadeIn delay={0.3}>
+        <FrameRunCiphernode />
+      </ScrollFadeIn>
+      <ScrollFadeIn delay={0.4}>
         <Frame7 />
       </ScrollFadeIn>
     </div>
@@ -1745,9 +1768,9 @@ function LiveNowBar() {
     <div className="relative flex h-[32px] w-full items-center justify-center bg-white md:absolute md:left-1/2 md:top-[min(44.444vw,640px)] md:-translate-x-1/2">
       <div className="flex items-center justify-center gap-12 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] text-[#687d71]">
         <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
-        <span>Live now</span>
-        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
-          <span>Aragon demo</span>
+        <span>Network Alpha · Live on mainnet</span>
+        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://governance.theinterfold.com">
+          <span>Governance</span>
           <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
         </a>
         <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
@@ -1801,7 +1824,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
                 <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">Github</a>
+                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
                 <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
