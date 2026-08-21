@@ -397,12 +397,12 @@ export function MobileVersion() {
                     Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
-                <div className="relative mt-auto flex min-h-[400px] flex-1 w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="absolute bottom-0 left-1/2 h-auto w-[240%] max-w-none -translate-x-1/2 translate-y-[16px]"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[16px]"
                       decoding="async"
                       loading="lazy"
                       src={imgChatGptImageApr232026051856Pm11}
@@ -423,12 +423,12 @@ export function MobileVersion() {
                     Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
-                <div className="relative mt-auto flex min-h-[400px] flex-1 w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="absolute bottom-0 left-1/2 h-auto w-[240%] max-w-none -translate-x-1/2 translate-y-[8px]"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
                       decoding="async"
                       loading="lazy"
                       src={imgChatGptImageApr232026051856Pm12}
@@ -449,12 +449,12 @@ export function MobileVersion() {
                     Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
-                <div className="relative mt-auto flex min-h-[400px] flex-1 w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
                       alt=""
-                      className="absolute bottom-0 left-1/2 h-auto w-[240%] max-w-none -translate-x-1/2 translate-y-[8px]"
+                      className="h-full w-full object-cover object-bottom scale-[1.02] translate-y-[8px]"
                       decoding="async"
                       loading="lazy"
                       src={imgChatGptImageApr232026051856Pm13}
