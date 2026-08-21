@@ -1698,7 +1698,7 @@ function Frame12() {
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
-        <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
+        <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.2] relative shrink-0 text-[#687d71] text-[18px] w-full md:w-[440px]">Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>
     </div>
   );

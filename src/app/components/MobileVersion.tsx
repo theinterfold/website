@@ -250,7 +250,7 @@ export function MobileVersion() {
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
           </div>
           <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
-            <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+            <p data-preview-was="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs." className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71]">
               Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.
             </p>
           </ScrollFadeIn>
