@@ -5,82 +5,83 @@ import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
+// `outro` used to live on each pathway and was never rendered — dead strings
+// that still shipped in the bundle, including one about "invite-only testnet"
+// from before Network Alpha. Removed rather than updated.
 const pathways = [
   {
     title: "01. Run a ciphernode",
     copy: [
-      "Ciphernodes are network operators selected into committees that participate in distributed key generation, threshold decryption, and outcome release for encrypted computations.",
+      "Run infrastructure for confidential coordination. Ciphernodes are selected into computation-specific committees and take part in distributed key generation, threshold decryption, and other protocol-defined duties.",
       "Ciphernodes participate in:",
     ],
     bullets: [
-      "PER-COMPUTATION COMMITTEES",
-      "DISTRIBUTED KEY GENERATION",
-      "THRESHOLD ENFORCEMENT",
-      "OUTCOME RELEASE",
-    ],
-    outro: [
-      "Responsibility is shared.",
-      "No single node can reconstruct the data or unilaterally affect results.",
-      "We are currently preparing the initial operator cohort ahead of invite-only testnet.",
+      "Computation-specific committees",
+      "Distributed key generation",
+      "Threshold decryption",
     ],
     actions: [
-      { label: "Apply here", href: "https://tally.so/r/meJPjo", primary: true },
-      { label: "Learn more about ciphernodes", href: "https://docs.theinterfold.com/", primary: false },
+      { label: "Run a ciphernode", href: "https://dashboard.theinterfold.com/#operator", primary: true },
+      { label: "Learn about ciphernodes", href: "https://docs.theinterfold.com/ciphernode-operators", primary: false },
     ],
   },
   {
     title: "02. Build and integrate",
     copy: [
-      "Interfold supports applications where multiple parties need to produce shared outcomes from private inputs.",
+      "Build applications where multiple parties need to produce shared, verifiable outcomes from private inputs.",
       "Early areas of focus include:",
     ],
     bullets: [
-      "private voting and governance",
-      "sealed-bid and batch auctions",
-      "multi-party\nanalytics",
-      "agent-mediated coordination",
-    ],
-    outro: [
-      "Developers can explore early documentation, collaborate on use case design, and prepare integrations ahead of testnet.",
+      "Private voting and governance",
+      "Sealed-bid and batch auctions",
+      "Multi-party analytics",
+      "Agent-mediated coordination",
     ],
     actions: [
-      { label: "Explore docs", href: "https://docs.theinterfold.com/", primary: true },
-      { label: "Chat with us for support", href: "https://t.me/enclave_e3", primary: false },
+      { label: "Explore docs", href: "https://docs.theinterfold.com/getting-started", primary: true },
+      { label: "Chat with us", href: "https://t.me/enclave_e3", primary: false },
     ],
   },
   {
     title: "03. Partner on a pilot",
     copy: [
-      "We are working with early collaborators to test and deploy confidential coordination in production environments.",
+      "Work with us to test and deploy confidential coordination in live use cases.",
+      "Partners may participate as requesters, data providers, or both, depending on the use case.",
       "This includes:",
     ],
     bullets: [
-      "onchain entities and governance frameworks",
-      "privacy-focused applications",
-      "research groups in secure computation",
-      "teams working on agent coordination",
-    ],
-    outro: [
-      "Participation at this stage is collaborative.",
-      "The goal is to test assumptions, define system constraints, and identify meaningful deployments.",
+      "Onchain entities and governance frameworks",
+      "Privacy-focused applications",
+      "Research groups in secure computation",
+      "Teams working on agent coordination",
     ],
     actions: [
       { label: "Reach out", href: "mailto:comms@gnosisguild.org", primary: true },
-      { label: "Join Telegram", href: "https://t.me/enclave_e3", primary: false },
+      { label: "Chat with us", href: "https://t.me/enclave_e3", primary: false },
     ],
   },
 ];
 
+// All three are reached now — Network Alpha is live, so nothing here is still
+// ahead of the network.
 const timelineItems = [
   "Internal devnet",
   "Public testnet",
-  "Mainnet Alpha",
+  "Network Alpha",
 ];
 
-const actors = [
-  ["Requesters", "Submitting programs"],
-  ["Data providers", "Contributing encrypted inputs"],
-  ["Ciphernode committees", "Coordinating Execution"],
+// Marvin's list has a fourth actor, Compute providers. It is not here because
+// each actor is drawn by a hand-made glyph in ActorGlyph and there is no fourth
+// one; adding it also means moving this row from three columns to four and
+// recomputing the connector lines. Copy is ready, the drawing is not.
+const actors: Array<[string, string, string]> = [
+  ["Requesters", "Initiating E3s", "Requesters define and initiate confidential computations."],
+  ["Data providers", "Contributing encrypted inputs", "Data providers contribute sensitive information in encrypted form."],
+  [
+    "Ciphernode committees",
+    "DKG + threshold decryption",
+    "Ciphernode committees collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
+  ],
 ];
 
 const carouselSettings = {
@@ -297,7 +298,7 @@ export function ParticipatePage() {
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
-                Builders, operators, and partners each help bring confidential coordination into practice.
+                Confidential coordination depends on multiple roles working together.
               </p>
             </ScrollFadeIn>
           </div>
@@ -308,7 +309,7 @@ export function ParticipatePage() {
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>Overview</SectionLabel>
               <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
-                Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place.
+                Interfold enables programs to compute over encrypted inputs without exposing the underlying data or placing decryption control in a single party.
               </p>
               <p className="mx-auto mt-8 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-none md:text-[14px]">
                 This requires coordination between multiple actors:
@@ -316,7 +317,7 @@ export function ParticipatePage() {
             </ScrollFadeIn>
 
             <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-3 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
-              {actors.map(([title, body], index) => (
+              {actors.map(([title, body, detail], index) => (
                 <div className="contents" key={title}>
                   <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none">
                     <ActorGlyph index={index} />
@@ -341,6 +342,9 @@ export function ParticipatePage() {
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
                         {body}
                       </p>
+                      <p className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md">
+                        {detail}
+                      </p>
                     </div>
                   </ScrollFadeIn>
                   {index < actors.length - 1 && (
@@ -355,12 +359,12 @@ export function ParticipatePage() {
         <section className="bg-[#687d71] px-6 py-[64px] text-[#d9fce8] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
-              <SectionLabel className="text-[#d9fce8]">Participation pathways</SectionLabel>
+              <SectionLabel className="text-[#d9fce8]">Participate</SectionLabel>
               <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
-                Participation is not
-                <br className="md:hidden" /> one-size-fits-all.
-                <br />
-                Each role has different responsibilities, constraints, and timelines.
+                Help form the network
+              </p>
+              <p className="mx-auto mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] md:max-w-[597.355px]">
+                Operate infrastructure, build applications, or bring a real-world use case.
               </p>
             </ScrollFadeIn>
             <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[1100px]:hidden" ref={participationCarouselRef}>
@@ -386,18 +390,18 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <div className="text-center">
               <ScrollFadeIn>
-                <SectionLabel className="text-[#d9fce8]/55">What’s next</SectionLabel>
+                <SectionLabel className="text-[#d9fce8]/55">Now live</SectionLabel>
               </ScrollFadeIn>
               <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-[320px] md:w-[597.355px] md:max-w-md">
                 <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
-                  The network is forming in stages:
+                  The network has entered its next stage:
                 </p>
               </ScrollFadeIn>
               <div className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-4">
                 <div className="absolute left-[calc(16.666%+36px)] right-[calc(50%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 <div className="absolute left-[calc(50%+36px)] right-[calc(16.666%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 {timelineItems.map((item, index) => {
-                  const isActive = index < 2;
+                  const isActive = true;
 
                   return (
                     <ScrollFadeIn className="relative flex flex-col items-center" delay={index * 0.1} key={item}>
@@ -415,41 +419,15 @@ export function ParticipatePage() {
               </div>
               <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
                 <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
-                  Access will expand gradually as the system stabilizes.
+                  Network Alpha is live on Ethereum mainnet.
                   <br />
-                  This page will be updated as participation opens.
+                  More operators join, more applications and E3s go live, and governance comes online from here.
                 </p>
               </ScrollFadeIn>
             </div>
           </div>
         </section>
 
-        <section className="bg-[#687d71] px-4 py-[64px] text-center md:py-[112px]">
-          <div className="mx-auto flex max-w-[760px] flex-col items-center">
-            <ScrollFadeIn>
-              <SectionLabel className="text-[#d9fce8]/70">Participate</SectionLabel>
-            </ScrollFadeIn>
-            <ScrollFadeIn className="mt-[11.543px] max-w-[320px] md:max-w-none">
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#d9fce8] md:text-[32px] md:leading-[0.95]">
-                Help form the network
-              </p>
-            </ScrollFadeIn>
-            <ScrollFadeIn className="mt-4 max-w-[320px] md:max-w-[597.355px]" delay={0.1}>
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#d9fce8]">
-                Run a ciphernode, build with Interfold, or explore a pilot for confidential coordination.
-              </p>
-            </ScrollFadeIn>
-            <ScrollFadeIn className="mt-8 w-full max-w-[288px]">
-              <HoverArrowLink
-                className="flex h-[52px] w-full max-w-[288px] items-center justify-center bg-[#82f5ad] transition-colors hover:bg-[#3a5e3c] md:w-[288px]"
-                href="mailto:comms@gnosisguild.org"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-              >
-                Reach out
-              </HoverArrowLink>
-            </ScrollFadeIn>
-          </div>
-        </section>
       </main>
 
       <DesktopFooter staticLayout />
