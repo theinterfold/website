@@ -158,7 +158,7 @@ const foldActions = [
 
 const carouselSettings = {
   centerMode: true,
-  centerPadding: "16px",
+  centerPadding: "0px",
   dots: true,
   infinite: true,
   speed: 500,
@@ -468,7 +468,7 @@ export function ParticipatePage() {
           </div>
         </section>
 
-        <section className="bg-[#687d71] px-6 py-[64px] text-[#d9fce8] md:py-[112px]">
+        <section className="bg-[#687d71] px-4 py-[64px] text-[#d9fce8] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel className="text-[#d9fce8]/55">Participate</SectionLabel>
@@ -479,7 +479,7 @@ export function ParticipatePage() {
                 Operate infrastructure, build applications, or bring a real-world use case.
               </p>
             </ScrollFadeIn>
-            <div className="mobile-what-possible-carousel participation-pathways-carousel mx-auto mt-16 w-full max-w-md [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[1100px]:hidden" ref={participationCarouselRef}>
+            <div className="mobile-what-possible-carousel participation-pathways-carousel -mx-1.5 mt-16 w-[calc(100%+12px)] max-w-none [&_.slick-slide>div]:h-full [&_.slick-slide]:h-auto [&_.slick-track]:items-stretch min-[1100px]:hidden" ref={participationCarouselRef}>
               <Slider {...carouselSettings}>
                 {pathways.map((pathway) => (
                   <div className="h-full px-1.5" key={pathway.title}>

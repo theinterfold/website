@@ -217,7 +217,7 @@ export function MobileVersion() {
 
   const carouselSettings = {
     centerMode: true,
-    centerPadding: '16px',
+    centerPadding: '0px',
     dots: true,
     infinite: true,
     speed: 500,
@@ -384,7 +384,7 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mobile-what-possible-carousel mx-auto w-full max-w-md" ref={possibilityCarouselRef}>
+        <div className="mobile-what-possible-carousel -mx-1.5 w-[calc(100%+12px)]" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
             <div className="h-full px-1.5">
               <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
