@@ -530,10 +530,15 @@ export function ParticipatePage() {
                   The network has entered its next stage:
                 </p>
               </ScrollFadeIn>
+              {/* The stages sit on their own panel so the sequence reads as one
+                  object rather than as loose marks on the section background.
+                  24px is the radius the cards already use — the only large radius
+                  in the system. #1c2426 is the panel tone from the auction page. */}
+              <div className="mt-16 rounded-[24px] bg-[#1c2426] px-6 py-12 md:px-10 md:py-14">
               {/* Four columns, but only three stages: the fourth is the continuation
                   marker below. The connector percentages are column centres, so they
                   move whenever the column count does. */}
-              <div className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-4">
+              <div className="relative grid gap-10 md:grid-cols-4 md:gap-4">
                 <div className="absolute left-[calc(12.5%+36px)] right-[calc(62.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 <div className="absolute left-[calc(37.5%+36px)] right-[calc(37.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 <div className="absolute left-[calc(62.5%+36px)] right-[calc(12.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
@@ -567,6 +572,7 @@ export function ParticipatePage() {
                     Network formation continues
                   </p>
                 </ScrollFadeIn>
+              </div>
               </div>
               <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
                 <p data-preview-note="alphaCtas" data-preview-was="Access will expand gradually as the system stabilizes. This page will be updated as participation opens." className={`${SUPPORTING_LINE} text-[#82f5ad]`}>
