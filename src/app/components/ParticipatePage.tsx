@@ -4,6 +4,7 @@ import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
+import { TITLE_BLOCK_GAP } from "./titleBlock";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 // `outro` used to live on each pathway and was never rendered — dead strings
@@ -381,20 +382,18 @@ export function ParticipatePage() {
         </div>
 
         <section className="bg-white px-4 py-[64px] text-center md:py-[112px]">
-          {/* Spacing is per-child rather than one flex gap: the supporting line
-              sits closer to the title than the label above it does. */}
-          <div className="mx-auto flex max-w-md flex-col items-center md:max-w-[760px]">
+          <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} md:max-w-[760px]`}>
             <ScrollFadeIn className="flex w-full justify-center">
               <SectionLabel>Participate</SectionLabel>
             </ScrollFadeIn>
-            <ScrollFadeIn className="mt-6 w-full">
+            <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">
                 Different Roles.
                 <br />
                 Shared Infrastructure.
               </h1>
             </ScrollFadeIn>
-            <ScrollFadeIn className="mt-3 flex w-full justify-center" delay={0.1}>
+            <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p data-preview-was="Builders, operators, and partners each help bring confidential coordination into practice." className="w-full max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:w-[382px] md:max-w-none md:text-[14px]">
                 Confidential coordination depends on multiple roles working together.
               </p>

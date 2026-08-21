@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { SectionLabel } from "./SectionLabel";
+import { TITLE_BLOCK_GAP } from "./titleBlock";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -241,8 +242,8 @@ export function MobileVersion() {
             sources={homeHeroSources}
           />
         </div>
-        <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
-          <ScrollFadeIn className="mb-4 flex w-full justify-center">
+        <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} text-center px-[24px] py-[64px]`}>
+          <ScrollFadeIn className="flex w-full justify-center">
             <SectionLabel>Home</SectionLabel>
           </ScrollFadeIn>
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
