@@ -387,7 +387,7 @@ export function MobileVersion() {
         <div className="mobile-what-possible-carousel mx-auto w-full max-w-md" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
             <div className="h-full px-1.5">
-              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Fairer market </p>
@@ -413,7 +413,7 @@ export function MobileVersion() {
             </div>
 
             <div className="h-full px-1.5">
-              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Stronger democratic </p>
@@ -439,7 +439,7 @@ export function MobileVersion() {
             </div>
 
             <div className="h-full px-1.5">
-              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Collaborative </p>
