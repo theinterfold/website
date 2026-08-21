@@ -552,9 +552,19 @@ export function ParticipatePage() {
                       <span className={`relative z-10 grid size-10 place-items-center font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:text-[14px] ${isActive ? "bg-[#82f5ad] text-[#121718]" : "bg-[#687d71] text-[#121718]"}`}>
                         {String(index + 1).padStart(2, "0")}
                       </span>
+                      {/* Reaches 40px past this cell, which is exactly the row
+                          gap, so it lands on the next stage's square. */}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute left-1/2 top-10 -bottom-10 -translate-x-1/2 md:hidden ${
+                          index === timelineItems.length - 1
+                            ? "border-l border-dashed border-[#687d71]"
+                            : "w-px bg-[#82f5ad]/40"
+                        }`}
+                      />
                       <span className={`mt-4 block size-3 rounded-full ${isActive ? "bg-[#82f5ad]" : "bg-[#687d71]"}`} />
-                      <span className={`mt-3 h-8 w-px ${isActive ? "bg-[#82f5ad]/60" : "bg-[#687d71]"}`} />
-                      <p className={`mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-md md:text-[14px] ${isActive ? "text-[#d9fce8]" : "text-[#d9fce8]/55"}`}>
+                      <span className={`mt-3 hidden h-8 w-px md:block ${isActive ? "bg-[#82f5ad]/60" : "bg-[#687d71]"}`} />
+                      <p className={`relative z-10 mt-4 max-w-[320px] bg-[#1c2426] px-3 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-md md:bg-transparent md:px-0 md:text-[14px] ${isActive ? "text-[#d9fce8]" : "text-[#d9fce8]/55"}`}>
                         {item}
                       </p>
                     </ScrollFadeIn>
@@ -569,8 +579,8 @@ export function ParticipatePage() {
                     &rarr;
                   </span>
                   <span className="mt-4 block size-3 rounded-full border border-dotted border-[#687d71]" />
-                  <span className="mt-3 h-8 w-px bg-[#687d71]" />
-                  <p data-preview-note="continues" className="mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:text-[14px]">
+                  <span className="mt-3 hidden h-8 w-px bg-[#687d71] md:block" />
+                  <p data-preview-note="continues" className="relative z-10 mt-4 max-w-[320px] bg-[#1c2426] px-3 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:bg-transparent md:px-0 md:text-[14px]">
                     Network formation continues
                   </p>
                 </ScrollFadeIn>
