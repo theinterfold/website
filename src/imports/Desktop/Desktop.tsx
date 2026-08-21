@@ -17,7 +17,7 @@ import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
-import { PageTag } from "../../app/components/PageTag";
+import { SectionLabel } from "../../app/components/SectionLabel";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 import { useStartOnInView } from "../../app/components/useStartOnInView";
@@ -148,7 +148,7 @@ function Frame() {
   };
 
   return (
-    <div className="relative isolate bg-[#d9fce8] md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(555px+min(44.444vw,640px))]">
+    <div className="relative isolate bg-[#d9fce8] md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(542px+min(44.444vw,640px))]">
       <motion.div
         className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -347,7 +347,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1741px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1728px+min(44.444vw,640px))] w-full">
       <Frame16 />
       <Frame23 />
     </div>
@@ -456,7 +456,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2725px+min(44.444vw,640px))] w-full">
+    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2712px+min(44.444vw,640px))] w-full">
       <Frame10 />
     </div>
   );
@@ -663,7 +663,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3224px+min(44.444vw,640px))] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3211px+min(44.444vw,640px))] w-full">
       <Frame18 />
       <Frame30 />
     </div>
@@ -1627,7 +1627,7 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[1071px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(670px+min(44.444vw,640px))] w-full"
+      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[1071px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(657px+min(44.444vw,640px))] w-full"
     >
       <Frame14 />
       <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
@@ -1691,7 +1691,7 @@ function Frame12() {
   return (
     <div className="content-stretch flex flex-col gap-[24px] items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0">
       <ScrollFadeIn className="flex w-full justify-center">
-        <PageTag label="home" textClassName="text-[#d9fce8]" />
+        <SectionLabel>Home</SectionLabel>
       </ScrollFadeIn>
       <div className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
@@ -1785,7 +1785,7 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[555px] md:top-[min(44.444vw,640px)] w-full">
+    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[542px] md:top-[min(44.444vw,640px)] w-full">
       <Frame12 />
       <Frame17 />
     </div>
@@ -1794,7 +1794,7 @@ function Frame13() {
 
 export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
   return (
-    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(4049px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
+    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(4036px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>

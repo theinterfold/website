@@ -3,7 +3,7 @@ import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
-import { PageTag } from "./PageTag";
+import { SectionLabel } from "./SectionLabel";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 // `outro` used to live on each pathway and was never rendered — dead strings
@@ -167,14 +167,6 @@ const carouselSettings = {
   swipeToSlide: true,
   touchThreshold: 10,
 };
-
-function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
-  return (
-    <p className={`font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] md:text-[14px] md:leading-[1.075] md:tracking-[1.4px] ${className}`}>
-      {children}
-    </p>
-  );
-}
 
 function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) {
   const [pathwayNumber, ...pathwayTitleParts] = pathway.title.split(". ");
@@ -391,7 +383,7 @@ export function ParticipatePage() {
         <section className="bg-white px-4 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-[24px] md:max-w-[760px]">
             <ScrollFadeIn className="flex w-full justify-center">
-              <PageTag label="participate" textClassName="text-white" />
+              <SectionLabel>Participate</SectionLabel>
             </ScrollFadeIn>
             <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">

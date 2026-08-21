@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
-import { PageTag } from "./PageTag";
+import { SectionLabel } from "./SectionLabel";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -243,7 +243,7 @@ export function MobileVersion() {
         </div>
         <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <ScrollFadeIn className="mb-4 flex w-full justify-center">
-            <PageTag label="home" textClassName="text-[#d9fce8]" />
+            <SectionLabel>Home</SectionLabel>
           </ScrollFadeIn>
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
