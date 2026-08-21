@@ -19,7 +19,7 @@ import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
 import { AnimatedExecutionModelGraphic, DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
 import { HeroImage, homeHeroSources } from "./HeroImage";
-import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
 import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
@@ -240,21 +240,6 @@ export function MobileVersion() {
             sources={homeHeroSources}
           />
         </div>
-        <div className="flex h-[32px] w-full shrink-0 items-center justify-center bg-white px-3">
-          <div className="flex items-center justify-center gap-4 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:gap-6 sm:text-[12px] sm:tracking-[1.2px]">
-            <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
-            <span>Network Alpha · Live on mainnet</span>
-            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://governance.theinterfold.com">
-              <span>Governance</span>
-              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-            </a>
-            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
-              <span>Network dashboard</span>
-              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-            </a>
-          </div>
-        </div>
-
         <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />

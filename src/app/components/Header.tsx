@@ -2,6 +2,7 @@ import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { motion } from "motion/react";
 import { ExternalArrowSlide } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
+import { NetworkStrip } from "./NetworkStrip";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 
 function Wordmark() {
@@ -55,7 +56,10 @@ export function Header({
     <>
       {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="xl:hidden" />}
       {showDesktop && (
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms] xl:block`}>
+        // The strip rides with the header rather than sitting in the page, so the
+        // positioning classes moved out to this wrapper.
+        <div className={`${desktopPositionClassName} z-50 hidden w-full xl:block`}>
+        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms]`}>
           <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
             <BrandLink
               aria-label="The Interfold home"
@@ -84,6 +88,8 @@ export function Header({
             </nav>
           </div>
         </header>
+        <NetworkStrip />
+        </div>
       )}
     </>
   );

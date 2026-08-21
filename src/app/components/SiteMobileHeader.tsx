@@ -3,6 +3,7 @@ import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { InterfoldSymbol } from "./InterfoldSymbol";
+import { NetworkStrip } from "./NetworkStrip";
 
 function AnimatedMenuButton({
   isOpen,
@@ -67,7 +68,9 @@ export function SiteMobileHeader({
 
   return (
     <>
-      <div className={`interfold-header-drop sticky top-0 z-50 flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms] ${className}`}>
+      {/* One sticky wrapper so the bar and the strip travel together. */}
+      <div className={`sticky top-0 z-50 ${className}`}>
+      <div className={`interfold-header-drop relative flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms]`}>
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
@@ -88,6 +91,8 @@ export function SiteMobileHeader({
           <InterfoldSymbol className="h-full w-full" />
         </a>
 
+      </div>
+      <NetworkStrip />
       </div>
 
       <div className={`fixed right-6 top-7 z-[70] -translate-y-1/2 ${className}`}>
