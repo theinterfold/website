@@ -1861,7 +1861,7 @@ function Frame32() {
 
 export default function Desktop() {
   return (
-    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-hidden bg-[#d9fce8] md:min-h-[calc(4261px+min(44.444vw,640px))]" data-name="Desktop">
+    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-clip bg-[#d9fce8] md:min-h-[calc(4261px+min(44.444vw,640px))]" data-name="Desktop">
       <div className="interfold-hero-transition md:absolute relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage

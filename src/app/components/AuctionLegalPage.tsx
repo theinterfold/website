@@ -558,7 +558,7 @@ export function AuctionLegalPage() {
   }, []);
 
   return (
-    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-white text-[#3a5e3c] md:pt-[63px]">
+    <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] md:pt-[63px]">
       <main>
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">

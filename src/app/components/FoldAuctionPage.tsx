@@ -726,7 +726,7 @@ export function FoldAuctionPage() {
   }, []);
 
   return (
-    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
+    <div className="interfold-page-transition min-h-screen overflow-x-clip bg-[#d9fce8] text-[#3a5e3c]">
       <main>
         {/* Hero visual band — same treatment as the homepage hero */}
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8] md:h-[min(44.444vw,640px)]">
