@@ -464,6 +464,10 @@ html.interfold-transition-page-enter .interfold-page-transition {
 .mobile-what-possible-carousel .slick-slide {
   opacity: 0.64;
   transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  /* slick.css sets height: 100% here, and a flex item with a set cross size
+     will not stretch. Back to auto so the track stretches every card to the
+     tallest one and captions of different lengths stop changing the size. */
+  height: auto;
 }
 
 .mobile-what-possible-carousel .slick-slide.slick-active,

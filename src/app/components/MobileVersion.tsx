@@ -386,8 +386,8 @@ export function MobileVersion() {
 
         <div className="mobile-what-possible-carousel mx-auto w-full max-w-md" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Fairer market </p>
@@ -397,7 +397,7 @@ export function MobileVersion() {
                     Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -412,8 +412,8 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Stronger democratic </p>
@@ -423,7 +423,7 @@ export function MobileVersion() {
                     Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -438,8 +438,8 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Collaborative </p>
@@ -449,7 +449,7 @@ export function MobileVersion() {
                     Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
