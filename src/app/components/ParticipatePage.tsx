@@ -70,18 +70,39 @@ const timelineItems = [
   "Network Alpha",
 ];
 
-// Marvin's list has a fourth actor, Compute providers. It is not here because
-// each actor is drawn by a hand-made glyph in ActorGlyph and there is no fourth
-// one; adding it also means moving this row from three columns to four and
-// recomputing the connector lines. Copy is ready, the drawing is not.
-const actors: Array<[string, string, string]> = [
-  ["Requesters", "Initiating E3s", "Requesters define and initiate confidential computations."],
-  ["Data providers", "Contributing encrypted inputs", "Data providers contribute sensitive information in encrypted form."],
-  [
-    "Ciphernode committees",
-    "DKG + threshold decryption",
-    "Ciphernode committees collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
-  ],
+// Each actor names its drawing rather than relying on its position in this
+// array, so reordering the row can never silently shuffle the glyphs.
+type ActorGlyphName = "requester" | "provider" | "committee";
+
+const actors: Array<{ title: string; role: string; detail: string; glyph: ActorGlyphName }> = [
+  {
+    title: "Requesters",
+    role: "Initiating E3s",
+    detail: "Requesters define and initiate confidential computations.",
+    glyph: "requester",
+  },
+  {
+    title: "Data providers",
+    role: "Contributing encrypted inputs",
+    detail: "Data providers contribute sensitive information in encrypted form.",
+    glyph: "provider",
+  },
+  {
+    title: "Compute providers",
+    role: "Executing E3 programs",
+    detail: "Compute providers run the defined computation over encrypted inputs.",
+    // PLACEHOLDER DRAWING — this is the Requesters glyph, borrowed so the fourth
+    // actor can ship with the copy. Tiago is drawing the real one. To swap it in,
+    // add the <svg> to ActorGlyph under a new name and change this one word.
+    glyph: "requester",
+  },
+  {
+    title: "Ciphernode committees",
+    role: "DKG + threshold decryption",
+    detail:
+      "Ciphernode committees collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
+    glyph: "committee",
+  },
 ];
 
 const carouselSettings = {
@@ -186,13 +207,13 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
   );
 }
 
-function ActorGlyph({ index }: { index: number }) {
+function ActorGlyph({ glyph }: { glyph: ActorGlyphName }) {
   const iconClass = "actor-glyph__svg h-11 w-12 overflow-visible";
   const accent = "#82f5ad";
 
   return (
     <div className="actor-glyph relative grid size-[76px] place-items-center rounded-full bg-[#3a5e3c] text-white">
-      {index === 0 ? (
+      {glyph === "requester" ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <path d="M9.65,28.65c-4.3,0-8.9,3.9-8.9,9.7v3.1h18.1v-3.1c0-5.8-4.9-9.7-9.2-9.7Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -207,7 +228,7 @@ function ActorGlyph({ index }: { index: number }) {
           <path d="M44.25,33.25v7.8h-23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="18.85" cy="41.25" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
         </svg>
-      ) : index === 1 ? (
+      ) : glyph === "provider" ? (
         <svg aria-hidden="true" className={`${iconClass} translate-x-0.5`} fill="none" focusable="false" viewBox="0 0 61.4 54">
           <polyline points="46.05 18.05 32.05 18.05 32.05 35.15 48.55 35.15 48.55 18.05 46.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <polyline points="13.65 7.2 23.65 7.2 32.05 18.05" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -316,11 +337,11 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
 
-            <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-3 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
-              {actors.map(([title, body, detail], index) => (
+            <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+              {actors.map(({ title, role, detail, glyph }, index) => (
                 <div className="contents" key={title}>
                   <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none">
-                    <ActorGlyph index={index} />
+                    <ActorGlyph glyph={glyph} />
                     {index < actors.length - 1 && (
                       <div
                         aria-hidden="true"
@@ -340,7 +361,7 @@ export function ParticipatePage() {
                         )}
                       </p>
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
-                        {body}
+                        {role}
                       </p>
                       <p className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md">
                         {detail}
