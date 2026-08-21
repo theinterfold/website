@@ -1,48 +1,7 @@
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
+import { ACCENT, container, draw, pop, popStyle, stroke } from "./iconMotion";
 
 export type ExploreResourceIconKind = "docs" | "essays" | "blog";
-
-// Container staggers each element so the icon appears to draw itself in.
-const container: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
-  },
-};
-
-// Open line work draws its stroke on.
-const draw: Variants = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: {
-    pathLength: 1,
-    opacity: 1,
-    transition: {
-      pathLength: { duration: 0.5, ease: "easeInOut" },
-      opacity: { duration: 0.15 },
-    },
-  },
-};
-
-// Solid accent shapes pop in cleanly (they never look "half-drawn").
-const pop: Variants = {
-  hidden: { opacity: 0, scale: 0.55 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
-
-// Stroked line work uses square corners and closed line endings.
-const stroke = {
-  stroke: "currentColor",
-  strokeWidth: 1.5,
-  strokeLinecap: "square",
-  strokeLinejoin: "miter",
-} as const;
-
-// Pop shapes scale around their own center rather than the SVG origin.
-const popStyle = { transformBox: "fill-box", transformOrigin: "center" } as const;
 
 export function ExploreResourceIcon({
   className = "",
@@ -51,7 +10,7 @@ export function ExploreResourceIcon({
   className?: string;
   kind: ExploreResourceIconKind;
 }) {
-  const accent = "#82f5ad";
+  const accent = ACCENT;
   const prefersReducedMotion = useReducedMotion();
 
   // When reduced motion is requested, render everything in its final state
