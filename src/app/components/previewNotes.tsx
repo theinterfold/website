@@ -192,8 +192,13 @@ export function PreviewNotesOverlay({ notes }: { notes: PreviewNotes }) {
     return null;
   }
 
-  const openPin = pins.find((pin) => pin.id === openId);
-  const note = openId ? notes[openId] : null;
+  // `pins` is measured in an effect, so on a route change this render runs with
+  // the new page's notes and the previous page's pins. Every id has to be
+  // re-checked here: reading notes[id] blind threw and took the whole app down,
+  // leaving a blank page that could not be scrolled.
+  const livePins = pins.filter((pin) => pin.id in notes);
+  const openPin = livePins.find((pin) => pin.id === openId);
+  const note = openId !== null && openId in notes ? notes[openId] : null;
   const width = Math.min(380, window.innerWidth * 0.8);
   const left = openPin
     ? Math.min(Math.max(openPin.x - width / 2, 12), window.innerWidth - width - 12)
@@ -202,7 +207,7 @@ export function PreviewNotesOverlay({ notes }: { notes: PreviewNotes }) {
   return (
     <div className="pointer-events-none fixed inset-0 z-[80]">
       <ChangedTextHighlights />
-      {pins.map((pin, index) => {
+      {livePins.map((pin, index) => {
         const isOpen = pin.id === openId;
 
         return (
