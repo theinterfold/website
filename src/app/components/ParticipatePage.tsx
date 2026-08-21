@@ -3,7 +3,7 @@ import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
-import { TitleGlyph } from "./TitleGlyph";
+import { PageTag } from "./PageTag";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 // `outro` used to live on each pathway and was never rendered — dead strings
@@ -391,7 +391,7 @@ export function ParticipatePage() {
         <section className="bg-white px-4 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-[24px] md:max-w-[760px]">
             <ScrollFadeIn className="flex w-full justify-center">
-              <TitleGlyph className="h-[48px] w-auto text-[#3a5e3c] md:h-[56px]" variant="roles" />
+              <PageTag label="participate" textClassName="text-white" />
             </ScrollFadeIn>
             <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">

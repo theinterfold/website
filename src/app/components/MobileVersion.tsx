@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
-import { TitleGlyph } from "./TitleGlyph";
+import { PageTag } from "./PageTag";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -243,7 +243,7 @@ export function MobileVersion() {
         </div>
         <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
           <ScrollFadeIn className="mb-4 flex w-full justify-center">
-            <TitleGlyph className="h-[44px] w-auto text-[#3a5e3c]" variant="inputs" />
+            <PageTag label="home" textClassName="text-[#d9fce8]" />
           </ScrollFadeIn>
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
@@ -521,11 +521,10 @@ export function MobileVersion() {
           </p>
         </div>
 
-        <div className="mx-auto flex w-full max-w-md flex-col gap-[16px]">
+        <div className="mx-auto grid w-full max-w-md grid-cols-3 gap-[10px]">
           <ExploreCard
             kind="docs"
             title="DOCS"
-            description="Technical documentation, references, and implementation details."
             cta="Explore Docs"
             href="https://docs.theinterfold.com/"
             hoveredButton={hoveredButton}
@@ -535,7 +534,6 @@ export function MobileVersion() {
           <ExploreCard
             kind="essays"
             title="ESSAYS"
-            description="Writing on confidential coordination and the architecture behind the network."
             cta="Read essays"
             href="https://blog.theinterfold.com/tag/confidential-coordination"
             hoveredButton={hoveredButton}
@@ -545,7 +543,6 @@ export function MobileVersion() {
           <ExploreCard
             kind="blog"
             title="BLOG"
-            description="Updates, research notes, and ecosystem announcements."
             cta="Read the blog"
             href="https://blog.theinterfold.com/"
             hoveredButton={hoveredButton}
@@ -563,7 +560,6 @@ export function MobileVersion() {
 function ExploreCard({
   kind,
   title,
-  description,
   cta,
   href,
   hoveredButton,
@@ -572,7 +568,6 @@ function ExploreCard({
 }: {
   kind: ExploreResourceIconKind;
   title: string;
-  description: string;
   cta: string;
   href: string;
   hoveredButton: string | null;
@@ -581,28 +576,23 @@ function ExploreCard({
 }) {
   return (
     <a
-      className="group w-full bg-white p-[8px] transition-colors hover:bg-[#d9fce8]"
+      className="group flex h-full w-full flex-col bg-white p-[6px] transition-colors hover:bg-[#d9fce8]"
       href={href}
       onMouseEnter={() => setHoveredButton(id)}
       onMouseLeave={() => setHoveredButton(null)}
     >
-      <div className="flex flex-col gap-[16px]">
+      <div className="flex h-full flex-col gap-[12px]">
         <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-          <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
+          <div className="flex h-[56px] w-full shrink-0 items-end justify-start">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
-        <div className="flex flex-col gap-[8px]">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">
-            {title}
-          </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-left text-[14.429px] leading-[1.075] text-[#3a5e3c]">
-            {description}
-          </p>
-        </div>
-        <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-[#252525]">
+          {title}
+        </p>
+        <div className="mt-auto flex h-[44px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]">
           <div className="relative inline-flex items-center justify-center">
             <motion.p
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-center text-[12.5px] leading-[1.075] text-[#3a5e3c]"
               animate={{ x: hoveredButton === id ? -8 : 0 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
