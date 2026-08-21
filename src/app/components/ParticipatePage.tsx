@@ -453,6 +453,16 @@ export function ParticipatePage() {
                 </div>
               ))}
             </div>
+
+            <ScrollFadeIn className="mt-14 flex justify-center" delay={0.1}>
+              <HoverArrowLink
+                className="flex h-[46px] w-full max-w-[320px] items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                href="https://blog.theinterfold.com/how-interfold-works/"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+              >
+                How Interfold works
+              </HoverArrowLink>
+            </ScrollFadeIn>
           </div>
         </section>
 
@@ -518,9 +528,13 @@ export function ParticipatePage() {
                   The network has entered its next stage:
                 </p>
               </ScrollFadeIn>
-              <div className="relative mt-16 grid gap-10 md:grid-cols-3 md:gap-4">
-                <div className="absolute left-[calc(16.666%+36px)] right-[calc(50%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
-                <div className="absolute left-[calc(50%+36px)] right-[calc(16.666%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
+              {/* Four columns, but only three stages: the fourth is the continuation
+                  marker below. The connector percentages are column centres, so they
+                  move whenever the column count does. */}
+              <div className="relative mt-16 grid gap-10 md:grid-cols-4 md:gap-4">
+                <div className="absolute left-[calc(12.5%+36px)] right-[calc(62.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
+                <div className="absolute left-[calc(37.5%+36px)] right-[calc(37.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
+                <div className="absolute left-[calc(62.5%+36px)] right-[calc(12.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
                 {timelineItems.map((item, index) => {
                   const isActive = true;
 
@@ -537,6 +551,20 @@ export function ParticipatePage() {
                     </ScrollFadeIn>
                   );
                 })}
+
+                {/* Deliberately not a stage 04: no number, hollow marker, muted
+                    colour. It says the sequence keeps going, not that something
+                    else is scheduled. */}
+                <ScrollFadeIn className="relative flex flex-col items-center" delay={timelineItems.length * 0.1}>
+                  <span className="relative z-10 grid size-10 place-items-center border border-dotted border-[#687d71] font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-none text-[#687d71]">
+                    &rarr;
+                  </span>
+                  <span className="mt-4 block size-3 rounded-full border border-dotted border-[#687d71]" />
+                  <span className="mt-3 h-8 w-px bg-[#687d71]" />
+                  <p className="mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:text-[14px]">
+                    Network formation continues
+                  </p>
+                </ScrollFadeIn>
               </div>
               <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
                 <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
@@ -544,6 +572,25 @@ export function ParticipatePage() {
                   <br />
                   More operators join, more applications and E3s go live, and governance comes online from here.
                 </p>
+              </ScrollFadeIn>
+              <ScrollFadeIn
+                className="mx-auto mt-10 flex w-full max-w-[320px] flex-col items-center gap-2 md:max-w-none md:flex-row md:justify-center md:gap-3"
+                delay={0.1}
+              >
+                <HoverArrowLink
+                  className="flex h-[46px] w-full items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                  href="https://dashboard.theinterfold.com/"
+                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                >
+                  Explore Network Alpha
+                </HoverArrowLink>
+                <HoverArrowLink
+                  className="flex h-[46px] w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                  href="https://blog.theinterfold.com/network-alpha-mainnet/"
+                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                >
+                  Read the launch post
+                </HoverArrowLink>
               </ScrollFadeIn>
             </div>
           </div>
