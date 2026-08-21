@@ -397,7 +397,7 @@ export function MobileVersion() {
                     Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
-                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
+                <div className="relative mt-auto flex min-h-[420px] flex-1 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -423,7 +423,7 @@ export function MobileVersion() {
                     Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
-                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
+                <div className="relative mt-auto flex min-h-[420px] flex-1 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -449,7 +449,7 @@ export function MobileVersion() {
                     Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
-                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
+                <div className="relative mt-auto flex min-h-[420px] flex-1 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
