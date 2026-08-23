@@ -168,20 +168,24 @@ export function SiteMobileHeader({
             {/* The same control as the nav's Network Alpha pill, in the shape a
                 menu wants: the title opens to reveal the two network surfaces
                 rather than listing them alongside the site's own pages. */}
-            <div className="mt-6 flex flex-col items-center">
+            {/* 56px puts this label at the exact width of a small phone, so it
+                needs the same side margin the rest of the overlay has and wraps to
+                two lines. The chevron follows the last word. */}
+            <div className="flex flex-col items-center px-6">
               <motion.button
                 animate={{ opacity: 1, y: 0 }}
                 aria-expanded={isNetworkOpen}
-                className="inline-flex items-center gap-3 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+                className="block max-w-full text-center font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
                 initial={{ opacity: 0, y: 16 }}
                 onClick={() => setIsNetworkOpen((current) => !current)}
+                style={{ wordSpacing: "-0.1em" }}
                 transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 type="button"
               >
-                <span>Network Alpha</span>
+                Network Alpha
                 <svg
                   aria-hidden="true"
-                  className={`h-[11px] w-[17px] shrink-0 transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
+                  className={`ml-3 inline-block h-[15px] w-[24px] align-middle transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
                   fill="none"
                   focusable="false"
                   viewBox="0 0 14 9"
