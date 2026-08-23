@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
+import { NetworkStrip } from "./NetworkStrip";
 import { SectionLabel } from "./SectionLabel";
 import { SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useStartOnInView } from "./useStartOnInView";
@@ -232,16 +233,21 @@ export function MobileVersion() {
     <div className="min-h-screen w-full overflow-x-clip bg-white">
       <SiteMobileHeader />
 
-      {/* Hero Section */}
+      {/* Hero Section. The image, the strip and the copy are siblings of the page
+          root rather than one wrapped block: a sticky element can only travel
+          inside its own parent, so wrapping these three together would let the
+          strip stick just until the hero scrolled past, and no further. */}
+      <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
+        <HeroImage
+          className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
+          fadeIn={false}
+          pictureClassName="block h-full w-full"
+          sources={homeHeroSources}
+        />
+      </div>
+      {/* 60px is the mobile bar's height. */}
+      <NetworkStrip className="sticky top-[60px] z-40" />
       <div className="flex flex-col bg-[#d9fce8]">
-        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
-          <HeroImage
-            className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
-            fadeIn={false}
-            pictureClassName="block h-full w-full"
-            sources={homeHeroSources}
-          />
-        </div>
         <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} text-center px-[24px] py-[64px]`}>
           <ScrollFadeIn className="flex w-full justify-center">
             <SectionLabel>Home</SectionLabel>

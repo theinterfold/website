@@ -17,6 +17,7 @@ import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { HoverArrowContent } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
+import { NetworkStrip } from "../../app/components/NetworkStrip";
 import { SectionLabel } from "../../app/components/SectionLabel";
 import { SUPPORTING_LINE, TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
@@ -1876,6 +1877,9 @@ export default function Desktop() {
           />
         </div>
       </div>
+      {/* 63px is the header's height: the header is fixed, so the strip pins to
+          its underside rather than to the top of the window. */}
+      <NetworkStrip className="sticky top-[63px] z-40" />
       {/* Reading order is now the order on screen. It used to be
           Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
           Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block

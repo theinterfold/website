@@ -3,7 +3,6 @@ import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { InterfoldSymbol } from "./InterfoldSymbol";
-import { NetworkStrip } from "./NetworkStrip";
 
 function AnimatedMenuButton({
   isOpen,
@@ -68,7 +67,6 @@ export function SiteMobileHeader({
 
   return (
     <>
-      {/* One sticky wrapper so the bar and the strip travel together. */}
       <div className={`sticky top-0 z-50 ${className}`}>
       <div className={`interfold-header-drop relative flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms]`}>
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
@@ -92,7 +90,6 @@ export function SiteMobileHeader({
         </a>
 
       </div>
-      <NetworkStrip />
       </div>
 
       <div className={`fixed right-6 top-7 z-[70] -translate-y-1/2 ${className}`}>
