@@ -36,6 +36,7 @@ export function SiteMobileHeader({
   className?: string;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNetworkOpen, setIsNetworkOpen] = useState(false);
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -63,6 +64,13 @@ export function SiteMobileHeader({
       document.body.style.overflow = previousBodyOverflow;
       window.scrollTo(0, scrollY);
     };
+  }, [isMenuOpen]);
+
+  // Reopening the menu should not remember that the group was left expanded.
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setIsNetworkOpen(false);
+    }
   }, [isMenuOpen]);
 
   return (
@@ -157,36 +165,55 @@ export function SiteMobileHeader({
             >
               Participate
             </motion.a>
-            {/* Governance and the dashboard left the strip when the Network Alpha
-                control took them over, and that control is desktop-only. Without
-                these two they would be unreachable on a phone. Smaller than the
-                main items: they are network surfaces, not site pages. */}
-            <motion.a
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-6 inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
-              href="https://governance.theinterfold.com"
-              initial={{ opacity: 0, y: 16 }}
-              onClick={() => setIsMenuOpen(false)}
-              rel="noopener noreferrer"
-              target="_blank"
-              transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span>Governance</span>
-              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
-            </motion.a>
-            <motion.a
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
-              href="https://dashboard.theinterfold.com/"
-              initial={{ opacity: 0, y: 16 }}
-              onClick={() => setIsMenuOpen(false)}
-              rel="noopener noreferrer"
-              target="_blank"
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span>Network dashboard</span>
-              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
-            </motion.a>
+            {/* The same control as the nav's Network Alpha pill, in the shape a
+                menu wants: the title opens to reveal the two network surfaces
+                rather than listing them alongside the site's own pages. */}
+            <div className="mt-6 flex flex-col items-center">
+              <motion.button
+                animate={{ opacity: 1, y: 0 }}
+                aria-expanded={isNetworkOpen}
+                className="inline-flex items-center gap-3 font-['ABC_Gramercy:Regular',sans-serif] text-[36px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+                initial={{ opacity: 0, y: 16 }}
+                onClick={() => setIsNetworkOpen((current) => !current)}
+                transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                type="button"
+              >
+                <span>Network Alpha</span>
+                <svg
+                  aria-hidden="true"
+                  className={`h-[11px] w-[17px] shrink-0 transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
+                  fill="none"
+                  focusable="false"
+                  viewBox="0 0 14 9"
+                >
+                  <polyline points="1 1.5 7 7.5 13 1.5" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" />
+                </svg>
+              </motion.button>
+
+              {isNetworkOpen && (
+                <div className="mt-3 flex flex-col items-center gap-y-1">
+                  {[
+                    { label: "Governance", href: "https://governance.theinterfold.com" },
+                    { label: "Network dashboard", href: "https://dashboard.theinterfold.com/" },
+                  ].map((link, index) => (
+                    <motion.a
+                      animate={{ opacity: 1, y: 0 }}
+                      className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[24px] capitalize leading-[1.2] tracking-[-0.5px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+                      href={link.href}
+                      initial={{ opacity: 0, y: 10 }}
+                      key={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      transition={{ duration: 0.35, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <span>{link.label}</span>
+                      <span aria-hidden="true" className="text-[13px] leading-none">↗</span>
+                    </motion.a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
