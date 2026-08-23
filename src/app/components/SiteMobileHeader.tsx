@@ -167,7 +167,9 @@ export function SiteMobileHeader({
             </motion.a>
             {/* The same control as the nav's Network Alpha pill, in the shape a
                 menu wants: the title opens to reveal the two network surfaces
-                rather than listing them alongside the site's own pages. */}
+                rather than listing them alongside the site's own pages. It reads
+                as one of the titles, so it is set like one — the two inside it
+                stay smaller and sage. */}
             {/* 56px puts this label at the exact width of a small phone, so it
                 needs the same side margin the rest of the overlay has and wraps to
                 two lines. The chevron follows the last word. */}
@@ -175,7 +177,7 @@ export function SiteMobileHeader({
               <motion.button
                 animate={{ opacity: 1, y: 0 }}
                 aria-expanded={isNetworkOpen}
-                className="block max-w-full text-center font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+                className="block max-w-full text-center font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
                 initial={{ opacity: 0, y: 16 }}
                 onClick={() => setIsNetworkOpen((current) => !current)}
                 style={{ wordSpacing: "-0.1em" }}

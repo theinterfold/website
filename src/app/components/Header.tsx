@@ -83,7 +83,7 @@ export function Header({
               {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
                   still live and still the claim route — reachable by direct link only. */}
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
-              <NetworkMenu className="-my-[9px] self-center" />
+              <NetworkMenu className="self-center" />
             </nav>
           </div>
         </header>
