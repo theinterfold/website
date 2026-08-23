@@ -173,7 +173,7 @@ export function SiteMobileHeader({
             {/* 56px puts this label at the exact width of a small phone, so it
                 needs the same side margin the rest of the overlay has and wraps to
                 two lines. The chevron follows the last word. */}
-            <div className="flex flex-col items-center px-6">
+            <div className="relative flex flex-col items-center px-6">
               <motion.button
                 animate={{ opacity: 1, y: 0 }}
                 aria-expanded={isNetworkOpen}
@@ -197,10 +197,10 @@ export function SiteMobileHeader({
               </motion.button>
 
               {isNetworkOpen && (
-                <div className="mt-3 flex flex-col items-center gap-y-1">
+                <div className="absolute left-1/2 top-full mt-3 flex w-max -translate-x-1/2 flex-col items-center gap-y-1">
                   {[
                     { label: "Governance", href: "https://governance.theinterfold.com" },
-                    { label: "Network dashboard", href: "https://dashboard.theinterfold.com/" },
+                    { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
                   ].map((link, index) => (
                     <motion.a
                       animate={{ opacity: 1, y: 0 }}
