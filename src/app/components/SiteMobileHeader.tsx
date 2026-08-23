@@ -160,6 +160,36 @@ export function SiteMobileHeader({
             >
               Participate
             </motion.a>
+            {/* Governance and the dashboard left the strip when the Network Alpha
+                control took them over, and that control is desktop-only. Without
+                these two they would be unreachable on a phone. Smaller than the
+                main items: they are network surfaces, not site pages. */}
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+              href="https://governance.theinterfold.com"
+              initial={{ opacity: 0, y: 16 }}
+              onClick={() => setIsMenuOpen(false)}
+              rel="noopener noreferrer"
+              target="_blank"
+              transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span>Governance</span>
+              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+            </motion.a>
+            <motion.a
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[28px] capitalize leading-[1.05] tracking-[-0.66px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+              href="https://dashboard.theinterfold.com/"
+              initial={{ opacity: 0, y: 16 }}
+              onClick={() => setIsMenuOpen(false)}
+              rel="noopener noreferrer"
+              target="_blank"
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span>Network dashboard</span>
+              <span aria-hidden="true" className="text-[14px] leading-none">↗</span>
+            </motion.a>
           </div>
         </div>
       )}

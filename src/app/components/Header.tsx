@@ -2,6 +2,7 @@ import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { motion } from "motion/react";
 import { ExternalArrowSlide } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
+import { NetworkMenu } from "./NetworkMenu";
 import { NetworkStrip } from "./NetworkStrip";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 
@@ -85,6 +86,7 @@ export function Header({
               {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
                   still live and still the claim route — reachable by direct link only. */}
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
+              <NetworkMenu className="-my-[9px] self-center" />
             </nav>
           </div>
         </header>
