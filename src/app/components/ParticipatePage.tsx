@@ -489,7 +489,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel className="text-[#d9fce8]/55">Participate</SectionLabel>
-              <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[0.95] md:tracking-[-0.96px]">
                 Help form the network
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>
@@ -521,7 +521,7 @@ export function ParticipatePage() {
           <div className="mx-auto max-w-[1052px]">
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel>FOLD</SectionLabel>
-              <p data-preview-note="foldSection" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-note="foldSection" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[0.95] md:tracking-[-0.96px]">
                 Operate. Govern. Transfer.
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>

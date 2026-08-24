@@ -795,7 +795,7 @@ export function FoldAuctionPage() {
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]">
-            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
+            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.87] tracking-[-1.92px] md:text-[64px]">
               <LineRevealAuto text={AUCTION.heroTitle} />
             </h1>
             <ScrollFadeIn className="flex w-full flex-col items-center gap-4" delay={0.1}>
@@ -1058,7 +1058,7 @@ export function FoldAuctionPage() {
             <div className="mt-10 grid gap-4 md:grid-cols-2">
               {supportsExamples.map((example, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={example.title}>
-                  <div className="h-full rounded-[24px] bg-white p-5">
+                  <div className="h-full rounded-[24px] bg-white p-6">
                     <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.1] text-[#3a5e3c] md:text-[20px]">
                       <span>{example.title}</span> <span className="text-[#687d71]">{example.body}</span>
                     </p>
