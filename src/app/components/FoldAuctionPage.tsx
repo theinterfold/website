@@ -5,6 +5,7 @@ import { HeroImage, auctionHeroSources } from "./HeroImage";
 import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
+import { SectionLabel } from "./SectionLabel";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { BUTTON_SIZE } from "./titleBlock";
 
@@ -137,14 +138,6 @@ const statusStripDetails = [
   "Connect the wallet you bid with",
   "Use official links only",
 ];
-
-function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
-  return (
-    <p className={`font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] md:text-[14px] md:leading-[1.075] md:tracking-[1.4px] ${className}`}>
-      {children}
-    </p>
-  );
-}
 
 function CtaButton({
   href,
@@ -1144,7 +1137,7 @@ export function FoldAuctionPage() {
         </section>
 
         {/* Important information */}
-        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[96px]">
+        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[760px]">
             <ScrollFadeIn>
               <SectionLabel>Important Information</SectionLabel>

@@ -223,7 +223,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
               {pathway.bullets.map((bullet) => (
                 <li className="grid grid-cols-[7px_1fr] gap-3" key={bullet}>
                   <span className="mt-[5px] size-[5px] rounded-full bg-[#82f5ad]" />
-                  <span className="whitespace-pre-line font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.38] tracking-[2.4px] text-[#82f5ad]">
+                  <span className="whitespace-pre-line font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.38] tracking-[1.4px] text-[#82f5ad]">
                     {bullet}
                   </span>
                 </li>
@@ -529,7 +529,7 @@ export function ParticipatePage() {
                   object rather than as loose marks on the section background.
                   24px is the radius the cards already use — the only large radius
                   in the system. #1c2426 is the panel tone from the auction page. */}
-              <div className="mx-auto mt-16 max-w-md rounded-[24px] bg-[#1c2426] px-6 py-12 md:max-w-none md:px-10 md:py-14">
+              <div className="mx-auto mt-16 max-w-md rounded-[24px] bg-[#1c2426] p-6 md:max-w-none md:p-10">
               {/* Four columns, but only three stages: the fourth is the continuation
                   marker below. The connector percentages are column centres, so they
                   move whenever the column count does. */}

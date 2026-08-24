@@ -595,7 +595,7 @@ function ExploreCard({
           <div className="flex h-[56px] w-full shrink-0 items-end justify-start">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-[#252525]">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-[#3a5e3c]">
           {title}
         </p>
         <div className={`mt-auto flex items-center justify-center overflow-hidden ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]`}>

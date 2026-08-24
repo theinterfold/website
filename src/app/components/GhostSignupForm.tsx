@@ -122,7 +122,7 @@ export function GhostSignupForm({ className = "" }: { className?: string }) {
 
   return (
     <div className={`interfold-ghost-signup relative -mx-3 px-3 py-2 transition-colors duration-300 focus-within:bg-[rgba(193,217,191,0.34)] hover:bg-[rgba(193,217,191,0.2)] ${className}`}>
-      <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525] whitespace-nowrap">
+      <p className="mb-3 font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#3a5e3c] whitespace-nowrap">
         Updates
       </p>
       <div

@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { UnderlinedArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { SectionLabel } from "./SectionLabel";
 
 type LegalBlock =
   | { type: "paragraph"; content: ReactNode }
@@ -479,18 +480,6 @@ const termsSections: LegalSection[] = [
     ],
   },
 ];
-
-function SectionLabel({ children, tone = "muted" }: { children: string; tone?: "muted" | "signal" }) {
-  return (
-    <p
-      className={`font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:text-[14px] ${
-        tone === "signal" ? "text-[#82f5ad]" : "text-[#687d71]"
-      }`}
-    >
-      {children}
-    </p>
-  );
-}
 
 function LegalSectionRow({ section }: { section: LegalSection }) {
   return (

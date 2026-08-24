@@ -519,7 +519,7 @@ function Frame26() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Technical documentation, references, and implementation details.</p>
       </div>
       <div className="mt-auto w-full">
@@ -581,7 +581,7 @@ function Frame28() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
       </div>
       <div className="mt-auto w-full">
@@ -633,7 +633,7 @@ function Frame29() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
         <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
       </div>
       <div className="mt-auto w-full">
@@ -1554,7 +1554,7 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px]">01</p>
             <p data-preview-was="Confidential inputs" className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
             <p className="leading-[1.075] text-[14px]">inputs</p>
@@ -1571,7 +1571,7 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">02</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Threshold `}</p>
             <p data-preview-was="Threshold enforcement" className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
@@ -1588,7 +1588,7 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">03</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Verifiable `}</p>
             <p className="leading-[1.075] text-[14px] whitespace-pre">outcomes</p>
@@ -1813,7 +1813,7 @@ export function DesktopFooter() {
         <div className="not-italic md:col-start-3 md:row-start-1">
           <div className="flex flex-col gap-[8px]">
             <ScrollFadeIn delay={0.1}>
-              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
+              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px] [&_a]:font-normal">
               <ScrollFadeIn delay={0.2}>
@@ -1829,7 +1829,7 @@ export function DesktopFooter() {
         <div className="content-stretch flex flex-col gap-[8px] items-start not-italic w-full md:col-start-4 md:row-start-1">
           <div className="flex flex-col gap-[8px] w-full">
             <ScrollFadeIn delay={0.1}>
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>

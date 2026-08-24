@@ -49,7 +49,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         className={`flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] ${
-          isOpen ? "rounded-t-[22px]" : "rounded-full"
+          isOpen ? "rounded-t-[24px]" : "rounded-full"
         }`}
         onClick={() => setIsOpen((current) => !current)}
         type="button"
@@ -83,11 +83,11 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
           read as one shape rather than a panel under a pill. 0fr to 1fr animates
           the height without anything having to measure it. */}
       <div
-        className={`absolute right-0 top-full z-50 grid w-full rounded-b-[22px] bg-[#121718] transition-[grid-template-rows] duration-200 ease-out ${
+        className={`absolute right-0 top-full z-50 grid w-full rounded-b-[24px] bg-[#121718] transition-[grid-template-rows] duration-200 ease-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
-        <div className="overflow-hidden rounded-b-[22px]">
+        <div className="overflow-hidden rounded-b-[24px]">
           <div className="pb-2" role="menu">
             {NETWORK_LINKS.map((link) => (
               <a
