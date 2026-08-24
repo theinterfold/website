@@ -296,7 +296,11 @@ function ActorGlyph({ className = "", glyph }: { className?: string; glyph: Acto
   const accentStroke = "#3a5e3c";
 
   return (
-    <div className={`actor-glyph relative grid cursor-pointer place-items-center text-[#3a5e3c] ${className}`} onClick={replay} ref={frameRef}>
+    <div className={`actor-glyph relative grid place-items-center text-[#3a5e3c] ${className}`} ref={frameRef}>
+      {/* The replay target is the drawing, not the frame around it. On the frame
+          the whole tile lit up as one big pointer, which read as a link to
+          somewhere rather than as something to poke. */}
+      <span className="grid cursor-pointer place-items-center" onClick={replay}>
       {glyph === "requester" ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -366,6 +370,7 @@ function ActorGlyph({ className = "", glyph }: { className?: string; glyph: Acto
           <circle className="actor-glyph__pulse actor-glyph__pulse--f" cx="42.25" cy="14.23" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
         </svg>
       )}
+      </span>
     </div>
   );
 }
