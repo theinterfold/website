@@ -19,9 +19,10 @@ const pathways = [
       "Ciphernodes participate in:",
     ],
     bullets: [
-      "Computation-specific committees",
+      "E3 committee participation",
       "Distributed key generation",
       "Threshold decryption",
+      "Protocol-defined duties",
     ],
     actions: [
       { label: "Run a ciphernode", href: "https://dashboard.theinterfold.com/#operator", primary: true },
@@ -48,15 +49,15 @@ const pathways = [
   {
     title: "03. Partner on a pilot",
     copy: [
-      "Work with us to test and deploy confidential coordination in live use cases.",
-      "Partners may participate as requesters, data providers, or both, depending on the use case.",
+      "Work with us to bring confidential coordination into live systems.",
+      "Partners can integrate Interfold into governance, research, public-interest, and other multiparty use cases.",
       "This includes:",
     ],
     bullets: [
-      "Onchain entities and governance frameworks",
-      "Privacy-focused applications",
-      "Research groups in secure computation",
-      "Teams working on agent coordination",
+      "Onchain governance systems",
+      "Public + civic institutions",
+      "Secure computation research",
+      "Agent coordination teams",
     ],
     actions: [
       { label: "Reach out", href: "mailto:comms@gnosisguild.org", primary: true },
@@ -103,15 +104,32 @@ const actors: Array<{ title: string; role: string; detail: string; glyph: ActorG
   },
 ];
 
-// Marvin's intro says "two forms of network participation" while there are three
-// cards: transferring is not participation, it is just what the token also does.
-// Kept as written; worth a second look with him.
+// Marvin reordered these so the token comes before what it is for: get FOLD,
+// then bond it to operate, then lock it to govern. The intro line above still
+// says "two forms of network participation" — his own words, and the one thing
+// in this section he has not rewritten. Left as it is, flagged to him.
 const foldActions = [
   {
-    title: "Bond FOLD",
+    title: "Get FOLD",
+    copy: ["FOLD gives holders access to the network's operator and governance pathways."],
+    actions: [
+      {
+        label: "Swap on Uniswap",
+        // The token address matches the one on the auction page.
+        href: "https://app.uniswap.org/explore/tokens/ethereum/0xe172e9b6cfbeeb5593bdce3f077356fdb33af904",
+        primary: true,
+      },
+      {
+        label: "View market",
+        href: "https://dexscreener.com/ethereum/0x909e4a022a7505d44b19b36fe76ee18567379ee4c9697438acde2e159c006c32",
+        primary: false,
+      },
+    ],
+  },
+  {
+    title: "Bond to operate",
     copy: [
-      "Bond FOLD to become eligible to run a ciphernode.",
-      "Bonded operators can be selected into computation-specific committees responsible for distributed key generation, threshold decryption, and other network duties.",
+      "Ciphernodes do more than validate activity: they participate in computation-specific committees, distributed key generation, threshold decryption, and other network duties.",
     ],
     actions: [
       { label: "Bond FOLD", href: "https://dashboard.theinterfold.com/#operator", primary: true },
@@ -119,33 +137,15 @@ const foldActions = [
     ],
   },
   {
-    title: "Lock FOLD",
+    title: "Lock to govern",
     copy: [
-      "Lock FOLD to participate in Interfold governance and receive governance weight.",
-      "Confidential, receipt-free voting is being brought onchain through the Interfold governance system.",
+      "Locked FOLD gives holders voting power to create proposals, vote on consequential network decisions, and participate in confidential, receipt-free governance.",
     ],
     actions: [
       { label: "Lock FOLD", href: "https://governance.theinterfold.com", primary: true },
       {
         label: "Learn about confidential governance",
         href: "https://blog.theinterfold.com/verifiable-secret-ballots-with-interfold-and-aragon/",
-        primary: false,
-      },
-    ],
-  },
-  {
-    title: "Transfer FOLD",
-    // The token address matches the one on the auction page.
-    copy: ["FOLD is generally transferable on Ethereum mainnet."],
-    actions: [
-      {
-        label: "Swap on Uniswap",
-        href: "https://app.uniswap.org/explore/tokens/ethereum/0xe172e9b6cfbeeb5593bdce3f077356fdb33af904",
-        primary: true,
-      },
-      {
-        label: "View market",
-        href: "https://dexscreener.com/ethereum/0x909e4a022a7505d44b19b36fe76ee18567379ee4c9697438acde2e159c006c32",
         primary: false,
       },
     ],
@@ -521,7 +521,7 @@ export function ParticipatePage() {
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel>FOLD</SectionLabel>
               <p data-preview-note="foldSection" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[0.95] md:tracking-[-0.96px]">
-                Operate. Govern. Transfer.
+                FOLD in the network
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>
                 FOLD supports two forms of network participation: operating and governing.
