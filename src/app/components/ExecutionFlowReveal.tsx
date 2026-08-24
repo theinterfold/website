@@ -1,16 +1,54 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
+import { ExecutionFlowTuner, SHOW_EXECUTION_FLOW_TUNER } from "./ExecutionFlowTuner";
 
-// viewBox units per millisecond. One pen speed for every route, so a run that
-// crosses the whole diagram takes longer than a short one — which is what reads
-// as drawing rather than as a set of bars filling.
-const PEN_SPEED = 1.9;
-// A route starts once the one above it is this far through its own journey, so
-// they overlap without ever arriving together.
-const ROUTE_OVERLAP = 0.55;
-// Applied over a whole route rather than per segment, so the pen does not stall
-// at every corner — it leaves gently, travels, and arrives gently.
-const ROUTE_EASING = "cubic-bezier(0.45, 0.05, 0.3, 1)";
+export type ExecutionFlowTiming = {
+  /** Applied over a whole route rather than per segment, so the pen does not
+      stall at every corner — it leaves gently, travels, and arrives gently. */
+  easing: string;
+  /** viewBox units per millisecond. One pen speed for every route, so a run
+      that crosses the whole diagram takes longer than a short one — which is
+      what reads as drawing rather than as a set of bars filling. */
+  penSpeed: number;
+  /** A route starts once the one above it is this far through its own journey,
+      so they overlap without ever arriving together. */
+  routeOverlap: number;
+};
+
+export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
+  easing: "cubic-bezier(0.45, 0.05, 0.3, 1)",
+  penSpeed: 1.9,
+  routeOverlap: 0.55,
+};
+
+// Held here rather than in component state so the tuner can change it and
+// replay without the graphic remounting. Nothing but the tuner writes to it.
+let timing: ExecutionFlowTiming = { ...DEFAULT_EXECUTION_FLOW_TIMING };
+const replayListeners = new Set<() => void>();
+const totalListeners = new Set<(ms: number) => void>();
+let revealRoot: HTMLElement | null = null;
+
+export function getExecutionFlowTiming() {
+  return timing;
+}
+
+export function setExecutionFlowTiming(next: ExecutionFlowTiming) {
+  timing = next;
+}
+
+/** Draws the graphic again from the top with whatever timing is set now. */
+export function replayExecutionFlow() {
+  revealRoot?.scrollIntoView({ behavior: "smooth", block: "center" });
+  window.setTimeout(() => replayListeners.forEach((listener) => listener()), 260);
+}
+
+/** Reports how long the run just scheduled will take, so the tuner can show it. */
+export function onExecutionFlowTotal(listener: (ms: number) => void) {
+  totalListeners.add(listener);
+  return () => {
+    totalListeners.delete(listener);
+  };
+}
 // How close two ends have to be to count as the same point, in viewBox units.
 const JOIN_TOLERANCE = 3;
 // Everything at or left of this x belongs to the input fan; the spine sits here.
@@ -76,14 +114,29 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
   const isInView = useInView(ref, { amount: 0.3, once: true });
   const shouldReduceMotion = useReducedMotion();
   const [hasDrawn, setHasDrawn] = useState(false);
+  const [run, setRun] = useState(0);
 
   const isHeld = !shouldReduceMotion && !hasDrawn;
+
+  useEffect(() => {
+    revealRoot = ref.current;
+    const replay = () => {
+      setHasDrawn(false);
+      setRun((previous) => previous + 1);
+    };
+    replayListeners.add(replay);
+    return () => {
+      replayListeners.delete(replay);
+    };
+  }, []);
 
   useEffect(() => {
     const root = ref.current;
     if (!root || !isInView || shouldReduceMotion || hasDrawn) {
       return undefined;
     }
+
+    const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeOverlap: ROUTE_OVERLAP } = timing;
 
     const svg = root.querySelector<SVGSVGElement>('[data-name="Layer_1"] > svg');
     const strokes = svg ? Array.from(svg.querySelectorAll<SVGPathElement>("path[stroke]")).map(measure) : [];
@@ -243,6 +296,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
     }
 
     const total = Math.max(...routes.map((route) => route.delay + route.duration), lastLanding);
+    totalListeners.forEach((listener) => listener(total));
 
     // The tags are chapter marks rather than part of the drawing, so they land
     // on the moments they name instead of being matched to a line.
@@ -264,8 +318,12 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
         segment.el.style.strokeDasharray = "";
         segment.el.style.strokeDashoffset = "";
       }
+      // Only matters when the tuner replays: a second run has to start from the
+      // same held state the first one did.
+      root.classList.remove("interfold-execution-flow-draw--live");
+      tags.forEach((tag) => tag.classList.remove("is-drawn"));
     };
-  }, [hasDrawn, isInView, shouldReduceMotion]);
+  }, [hasDrawn, isInView, run, shouldReduceMotion]);
 
   return (
     <div
@@ -273,6 +331,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
       ref={ref}
     >
       {children}
+      {SHOW_EXECUTION_FLOW_TUNER ? <ExecutionFlowTuner /> : null}
     </div>
   );
 }
