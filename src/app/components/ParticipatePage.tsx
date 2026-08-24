@@ -272,7 +272,7 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
 }
 
 function ActorGlyph({ className = "", glyph }: { className?: string; glyph: ActorGlyphName }) {
-  const iconClass = "actor-glyph__svg h-[88px] w-24 overflow-visible";
+  const iconClass = "actor-glyph__svg h-[66px] w-[72px] overflow-visible min-[1100px]:h-[80px] min-[1100px]:w-[88px]";
   // The mint fills sit inside a dark outline, so they still read on white. The
   // three accent *strokes* do not — mint line work on a white panel all but
   // disappears — so they take the dark green and the mint stays a fill colour.
@@ -306,9 +306,9 @@ function ActorGlyph({ className = "", glyph }: { className?: string; glyph: Acto
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="4.95" y2="18.05" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="40.45" x2="40.45" y1="35.45" y2="47.95" />
           <rect className="actor-glyph__provider-core" fill={accent} height="5.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="5.4" x="37.85" y="23.45" />
-          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="40.45" cy="3.65" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle className="actor-glyph__pulse actor-glyph__pulse--c" cx="40.45" cy="49.35" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="59.05" cy="26.15" fill={accent} r="1.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="40.45" cy="3.65" fill={accent} r="3" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--c" cx="40.45" cy="49.35" fill={accent} r="3" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--b" cx="59.05" cy="26.15" fill={accent} r="3" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <g className="actor-glyph__provider-source actor-glyph__provider-source--a">
             <rect height="12.9" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="12.8" x=".75" y=".75" />
             <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="3.65" x2="10.95" y1="4" y2="4" />
@@ -332,7 +332,7 @@ function ActorGlyph({ className = "", glyph }: { className?: string; glyph: Acto
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 45.7 52.21">
           <polygon className="actor-glyph__committee-ring" points="42.25 36.95 42.25 14.55 22.85 3.35 3.45 14.55 3.45 36.95 22.85 48.15 42.25 36.95" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <circle className="actor-glyph__pulse actor-glyph__pulse--d" cx="22.85" cy="48.76" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
-          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="22.85" cy="3.35" fill={accent} r="2.6" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
+          <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="22.85" cy="3.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <circle className="actor-glyph__pulse actor-glyph__pulse--c" cx="3.45" cy="37.35" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="5.95" y2="13.35" />
           <line stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" x1="22.85" x2="22.85" y1="38.66" y2="46.06" />
@@ -424,7 +424,7 @@ export function ParticipatePage() {
             <div className="flex flex-col gap-8 min-[1100px]:grid min-[1100px]:grid-cols-3 min-[1100px]:items-start min-[1100px]:gap-4">
               {actors.map(({ title, role, detail, glyph }) => (
                 <ScrollFadeIn className="relative flex w-full max-w-md gap-4 text-left min-[1100px]:max-w-none min-[1100px]:flex-col min-[1100px]:gap-0" key={title}>
-                    <ActorGlyph className="aspect-square w-[104px] shrink-0 self-start bg-[#d9fce8] min-[1100px]:w-full" glyph={glyph} />
+                    <ActorGlyph className="w-[104px] shrink-0 bg-[#d9fce8] min-[1100px]:aspect-square min-[1100px]:w-full" glyph={glyph} />
                     <div className="flex min-w-0 flex-col">
                       <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                         {title}

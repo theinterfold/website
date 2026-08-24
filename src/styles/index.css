@@ -129,16 +129,37 @@ html.interfold-theme-participate #root {
   }
 }
 
+/* transform: scale() scales the stroke with the shape, so a mark that grows
+   also gets heavier than the line work around it. The stroke width is animated
+   back down by the same factor — 1.5 / 1.15 — so only the size changes. */
 @keyframes interfold-actor-core {
   0%,
   38%,
   62%,
   100% {
     transform: scale(1);
+    stroke-width: 1.5;
   }
 
   48% {
     transform: scale(1.15);
+    stroke-width: 1.304;
+  }
+}
+
+/* The committee core is a group, and stroke-width set on a group loses to the
+   children's own attribute, so they carry the counter-animation themselves.
+   Same duration and easing, so it stays in step with the scale above. */
+@keyframes interfold-actor-core-stroke {
+  0%,
+  38%,
+  62%,
+  100% {
+    stroke-width: 1.5;
+  }
+
+  48% {
+    stroke-width: 1.304;
   }
 }
 
@@ -148,10 +169,12 @@ html.interfold-theme-participate #root {
   26%,
   100% {
     transform: scale(1);
+    stroke-width: 1.5;
   }
 
   15% {
     transform: scale(1.42);
+    stroke-width: 1.056;
   }
 }
 
@@ -174,6 +197,10 @@ html.interfold-theme-participate #root {
 .actor-glyph__provider-core,
 .actor-glyph__committee-core {
   animation: interfold-actor-core 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__committee-core > * {
+  animation: interfold-actor-core-stroke 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .actor-glyph__pulse {
