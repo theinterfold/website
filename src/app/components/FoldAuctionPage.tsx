@@ -515,7 +515,7 @@ function ContractsCard() {
   // Lit surface (radial gradient, brighter at top) + beveled edge (top highlight,
   // hairline inner border, bottom inner shadow) to give the card real material depth.
   const shellClass =
-    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] p-6 pb-0 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:p-12 md:pb-0";
+    "relative h-full overflow-hidden rounded-[24px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] p-6 pb-0 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:p-12 md:pb-0";
 
   return (
     <div
@@ -761,7 +761,7 @@ export function FoldAuctionPage() {
                 </span>
               </button>
               <span
-                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[8px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[6px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
                 role="tooltip"
               >
                 <span aria-hidden="true" className="absolute -top-[5px] left-1/2 size-[10px] -translate-x-1/2 rotate-45 border-l border-t border-[#82f5ad]/15 bg-[#121718]" />
@@ -986,7 +986,7 @@ export function FoldAuctionPage() {
             <div className="mt-12 grid gap-4 md:grid-cols-2">
               {foldRoles.map((role, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={role.number}>
-                  <article className="flex h-full flex-col gap-3 rounded-[20px] bg-[#1c2426] p-6">
+                  <article className="flex h-full flex-col gap-3 rounded-[24px] bg-[#1c2426] p-6">
                     <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
                       {role.number}
                     </span>
@@ -1039,7 +1039,7 @@ export function FoldAuctionPage() {
             <div className="mt-10 grid gap-4 md:grid-cols-2">
               {supportsExamples.map((example, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={example.title}>
-                  <div className="h-full rounded-[16px] bg-white p-5">
+                  <div className="h-full rounded-[24px] bg-white p-5">
                     <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.1] text-[#3a5e3c] md:text-[20px]">
                       <span>{example.title}</span> <span className="text-[#687d71]">{example.body}</span>
                     </p>

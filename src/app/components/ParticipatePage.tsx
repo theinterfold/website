@@ -197,7 +197,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
 
   return (
     <article className="flex h-[640px]">
-      <div className="flex h-full w-full flex-col overflow-hidden rounded-[20px] bg-[#121718] p-6 text-[#d9fce8]">
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-[24px] bg-[#121718] p-6 text-[#d9fce8]">
         <div className="shrink-0">
           <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
             {pathwayNumber}
@@ -252,7 +252,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
 
 function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
   return (
-    <article className="flex h-full flex-col rounded-[20px] bg-white p-6">
+    <article className="flex h-full flex-col rounded-[24px] bg-white p-6">
       <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[32px] leading-[0.95] tracking-[-0.96px]">
         {item.title}
       </h3>

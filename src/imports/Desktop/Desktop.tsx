@@ -374,7 +374,7 @@ function Frame2() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/getting-started"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -395,7 +395,7 @@ function Frame1() {
 
   return (
     <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -415,7 +415,7 @@ function FinalTelegramCta() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://dashboard.theinterfold.com/#operator"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -482,7 +482,7 @@ function Frame3() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -544,7 +544,7 @@ function Frame4() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://blog.theinterfold.com/tag/confidential-coordination"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -596,7 +596,7 @@ function Frame5() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
       href="https://blog.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1605,7 +1605,7 @@ function HowItWorksCta() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       data-preview-note="howItWorks"
       href="https://blog.theinterfold.com/how-interfold-works/"
       onMouseEnter={() => setIsHovered(true)}
@@ -1710,7 +1710,7 @@ function Frame6() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="https://docs.theinterfold.com/getting-started"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1731,7 +1731,7 @@ function Frame7() {
 
   return (
     <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1751,7 +1751,7 @@ function FrameRunCiphernode() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
+      className="group rounded-[6px] bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
       href="https://dashboard.theinterfold.com/#operator"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

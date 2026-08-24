@@ -589,7 +589,7 @@ export function AuctionLegalPage() {
 
         <section className="bg-white px-4 pb-[64px] md:px-8 md:pb-[96px]">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
-            <div className="rounded-[28px] bg-[#d9fce8] p-6 md:p-10">
+            <div className="rounded-[24px] bg-[#d9fce8] p-6 md:p-10">
               <SectionLabel>Important Information</SectionLabel>
               <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
                 <p>FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</p>

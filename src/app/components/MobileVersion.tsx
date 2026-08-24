@@ -265,7 +265,7 @@ export function MobileVersion() {
           <div data-preview-note="heroCtas" className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <HoverArrowLink
-                className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="flex w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://docs.theinterfold.com/getting-started"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
@@ -274,7 +274,7 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <HoverArrowLink
-                className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="flex w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="https://dashboard.theinterfold.com/#operator"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
@@ -283,7 +283,7 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <HoverArrowLink
-                className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+                className="flex w-full items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
                 href="/participate"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
@@ -370,7 +370,7 @@ export function MobileVersion() {
 
         <div className="mx-auto mt-10 w-[min(100%-96px,540px)]" data-preview-note="howItWorks">
           <HoverArrowLink
-            className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+            className="flex w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
             href="https://blog.theinterfold.com/how-interfold-works/"
             textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
           >
@@ -490,7 +490,7 @@ export function MobileVersion() {
         <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
           <div className="w-full">
             <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="flex w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://docs.theinterfold.com/getting-started"
               textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
@@ -499,7 +499,7 @@ export function MobileVersion() {
           </div>
           <div className="w-full">
             <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="flex w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="https://dashboard.theinterfold.com/#operator"
               textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
@@ -508,7 +508,7 @@ export function MobileVersion() {
           </div>
           <div className="w-full">
             <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
+              className="flex w-full items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
               href="/participate"
               textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
             >
@@ -598,7 +598,7 @@ function ExploreCard({
         <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-[#252525]">
           {title}
         </p>
-        <div className="mt-auto flex h-[44px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]">
+        <div className="mt-auto flex h-[44px] items-center justify-center overflow-hidden rounded-[6px] bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]">
           <div className="relative inline-flex items-center justify-center">
             <motion.p
               className="font-['ABC_Gramercy:Regular',sans-serif] text-center text-[12.5px] leading-[1.075] text-[#3a5e3c]"
