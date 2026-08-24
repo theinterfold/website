@@ -15,10 +15,9 @@ import etmStackedLogo from "./encrypt-mempool-stacked.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
 import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
-import { HoverArrowContent } from "../../app/components/HoverArrowLink";
+import { HoverArrowContent, UnderlinedArrowLink } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
 import { NetworkStrip } from "../../app/components/NetworkStrip";
-import { SectionLabel } from "../../app/components/SectionLabel";
 import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
@@ -224,7 +223,7 @@ function Frame16() {
         <LineRevealAuto delay={0.1} text="New forms of coordination become possible." />
       </p>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
-        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>When shared outcomes no longer require exposing private inputs, or trusting a single operator.</p>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>When shared outcomes no longer require exposing private inputs or trusting a single operator.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -366,88 +365,69 @@ function Frame8() {
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#d4f6da]/55 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through people." />
+        <LineRevealAuto delay={0.1} text="Help form the network." />
       </p>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
-        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#d4f6da]/55 w-full md:w-[440px]`}>They operate the network, build applications, and bring new use cases to it.</p>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#d4f6da]/55 w-full md:w-[440px]`}>Operate the network, build applications, or bring new use cases to Interfold.</p>
       </ScrollFadeIn>
     </div>
   );
 }
 
-function Frame2() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
-      href="https://docs.theinterfold.com/getting-started"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isExternal
-        isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Build on Interfold
-      </AnimatedButtonContent>
-    </a>
-  );
-}
-
-function Frame1() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className={`group bg-[#82f5ad] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
-      href="/participate"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Participate
-      </AnimatedButtonContent>
-    </a>
-  );
-}
-
-function FinalTelegramCta() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
-      href="https://dashboard.theinterfold.com/#operator"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isExternal
-        isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Run a ciphernode
-      </AnimatedButtonContent>
-    </a>
-  );
-}
+// Marvin: this section was repeating the hero's CTAs. It is now a compact
+// version of the three participation paths from the Participate page —
+// title, one line, one link — and a text link to the page itself.
+const participationPaths = [
+  {
+    body: "Operate infrastructure for confidential coordination.",
+    cta: "Run a ciphernode",
+    href: "https://dashboard.theinterfold.com/#operator",
+    title: "Run a ciphernode",
+  },
+  {
+    body: "Build applications using private inputs and verifiable outcomes.",
+    cta: "Explore docs",
+    href: "https://docs.theinterfold.com/getting-started",
+    title: "Build and integrate",
+  },
+  {
+    body: "Bring a live use case to Interfold.",
+    cta: "Reach out",
+    href: "mailto:comms@gnosisguild.org",
+    title: "Partner on a pilot",
+  },
+];
 
 function Frame9() {
   return (
-    <div className={`${THREE_COLUMN_GRID_CLASS} items-center`}>
-      <ScrollFadeIn className="w-full" delay={0.3}>
-        <Frame2 />
-      </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.4}>
-        <FinalTelegramCta />
-      </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.5}>
-        <Frame1 />
+    <div className="content-stretch flex w-full flex-col items-center gap-[48px]">
+      <div className={`${THREE_COLUMN_GRID_CLASS} items-start gap-y-[40px]`}>
+        {participationPaths.map((path, index) => (
+          <ScrollFadeIn className="w-full" delay={0.3 + index * 0.1} key={path.title}>
+            <div className="flex flex-col items-start gap-[8px] text-left">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d9fce8]">
+                {path.title}
+              </p>
+              <p className={`${SUPPORTING_LINE} text-[#d4f6da]/55`}>{path.body}</p>
+              <UnderlinedArrowLink
+                className="mt-[8px] inline-flex"
+                href={path.href}
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#82f5ad] md:text-[14px]"
+              >
+                {path.cta}
+              </UnderlinedArrowLink>
+            </div>
+          </ScrollFadeIn>
+        ))}
+      </div>
+      <ScrollFadeIn delay={0.6}>
+        <UnderlinedArrowLink
+          className="inline-flex"
+          href="/participate"
+          textClassName={`${SUPPORTING_LINE} text-[#82f5ad]`}
+        >
+          Explore all ways to participate
+        </UnderlinedArrowLink>
       </ScrollFadeIn>
     </div>
   );
@@ -480,7 +460,7 @@ function Frame18() {
         <LineRevealAuto delay={0.1} text="Go deeper." />
       </p>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
-        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>How Interfold works, why confidential coordination matters, and what is live now.</p>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Explore how Interfold works, why confidential coordination matters, and what is live now.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1704,9 +1684,6 @@ function Frame21() {
 function Frame12() {
   return (
     <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0`}>
-      <ScrollFadeIn className="flex w-full justify-center">
-        <SectionLabel>Home</SectionLabel>
-      </ScrollFadeIn>
       <div className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
@@ -1738,32 +1715,12 @@ function Frame6() {
   );
 }
 
-function Frame7() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className={`group bg-[#82f5ad] content-stretch flex ${BUTTON_SIZE} items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
-      href="/participate"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Participate
-      </AnimatedButtonContent>
-    </a>
-  );
-}
-
 function FrameRunCiphernode() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a
-      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
+      className={`group bg-[#82f5ad] content-stretch flex ${BUTTON_SIZE} items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
       href="https://dashboard.theinterfold.com/#operator"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -1789,9 +1746,6 @@ function Frame17() {
       </ScrollFadeIn>
       <ScrollFadeIn delay={0.3}>
         <FrameRunCiphernode />
-      </ScrollFadeIn>
-      <ScrollFadeIn delay={0.4}>
-        <Frame7 />
       </ScrollFadeIn>
     </div>
   );

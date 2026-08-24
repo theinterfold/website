@@ -404,7 +404,6 @@ export function ParticipatePage() {
         <section className="bg-white px-4 py-[64px] text-center md:py-[112px]">
           <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} md:max-w-[760px]`}>
             <ScrollFadeIn className="flex w-full justify-center">
-              <SectionLabel>Participate</SectionLabel>
             </ScrollFadeIn>
             <ScrollFadeIn className="w-full">
               <h1 className="font-['ABC_Gramercy:Regular',sans-serif] text-[40px] capitalize leading-[0.87] tracking-[-1.92px] md:text-[64px]">

@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { NetworkStrip } from "./NetworkStrip";
-import { SectionLabel } from "./SectionLabel";
 import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
@@ -22,7 +21,7 @@ import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
 import { AnimatedExecutionModelGraphic, DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
 import { HeroImage, homeHeroSources } from "./HeroImage";
-import { HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { HoverArrowContent, HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
@@ -211,6 +210,27 @@ const mobileLogos = [
   { href: "https://www.encryptedmempool.org/", name: "Encrypt the Mempool", visualScale: 0.9, content: <MobilePartnerLogoAsset aspectRatio="791 / 219" src={etmStackedLogo} /> },
 ];
 
+const participationPaths = [
+  {
+    body: "Operate infrastructure for confidential coordination.",
+    cta: "Run a ciphernode",
+    href: "https://dashboard.theinterfold.com/#operator",
+    title: "Run a ciphernode",
+  },
+  {
+    body: "Build applications using private inputs and verifiable outcomes.",
+    cta: "Explore docs",
+    href: "https://docs.theinterfold.com/getting-started",
+    title: "Build and integrate",
+  },
+  {
+    body: "Bring a live use case to Interfold.",
+    cta: "Reach out",
+    href: "mailto:comms@gnosisguild.org",
+    title: "Partner on a pilot",
+  },
+];
+
 export function MobileVersion() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const logoMarquee = useStartOnInView();
@@ -249,9 +269,6 @@ export function MobileVersion() {
       <NetworkStrip className="sticky top-[60px] z-40" />
       <div className="flex flex-col bg-[#d9fce8]">
         <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} text-center px-[24px] py-[64px]`}>
-          <ScrollFadeIn className="flex w-full justify-center">
-            <SectionLabel>Home</SectionLabel>
-          </ScrollFadeIn>
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
           </div>
@@ -274,20 +291,11 @@ export function MobileVersion() {
             </div>
             <div className="w-full">
               <HoverArrowLink
-                className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
+                className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c]`}
                 href="https://dashboard.theinterfold.com/#operator"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Run a ciphernode
-              </HoverArrowLink>
-            </div>
-            <div className="w-full">
-              <HoverArrowLink
-                className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c]`}
-                href="/participate"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-              >
-                Participate
               </HoverArrowLink>
             </div>
           </div>
@@ -390,7 +398,7 @@ export function MobileVersion() {
           <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
             New forms of coordination become possible.</p>
             <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
-              When shared outcomes no longer require exposing private inputs, or trusting a single operator.
+              When shared outcomes no longer require exposing private inputs or trusting a single operator.
             </p>
         </div>
 
@@ -487,40 +495,37 @@ export function MobileVersion() {
               Participate
             </p>
             <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
-              Confidential coordination becomes real through people.</p>
+              Help form the network.</p>
             <p className={`mt-3 text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>
-              They operate the network, build applications, and bring new use cases to it.
+              Operate the network, build applications, or bring new use cases to Interfold.
             </p>
           </div>
 
-        <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
-          <div className="w-full">
-            <HoverArrowLink
-              className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
-              href="https://docs.theinterfold.com/getting-started"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Build on Interfold
-            </HoverArrowLink>
-          </div>
-          <div className="w-full">
-            <HoverArrowLink
-              className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
-              href="https://dashboard.theinterfold.com/#operator"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Run a ciphernode
-            </HoverArrowLink>
-          </div>
-          <div className="w-full">
-            <HoverArrowLink
-              className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c]`}
-              href="/participate"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Participate
-            </HoverArrowLink>
-          </div>
+        {/* Marvin: was a repeat of the hero CTAs. Now a compact version of the
+            three participation paths — title, one line, one link. */}
+        <div className="mx-auto flex w-full max-w-[320px] flex-col gap-10 text-left">
+          {participationPaths.map((path) => (
+            <div className="flex flex-col items-start gap-2" key={path.title}>
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d9fce8]">
+                {path.title}
+              </p>
+              <p className={`text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>{path.body}</p>
+              <UnderlinedArrowLink
+                className="mt-2 inline-flex"
+                href={path.href}
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#82f5ad]"
+              >
+                {path.cta}
+              </UnderlinedArrowLink>
+            </div>
+          ))}
+          <UnderlinedArrowLink
+            className="inline-flex self-center"
+            href="/participate"
+            textClassName={`${SUPPORTING_LINE} text-[#82f5ad]`}
+          >
+            Explore all ways to participate
+          </UnderlinedArrowLink>
         </div>
         </ScrollFadeIn>
       </div>
@@ -534,7 +539,7 @@ export function MobileVersion() {
           <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
             Go deeper.</p>
             <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
-              How Interfold works, why confidential coordination matters, and what is live now.
+              Explore how Interfold works, why confidential coordination matters, and what is live now.
             </p>
         </div>
 
