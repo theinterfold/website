@@ -1845,13 +1845,13 @@ export function DesktopFooter() {
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <a data-preview-note="footerGithub" data-preview-was="https://github.com/gnosisguild/enclave/" className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
+                <a data-preview-note="footerGithub" data-preview-was="https://github.com/gnosisguild/enclave/" className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
               </ScrollFadeIn>
             </div>
           </div>

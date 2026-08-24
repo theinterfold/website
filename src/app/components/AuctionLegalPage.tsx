@@ -462,7 +462,7 @@ const termsSections: LegalSection[] = [
           <UnderlinedArrowLink
             className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
             href="mailto:ops@gnosisguild.org"
-            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-current"
+            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
             underlineClassName="border-b border-current pb-[3px]"
           >
             ops@gnosisguild.org
@@ -470,7 +470,7 @@ const termsSections: LegalSection[] = [
           <UnderlinedArrowLink
             className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
             href="https://www.theinterfold.com/fold-auction"
-            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-current"
+            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
             underlineClassName="border-b border-current pb-[3px]"
           >
             Official Interfold auction page
