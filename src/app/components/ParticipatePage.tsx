@@ -105,9 +105,9 @@ const actors: Array<{ title: string; role: string; detail: string; glyph: ActorG
 ];
 
 // Marvin reordered these so the token comes before what it is for: get FOLD,
-// then bond it to operate, then lock it to govern. The intro line above still
-// says "two forms of network participation" — his own words, and the one thing
-// in this section he has not rewritten. Left as it is, flagged to him.
+// then bond it to operate, then lock it to govern. The line above used to say
+// "two forms of network participation" while three cards sat under it; he
+// rewrote that too.
 const foldActions = [
   {
     title: "Get FOLD",
@@ -524,7 +524,7 @@ export function ParticipatePage() {
                 FOLD in the network
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>
-                FOLD supports two forms of network participation: operating and governing.
+                FOLD connects token holders to network participation and governance.
               </p>
             </ScrollFadeIn>
             <div className="mx-auto mt-16 grid max-w-md gap-4 md:max-w-none md:grid-cols-3">
