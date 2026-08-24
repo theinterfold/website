@@ -408,11 +408,13 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
 
-            {/* The same panel the stages sit on further down the page: 24px, one
-                step off the section background, so the four roles read as one
-                object. White is the light-section panel tone — it is what the
-                FOLD cards use. */}
-            <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:p-10">
+            {/* Concentric corners: an outer radius equals the inner radius plus
+                the gap between them, or the two curves run at different rates
+                and the nesting reads as a mistake. The frames are the site's
+                24px inside 40px of padding, so the panel is 64 — and 48 on
+                mobile, where the padding is 24. White is the light-section
+                panel tone: it is what the FOLD cards use. */}
+            <div className="mx-auto mt-4 max-w-md rounded-[48px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:rounded-[64px] min-[1100px]:p-10">
             {/* Two up until the three fit: stacked one-wide, the square frames
                 grew to the full panel and the section ran for pages. */}
             <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 min-[1100px]:grid-cols-3 min-[1100px]:gap-4">
