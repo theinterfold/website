@@ -221,7 +221,7 @@ function FaqRow({ item }: { item: { question: string; answer: string } }) {
           >
             <motion.p
               animate={{ y: 0, opacity: 1 }}
-              className="pb-5 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.25] text-[#687d71] md:text-[18px]"
+              className="pb-5 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]"
               initial={{ y: revealOffset, opacity: 0 }}
               transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -916,7 +916,7 @@ export function FoldAuctionPage() {
                   <li key={item}>
                     <ScrollFadeIn className="grid grid-cols-[7px_1fr] gap-3" delay={0.05 + index * 0.08}>
                       <span className="mt-[9px] size-[5px] rounded-full bg-[#82f5ad]" />
-                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]">
+                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
                         {item}
                       </span>
                     </ScrollFadeIn>
@@ -960,7 +960,7 @@ export function FoldAuctionPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
+                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d9fce8]">
                         {item.body}
                       </p>
                       {actions.length > 0 && (
@@ -1012,7 +1012,7 @@ export function FoldAuctionPage() {
                     <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[0.95] tracking-[-0.84px] text-[#d9fce8]">
                       {role.title}
                     </h3>
-                    <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8]/85 md:text-[18px]">
+                    <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d9fce8]/85">
                       {role.body}
                     </p>
                   </article>
