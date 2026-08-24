@@ -280,12 +280,16 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
   );
 }
 
-function ActorGlyph({ glyph }: { glyph: ActorGlyphName }) {
-  const iconClass = "actor-glyph__svg h-11 w-12 overflow-visible";
+function ActorGlyph({ className = "", glyph }: { className?: string; glyph: ActorGlyphName }) {
+  const iconClass = "actor-glyph__svg h-16 w-[68px] overflow-visible";
+  // The mint fills sit inside a dark outline, so they still read on white. The
+  // three accent *strokes* do not — mint line work on a white panel all but
+  // disappears — so they take the dark green and the mint stays a fill colour.
   const accent = "#82f5ad";
+  const accentStroke = "#3a5e3c";
 
   return (
-    <div className="actor-glyph relative grid size-[76px] place-items-center rounded-full bg-[#3a5e3c] text-white">
+    <div className={`actor-glyph relative grid size-[76px] place-items-center text-[#3a5e3c] ${className}`}>
       {glyph === "requester" ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -293,9 +297,9 @@ function ActorGlyph({ glyph }: { glyph: ActorGlyphName }) {
           <path d="M23.25,11.45V3.65h23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <rect height="22" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" width="21" x="23.25" y="11.45" />
           <g className="actor-glyph__request-code">
-            <polyline points="30.55 19.55 27.65 22.35 30.55 25.35" stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" />
-            <polyline points="37.15 19.35 40.05 22.45 37.15 25.35" stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" />
-            <line stroke={accent} strokeMiterlimit="10" strokeWidth="1.5" x1="32.25" x2="35.35" y1="27.05" y2="17.65" />
+            <polyline points="30.55 19.55 27.65 22.35 30.55 25.35" stroke={accentStroke} strokeMiterlimit="10" strokeWidth="1.5" />
+            <polyline points="37.15 19.35 40.05 22.45 37.15 25.35" stroke={accentStroke} strokeMiterlimit="10" strokeWidth="1.5" />
+            <line stroke={accentStroke} strokeMiterlimit="10" strokeWidth="1.5" x1="32.25" x2="35.35" y1="27.05" y2="17.65" />
           </g>
           <circle className="actor-glyph__pulse actor-glyph__pulse--a" cx="48.65" cy="3.45" fill={accent} r="2.7" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
           <path d="M44.25,33.25v7.8h-23.4" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -418,21 +422,13 @@ export function ParticipatePage() {
                 object. White is the light-section panel tone — it is what the
                 FOLD cards use. */}
             <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white px-6 py-12 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:px-10 min-[1100px]:py-14">
-            <div className="flex flex-col items-center gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+            <div className="flex flex-col gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
               {actors.map(({ title, role, detail, glyph }) => (
-                <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
-                    <ActorGlyph glyph={glyph} />
-                    <div className="flex min-w-0 flex-col items-center">
+                <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
+                    <ActorGlyph className="self-center" glyph={glyph} />
+                    <div className="flex min-w-0 flex-col">
                       <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
-                        {title === "Ciphernode committees" ? (
-                          <>
-                            Ciphernode
-                            <br className="min-[1100px]:hidden" />{" "}
-                            committees
-                          </>
-                        ) : (
-                          title
-                        )}
+                        {title}
                       </p>
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
                         {role}
