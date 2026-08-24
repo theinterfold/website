@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Slider from "react-slick";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { HeroImage, participateHeroSources } from "./HeroImage";
@@ -272,6 +273,21 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
 }
 
 function ActorGlyph({ className = "", glyph }: { className?: string; glyph: ActorGlyphName }) {
+  const frameRef = useRef<HTMLDivElement | null>(null);
+
+  // The loop runs on its own, but a cycle is 4.8s and the part worth watching is
+  // a fraction of that. Clicking the frame starts it over instead of waiting for
+  // it to come round. cancel() then play() restarts a CSS animation from zero.
+  //
+  // Under prefers-reduced-motion the keyframes are switched off, so there is
+  // nothing to collect here and the click quietly does nothing.
+  const replay = () => {
+    frameRef.current?.getAnimations({ subtree: true }).forEach((animation) => {
+      animation.cancel();
+      animation.play();
+    });
+  };
+
   const iconClass = "actor-glyph__svg h-[66px] w-[72px] overflow-visible min-[1100px]:h-[80px] min-[1100px]:w-[88px]";
   // The mint fills sit inside a dark outline, so they still read on white. The
   // three accent *strokes* do not — mint line work on a white panel all but
@@ -280,7 +296,7 @@ function ActorGlyph({ className = "", glyph }: { className?: string; glyph: Acto
   const accentStroke = "#3a5e3c";
 
   return (
-    <div className={`actor-glyph relative grid place-items-center text-[#3a5e3c] ${className}`}>
+    <div className={`actor-glyph relative grid cursor-pointer place-items-center text-[#3a5e3c] ${className}`} onClick={replay} ref={frameRef}>
       {glyph === "requester" ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
