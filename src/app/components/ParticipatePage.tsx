@@ -81,20 +81,24 @@ const actors: Array<{ title: string; role: string; detail: string; glyph: ActorG
   {
     title: "Requesters",
     role: "Initiating E3s",
-    detail: "Requesters define and initiate confidential computations.",
+    detail:
+      "Requesters define and initiate confidential computations. Applications, protocols, or other systems can act as requesters.",
     glyph: "requester",
   },
   {
-    title: "Data providers",
-    role: "Contributing encrypted inputs",
-    detail: "Data providers contribute sensitive information in encrypted form.",
+    // Was "Data providers". The drawing keeps its own name — it is the sources
+    // feeding a core, which is still what this role does.
+    title: "Participants",
+    role: "Contributing private inputs",
+    detail:
+      "Participants contribute the private information an E3 computes over, encrypted before submission. They can be people, applications, organizations, or other systems.",
     glyph: "provider",
   },
   {
     title: "Ciphernodes",
     role: "DKG + threshold decryption",
     detail:
-      "Ciphernode committees collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
+      "Ciphernodes form computation-specific committees that collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
     glyph: "committee",
   },
 ];
@@ -424,9 +428,9 @@ export function ParticipatePage() {
               <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
                 Interfold enables programs to compute over encrypted inputs without exposing the underlying data or placing decryption control in a single party.
               </p>
-              <p className={`mx-auto mt-8 max-w-[320px] ${SUPPORTING_LINE} md:max-w-none`}>
-                This requires coordination between multiple actors:
-              </p>
+              <div className="mt-8">
+                <SectionLabel>An E3 brings together different roles:</SectionLabel>
+              </div>
             </ScrollFadeIn>
 
             {/* Concentric corners: the inner radius is the outer radius minus
