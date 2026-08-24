@@ -417,12 +417,16 @@ export function ParticipatePage() {
             <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:p-10">
             {/* Two up until the three fit: stacked one-wide, the square frames
                 grew to the full panel and the section ran for pages. */}
-            <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 min-[1100px]:grid-cols-3 min-[1100px]:gap-4">
+            {/* Three roles do not divide into two columns, so below the
+                four-across breakpoint each one is a row instead: the frame keeps
+                its square, shrinks to a fixed size, and the copy sits beside it.
+                No orphan, and no tower of full-width squares either. */}
+            <div className="flex flex-col gap-8 min-[1100px]:grid min-[1100px]:grid-cols-3 min-[1100px]:items-start min-[1100px]:gap-4">
               {actors.map(({ title, role, detail, glyph }) => (
-                <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
-                    <ActorGlyph className="aspect-square w-full bg-[#d9fce8]" glyph={glyph} />
+                <ScrollFadeIn className="relative flex w-full max-w-md gap-4 text-left min-[1100px]:max-w-none min-[1100px]:flex-col min-[1100px]:gap-0" key={title}>
+                    <ActorGlyph className="aspect-square w-[104px] shrink-0 self-start bg-[#d9fce8] min-[1100px]:w-full" glyph={glyph} />
                     <div className="flex min-w-0 flex-col">
-                      <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
+                      <p className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                         {title}
                       </p>
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
