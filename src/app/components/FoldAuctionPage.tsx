@@ -27,8 +27,18 @@ const isPending = (href: string) => !href || href === PENDING_LINK;
 
 const AUCTION = {
   // --- Identity -------------------------------------------------------------
-  heroTitle: "FOLD Auction 2 is Live",
-  statusLead: "FOLD Auction 2 live now",
+  // Was: "FOLD Auction 2 is Live". Plural and unqualified on purpose \u2014 it covers
+  // both auctions, not just this one.
+  heroTitle: "$FOLD Auctions are closed",
+  // Was: "FOLD Auction 2 live now". Same two-part shape the page used when
+  // Auction 1 closed ("$FOLD auction closed \u00b7 400 ETH target surpassed"), but the
+  // second half is the action still open rather than a result.
+  //
+  // Held as two fields because the strip renders them differently by width: one
+  // line joined by a middle dot on desktop, two lines on mobile. Auction 1's
+  // version was short enough to fit either way; this one is not.
+  statusLead: "$FOLD auctions closed",
+  statusLeadSecondary: "Claiming open",
 
   // --- Participate (Auction 2 specific) --------------------------------------
   uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
@@ -98,13 +108,16 @@ const AUCTION = {
 
 const PAGE_TITLE = "FOLD Auction 2 · The Interfold";
 const META_DESCRIPTION =
-  "The FOLD Auction 2 is live. FOLD is distributed through a Continuous Clearing Auction on Uniswap. Registration required. Use official links only.";
+  "The $FOLD auctions are closed. FOLD was distributed through a Continuous Clearing Auction on Uniswap, and successful bidders can now claim. Use official links only.";
 
 // Composed date strings, tolerant of a still-pending time.
 const opensWhen = AUCTION.opensTime === PENDING_TEXT ? `${AUCTION.opensDate} at ${PENDING_TEXT}` : `${AUCTION.opensDate} at ${AUCTION.opensTime}`;
 const closesWhen = AUCTION.closesTime === PENDING_TEXT ? `${AUCTION.closesDate} at ${PENDING_TEXT}` : `${AUCTION.closesDate} at ${AUCTION.closesTime}`;
 
-const heroPrimaryCta = { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl };
+// Same Uniswap CCA URL, different job: that page is now where claiming happens.
+// This is the page's only claim link now that the update box is gone.
+// Was: "Join the FOLD Auction".
+const heroPrimaryCta = { label: "Claim Your FOLD", href: AUCTION.uniswapCcaUrl };
 // The live Auction 1 page pointed this at the participation guide, which for
 // Auction 2 has not been written yet. Rather than hide it, it points at the
 // Auction FAQ — which is what the currently published page does too. Swap it
@@ -114,9 +127,14 @@ const heroSecondaryCta = isPending(AUCTION.participationGuideUrl)
   : { label: "How to Participate", href: AUCTION.participationGuideUrl };
 const auctionActionLabel = "Join the FOLD Auction";
 
-// Auction 1's middle line was the 40-day cooldown, which no longer applies.
+// The strip now carries the post-auction detail, the way it did when Auction 1
+// closed. That version read "Results will be shared once finalized / 40-day
+// cooldown period / Use official links only"; the cooldown is gone and there are
+// no results to share yet, so these two lines cover claiming instead. The last
+// line is unchanged from both previous versions.
 const statusStripDetails = [
-  "Verification required",
+  "Claiming runs through the official Uniswap CCA interface",
+  "Connect the wallet you bid with",
   "Use official links only",
 ];
 
@@ -749,8 +767,15 @@ export function FoldAuctionPage() {
         {/* Status strip */}
         <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
           <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
-            <span aria-hidden="true" className="size-[7px] shrink-0 animate-pulse rounded-full bg-[#82f5ad] motion-reduce:animate-none" />
-            <span>{AUCTION.statusLead}</span>
+            {/* The status dot is gone: it was a liveness indicator, and nothing here is live. */}
+            <span>
+              {AUCTION.statusLead}
+              {/* Middle dot on one line at md and up; a hard break below it, where the
+                  two halves would otherwise wrap mid-phrase. */}
+              <span className="hidden md:inline">{" \u00b7 "}</span>
+              <br className="md:hidden" />
+              {AUCTION.statusLeadSecondary}
+            </span>
             <span className="group relative inline-flex">
               <button
                 aria-label={`More details: ${statusStripDetails.join(", ")}`}
