@@ -413,7 +413,12 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
 
-            <div className="mx-auto mt-4 flex max-w-md flex-col items-center pt-4 min-[1100px]:mt-16 min-[1100px]:grid min-[1100px]:max-w-[1052px] min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+            {/* The same panel the stages sit on further down the page: 24px, one
+                step off the section background, so the four roles read as one
+                object. White is the light-section panel tone — it is what the
+                FOLD cards use. */}
+            <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white px-6 py-12 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:px-10 min-[1100px]:py-14">
+            <div className="flex flex-col items-center pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
               {actors.map(({ title, role, detail, glyph }, index) => (
                 <div className="contents" key={title}>
                   <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none">
@@ -452,6 +457,7 @@ export function ParticipatePage() {
                   )}
                 </div>
               ))}
+            </div>
             </div>
 
             <ScrollFadeIn className="mt-14 flex justify-center" delay={0.1}>
