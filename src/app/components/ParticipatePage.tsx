@@ -280,12 +280,12 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
   );
 }
 
-function ActorGlyph({ glyph }: { glyph: ActorGlyphName }) {
+function ActorGlyph({ className = "", glyph }: { className?: string; glyph: ActorGlyphName }) {
   const iconClass = "actor-glyph__svg h-11 w-12 overflow-visible";
   const accent = "#82f5ad";
 
   return (
-    <div className="actor-glyph relative grid size-[76px] place-items-center rounded-full bg-[#3a5e3c] text-white">
+    <div className={`actor-glyph relative grid size-[76px] place-items-center rounded-full bg-[#3a5e3c] text-white ${className}`}>
       {glyph === "requester" ? (
         <svg aria-hidden="true" className={iconClass} fill="none" focusable="false" viewBox="0 0 52.1 44.7">
           <path d="M9.55,14.55c-3.2,0-5.7,2.7-5.7,5.8s2.5,5.9,5.7,5.9,5.9-2.7,5.9-5.9-2.7-5.8-5.9-5.8Z" stroke="currentColor" strokeMiterlimit="10" strokeWidth="1.5" />
@@ -421,7 +421,7 @@ export function ParticipatePage() {
             <div className="flex flex-col gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
               {actors.map(({ title, role, detail, glyph }) => (
                 <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
-                    <ActorGlyph glyph={glyph} />
+                    <ActorGlyph className="self-center" glyph={glyph} />
                     <div className="flex min-w-0 flex-col">
                       <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                         {title}
