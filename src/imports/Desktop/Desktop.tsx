@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import * as THREE from "three";
 import { AnimatePresence, motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
+import { ExecutionFlowReveal } from "../../app/components/ExecutionFlowReveal";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
@@ -974,6 +975,7 @@ function ExecutionFlowThreeGlows({ isHidden }: { isHidden: boolean }) {
     <div
       aria-hidden="true"
       className={`absolute inset-0 pointer-events-none execution-flow-three-glows transition-opacity duration-200 ${isHidden ? "opacity-0" : "opacity-100"}`}
+      data-execution-flow-overlay=""
       ref={mountRef}
     />
   );
@@ -1032,7 +1034,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
           : "";
 
   return (
-    <svg className={`absolute block inset-0 pointer-events-none size-full overflow-visible ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+    <svg className={`absolute block inset-0 pointer-events-none size-full overflow-visible ${hoverClass}`} data-execution-flow-overlay="" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
       <g clipPath="url(#clip0_execution_flow_pulse_dots)">
         <style>{`
           .execution-flow-pulse-dot {
@@ -1286,7 +1288,7 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
         : "";
 
   return (
-    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} data-execution-flow-overlay="" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
       <g clipPath="url(#clip0_execution_flow_inputs)">
         <style>{`
           .execution-flow-input-square {
@@ -1485,7 +1487,11 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
 }
 
 export function AnimatedExecutionModelGraphic() {
-  return <Layer hoveredZone={null} isFullWidth />;
+  return (
+    <ExecutionFlowReveal className="w-full">
+      <Layer hoveredZone={null} isFullWidth />
+    </ExecutionFlowReveal>
+  );
 }
 
 function Group({
@@ -1502,21 +1508,23 @@ function Group({
   };
 
   return (
+    <ExecutionFlowReveal>
     <div className="grid-cols-[1fr] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 w-[calc(100vw-64px)] max-w-[1052px]">
       <Layer hoveredZone={hoveredZone} />
-      <div className={`${tagClass("inputs")} ml-[14.639%] mt-0`}>
+      <div className={`${tagClass("inputs")} ml-[14.639%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">01</p>
       </div>
-      <div className={`${tagClass("nodes")} ml-[48.479%] mt-0`}>
+      <div className={`${tagClass("nodes")} ml-[48.479%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">02</p>
       </div>
-      <div className={`${tagClass("output")} ml-[82.319%] mt-0`}>
+      <div className={`${tagClass("output")} ml-[82.319%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">03</p>
       </div>
       <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("inputs")} />
       <div aria-hidden="true" className="absolute left-[33.84%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("nodes")} />
       <div aria-hidden="true" className="absolute left-[67.681%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("output")} />
     </div>
+    </ExecutionFlowReveal>
   );
 }
 
@@ -1625,9 +1633,7 @@ function Frame15() {
     >
       <Frame14 />
       <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
-        <ScrollFadeIn delay={0.2}>
-          <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
-        </ScrollFadeIn>
+        <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
         <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
         <ScrollFadeIn delay={0.4}>
           <HowItWorksCta />

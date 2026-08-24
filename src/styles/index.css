@@ -583,3 +583,44 @@ html.interfold-transition-page-enter .interfold-page-transition {
   color: #82f5ad;
   opacity: 1;
 }
+
+/* The execution-model graphic is a drawing: inputs run in from the left, land
+   on the committee spine, and fan back out to the decrypted output. A fade
+   arrived with all of that already finished, so it is drawn instead — line by
+   line, each one from its left end — by ExecutionFlowReveal, which measures
+   the paths and runs the strokes itself. These rules only hold the pieces back
+   until it does; the class comes off the wrapper once the drawing is over. */
+.interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path {
+  opacity: 0;
+}
+
+.interfold-execution-flow-draw [data-execution-flow-overlay] {
+  opacity: 0;
+  transition: opacity 520ms ease-out;
+}
+
+.interfold-execution-flow-draw--live [data-execution-flow-overlay] {
+  opacity: 1;
+}
+
+.interfold-execution-flow-draw [data-execution-flow-tag] {
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+  transition:
+    opacity 380ms ease-out,
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.interfold-execution-flow-draw [data-execution-flow-tag].is-drawn {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path,
+  .interfold-execution-flow-draw [data-execution-flow-overlay],
+  .interfold-execution-flow-draw [data-execution-flow-tag] {
+    opacity: 1;
+    transform: none;
+  }
+}
