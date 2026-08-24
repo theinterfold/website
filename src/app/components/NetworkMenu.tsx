@@ -50,10 +50,21 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className={`flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] ${
+        className={`flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] hover:bg-[#1c2426] ${
           isOpen ? "rounded-t-[24px]" : "rounded-full"
         }`}
         onClick={() => setIsOpen((current) => !current)}
+        // The corners square off the moment the panel starts opening, but on the
+        // way back they have to wait for it: re-rounding straight away left a
+        // full pill sitting on top of a panel that was still there, biting two
+        // notches out of it for the length of the collapse. Zero duration and a
+        // delay, not a 200ms tween — rounded-full is 9999px, so interpolating
+        // it towards 24 sits clamped at the pill shape almost the whole way.
+        style={{
+          transitionProperty: "background-color, border-radius",
+          transitionDuration: "150ms, 0ms",
+          transitionDelay: isOpen ? "0ms, 0ms" : "0ms, 200ms",
+        }}
         type="button"
       >
         {/* Same live dot the strip carries, glow and all. */}
