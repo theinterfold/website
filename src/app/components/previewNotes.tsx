@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 // measures the anchors, and the anchors are bare data attributes on elements
 // that already existed — they render nothing.
 // =============================================================================
-export const SHOW_PREVIEW_NOTES = true; // TODO: set to false before deploying
+export const SHOW_PREVIEW_NOTES = false; // flip to true to review in the browser
 
 export type PreviewNote = {
   n: number;
