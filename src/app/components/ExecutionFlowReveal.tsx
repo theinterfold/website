@@ -10,15 +10,16 @@ export type ExecutionFlowTiming = {
       that crosses the whole diagram takes longer than a short one — which is
       what reads as drawing rather than as a set of bars filling. */
   penSpeed: number;
-  /** A route starts once the one above it is this far through its own journey,
-      so they overlap without ever arriving together. */
-  routeOverlap: number;
+  /** How far into its own journey a route is when the next one sets off, as a
+      fraction of that route. Small values pile the routes on top of each other;
+      near 1 they run one clean after another. */
+  routeStagger: number;
 };
 
 export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
-  easing: "cubic-bezier(0.45, 0.05, 0.3, 1)",
-  penSpeed: 1.9,
-  routeOverlap: 0.55,
+  easing: "cubic-bezier(0.45, 0, 0.55, 1)",
+  penSpeed: 1.2,
+  routeStagger: 0.12,
 };
 
 // Held here rather than in component state so the tuner can change it and
@@ -136,7 +137,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
       return undefined;
     }
 
-    const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeOverlap: ROUTE_OVERLAP } = timing;
+    const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeStagger: ROUTE_STAGGER } = timing;
 
     const svg = root.querySelector<SVGSVGElement>('[data-name="Layer_1"] > svg');
     const strokes = svg ? Array.from(svg.querySelectorAll<SVGPathElement>("path[stroke]")).map(measure) : [];
@@ -177,7 +178,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
     let cursor = 0;
     for (const route of routes) {
       route.delay = cursor;
-      cursor += route.duration * ROUTE_OVERLAP;
+      cursor += route.duration * ROUTE_STAGGER;
     }
 
     // Short spurs that branch off the middle of a run rather than off its end.

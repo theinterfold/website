@@ -23,28 +23,73 @@ import {
 // =============================================================================
 export const SHOW_EXECUTION_FLOW_TUNER = true; // flip to false to hide the panel
 
-const STORE_KEY = "interfold-execution-flow-timing";
+const STORE_KEY = "interfold-execution-flow-timing-v2";
 
 type Curve = [number, number, number, number];
 
-const PRESETS: Array<{ curve: Curve; name: string }> = [
-  { curve: [0, 0, 1, 1], name: "linear" },
-  { curve: [0.45, 0.05, 0.3, 1], name: "atual" },
-  { curve: [0.65, 0, 0.35, 1], name: "in-out" },
-  { curve: [0.22, 1, 0.36, 1], name: "site" },
-  { curve: [0.34, 0, 0.2, 1], name: "solto" },
-];
+// The standard easing curves, in the vocabulary everyone already uses — pick a
+// family and a direction rather than dragging four control points. Values are
+// the usual cubic-bezier equivalents.
+const FAMILIES = ["sine", "quad", "cubic", "quart", "quint", "expo", "circ", "back"] as const;
+const DIRECTIONS = ["in", "out", "in-out"] as const;
 
-function toCurve(easing: string): Curve {
-  const numbers = easing.match(/-?\d*\.?\d+/g);
-  if (!numbers || numbers.length < 4) {
-    return [0.45, 0.05, 0.3, 1];
-  }
-  return [Number(numbers[0]), Number(numbers[1]), Number(numbers[2]), Number(numbers[3])] as Curve;
-}
+type Family = (typeof FAMILIES)[number];
+type Direction = (typeof DIRECTIONS)[number];
+
+const CURVES: Record<string, Curve> = {
+  "sine-in": [0.12, 0, 0.39, 0],
+  "sine-out": [0.61, 1, 0.88, 1],
+  "sine-in-out": [0.37, 0, 0.63, 1],
+  "quad-in": [0.11, 0, 0.5, 0],
+  "quad-out": [0.5, 1, 0.89, 1],
+  "quad-in-out": [0.45, 0, 0.55, 1],
+  "cubic-in": [0.32, 0, 0.67, 0],
+  "cubic-out": [0.33, 1, 0.68, 1],
+  "cubic-in-out": [0.65, 0, 0.35, 1],
+  "quart-in": [0.5, 0, 0.75, 0],
+  "quart-out": [0.25, 1, 0.5, 1],
+  "quart-in-out": [0.76, 0, 0.24, 1],
+  "quint-in": [0.64, 0, 0.78, 0],
+  "quint-out": [0.22, 1, 0.36, 1],
+  "quint-in-out": [0.83, 0, 0.17, 1],
+  "expo-in": [0.7, 0, 0.84, 0],
+  "expo-out": [0.16, 1, 0.3, 1],
+  "expo-in-out": [0.87, 0, 0.13, 1],
+  "circ-in": [0.55, 0, 1, 0.45],
+  "circ-out": [0, 0.55, 0.45, 1],
+  "circ-in-out": [0.85, 0, 0.15, 1],
+  "back-in": [0.36, 0, 0.66, -0.56],
+  "back-out": [0.34, 1.56, 0.64, 1],
+  "back-in-out": [0.68, -0.6, 0.32, 1.6],
+};
+
+const LINEAR: Curve = [0, 0, 1, 1];
 
 function toEasing(curve: Curve) {
   return `cubic-bezier(${curve.map((n) => Number(n.toFixed(2))).join(", ")})`;
+}
+
+/** Which named curve an easing string is, so the buttons show what is selected. */
+function nameOf(easing: string): { direction: Direction | null; family: Family | "linear" | null } {
+  for (const [key, curve] of Object.entries(CURVES)) {
+    if (toEasing(curve) === easing) {
+      const split = key.lastIndexOf("-", key.length - (key.endsWith("in-out") ? 7 : 1));
+      const family = key.slice(0, split) as Family;
+      return { direction: key.slice(split + 1) as Direction, family };
+    }
+  }
+  if (toEasing(LINEAR) === easing) {
+    return { direction: null, family: "linear" };
+  }
+  return { direction: null, family: null };
+}
+
+function curveOf(easing: string): Curve {
+  const numbers = easing.match(/-?\d*\.?\d+/g);
+  if (!numbers || numbers.length < 4) {
+    return CURVES["quad-in-out"];
+  }
+  return [Number(numbers[0]), Number(numbers[1]), Number(numbers[2]), Number(numbers[3])] as Curve;
 }
 
 function read(): ExecutionFlowTiming {
@@ -137,14 +182,18 @@ export function ExecutionFlowTuner() {
     replayExecutionFlow();
   };
 
-  const curve = toCurve(timing.easing);
-  const setCurve = (index: number, value: number) => {
-    const next = [...curve] as Curve;
-    next[index] = value;
-    apply({ easing: toEasing(next) });
+  const curve = curveOf(timing.easing);
+  const selected = nameOf(timing.easing);
+  const pickCurve = (family: Family | "linear", direction: Direction | null) => {
+    if (family === "linear") {
+      apply({ easing: toEasing(LINEAR) });
+      return;
+    }
+    apply({ easing: toEasing(CURVES[`${family}-${direction ?? selected.direction ?? "in-out"}`]) });
   };
 
-  const snippet = `penSpeed: ${timing.penSpeed}, routeOverlap: ${timing.routeOverlap}, easing: "${timing.easing}"`;
+  const label = selected.family === "linear" ? "linear" : selected.family ? `${selected.family} ${selected.direction}` : "custom";
+  const snippet = `penSpeed: ${timing.penSpeed}, routeStagger: ${timing.routeStagger}, easing: "${timing.easing}" // ${label}`;
 
   return createPortal(
     <div className="pointer-events-auto fixed bottom-4 right-4 z-[9999] font-['Office_Code_Pro:Medium',monospace] text-white">
@@ -167,40 +216,67 @@ export function ExecutionFlowTuner() {
               value={timing.penSpeed}
             />
             <Slider
-              label="Sobreposicao"
+              label="Atraso entre rotas"
               max={1}
-              min={0.1}
-              onChange={(routeOverlap) => apply({ routeOverlap })}
+              min={0.05}
+              onChange={(routeStagger) => apply({ routeStagger })}
               step={0.01}
-              value={timing.routeOverlap}
+              value={timing.routeStagger}
             />
+            <p className="-mt-1 text-[9px] leading-[1.3] text-white/35">
+              Fracao da rota andada quando a seguinte arranca. 0.10 = quase todas juntas, 1.00 = uma de cada vez.
+            </p>
 
-            <div className="mt-1 flex items-start gap-3">
+            <div className="mt-1 flex items-start gap-3 border-t border-white/10 pt-3">
               <CurvePreview curve={curve} />
-              <div className="flex w-full flex-col gap-1.5">
-                {(["x1", "y1", "x2", "y2"] as const).map((name, index) => (
-                  <Slider
-                    key={name}
-                    label={name}
-                    max={index % 2 === 0 ? 1 : 1.6}
-                    min={index % 2 === 0 ? 0 : -0.6}
-                    onChange={(value) => setCurve(index, value)}
-                    step={0.01}
-                    value={curve[index]}
-                  />
-                ))}
+              <div className="flex w-full flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-[0.08em] text-white/55">Easing</span>
+                <span className="text-[11px] text-[#82f5ad]">{label}</span>
+                <span className="text-[9px] leading-[1.3] text-white/35">{timing.easing}</span>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-1">
-              {PRESETS.map((preset) => (
+              {DIRECTIONS.map((direction) => (
                 <button
-                  className="rounded-[4px] border border-white/15 px-2 py-1 text-[10px] text-white/70 transition-colors hover:border-[#82f5ad] hover:text-[#82f5ad]"
-                  key={preset.name}
-                  onClick={() => apply({ easing: toEasing(preset.curve) })}
+                  className={`rounded-[4px] border px-2 py-1 text-[10px] transition-colors ${
+                    selected.direction === direction
+                      ? "border-[#82f5ad] bg-[#82f5ad]/15 text-[#82f5ad]"
+                      : "border-white/15 text-white/70 hover:border-[#82f5ad] hover:text-[#82f5ad]"
+                  }`}
+                  key={direction}
+                  onClick={() => pickCurve(selected.family && selected.family !== "linear" ? selected.family : "quad", direction)}
                   type="button"
                 >
-                  {preset.name}
+                  {direction}
+                </button>
+              ))}
+              <button
+                className={`rounded-[4px] border px-2 py-1 text-[10px] transition-colors ${
+                  selected.family === "linear"
+                    ? "border-[#82f5ad] bg-[#82f5ad]/15 text-[#82f5ad]"
+                    : "border-white/15 text-white/70 hover:border-[#82f5ad] hover:text-[#82f5ad]"
+                }`}
+                onClick={() => pickCurve("linear", null)}
+                type="button"
+              >
+                linear
+              </button>
+            </div>
+
+            <div className="flex flex-wrap gap-1">
+              {FAMILIES.map((family) => (
+                <button
+                  className={`rounded-[4px] border px-2 py-1 text-[10px] transition-colors ${
+                    selected.family === family
+                      ? "border-[#82f5ad] bg-[#82f5ad]/15 text-[#82f5ad]"
+                      : "border-white/15 text-white/70 hover:border-[#82f5ad] hover:text-[#82f5ad]"
+                  }`}
+                  key={family}
+                  onClick={() => pickCurve(family, selected.direction)}
+                  type="button"
+                >
+                  {family}
                 </button>
               ))}
             </div>
