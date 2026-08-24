@@ -418,17 +418,10 @@ export function ParticipatePage() {
                 object. White is the light-section panel tone — it is what the
                 FOLD cards use. */}
             <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white px-6 py-12 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:px-10 min-[1100px]:py-14">
-            <div className="flex flex-col items-center pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
-              {actors.map(({ title, role, detail, glyph }, index) => (
-                <div className="contents" key={title}>
-                  <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none">
+            <div className="flex flex-col items-center gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+              {actors.map(({ title, role, detail, glyph }) => (
+                <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
                     <ActorGlyph glyph={glyph} />
-                    {index < actors.length - 1 && (
-                      <div
-                        aria-hidden="true"
-                        className="absolute left-[calc(50%+38px)] top-[38px] hidden h-px w-[calc(100%+1rem-76px)] bg-[#3a5e3c]/55 min-[1100px]:block"
-                      />
-                    )}
                     <div className="flex min-w-0 flex-col items-center">
                       <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                         {title === "Ciphernode committees" ? (
@@ -451,11 +444,7 @@ export function ParticipatePage() {
                         {detail}
                       </p>
                     </div>
-                  </ScrollFadeIn>
-                  {index < actors.length - 1 && (
-                    <div aria-hidden="true" className="my-4 h-8 w-px bg-[#3a5e3c]/45 min-[1100px]:hidden" />
-                  )}
-                </div>
+                </ScrollFadeIn>
               ))}
             </div>
             </div>
