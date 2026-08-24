@@ -156,7 +156,7 @@ function CtaButton({
     return (
       <span
         aria-disabled="true"
-        className={`flex w-full cursor-not-allowed items-center justify-center ${BUTTON_SIZE} px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] ${
+        className={`flex w-full cursor-not-allowed items-center justify-center ${BUTTON_SIZE} px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] ${
           isPrimary ? "bg-[#82f5ad]/40 text-[#3a5e3c]/55" : "bg-[rgba(193,217,191,0.4)] text-[#3a5e3c]/55"
         }`}
       >
@@ -171,7 +171,7 @@ function CtaButton({
         isPrimary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
       }`}
       href={href}
-      textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+      textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
     >
       {children}
     </HoverArrowLink>
@@ -822,7 +822,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Auction Details</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <span className="md:hidden">
                   <LineRevealAuto delay={0.08} text="FOLD Auction 2 is being distributed" />
                   <LineRevealAuto delay={0.17} text="through a Uniswap" />
@@ -869,7 +869,7 @@ export function FoldAuctionPage() {
             </div>
 
             <ScrollFadeIn className="mt-8" delay={0.15}>
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]">
                 Participation is subject to eligibility requirements, jurisdictional restrictions, and completion of the required registration and verification process.
               </p>
             </ScrollFadeIn>
@@ -887,7 +887,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>How to Participate</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <span className="md:hidden">
                   <LineRevealAuto delay={0.08} text="Register and complete verification." />
                   <LineRevealAuto delay={0.17} text="Bid through the official" />
@@ -994,7 +994,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">The Role of FOLD</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="FOLD supports participation in The Interfold network." />
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:max-w-[640px] md:text-[18px]">
@@ -1047,7 +1047,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>What FOLD Supports</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="Private inputs. Shared outcomes." />
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71] md:max-w-[640px] md:text-[18px]">
@@ -1109,7 +1109,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Official Links &amp; Contract Information</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="Use only official Interfold links when participating in the FOLD auction." />
               </p>
             </div>
@@ -1128,7 +1128,7 @@ export function FoldAuctionPage() {
               <ContractsCard />
             </ScrollFadeIn>
             <ScrollFadeIn className="pointer-events-none relative z-10 mx-auto max-w-[620px] pt-36 md:pt-44" delay={0.16}>
-              <p className="pointer-events-auto text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+              <p className="pointer-events-auto text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]">
                 Always verify links and contract addresses through The Interfold&rsquo;s official channels.
                 The team will never DM you first and will never ask for your seed phrase or private keys.
               </p>

@@ -404,7 +404,7 @@ export function MobileVersion() {
                     <p className="mb-0 whitespace-pre">Fairer market </p>
                     <p className="whitespace-pre">mechanisms</p>
                   </div>
-                  <p data-preview-was="Sealed auction mechanisms where bids remain private and outcomes are verifiable" className="text-[14.429px] leading-[1.075]">
+                  <p data-preview-was="Sealed auction mechanisms where bids remain private and outcomes are verifiable" className="text-[14px] leading-[1.075]">
                     Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
@@ -430,7 +430,7 @@ export function MobileVersion() {
                     <p className="mb-0 whitespace-pre">Stronger democratic </p>
                     <p className="whitespace-pre">systems</p>
                   </div>
-                  <p data-preview-was="Secret ballots with correct, verifiable tallying and no trusted operator" className="text-[14.429px] leading-[1.075]">
+                  <p data-preview-was="Secret ballots with correct, verifiable tallying and no trusted operator" className="text-[14px] leading-[1.075]">
                     Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
@@ -456,7 +456,7 @@ export function MobileVersion() {
                     <p className="mb-0 whitespace-pre">Collaborative </p>
                     <p className="whitespace-pre">Intelligence</p>
                   </div>
-                  <p data-preview-was="Multiple parties compute together to produce shared results without exposing data" className="text-[14.429px] leading-[1.075]">
+                  <p data-preview-was="Multiple parties compute together to produce shared results without exposing data" className="text-[14px] leading-[1.075]">
                     Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
@@ -599,7 +599,7 @@ function ExploreCard({
       onMouseLeave={() => setHoveredButton(null)}
     >
       <div className="flex h-full flex-col gap-[12px]">
-        <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
+        <div className="h-0 w-full border-t-[3px] border-[#3a5e3c]" />
           <div className="flex h-[56px] w-full shrink-0 items-end justify-start">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
@@ -609,14 +609,14 @@ function ExploreCard({
         <div className={`mt-auto flex items-center justify-center overflow-hidden ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]`}>
           <div className="relative inline-flex items-center justify-center">
             <motion.p
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-center text-[12.5px] leading-[1.075] text-[#3a5e3c]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-center text-[12px] leading-[1.075] text-[#3a5e3c]"
               animate={{ x: hoveredButton === id ? -8 : 0 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
               {cta}
             </motion.p>
             <motion.span
-              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
+              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c]"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: hoveredButton === id ? 1 : 0, x: hoveredButton === id ? 0 : -10 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}

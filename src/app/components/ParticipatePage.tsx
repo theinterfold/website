@@ -204,7 +204,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
         </div>
         <div className="my-7 h-px shrink-0 bg-[#82f5ad]/35" />
         <div className="flex min-h-0 flex-1 flex-col">
-          <div className="space-y-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
+          <div className="space-y-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075]">
             {pathway.copy.slice(0, -1).map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -212,7 +212,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
           <div className="flex-1" />
           <div className="shrink-0">
             <div className="mb-3 h-px bg-[#82f5ad]/35" />
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075]">
               {pathway.copy[pathway.copy.length - 1]}
             </p>
             <ul className="mt-5 space-y-3">
@@ -234,7 +234,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
                 }`}
                 href={action.href}
                 key={action.label}
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 {action.label}
               </HoverArrowLink>
@@ -253,7 +253,7 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
         {item.title}
       </h3>
       <div className="my-7 h-px bg-[#3a5e3c]/20" />
-      <div className="space-y-3 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075]">
+      <div className="space-y-3 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075]">
         {item.copy.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -266,7 +266,7 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
             }`}
             href={action.href}
             key={action.label}
-            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
           >
             {action.label}
           </HoverArrowLink>
@@ -423,9 +423,9 @@ export function ParticipatePage() {
 
         <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
-            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
+            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel>Overview</SectionLabel>
-              <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
+              <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
                 Interfold enables programs to compute over encrypted inputs.
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} text-[#687d71] md:max-w-none`}>
@@ -461,7 +461,7 @@ export function ParticipatePage() {
                         {role}
                       </p>
                       <p
-                        className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md"
+                        className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md"
                       >
                         {detail}
                       </p>
@@ -476,7 +476,7 @@ export function ParticipatePage() {
               <HoverArrowLink
                 className={`flex w-full max-w-[320px] items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                 href="https://blog.theinterfold.com/how-interfold-works/"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 How Interfold works
               </HoverArrowLink>
@@ -487,12 +487,12 @@ export function ParticipatePage() {
 
         <section className="bg-[#687d71] px-4 py-[64px] text-[#d9fce8] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
-            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
+            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel className="text-[#d9fce8]/55">Participate</SectionLabel>
-              <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-was="Participation is not one-size-fits-all. Each role has different responsibilities, constraints, and timelines. (eyebrow was PARTICIPATION PATHWAYS)" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Help form the network
               </p>
-              <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[597.355px]`}>
+              <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>
                 Operate infrastructure, build applications, or bring a real-world use case.
               </p>
             </ScrollFadeIn>
@@ -519,12 +519,12 @@ export function ParticipatePage() {
 
         <section className="bg-[#d9fce8] px-4 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[1052px]">
-            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
+            <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[600px]">
               <SectionLabel>FOLD</SectionLabel>
-              <p data-preview-note="foldSection" className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
+              <p data-preview-note="foldSection" className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] md:max-w-none md:text-[32px] md:leading-[1.02] md:tracking-[-0.96px]">
                 Operate. Govern. Transfer.
               </p>
-              <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[597.355px]`}>
+              <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} md:max-w-[600px]`}>
                 FOLD supports two forms of network participation: operating and governing.
               </p>
             </ScrollFadeIn>
@@ -544,7 +544,7 @@ export function ParticipatePage() {
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">Now live</SectionLabel>
               </ScrollFadeIn>
-              <ScrollFadeIn className="mx-auto mt-[11.543px] max-w-[320px] md:w-[597.355px] md:max-w-md">
+              <ScrollFadeIn className="mx-auto mt-[12px] max-w-[320px] md:w-[600px] md:max-w-md">
                 <p data-preview-was="The network is forming in stages: (eyebrow was WHAT'S NEXT, and only the first two stages were marked as reached)" className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
                   The network has entered its next stage:
                 </p>
@@ -607,14 +607,14 @@ export function ParticipatePage() {
                 <HoverArrowLink
                   className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                   href="https://dashboard.theinterfold.com/"
-                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                 >
                   Explore Network Alpha
                 </HoverArrowLink>
                 <HoverArrowLink
                   className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                   href="https://blog.theinterfold.com/network-alpha-mainnet/"
-                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                 >
                   Read the launch post
                 </HoverArrowLink>

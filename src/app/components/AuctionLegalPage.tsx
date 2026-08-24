@@ -552,7 +552,7 @@ export function AuctionLegalPage() {
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
             <SectionLabel>Terms</SectionLabel>
-            <h2 className="mx-auto mt-[11.543px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
+            <h2 className="mx-auto mt-[12px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
               FOLD Auction Terms
             </h2>
             <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">

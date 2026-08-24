@@ -61,14 +61,14 @@ export function Header({
           <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
             <BrandLink
               aria-label="The Interfold home"
-              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17.239px] w-[120.421px] justify-self-start"}
+              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17px] w-[120px] justify-self-start"}
               href="/"
               style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
               {...openingMotion(0.75)}
             >
               {animateOpening ? "The Interfold" : <Wordmark />}
             </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
+            <MarkLink aria-label="The Interfold home" className="h-[35px] w-[46px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
               <InterfoldSymbol className="block h-full w-full" />
             </MarkLink>
             {/* items-center matters now that the pill is in here: without it the links

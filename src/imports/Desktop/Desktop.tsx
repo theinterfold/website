@@ -189,7 +189,7 @@ function Frame() {
             {hoveredFriend !== null && (
               <motion.div
                 key="friend-tooltip"
-                className="pointer-events-none fixed z-[9999] overflow-hidden bg-[#3a5e3c] px-3 py-2 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#d9fce8]"
+                className="pointer-events-none fixed z-[9999] overflow-hidden bg-[#3a5e3c] px-3 py-2 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#d9fce8]"
                 initial={{ opacity: 0, scale: 0.96, y: 4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 4 }}
@@ -234,7 +234,7 @@ function AnimatedButtonContent({
   children,
   isExternal = false,
   isHovered,
-  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
+  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
   textClassName,
 }: {
   children: string;
@@ -264,7 +264,7 @@ function Frame22() {
           <p className="leading-[0.95] mb-0">Fairer market</p>
           <p className="leading-[0.95]">mechanisms</p>
         </div>
-        <p data-preview-was="Sealed auction mechanisms where bids remain private and outcomes are verifiable" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
+        <p data-preview-was="Sealed auction mechanisms where bids remain private and outcomes are verifiable" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
       </div>
     </div>
   );
@@ -278,7 +278,7 @@ function Frame24() {
           <p className="leading-[0.95] mb-0">Stronger democratic</p>
           <p className="leading-[0.95]">systems</p>
         </div>
-        <p data-preview-was="Secret ballots with correct, verifiable tallying and no trusted operator" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
+        <p data-preview-was="Secret ballots with correct, verifiable tallying and no trusted operator" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
       </div>
     </div>
   );
@@ -292,7 +292,7 @@ function Frame25() {
           <p className="leading-[0.95] mb-0">Collaborative</p>
           <p className="leading-[0.95]">Intelligence</p>
         </div>
-        <p data-preview-was="Multiple parties compute together to produce shared results without exposing data" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
+        <p data-preview-was="Multiple parties compute together to produce shared results without exposing data" className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
       </div>
     </div>
   );
@@ -388,7 +388,7 @@ function Frame2() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Build on Interfold
       </AnimatedButtonContent>
@@ -408,7 +408,7 @@ function Frame1() {
     >
       <AnimatedButtonContent
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Participate
       </AnimatedButtonContent>
@@ -429,7 +429,7 @@ function FinalTelegramCta() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Run a ciphernode
       </AnimatedButtonContent>
@@ -499,7 +499,7 @@ function Frame3() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Explore Docs
       </AnimatedButtonContent>
@@ -529,7 +529,7 @@ function Frame26() {
           </div>
         </div>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Technical documentation, references, and implementation details.</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Technical documentation, references, and implementation details.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame3 />
@@ -561,7 +561,7 @@ function Frame4() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read essays
       </AnimatedButtonContent>
@@ -591,7 +591,7 @@ function Frame28() {
           </div>
         </div>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame4 />
@@ -613,7 +613,7 @@ function Frame5() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read the blog
       </AnimatedButtonContent>
@@ -643,7 +643,7 @@ function Frame29() {
           </div>
         </div>
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame5 />
@@ -1387,7 +1387,7 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
 
 function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlowHoverZone; isFullWidth?: boolean }) {
   return (
-    <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 mt-[0.57px] relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
+    <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
@@ -1571,7 +1571,7 @@ function Frame31({
             <p data-preview-was="Confidential inputs" className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
             <p className="leading-[1.075] text-[14px]">inputs</p>
           </div>
-          <p data-preview-was="Data remains private throughout execution" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Sensitive data remains private during execution.</p>
+          <p data-preview-was="Data remains private throughout execution" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Sensitive data remains private during execution.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
@@ -1588,7 +1588,7 @@ function Frame31({
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Threshold `}</p>
             <p data-preview-was="Threshold enforcement" className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
           </div>
-          <p data-preview-was="A subset of nodes governs execution and release" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
+          <p data-preview-was="A subset of nodes governs execution and release" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
@@ -1605,7 +1605,7 @@ function Frame31({
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Verifiable `}</p>
             <p className="leading-[1.075] text-[14px] whitespace-pre">outcomes</p>
           </div>
-          <p data-preview-was="Results are verifiable without revealing inputs" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
+          <p data-preview-was="Results are verifiable without revealing inputs" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
         </div>
       </ScrollFadeIn>
     </div>
@@ -1626,7 +1626,7 @@ function HowItWorksCta() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         How Interfold Works
       </AnimatedButtonContent>
@@ -1730,7 +1730,7 @@ function Frame6() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Build on Interfold
       </AnimatedButtonContent>
@@ -1750,7 +1750,7 @@ function Frame7() {
     >
       <AnimatedButtonContent
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Participate
       </AnimatedButtonContent>
@@ -1771,7 +1771,7 @@ function FrameRunCiphernode() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Run a ciphernode
       </AnimatedButtonContent>
