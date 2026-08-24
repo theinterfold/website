@@ -421,8 +421,8 @@ export function ParticipatePage() {
                 step off the section background, so the four roles read as one
                 object. White is the light-section panel tone — it is what the
                 FOLD cards use. */}
-            <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white px-6 py-12 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:px-10 min-[1100px]:py-14">
-            <div className="flex flex-col gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+            <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:p-10">
+            <div className="flex flex-col gap-16 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4">
               {actors.map(({ title, role, detail, glyph }) => (
                 <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
                     <ActorGlyph className="aspect-square w-full rounded-[24px] bg-[#d9fce8]" glyph={glyph} />

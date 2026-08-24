@@ -111,16 +111,21 @@ html.interfold-theme-participate #root {
   }
 }
 
+/* The resting fill has to be the frame behind the glyph, or the rect covers
+   the three document lines drawn inside it. It used to name the dark disc
+   colour outright; transparent means it follows whatever it is placed on. The
+   flash was tuned against that dark disc, so it also needed to come up to read
+   on a light frame. */
 @keyframes interfold-actor-provider-source {
   0%,
   12%,
   38%,
   100% {
-    fill: #3a5e3c;
+    fill: transparent;
   }
 
   23% {
-    fill: rgba(130, 245, 173, 0.24);
+    fill: rgba(130, 245, 173, 0.9);
   }
 }
 
