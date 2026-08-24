@@ -6,6 +6,7 @@ import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { BUTTON_SIZE } from "./titleBlock";
 
 // =============================================================================
 // AUCTION 2 CONFIGURATION — single source of truth for the live Auction 2 page.
@@ -144,7 +145,7 @@ function CtaButton({
     return (
       <span
         aria-disabled="true"
-        className={`flex h-[52px] w-full cursor-not-allowed items-center justify-center rounded-[6px] px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] ${
+        className={`flex w-full cursor-not-allowed items-center justify-center ${BUTTON_SIZE} px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] ${
           isPrimary ? "bg-[#82f5ad]/40 text-[#3a5e3c]/55" : "bg-[rgba(193,217,191,0.4)] text-[#3a5e3c]/55"
         }`}
       >
@@ -155,7 +156,7 @@ function CtaButton({
 
   return (
     <HoverArrowLink
-      className={`flex h-[52px] w-full items-center justify-center rounded-[6px] px-6 transition-colors hover:bg-[#3a5e3c] ${
+      className={`flex w-full items-center justify-center ${BUTTON_SIZE} px-6 transition-colors hover:bg-[#3a5e3c] ${
         isPrimary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
       }`}
       href={href}

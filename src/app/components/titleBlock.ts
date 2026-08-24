@@ -14,3 +14,11 @@ export const TITLE_BLOCK_GAP = "gap-[8px] md:gap-[12px]";
 // sheet rather than as a sentence.
 export const SUPPORTING_LINE =
   "font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] md:text-[18px]";
+
+// One button size for the whole site. Heights had drifted to five different
+// values — 52 on the homepage and the auction pages, 46 on Participate, 44 on
+// the Explore tiles, and 47 on mobile where padding was setting it instead of a
+// height. Smaller on a phone, taller from md up, like the rest of the scale.
+//
+// Carries the radius too, so a button cannot pick up one and miss the other.
+export const BUTTON_SIZE = "h-[46px] md:h-[52px] rounded-[6px]";

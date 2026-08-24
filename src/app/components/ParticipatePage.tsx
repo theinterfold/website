@@ -4,7 +4,7 @@ import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
-import { SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
+import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 // `outro` used to live on each pathway and was never rendered — dead strings
@@ -233,7 +233,7 @@ function ParticipationCard({ pathway }: { pathway: (typeof pathways)[number] }) 
           <div className="mt-7 flex shrink-0 flex-col gap-2">
             {pathway.actions.map((action) => (
               <HoverArrowLink
-                className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 transition-colors hover:bg-[#3a5e3c] ${
+                className={`flex w-full items-center justify-center ${BUTTON_SIZE} px-4 transition-colors hover:bg-[#3a5e3c] ${
                   action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
                 }`}
                 href={action.href}
@@ -265,7 +265,7 @@ function FoldCard({ item }: { item: (typeof foldActions)[number] }) {
       <div className="mt-auto flex flex-col gap-2 pt-7">
         {item.actions.map((action) => (
           <HoverArrowLink
-            className={`flex h-[46px] w-full items-center justify-center rounded-[6px] px-4 text-center transition-colors hover:bg-[#3a5e3c] ${
+            className={`flex w-full items-center justify-center ${BUTTON_SIZE} px-4 text-center transition-colors hover:bg-[#3a5e3c] ${
               action.primary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
             }`}
             href={action.href}
@@ -457,7 +457,7 @@ export function ParticipatePage() {
             <ScrollFadeIn className="mt-14 flex justify-center" delay={0.1}>
               <div data-preview-note="howItWorksParticipate">
               <HoverArrowLink
-                className="flex h-[46px] w-full max-w-[320px] items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                className={`flex w-full max-w-[320px] items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                 href="https://blog.theinterfold.com/how-interfold-works/"
                 textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
@@ -588,14 +588,14 @@ export function ParticipatePage() {
                 delay={0.1}
               >
                 <HoverArrowLink
-                  className="flex h-[46px] w-full items-center justify-center rounded-[6px] bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                  className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                   href="https://dashboard.theinterfold.com/"
                   textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                 >
                   Explore Network Alpha
                 </HoverArrowLink>
                 <HoverArrowLink
-                  className="flex h-[46px] w-full items-center justify-center rounded-[6px] bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto"
+                  className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
                   href="https://blog.theinterfold.com/network-alpha-mainnet/"
                   textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
                 >
