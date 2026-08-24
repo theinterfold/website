@@ -426,7 +426,10 @@ export function ParticipatePage() {
             <ScrollFadeIn className="mx-auto w-full max-w-md text-center md:max-w-[597.355px]">
               <SectionLabel>Overview</SectionLabel>
               <p data-preview-was="Interfold enables programs to run across encrypted inputs without exposing the data or concentrating execution in a single place." className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-none md:text-[32px] md:leading-[0.95]">
-                Interfold enables programs to compute over encrypted inputs without exposing the underlying data or placing decryption control in a single party.
+                Interfold enables programs to compute over encrypted inputs.
+              </p>
+              <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} text-[#687d71] md:max-w-none`}>
+                Without exposing the underlying data, or placing decryption control in a single party.
               </p>
               <div className="mt-8">
                 <SectionLabel>An E3 brings together different roles:</SectionLabel>
