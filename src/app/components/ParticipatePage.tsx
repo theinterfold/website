@@ -418,21 +418,13 @@ export function ParticipatePage() {
                 object. White is the light-section panel tone — it is what the
                 FOLD cards use. */}
             <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white px-6 py-12 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:px-10 min-[1100px]:py-14">
-            <div className="flex flex-col items-center gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
+            <div className="flex flex-col gap-16 pt-4 min-[1100px]:grid min-[1100px]:grid-cols-4 min-[1100px]:items-start min-[1100px]:gap-4 min-[1100px]:pt-0">
               {actors.map(({ title, role, detail, glyph }) => (
-                <ScrollFadeIn className="relative flex w-full max-w-md flex-col items-center text-center min-[1100px]:max-w-none" key={title}>
+                <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
                     <ActorGlyph glyph={glyph} />
-                    <div className="flex min-w-0 flex-col items-center">
+                    <div className="flex min-w-0 flex-col">
                       <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
-                        {title === "Ciphernode committees" ? (
-                          <>
-                            Ciphernode
-                            <br className="min-[1100px]:hidden" />{" "}
-                            committees
-                          </>
-                        ) : (
-                          title
-                        )}
+                        {title}
                       </p>
                       <p className="mt-3 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] min-[1100px]:max-w-md min-[1100px]:text-[14px]">
                         {role}
