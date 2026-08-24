@@ -90,16 +90,7 @@ const actors: Array<{ title: string; role: string; detail: string; glyph: ActorG
     glyph: "provider",
   },
   {
-    title: "Compute providers",
-    role: "Executing E3 programs",
-    detail: "Compute providers run the defined computation over encrypted inputs.",
-    // PLACEHOLDER DRAWING — this is the Requesters glyph, borrowed so the fourth
-    // actor can ship with the copy. Tiago is drawing the real one. To swap it in,
-    // add the <svg> to ActorGlyph under a new name and change this one word.
-    glyph: "requester",
-  },
-  {
-    title: "Ciphernode committees",
+    title: "Ciphernodes",
     role: "DKG + threshold decryption",
     detail:
       "Ciphernode committees collectively generate encryption keys and decrypt permitted outputs once the required threshold is reached.",
@@ -422,9 +413,9 @@ export function ParticipatePage() {
                 object. White is the light-section panel tone — it is what the
                 FOLD cards use. */}
             <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:p-10">
-            {/* Two up until the four fit: stacked one-wide, the square frames
+            {/* Two up until the three fit: stacked one-wide, the square frames
                 grew to the full panel and the section ran for pages. */}
-            <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 min-[1100px]:grid-cols-4 min-[1100px]:gap-4">
+            <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 min-[1100px]:grid-cols-3 min-[1100px]:gap-4">
               {actors.map(({ title, role, detail, glyph }) => (
                 <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
                     <ActorGlyph className="aspect-square w-full rounded-[24px] bg-[#d9fce8]" glyph={glyph} />
@@ -436,7 +427,6 @@ export function ParticipatePage() {
                         {role}
                       </p>
                       <p
-                        data-preview-note={title === "Compute providers" ? "computeProviders" : undefined}
                         className="mt-3 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#3a5e3c] min-[1100px]:max-w-md"
                       >
                         {detail}

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { ExternalArrowSlide } from "./HoverArrowLink";
+
 // The live-network surfaces used to be two links in the white strip. They are now
 // one control in the nav: a pill that grows downwards when you open it, so both
 // destinations sit inside the same shape.
@@ -92,7 +94,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
             {NETWORK_LINKS.map((link) => (
               <a
                 aria-hidden={!isOpen}
-                className="group flex items-center justify-between gap-6 whitespace-nowrap px-[16px] py-[8px] font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.05] tracking-[-0.5px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
+                className="group flex items-center justify-between gap-6 whitespace-nowrap px-[16px] py-[8px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
                 href={link.href}
                 key={link.href}
                 onClick={() => setIsOpen(false)}
@@ -102,9 +104,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
                 target="_blank"
               >
                 <span>{link.label}</span>
-                <span aria-hidden="true" className="text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]">
-                  ↗
-                </span>
+                <ExternalArrowSlide className="relative inline-block h-[14px] w-[14px] shrink-0 overflow-hidden text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]" />
               </a>
             ))}
           </div>
