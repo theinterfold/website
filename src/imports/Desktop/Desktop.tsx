@@ -1632,22 +1632,31 @@ function Frame15() {
       className="relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center py-[64px] md:py-[112px] w-full"
     >
       <Frame14 />
-      <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
-        <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
-        <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+      <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full">
+        {/* The three hover columns are full height, so they have to stop at the
+            bottom of the cards. Spanning the whole section put them over the
+            button below, which then could be neither hovered nor clicked, and
+            left a card lit while the pointer was already down on the button. */}
+        <div
+          className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full"
+          onMouseLeave={() => setHoveredZone(null)}
+        >
+          <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+          <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
+            {executionHoverZones.map((zone) => (
+              <div
+                aria-hidden="true"
+                className="pointer-events-auto"
+                key={zone}
+                onMouseEnter={() => setHoveredZone(zone)}
+              />
+            ))}
+          </div>
+        </div>
         <ScrollFadeIn delay={0.4}>
           <HowItWorksCta />
         </ScrollFadeIn>
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
-          {executionHoverZones.map((zone) => (
-            <div
-              aria-hidden="true"
-              className="pointer-events-auto"
-              key={zone}
-              onMouseEnter={() => setHoveredZone(zone)}
-            />
-          ))}
-        </div>
       </div>
     </div>
   );
