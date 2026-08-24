@@ -216,13 +216,16 @@ function Frame() {
 
 function Frame16() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
       <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible." />
+        <LineRevealAuto delay={0.1} text="New forms of coordination become possible." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>When shared outcomes no longer require exposing private inputs, or trusting a single operator.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -358,13 +361,16 @@ function Frame19() {
 
 function Frame8() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#d4f6da]/55 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it." />
+        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through people." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#d4f6da]/55 w-full md:w-[440px]`}>They operate the network, build applications, and bring new use cases to it.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -466,13 +472,16 @@ function Frame11() {
 
 function Frame18() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
       <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Go deeper into how Interfold works, why confidential coordination matters, and what is live now." />
+        <LineRevealAuto delay={0.1} text="Go deeper." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>How Interfold works, why confidential coordination matters, and what is live now.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -674,7 +683,7 @@ function Frame20() {
 
 function Frame14() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full flex justify-center">
         <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
           <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
@@ -682,8 +691,11 @@ function Frame14() {
         </div>
       </ScrollFadeIn>
       <p data-preview-was="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
-        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, allowing multiple parties to compute over encrypted inputs and produce shared, verifiable outcomes." />
+        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.</p>
+      </ScrollFadeIn>
     </div>
   );
 }

@@ -319,8 +319,10 @@ export function MobileVersion() {
             A new execution Model
           </p>
           <p data-preview-was="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            The Interfold brings confidential coordination to digital systems, allowing multiple parties to compute over encrypted inputs and produce shared, verifiable outcomes.
-          </p>
+            The Interfold brings confidential coordination to digital systems.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.
+            </p>
         </div>
 
         <div className="mb-12 w-full max-w-md">
@@ -386,8 +388,10 @@ export function MobileVersion() {
             What Becomes Possible
           </p>
           <p data-preview-was="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            When shared outcomes no longer require exposing private inputs or trusting a single operator, new forms of coordination become possible.
-          </p>
+            New forms of coordination become possible.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              When shared outcomes no longer require exposing private inputs, or trusting a single operator.
+            </p>
         </div>
 
         <div className="mx-auto w-full max-w-md">
@@ -483,7 +487,9 @@ export function MobileVersion() {
               Participate
             </p>
             <p data-preview-was="Confidential coordination becomes real through both applications and operators: Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release. (the second sentence was dropped)" className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
-              Confidential coordination becomes real through the people who operate the network, build applications, and bring new use cases to it.
+              Confidential coordination becomes real through people.</p>
+            <p className={`mt-3 text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>
+              They operate the network, build applications, and bring new use cases to it.
             </p>
           </div>
 
@@ -526,8 +532,10 @@ export function MobileVersion() {
             Explore
           </p>
           <p data-preview-was="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            Go deeper into how Interfold works, why confidential coordination matters, and what is live now.
-          </p>
+            Go deeper.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              How Interfold works, why confidential coordination matters, and what is live now.
+            </p>
         </div>
 
         <div className="mx-auto grid w-full max-w-md grid-cols-3 gap-[10px]">
