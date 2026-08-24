@@ -408,19 +408,19 @@ export function ParticipatePage() {
               </p>
             </ScrollFadeIn>
 
-            {/* Concentric corners: an outer radius equals the inner radius plus
+            {/* Concentric corners: the inner radius is the outer radius minus
                 the gap between them, or the two curves run at different rates
-                and the nesting reads as a mistake. The frames are the site's
-                24px inside 40px of padding, so the panel is 64 — and 48 on
-                mobile, where the padding is 24. White is the light-section
+                and the nesting reads as a mistake. The panel keeps the site's
+                24px and the padding is 40, so the frames come out square —
+                24 minus 40 has no positive answer. White is the light-section
                 panel tone: it is what the FOLD cards use. */}
-            <div className="mx-auto mt-4 max-w-md rounded-[48px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:rounded-[64px] min-[1100px]:p-10">
+            <div className="mx-auto mt-4 max-w-md rounded-[24px] bg-white p-6 min-[1100px]:mt-16 min-[1100px]:max-w-[1052px] min-[1100px]:p-10">
             {/* Two up until the three fit: stacked one-wide, the square frames
                 grew to the full panel and the section ran for pages. */}
             <div className="grid grid-cols-2 items-start gap-x-4 gap-y-10 min-[1100px]:grid-cols-3 min-[1100px]:gap-4">
               {actors.map(({ title, role, detail, glyph }) => (
                 <ScrollFadeIn className="relative flex w-full max-w-md flex-col text-left min-[1100px]:max-w-none" key={title}>
-                    <ActorGlyph className="aspect-square w-full rounded-[24px] bg-[#d9fce8]" glyph={glyph} />
+                    <ActorGlyph className="aspect-square w-full bg-[#d9fce8]" glyph={glyph} />
                     <div className="flex min-w-0 flex-col">
                       <p className="mt-4 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:text-[32px] md:leading-[0.95] min-[1100px]:mt-6 min-[1100px]:max-w-md">
                         {title}
