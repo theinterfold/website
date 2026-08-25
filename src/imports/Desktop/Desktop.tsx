@@ -392,7 +392,7 @@ const participationPaths = [
     title: "Build and integrate",
   },
   {
-    body: "Bring a live use case to Interfold.",
+    body: "Bring a live use case to Interfold and deploy it in practice.",
     cta: "Reach out",
     href: "mailto:comms@gnosisguild.org",
     title: "Partner on a pilot",
