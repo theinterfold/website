@@ -378,7 +378,7 @@ export function MobileVersion() {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 w-[min(100%-96px,540px)]" data-preview-note="howItWorks">
+        <div className="mx-auto mt-10 w-full max-w-md" data-preview-note="howItWorks">
           <HoverArrowLink
             className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
             href="https://blog.theinterfold.com/how-interfold-works/"
@@ -519,13 +519,13 @@ export function MobileVersion() {
               </UnderlinedArrowLink>
             </div>
           ))}
-          <UnderlinedArrowLink
-            className="inline-flex self-center text-[#82f5ad]"
+          <HoverArrowLink
+            className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
             href="/participate"
-            textClassName={`${SUPPORTING_LINE} text-current`}
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
           >
             Explore all ways to participate
-          </UnderlinedArrowLink>
+          </HoverArrowLink>
         </div>
         </ScrollFadeIn>
       </div>

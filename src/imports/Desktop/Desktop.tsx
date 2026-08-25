@@ -399,6 +399,30 @@ const participationPaths = [
   },
 ];
 
+// The route into the Participate page. It was a text link; it is a button now,
+// one column wide like the How Interfold Works button, so the two actions that
+// close a section read as the same thing. It sits on #121718, where the
+// Participate page already fills its secondary buttons this way.
+function ExploreParticipateCta() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <a
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
+      href="/participate"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatedButtonContent
+        isHovered={isHovered}
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        Explore all ways to participate
+      </AnimatedButtonContent>
+    </a>
+  );
+}
+
 function Frame9() {
   return (
     <div className="content-stretch flex w-full flex-col items-center gap-[48px]">
@@ -421,15 +445,11 @@ function Frame9() {
           </ScrollFadeIn>
         ))}
       </div>
-      <ScrollFadeIn delay={0.6}>
-        <UnderlinedArrowLink
-          className="inline-flex text-[#82f5ad]"
-          href="/participate"
-          textClassName={`${SUPPORTING_LINE} text-current`}
-        >
-          Explore all ways to participate
-        </UnderlinedArrowLink>
-      </ScrollFadeIn>
+      <div className={THREE_COLUMN_GRID_CLASS}>
+        <ScrollFadeIn className="md:col-start-2" delay={0.6}>
+          <ExploreParticipateCta />
+        </ScrollFadeIn>
+      </div>
     </div>
   );
 }
@@ -1609,7 +1629,7 @@ function HowItWorksCta() {
 
   return (
     <a
-      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
       data-preview-note="howItWorks"
       href="https://blog.theinterfold.com/how-interfold-works/"
       onMouseEnter={() => setIsHovered(true)}
@@ -1658,9 +1678,14 @@ function Frame15() {
             ))}
           </div>
         </div>
-        <ScrollFadeIn delay={0.4}>
-          <HowItWorksCta />
-        </ScrollFadeIn>
+        {/* Placed in the same grid as the cards above, in the middle column,
+            so the button is exactly one column wide at every width — and the
+            full column once the grid collapses to one. */}
+        <div className={THREE_COLUMN_GRID_CLASS}>
+          <ScrollFadeIn className="md:col-start-2 md:px-[8px]" delay={0.4}>
+            <HowItWorksCta />
+          </ScrollFadeIn>
+        </div>
       </div>
     </div>
   );
