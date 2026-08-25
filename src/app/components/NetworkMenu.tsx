@@ -19,58 +19,39 @@ const OPEN_EASING = "cubic-bezier(0.33, 0, 0.2, 1)";
 
 export function NetworkMenu({ className = "" }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  // The pill's bottom corners curve inwards. Once anything is showing below
-  // them, the page reads straight through that curve and the two shapes meet
-  // in a step. The control's own box is backed with the panel's colour for as
-  // long as there is a panel to join — derived rather than set from an effect,
-  // because effects run after paint and that left the step showing for the
-  // first frame of every open.
-  const [isCollapsing, setIsCollapsing] = useState(false);
-  const isJoined = isOpen || isCollapsing;
-  // Half the pill's height, measured rather than guessed. A radius larger than
-  // this gets clamped, and the clamp only bites while the bottom corners are
-  // still round — so a written-in 24px rendered as the pill's own 20.5px when
-  // closed and opened out to a full 24, and the top corners visibly changed
-  // shape between the two states. At exactly half the height nothing clamps in
-  // either state, so one radius serves the pill, the open shape and the panel.
+  const [isHovered, setIsHovered] = useState(false);
+  // Half the pill's height, and the height of the part that unfolds. Both
+  // measured: the pill's height falls out of its padding and line box, and a
+  // radius written in by hand gets clamped the moment two corners on one edge
+  // do not fit inside it.
   const [capRadius, setCapRadius] = useState(20);
+  const [menuHeight, setMenuHeight] = useState(0);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const node = buttonRef.current;
-    if (!node) {
+    const button = buttonRef.current;
+    const menu = menuRef.current;
+    if (!button || !menu) {
       return undefined;
     }
-    const measure = () => setCapRadius(node.getBoundingClientRect().height / 2);
+    const measure = () => {
+      setCapRadius(button.getBoundingClientRect().height / 2);
+      setMenuHeight(menu.getBoundingClientRect().height);
+    };
     measure();
     const observer = new ResizeObserver(measure);
-    observer.observe(node);
+    observer.observe(button);
+    observer.observe(menu);
     return () => observer.disconnect();
   }, []);
 
-  // Every close goes through here so the join survives the collapse whichever
-  // way it was triggered — the button, a click outside, Escape, or a link.
-  const close = useCallback(() => {
-    setIsCollapsing(true);
-    setIsOpen(false);
-  }, []);
-
-  // Normally cleared by the panel's own transitionend, which is exact. This is
-  // only here for the case where that never arrives — a timer racing a
-  // transition of the same length can fire a frame early, and a frame early
-  // means one frame of the step.
-  useEffect(() => {
-    if (!isCollapsing) {
-      return undefined;
-    }
-    const timer = window.setTimeout(() => setIsCollapsing(false), OPEN_MS + 150);
-    return () => window.clearTimeout(timer);
-  }, [isCollapsing]);
+  const close = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     if (!isOpen) {
-      return;
+      return undefined;
     }
 
     const closeOnOutside = (event: MouseEvent) => {
@@ -93,43 +74,48 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
     };
   }, [close, isOpen]);
 
+  // How much of the shape is folded away. One number drives both the shape and
+  // the links, in pixels rather than percentages, so the two clip edges sit on
+  // the same line at every point of the move.
+  const folded = isOpen ? 0 : menuHeight;
+
   return (
-    // The button stays in flow so this box has the pill's width; the part that
-    // grows hangs below it, out of flow, so the 63px header never stretches.
-    <div
-      // Rounded to the open shape's 24px rather than the pill's 22px, so this
-      // never pokes out past the button sitting on top of it.
-      className={`relative ${isJoined ? "bg-[#121718]" : ""} ${className}`}
-      ref={rootRef}
-      style={{
-        // Rounded a shade tighter than the button so it stays tucked behind it
-        // at the top, and square at the bottom so it fills the corners there.
-        borderTopLeftRadius: `${capRadius + 2}px`,
-        borderTopRightRadius: `${capRadius + 2}px`,
-      }}
-    >
+    // The button stays in flow so this box has the pill's height and width; the
+    // shape hangs below it, out of flow, so the 63px header never stretches.
+    <div className={`relative ${className}`} ref={rootRef}>
+      {/*
+        Pill and panel are one painted shape, not a pill sitting on a panel.
+        Drawn separately they meet along an edge, and that edge was the whole
+        problem: the pill's corners curve inwards, so the page read straight
+        through them into a step, and backing the pill with a square-cornered
+        patch to hide the step hid the corners' own movement with it — measured
+        off a screen recording, the corner sat square for the entire collapse
+        and jumped round in a single frame.
+
+        As one shape there is no edge. The corners are the clip's own, so they
+        keep the same radius throughout and travel with the growing bottom.
+      */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0"
+        style={{
+          backgroundColor: !isOpen && isHovered ? "#1c2426" : "#121718",
+          clipPath: `inset(0 0 ${folded}px 0 round ${capRadius}px)`,
+          height: `calc(100% + ${menuHeight}px)`,
+          transitionDuration: `${OPEN_MS}ms, 150ms`,
+          transitionProperty: "clip-path, background-color",
+          transitionTimingFunction: `${OPEN_EASING}, ease`,
+        }}
+      />
+
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className={`flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] ${
-          // Tinting only the top of the shape put a seam across the join, since
-          // the panel below it stays #121718.
-          isJoined ? "" : "hover:bg-[#1c2426]"
-        }`}
-        onClick={() => (isOpen ? close() : setIsOpen(true))}
-        // The closed radius is written out rather than left to rounded-full,
-        // which resolves to 1.6e7px: nothing interpolates from there, so the
-        // corners could only ever snap, and opening and closing had to snap at
-        // different moments to stay out of the panel's way. 22px against a
-        // 41px pill clamps to the same shape and does tween, so both
-        // directions are now the same 200ms move.
+        className="relative z-10 flex w-full items-center gap-[10px] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8]"
+        onClick={() => setIsOpen((current) => !current)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         ref={buttonRef}
-        style={{
-          borderRadius: isOpen ? `${capRadius}px ${capRadius}px 0px 0px` : `${capRadius}px`,
-          transitionDuration: `150ms, ${OPEN_MS}ms`,
-          transitionProperty: "background-color, border-radius",
-          transitionTimingFunction: `ease, ${OPEN_EASING}`,
-        }}
         type="button"
       >
         {/* Same live dot the strip carries, glow and all. */}
@@ -146,10 +132,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
           fill="none"
           focusable="false"
           // Turned rather than flipped. Scaling y from 1 to -1 passes through
-          // zero, so the chevron folded flat halfway and unfolded again —
-          // measured at 70ms into the close it was at scaleY -0.08. A turn
-          // sweeps to the same place without ever losing its shape, and on the
-          // same curve as the corners instead of Tailwind's own.
+          // zero, so the chevron folded flat halfway and unfolded again.
           style={{
             rotate: isOpen ? "180deg" : "0deg",
             transitionDuration: `${OPEN_MS}ms`,
@@ -168,37 +151,16 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         </svg>
       </button>
 
-      {/* Same width and colour as the button and flush against it, so the two
-          read as one shape rather than a panel under a pill.
-          The reveal is a clip rather than the 0fr-to-1fr grid trick it used to
-          be: interpolating grid-template-rows re-runs layout on every frame,
-          which is what made this stutter. clip-path animates on the compositor,
-          and carrying the same 24px on the clip's own bottom corners keeps them
-          travelling down with the edge instead of appearing at the end. */}
       <div
-        className={`absolute right-0 top-full z-50 w-full overflow-hidden bg-[#121718] ${
-          isOpen ? "" : "pointer-events-none"
-        }`}
+        className={`absolute inset-x-0 top-full z-10 ${isOpen ? "" : "pointer-events-none"}`}
         style={{
-          borderBottomLeftRadius: `${capRadius}px`,
-          borderBottomRightRadius: `${capRadius}px`,
-          clipPath: isOpen
-            ? `inset(0 0 0 0 round 0 0 ${capRadius}px ${capRadius}px)`
-            : `inset(0 0 100% 0 round 0 0 ${capRadius}px ${capRadius}px)`,
-          // The same curve the corners use, so the edge and the corner arrive
-          // together instead of drifting apart mid-move.
+          clipPath: `inset(0 0 ${folded}px 0)`,
           transitionDuration: `${OPEN_MS}ms`,
           transitionProperty: "clip-path",
           transitionTimingFunction: OPEN_EASING,
         }}
-        onTransitionEnd={(event) => {
-          // Links inside bubble their own colour transitions through here.
-          if (event.target === event.currentTarget && event.propertyName === "clip-path") {
-            setIsCollapsing(false);
-          }
-        }}
       >
-        <div className="pb-2" role="menu">
+        <div className="pb-2" ref={menuRef} role="menu">
           {NETWORK_LINKS.map((link) => (
             <a
               aria-hidden={!isOpen}
