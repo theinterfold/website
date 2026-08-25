@@ -4,6 +4,8 @@ import {
   DEFAULT_EXECUTION_FLOW_TIMING,
   ExecutionFlowTiming,
   getExecutionFlowTiming,
+  highlightExecutionFlowRoute,
+  onExecutionFlowRoutes,
   onExecutionFlowTotal,
   replayExecutionFlow,
   setExecutionFlowTiming,
@@ -64,6 +66,10 @@ const CURVES: Record<string, Curve> = {
 };
 
 const LINEAR: Curve = [0, 0, 1, 1];
+
+// Each route keeps the same letter whatever order it runs in, so the row of
+// chips reads as an order rather than as a list of slots.
+const ROUTE_LETTERS = "ABCDEFGH";
 
 function toEasing(curve: Curve) {
   return `cubic-bezier(${curve.map((n) => Number(n.toFixed(2))).join(", ")})`;
@@ -158,6 +164,8 @@ function Slider({
 export function ExecutionFlowTuner() {
   const [timing, setTiming] = useState<ExecutionFlowTiming>(() => getExecutionFlowTiming());
   const [total, setTotal] = useState(0);
+  const [routeCount, setRouteCount] = useState(0);
+  const [picked, setPicked] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(true);
   const [copied, setCopied] = useState(false);
 
@@ -169,6 +177,8 @@ export function ExecutionFlowTuner() {
   }, []);
 
   useEffect(() => onExecutionFlowTotal(setTotal), []);
+  useEffect(() => onExecutionFlowRoutes(setRouteCount), []);
+  useEffect(() => () => highlightExecutionFlowRoute(null), []);
 
   const apply = (next: Partial<ExecutionFlowTiming>) => {
     const merged = { ...timing, ...next };
@@ -182,6 +192,20 @@ export function ExecutionFlowTuner() {
     replayExecutionFlow();
   };
 
+  const order =
+    timing.routeOrder.length === routeCount && routeCount > 0
+      ? timing.routeOrder
+      : Array.from({ length: routeCount }, (_, index) => index);
+  const pickedSlot = picked === null ? -1 : order.indexOf(picked);
+  const moveTo = (slot: number) => {
+    if (picked === null) {
+      return;
+    }
+    const next = order.filter((index) => index !== picked);
+    next.splice(Math.max(0, Math.min(slot, next.length)), 0, picked);
+    apply({ routeOrder: next });
+  };
+
   const curve = curveOf(timing.easing);
   const selected = nameOf(timing.easing);
   const pickCurve = (family: Family | "linear", direction: Direction | null) => {
@@ -193,7 +217,7 @@ export function ExecutionFlowTuner() {
   };
 
   const label = selected.family === "linear" ? "linear" : selected.family ? `${selected.family} ${selected.direction}` : "custom";
-  const snippet = `penSpeed: ${timing.penSpeed}, routeStagger: ${timing.routeStagger}, easing: "${timing.easing}" // ${label}`;
+  const snippet = `penSpeed: ${timing.penSpeed}, routeStagger: ${timing.routeStagger}, easing: "${timing.easing}", routeOrder: [${order.join(", ")}] // ${label}`;
 
   return createPortal(
     <div className="pointer-events-auto fixed bottom-4 right-4 z-[9999] font-['Office_Code_Pro:Medium',monospace] text-white">
@@ -226,6 +250,45 @@ export function ExecutionFlowTuner() {
             <p className="-mt-1 text-[9px] leading-[1.3] text-white/35">
               Fracao da rota andada quando a seguinte arranca. 0.10 = quase todas juntas, 1.00 = uma de cada vez.
             </p>
+
+            <div className="mt-1 flex flex-col gap-1.5 border-t border-white/10 pt-3">
+              <span className="text-[10px] uppercase tracking-[0.08em] text-white/55">Ordem das rotas</span>
+              <div className="flex flex-wrap gap-1">
+                {order.map((route, slot) => (
+                  <button
+                    className={`h-6 w-6 rounded-[4px] border text-[10px] transition-colors ${
+                      picked === route
+                        ? "border-[#ff3d81] bg-[#ff3d81]/20 text-[#ff3d81]"
+                        : "border-white/15 text-white/70 hover:border-[#ff3d81] hover:text-[#ff3d81]"
+                    }`}
+                    key={route}
+                    onClick={() => {
+                      const next = picked === route ? null : route;
+                      setPicked(next);
+                      highlightExecutionFlowRoute(next);
+                    }}
+                    title={`Posicao ${slot + 1}`}
+                    type="button"
+                  >
+                    {ROUTE_LETTERS[route] ?? route + 1}
+                  </button>
+                ))}
+              </div>
+              {picked === null ? (
+                <p className="text-[9px] leading-[1.3] text-white/35">
+                  Carrega numa letra para a pintar de rosa no desenho, depois arrasta para a mover na ordem.
+                </p>
+              ) : (
+                <Slider
+                  label={`Posicao de ${ROUTE_LETTERS[picked]}`}
+                  max={Math.max(1, order.length)}
+                  min={1}
+                  onChange={(slot) => moveTo(slot - 1)}
+                  step={1}
+                  value={pickedSlot + 1}
+                />
+              )}
+            </div>
 
             <div className="mt-1 flex items-start gap-3 border-t border-white/10 pt-3">
               <CurvePreview curve={curve} />
@@ -307,7 +370,11 @@ export function ExecutionFlowTuner() {
               </button>
               <button
                 className="rounded-[4px] border border-white/15 px-2 py-1.5 text-[11px] text-white/70 transition-colors hover:border-[#82f5ad] hover:text-[#82f5ad]"
-                onClick={() => apply({ ...DEFAULT_EXECUTION_FLOW_TIMING })}
+                onClick={() => {
+                  setPicked(null);
+                  highlightExecutionFlowRoute(null);
+                  apply({ ...DEFAULT_EXECUTION_FLOW_TIMING });
+                }}
                 type="button"
               >
                 reset

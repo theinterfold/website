@@ -10,6 +10,9 @@ export type ExecutionFlowTiming = {
       that crosses the whole diagram takes longer than a short one — which is
       what reads as drawing rather than as a set of bars filling. */
   penSpeed: number;
+  /** The running order, as indices into the natural one — top to bottom by
+      where each route begins. Empty means that natural order. */
+  routeOrder: number[];
   /** How far into its own journey a route is when the next one sets off, as a
       fraction of that route. Small values pile the routes on top of each other;
       near 1 they run one clean after another. */
@@ -19,6 +22,7 @@ export type ExecutionFlowTiming = {
 export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
   easing: "cubic-bezier(0.45, 0, 0.55, 1)",
   penSpeed: 1.2,
+  routeOrder: [],
   routeStagger: 0.12,
 };
 
@@ -27,7 +31,34 @@ export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
 let timing: ExecutionFlowTiming = { ...DEFAULT_EXECUTION_FLOW_TIMING };
 const replayListeners = new Set<() => void>();
 const totalListeners = new Set<(ms: number) => void>();
+const routeListeners = new Set<(count: number) => void>();
 let revealRoot: HTMLElement | null = null;
+// Kept so the tuner can point at a route in the drawing itself: reading a
+// running order off a list of numbers is guesswork until you can see which line
+// each number is.
+let lastRoutes: Route[] = [];
+let highlighted: Route | null = null;
+
+/** Paints one route so it can be picked out of the fan. Pass null to clear. */
+export function highlightExecutionFlowRoute(index: number | null) {
+  for (const segment of highlighted?.segments ?? []) {
+    segment.el.style.stroke = "";
+    segment.el.style.strokeWidth = "";
+  }
+  highlighted = index === null ? null : lastRoutes[index] ?? null;
+  for (const segment of highlighted?.segments ?? []) {
+    segment.el.style.stroke = "#ff3d81";
+    segment.el.style.strokeWidth = "4";
+  }
+}
+
+/** Reports how many routes the drawing has, once it has measured them. */
+export function onExecutionFlowRoutes(listener: (count: number) => void) {
+  routeListeners.add(listener);
+  return () => {
+    routeListeners.delete(listener);
+  };
+}
 
 export function getExecutionFlowTiming() {
   return timing;
@@ -137,7 +168,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
       return undefined;
     }
 
-    const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeStagger: ROUTE_STAGGER } = timing;
+    const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeOrder, routeStagger: ROUTE_STAGGER } = timing;
 
     const svg = root.querySelector<SVGSVGElement>('[data-name="Layer_1"] > svg');
     const strokes = svg ? Array.from(svg.querySelectorAll<SVGPathElement>("path[stroke]")).map(measure) : [];
@@ -153,7 +184,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
     const isInput = (segment: Segment) => segment.el.getBBox().x + segment.el.getBBox().width <= SPINE_X;
     const pool = new Set(drawable.filter((segment) => !isInput(segment)));
 
-    const routes: Route[] = drawable
+    const natural: Route[] = drawable
       .filter(isInput)
       // Top to bottom by where each run begins, which is where the eye is when
       // the drawing starts. Ordering by where they land on the spine instead is
@@ -176,6 +207,15 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
         const length = segments.reduce((sum, segment) => sum + segment.length, 0);
         return { delay: 0, duration: length / PEN_SPEED, length, segments };
       });
+
+    // The running order the tuner set, if it still describes this many routes.
+    const order =
+      routeOrder.length === natural.length && new Set(routeOrder).size === natural.length
+        ? routeOrder
+        : natural.map((_, index) => index);
+    const routes = order.map((index) => natural[index]);
+    lastRoutes = natural;
+    routeListeners.forEach((listener) => listener(natural.length));
 
     let cursor = 0;
     for (const route of routes) {
