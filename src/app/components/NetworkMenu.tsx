@@ -25,7 +25,27 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
   // there is a panel — including the whole way back, or the step reappears for
   // the length of the collapse.
   const [isJoined, setIsJoined] = useState(false);
+  // Half the pill's height, measured rather than guessed. A radius larger than
+  // this gets clamped, and the clamp only bites while the bottom corners are
+  // still round — so a written-in 24px rendered as the pill's own 20.5px when
+  // closed and opened out to a full 24, and the top corners visibly changed
+  // shape between the two states. At exactly half the height nothing clamps in
+  // either state, so one radius serves the pill, the open shape and the panel.
+  const [capRadius, setCapRadius] = useState(20);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const node = buttonRef.current;
+    if (!node) {
+      return undefined;
+    }
+    const measure = () => setCapRadius(node.getBoundingClientRect().height / 2);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -67,8 +87,14 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
     <div
       // Rounded to the open shape's 24px rather than the pill's 22px, so this
       // never pokes out past the button sitting on top of it.
-      className={`relative ${isJoined ? "rounded-t-[24px] bg-[#121718]" : ""} ${className}`}
+      className={`relative ${isJoined ? "bg-[#121718]" : ""} ${className}`}
       ref={rootRef}
+      style={{
+        // Rounded a shade tighter than the button so it stays tucked behind it
+        // at the top, and square at the bottom so it fills the corners there.
+        borderTopLeftRadius: `${capRadius + 2}px`,
+        borderTopRightRadius: `${capRadius + 2}px`,
+      }}
     >
       <button
         aria-expanded={isOpen}
@@ -81,8 +107,9 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         // different moments to stay out of the panel's way. 22px against a
         // 41px pill clamps to the same shape and does tween, so both
         // directions are now the same 200ms move.
+        ref={buttonRef}
         style={{
-          borderRadius: isOpen ? "24px 24px 0px 0px" : "22px",
+          borderRadius: isOpen ? `${capRadius}px ${capRadius}px 0px 0px` : `${capRadius}px`,
           transitionDuration: `150ms, ${OPEN_MS}ms`,
           transitionProperty: "background-color, border-radius",
           transitionTimingFunction: `ease, ${OPEN_EASING}`,
@@ -122,11 +149,15 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
           and carrying the same 24px on the clip's own bottom corners keeps them
           travelling down with the edge instead of appearing at the end. */}
       <div
-        className={`absolute right-0 top-full z-50 w-full overflow-hidden rounded-b-[24px] bg-[#121718] ${
+        className={`absolute right-0 top-full z-50 w-full overflow-hidden bg-[#121718] ${
           isOpen ? "" : "pointer-events-none"
         }`}
         style={{
-          clipPath: isOpen ? "inset(0 0 0 0 round 0 0 24px 24px)" : "inset(0 0 100% 0 round 0 0 24px 24px)",
+          borderBottomLeftRadius: `${capRadius}px`,
+          borderBottomRightRadius: `${capRadius}px`,
+          clipPath: isOpen
+            ? `inset(0 0 0 0 round 0 0 ${capRadius}px ${capRadius}px)`
+            : `inset(0 0 100% 0 round 0 0 ${capRadius}px ${capRadius}px)`,
           // The same curve the corners use, so the edge and the corner arrive
           // together instead of drifting apart mid-move.
           transitionDuration: `${OPEN_MS}ms`,
