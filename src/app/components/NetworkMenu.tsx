@@ -14,9 +14,27 @@ const NETWORK_LINKS = [
   { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
 ];
 
+const OPEN_MS = 200;
+const OPEN_EASING = "cubic-bezier(0.33, 0, 0.2, 1)";
+
 export function NetworkMenu({ className = "" }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
+  // The pill's bottom corners curve inwards. Once anything is showing below
+  // them, the page reads straight through that curve and the two shapes meet
+  // in a step. This backs the pill with the panel's own colour for as long as
+  // there is a panel — including the whole way back, or the step reappears for
+  // the length of the collapse.
+  const [isJoined, setIsJoined] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsJoined(true);
+      return undefined;
+    }
+    const timer = window.setTimeout(() => setIsJoined(false), OPEN_MS);
+    return () => window.clearTimeout(timer);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -46,7 +64,12 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
   return (
     // The button stays in flow so this box has the pill's width; the part that
     // grows hangs below it, out of flow, so the 63px header never stretches.
-    <div className={`relative ${className}`} ref={rootRef}>
+    <div
+      // Rounded to the open shape's 24px rather than the pill's 22px, so this
+      // never pokes out past the button sitting on top of it.
+      className={`relative ${isJoined ? "rounded-t-[24px] bg-[#121718]" : ""} ${className}`}
+      ref={rootRef}
+    >
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
@@ -60,9 +83,9 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         // directions are now the same 200ms move.
         style={{
           borderRadius: isOpen ? "24px 24px 0px 0px" : "22px",
-          transitionDuration: "150ms, 200ms",
+          transitionDuration: `150ms, ${OPEN_MS}ms`,
           transitionProperty: "background-color, border-radius",
-          transitionTimingFunction: "ease, cubic-bezier(0.33, 0, 0.2, 1)",
+          transitionTimingFunction: `ease, ${OPEN_EASING}`,
         }}
         type="button"
       >
@@ -99,11 +122,16 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
           and carrying the same 24px on the clip's own bottom corners keeps them
           travelling down with the edge instead of appearing at the end. */}
       <div
-        className={`absolute right-0 top-full z-50 w-full overflow-hidden rounded-b-[24px] bg-[#121718] transition-[clip-path] duration-200 ease-out ${
+        className={`absolute right-0 top-full z-50 w-full overflow-hidden rounded-b-[24px] bg-[#121718] ${
           isOpen ? "" : "pointer-events-none"
         }`}
         style={{
           clipPath: isOpen ? "inset(0 0 0 0 round 0 0 24px 24px)" : "inset(0 0 100% 0 round 0 0 24px 24px)",
+          // The same curve the corners use, so the edge and the corner arrive
+          // together instead of drifting apart mid-move.
+          transitionDuration: `${OPEN_MS}ms`,
+          transitionProperty: "clip-path",
+          transitionTimingFunction: OPEN_EASING,
         }}
       >
         <div className="pb-2" role="menu">
