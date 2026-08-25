@@ -22,7 +22,9 @@ export type ExecutionFlowTiming = {
 export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
   easing: "cubic-bezier(0.45, 0, 0.55, 1)",
   penSpeed: 1.2,
-  routeOrder: [],
+  // A B H C D E F G — the long run that sweeps in along the floor goes third
+  // rather than last, which is where Tiago put it on the preview.
+  routeOrder: [0, 1, 7, 2, 3, 4, 5, 6],
   routeStagger: 0.12,
 };
 

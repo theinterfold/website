@@ -1047,15 +1047,19 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
             fill: #82F5AD;
           }
 
+          /* This overlay is its own svg, so it cannot share the group the rest
+             of the drawing dims inside. Dimming it the same way would put 50%
+             black over the 50% black lines and land at 75% — a dark dot on
+             every junction. It takes the dimmed tone as a solid colour
+             instead: #929292 is exactly what #252525 at half strength looks
+             like on the white this sits on. */
           .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot {
-            opacity: 0.5;
             animation: none;
           }
 
           .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot {
-            opacity: 0.5;
             animation: none;
           }
 
@@ -1063,7 +1067,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
           .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot-core {
-            fill: #252525 !important;
+            fill: #929292 !important;
           }
 
           .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot-halo,
@@ -1372,6 +1376,11 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
     <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
+          {/* Lines, nodes and spine dim together inside one group. Dimming them
+              separately stacked three translucent layers, and every node that
+              sat on a line came out at 0.75 alpha against the line's 0.5 —
+              which read as a dark blob at exactly the junctions the drawing is
+              trying to make legible. */}
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
             <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
@@ -1392,14 +1401,10 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
             <path d={svgPaths.pf569a00} id="Vector_26" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.p35357400} id="Vector_27" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.pd678600} id="Vector_28" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          </g>
           <g
-            className="transition-[color,opacity] duration-200"
+            className="transition-[color] duration-200"
             id="Group_2"
-            style={{
-              color: hoveredZone ? "#252525" : "#82F5AD",
-              opacity: hoveredZone ? 0.5 : 1,
-            }}
+            style={{ color: hoveredZone ? "#252525" : "#82F5AD" }}
           >
             <path d={svgPaths.p3380c5c0} fill="currentColor" id="Vector_29" />
             <path d={svgPaths.pe920280} fill="currentColor" id="Vector_32" />
@@ -1420,14 +1425,13 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
             <path d={svgPaths.p1decb600} fill="currentColor" id="Vector_47" />
           </g>
           <path
-            className="transition-opacity duration-200"
             d="M476.758 208.821V114.505"
             id="Vector_54"
             stroke="var(--stroke-0, #252525)"
             strokeMiterlimit="10"
             strokeWidth="2.18269"
-            style={{ opacity: hoveredZone ? 0.5 : 1 }}
           />
+          </g>
         </g>
         <defs>
           <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_0_363" x1="332.379" x2="332.379" y1="6.73522" y2="114.525">
