@@ -20,6 +20,11 @@ const OPEN_EASING = "cubic-bezier(0.33, 0, 0.2, 1)";
 export function NetworkMenu({ className = "" }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  // Tracked rather than left to the UA ring. The button carries no background
+  // of its own any more, so a default ring draws a bare rectangle across a
+  // shape that has none — and it paints on a plain :focus too, which is a
+  // mouse click.
+  const [hasKeyboardFocus, setHasKeyboardFocus] = useState(false);
   // Half the pill's height, and the height of the part that unfolds. Both
   // measured: the pill's height falls out of its padding and line box, and a
   // radius written in by hand gets clamped the moment two corners on one edge
@@ -112,10 +117,20 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         aria-expanded={isOpen}
         aria-haspopup="menu"
         className="relative z-10 flex w-full items-center gap-[10px] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8]"
+        onBlur={() => setHasKeyboardFocus(false)}
         onClick={() => setIsOpen((current) => !current)}
+        onFocus={(event) => setHasKeyboardFocus(event.target.matches(":focus-visible"))}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         ref={buttonRef}
+        style={{
+          // Nothing paints here — the shape behind does. The radius is only so
+          // the focus ring traces the pill instead of the button's box, and the
+          // ring is drawn inside the edge so it never crosses the panel.
+          borderRadius: isOpen ? `${capRadius}px ${capRadius}px 0px 0px` : `${capRadius}px`,
+          outline: hasKeyboardFocus ? "2px solid #82f5ad" : "none",
+          outlineOffset: "-3px",
+        }}
         type="button"
       >
         {/* Same live dot the strip carries, glow and all. */}
@@ -154,7 +169,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <div
         className={`absolute inset-x-0 top-full z-10 ${isOpen ? "" : "pointer-events-none"}`}
         style={{
-          clipPath: `inset(0 0 ${folded}px 0)`,
+          clipPath: `inset(0 0 ${folded}px 0 round 0 0 ${capRadius}px ${capRadius}px)`,
           transitionDuration: `${OPEN_MS}ms`,
           transitionProperty: "clip-path",
           transitionTimingFunction: OPEN_EASING,
