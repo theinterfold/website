@@ -50,20 +50,19 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className={`flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] hover:bg-[#1c2426] ${
-          isOpen ? "rounded-t-[24px]" : "rounded-full"
-        }`}
+        className="flex w-full items-center gap-[10px] bg-[#121718] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8] hover:bg-[#1c2426]"
         onClick={() => setIsOpen((current) => !current)}
-        // The corners square off the moment the panel starts opening, but on the
-        // way back they have to wait for it: re-rounding straight away left a
-        // full pill sitting on top of a panel that was still there, biting two
-        // notches out of it for the length of the collapse. Zero duration and a
-        // delay, not a 200ms tween — rounded-full is 9999px, so interpolating
-        // it towards 24 sits clamped at the pill shape almost the whole way.
+        // The closed radius is written out rather than left to rounded-full,
+        // which resolves to 1.6e7px: nothing interpolates from there, so the
+        // corners could only ever snap, and opening and closing had to snap at
+        // different moments to stay out of the panel's way. 22px against a
+        // 41px pill clamps to the same shape and does tween, so both
+        // directions are now the same 200ms move.
         style={{
+          borderRadius: isOpen ? "24px 24px 0px 0px" : "22px",
+          transitionDuration: "150ms, 200ms",
           transitionProperty: "background-color, border-radius",
-          transitionDuration: "150ms, 0ms",
-          transitionDelay: isOpen ? "0ms, 0ms" : "0ms, 200ms",
+          transitionTimingFunction: "ease, cubic-bezier(0.33, 0, 0.2, 1)",
         }}
         type="button"
       >
@@ -93,32 +92,37 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       </button>
 
       {/* Same width and colour as the button and flush against it, so the two
-          read as one shape rather than a panel under a pill. 0fr to 1fr animates
-          the height without anything having to measure it. */}
+          read as one shape rather than a panel under a pill.
+          The reveal is a clip rather than the 0fr-to-1fr grid trick it used to
+          be: interpolating grid-template-rows re-runs layout on every frame,
+          which is what made this stutter. clip-path animates on the compositor,
+          and carrying the same 24px on the clip's own bottom corners keeps them
+          travelling down with the edge instead of appearing at the end. */}
       <div
-        className={`absolute right-0 top-full z-50 grid w-full rounded-b-[24px] bg-[#121718] transition-[grid-template-rows] duration-200 ease-out ${
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        className={`absolute right-0 top-full z-50 w-full overflow-hidden rounded-b-[24px] bg-[#121718] transition-[clip-path] duration-200 ease-out ${
+          isOpen ? "" : "pointer-events-none"
         }`}
+        style={{
+          clipPath: isOpen ? "inset(0 0 0 0 round 0 0 24px 24px)" : "inset(0 0 100% 0 round 0 0 24px 24px)",
+        }}
       >
-        <div className="overflow-hidden rounded-b-[24px]">
-          <div className="pb-2" role="menu">
-            {NETWORK_LINKS.map((link) => (
-              <a
-                aria-hidden={!isOpen}
-                className="group flex items-center justify-between gap-6 whitespace-nowrap px-[16px] py-[8px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
-                href={link.href}
-                key={link.href}
-                onClick={() => setIsOpen(false)}
-                rel="noopener noreferrer"
-                role="menuitem"
-                tabIndex={isOpen ? 0 : -1}
-                target="_blank"
-              >
-                <span>{link.label}</span>
-                <ExternalArrowSlide className="relative inline-block h-[14px] w-[14px] shrink-0 overflow-hidden text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]" />
-              </a>
-            ))}
-          </div>
+        <div className="pb-2" role="menu">
+          {NETWORK_LINKS.map((link) => (
+            <a
+              aria-hidden={!isOpen}
+              className="group flex items-center justify-between gap-6 whitespace-nowrap py-[8px] pl-[16px] pr-[13px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
+              href={link.href}
+              key={link.href}
+              onClick={() => setIsOpen(false)}
+              rel="noopener noreferrer"
+              role="menuitem"
+              tabIndex={isOpen ? 0 : -1}
+              target="_blank"
+            >
+              <span>{link.label}</span>
+              <ExternalArrowSlide className="relative inline-block h-[14px] w-[14px] shrink-0 overflow-hidden text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]" />
+            </a>
+          ))}
         </div>
       </div>
     </div>
