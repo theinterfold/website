@@ -155,9 +155,11 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
 
     const routes: Route[] = drawable
       .filter(isInput)
-      // In the order they land on the spine, which is the order the fan reads —
-      // not the order their far ends happen to sit at on the left.
-      .sort((a, b) => a.end.y - b.end.y)
+      // Top to bottom by where each run begins, which is where the eye is when
+      // the drawing starts. Ordering by where they land on the spine instead is
+      // the same for every route but the last two, and it ends on the short
+      // middle run rather than on the long one that sweeps in along the floor.
+      .sort((a, b) => a.start.y - b.start.y)
       .map((input) => {
         const segments = [input];
         // Follow the drawing: whatever leaves the point this leg arrived at is
