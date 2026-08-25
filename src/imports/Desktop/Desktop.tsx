@@ -411,9 +411,9 @@ function Frame9() {
               </p>
               <p className={`${SUPPORTING_LINE} text-[#d4f6da]/55`}>{path.body}</p>
               <UnderlinedArrowLink
-                className="mt-[8px] inline-flex"
+                className="mt-[8px] inline-flex text-[#82f5ad]"
                 href={path.href}
-                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#82f5ad] md:text-[14px]"
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-current md:text-[14px]"
               >
                 {path.cta}
               </UnderlinedArrowLink>
@@ -423,9 +423,9 @@ function Frame9() {
       </div>
       <ScrollFadeIn delay={0.6}>
         <UnderlinedArrowLink
-          className="inline-flex"
+          className="inline-flex text-[#82f5ad]"
           href="/participate"
-          textClassName={`${SUPPORTING_LINE} text-[#82f5ad]`}
+          textClassName={`${SUPPORTING_LINE} text-current`}
         >
           Explore all ways to participate
         </UnderlinedArrowLink>

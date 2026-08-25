@@ -511,18 +511,18 @@ export function MobileVersion() {
               </p>
               <p className={`text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>{path.body}</p>
               <UnderlinedArrowLink
-                className="mt-2 inline-flex"
+                className="mt-2 inline-flex text-[#82f5ad]"
                 href={path.href}
-                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#82f5ad]"
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-current"
               >
                 {path.cta}
               </UnderlinedArrowLink>
             </div>
           ))}
           <UnderlinedArrowLink
-            className="inline-flex self-center"
+            className="inline-flex self-center text-[#82f5ad]"
             href="/participate"
-            textClassName={`${SUPPORTING_LINE} text-[#82f5ad]`}
+            textClassName={`${SUPPORTING_LINE} text-current`}
           >
             Explore all ways to participate
           </UnderlinedArrowLink>
