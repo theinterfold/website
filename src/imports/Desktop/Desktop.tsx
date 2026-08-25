@@ -1862,9 +1862,11 @@ export default function Desktop() {
           />
         </div>
       </div>
-      {/* 63px is the header's height: the header is fixed, so the strip pins to
-          its underside rather than to the top of the window. */}
-      <NetworkStrip className="sticky top-[63px] z-40" />
+      {/* The offset is whichever header is on screen. Below xl that is the
+          60px mobile header, which is sticky and in flow; from xl it is the
+          63px desktop header, which is fixed, so the strip pins to its
+          underside rather than to the top of the window. */}
+      <NetworkStrip className="sticky top-[60px] z-40 xl:top-[63px]" />
       {/* Reading order is now the order on screen. It used to be
           Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
           Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block
