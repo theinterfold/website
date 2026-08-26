@@ -53,6 +53,11 @@ export function Header({
         transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
       }
     : {};
+  // The arrow hangs from the x-height line rather than sitting 1.2px under it.
+  // Measured off the rendered ink, not the font's metrics — the glyph does not
+  // sit flush on its own baseline. Same rule as the mobile menu.
+  const navArrowClass =
+    "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none top-[-0.0875em]";
   const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
   const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
@@ -82,11 +87,11 @@ export function Header({
             <nav data-preview-note="nav" className="hidden items-center justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
-                <ExternalArrowSlide />
+                <ExternalArrowSlide className={navArrowClass} />
               </NavLink>
               <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
                 <span>Blog</span>
-                <ExternalArrowSlide />
+                <ExternalArrowSlide className={navArrowClass} />
               </NavLink>
               {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
                   still live and still the claim route — reachable by direct link only. */}

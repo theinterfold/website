@@ -186,7 +186,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         <span
           aria-hidden="true"
           className="relative ml-auto block shrink-0"
-          style={{ height: `${CHEVRON_HEIGHT}px`, width: `${CHEVRON_WIDTH}px` }}
+          style={{ height: `${CHEVRON_HEIGHT}px`, top: "0.0246em", width: `${CHEVRON_WIDTH}px` }}
         >
           <span style={chevronArm(true, isOpen)} />
           <span style={chevronArm(false, isOpen)} />
@@ -226,7 +226,10 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
               target="_blank"
             >
               <span>{link.label}</span>
-              <ExternalArrowSlide className="relative inline-block h-[14px] w-[14px] shrink-0 overflow-hidden text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]" />
+              {/* Pushed down, not up like the nav's: these rows are items-center, so
+                  the arrow was already riding 1.2px above the x-height line
+                  rather than sitting below it. Measured either way. */}
+              <ExternalArrowSlide className="relative top-[0.0875em] inline-block h-[14px] w-[14px] shrink-0 overflow-hidden text-[14px] leading-none text-[#687d71] transition-colors group-hover:text-[#82f5ad]" />
             </a>
           ))}
         </div>
