@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { UnderlinedArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { SectionLabel } from "./SectionLabel";
 
 type LegalBlock =
   | { type: "paragraph"; content: ReactNode }
@@ -461,7 +462,7 @@ const termsSections: LegalSection[] = [
           <UnderlinedArrowLink
             className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
             href="mailto:ops@gnosisguild.org"
-            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-current"
+            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
             underlineClassName="border-b border-current pb-[3px]"
           >
             ops@gnosisguild.org
@@ -469,7 +470,7 @@ const termsSections: LegalSection[] = [
           <UnderlinedArrowLink
             className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
             href="https://www.theinterfold.com/fold-auction"
-            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-current"
+            textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
             underlineClassName="border-b border-current pb-[3px]"
           >
             Official Interfold auction page
@@ -479,18 +480,6 @@ const termsSections: LegalSection[] = [
     ],
   },
 ];
-
-function SectionLabel({ children, tone = "muted" }: { children: string; tone?: "muted" | "signal" }) {
-  return (
-    <p
-      className={`font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:text-[14px] ${
-        tone === "signal" ? "text-[#82f5ad]" : "text-[#687d71]"
-      }`}
-    >
-      {children}
-    </p>
-  );
-}
 
 function LegalSectionRow({ section }: { section: LegalSection }) {
   return (
@@ -558,12 +547,12 @@ export function AuctionLegalPage() {
   }, []);
 
   return (
-    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-white text-[#3a5e3c] md:pt-[63px]">
+    <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] md:pt-[63px]">
       <main>
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
             <SectionLabel>Terms</SectionLabel>
-            <h2 className="mx-auto mt-[11.543px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
+            <h2 className="mx-auto mt-[12px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
               FOLD Auction Terms
             </h2>
             <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">
@@ -589,7 +578,7 @@ export function AuctionLegalPage() {
 
         <section className="bg-white px-4 pb-[64px] md:px-8 md:pb-[96px]">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
-            <div className="rounded-[28px] bg-[#d9fce8] p-6 md:p-10">
+            <div className="rounded-[24px] bg-[#d9fce8] p-6 md:p-10">
               <SectionLabel>Important Information</SectionLabel>
               <div className="mt-6 space-y-4 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.6] tracking-[0.3px] text-[#687d71]">
                 <p>FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch sequence.</p>
@@ -614,7 +603,7 @@ export function AuctionLegalPage() {
         </section>
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
 
     </div>
   );

@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import * as THREE from "three";
 import { AnimatePresence, motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
+import { ExecutionFlowReveal } from "../../app/components/ExecutionFlowReveal";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.png";
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
@@ -15,8 +16,10 @@ import etmStackedLogo from "./encrypt-mempool-stacked.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
 import { GhostSignupForm } from "../../app/components/GhostSignupForm";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
-import { ExternalArrowSlide, HoverArrowContent } from "../../app/components/HoverArrowLink";
+import { HoverArrowContent, UnderlinedArrowLink } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
+import { NetworkStrip } from "../../app/components/NetworkStrip";
+import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
 import { useStartOnInView } from "../../app/components/useStartOnInView";
@@ -147,7 +150,7 @@ function Frame() {
   };
 
   return (
-    <div className="relative isolate bg-[#d9fce8] md:absolute w-full md:left-1/2 md:-translate-x-1/2 md:top-[calc(535px+min(44.444vw,640px))]">
+    <div className="relative isolate bg-[#d9fce8] w-full">
       <motion.div
         className="w-full bg-[rgba(193,217,191,0.8)] py-6 md:py-8 min-h-[115px] flex items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -186,7 +189,7 @@ function Frame() {
             {hoveredFriend !== null && (
               <motion.div
                 key="friend-tooltip"
-                className="pointer-events-none fixed z-[9999] overflow-hidden bg-[#3a5e3c] px-3 py-2 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#d9fce8]"
+                className="pointer-events-none fixed z-[9999] overflow-hidden bg-[#3a5e3c] px-3 py-2 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#d9fce8]"
                 initial={{ opacity: 0, scale: 0.96, y: 4 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.96, y: 4 }}
@@ -213,13 +216,16 @@ function Frame() {
 
 function Frame16() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination systems become possible." />
+        <LineRevealAuto delay={0.1} text="New forms of coordination become possible." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>When shared outcomes no longer require exposing private inputs or trusting a single operator.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -228,7 +234,7 @@ function AnimatedButtonContent({
   children,
   isExternal = false,
   isHovered,
-  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
+  arrowClassName = "absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]",
   textClassName,
 }: {
   children: string;
@@ -258,7 +264,7 @@ function Frame22() {
           <p className="leading-[0.95] mb-0">Fairer market</p>
           <p className="leading-[0.95]">mechanisms</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Sealed auction mechanisms where bids remain private and outcomes are verifiable</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.</p>
       </div>
     </div>
   );
@@ -272,7 +278,7 @@ function Frame24() {
           <p className="leading-[0.95] mb-0">Stronger democratic</p>
           <p className="leading-[0.95]">systems</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Secret ballots with correct, verifiable tallying and no trusted operator</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.</p>
       </div>
     </div>
   );
@@ -286,7 +292,7 @@ function Frame25() {
           <p className="leading-[0.95] mb-0">Collaborative</p>
           <p className="leading-[0.95]">Intelligence</p>
         </div>
-        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14.429px] max-w-full">Multiple parties compute together to produce shared results without exposing data</p>
+        <p className="leading-[1.075] relative shrink-0 text-[13px] md:text-[14px] lg:text-[14px] max-w-full">Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.</p>
       </div>
     </div>
   );
@@ -346,7 +352,7 @@ function Frame23() {
 
 function Frame19() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(1573px+min(44.444vw,640px))] w-full">
+    <div className="relative bg-[#d9fce8] content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center justify-center py-[64px] md:py-[112px] w-full">
       <Frame16 />
       <Frame23 />
     </div>
@@ -355,77 +361,63 @@ function Frame19() {
 
 function Frame8() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-[#d4f6da] text-center w-full md:w-[540px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#d4f6da]/55 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Confidential coordination becomes real through both applications and operators:" />
+        <LineRevealAuto delay={0.1} text="Help form the network." />
       </p>
-      <ScrollFadeIn className="w-full" delay={0.4}>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] relative shrink-0 text-[14.429px] w-full">Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution authority and govern outcome release.</p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#d4f6da]/55 w-full md:w-[440px]`}>Operate the network, build applications, or bring new use cases to Interfold.</p>
       </ScrollFadeIn>
     </div>
   );
 }
 
-function Frame2() {
+// Marvin: this section was repeating the hero's CTAs. It is now a compact
+// version of the three participation paths from the Participate page —
+// title, one line, one link — and a text link to the page itself.
+const participationPaths = [
+  {
+    body: "Operate infrastructure for confidential coordination.",
+    cta: "Get started",
+    href: "https://dashboard.theinterfold.com/#operator",
+    title: "Run a ciphernode",
+  },
+  {
+    body: "Build applications using private inputs and verifiable outcomes.",
+    cta: "Explore docs",
+    href: "https://docs.theinterfold.com/getting-started",
+    title: "Build and integrate",
+  },
+  {
+    body: "Bring a live use case to Interfold and deploy it in practice.",
+    cta: "Reach out",
+    href: "mailto:comms@gnosisguild.org",
+    title: "Partner on a pilot",
+  },
+];
+
+// The route into the Participate page. It was a text link; it is a button now,
+// one column wide like the How Interfold Works button, so the two actions that
+// close a section read as the same thing. It sits on #121718, where the
+// Participate page already fills its secondary buttons this way.
+function ExploreParticipateCta() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="https://docs.theinterfold.com/"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isExternal
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Build on Interfold
-      </AnimatedButtonContent>
-    </a>
-  );
-}
-
-function Frame1() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="/fold-auction"
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
+      href="/participate"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Participate
-      </AnimatedButtonContent>
-    </a>
-  );
-}
-
-function FinalTelegramCta() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
-      href="https://t.me/enclave_e3"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <AnimatedButtonContent
-        isExternal
-        isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
-      >
-        Join Telegram
+        Explore all ways to participate
       </AnimatedButtonContent>
     </a>
   );
@@ -433,16 +425,31 @@ function FinalTelegramCta() {
 
 function Frame9() {
   return (
-    <div className={`${THREE_COLUMN_GRID_CLASS} items-center`}>
-      <ScrollFadeIn className="w-full" delay={0.3}>
-        <Frame2 />
-      </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.4}>
-        <FinalTelegramCta />
-      </ScrollFadeIn>
-      <ScrollFadeIn className="w-full" delay={0.5}>
-        <Frame1 />
-      </ScrollFadeIn>
+    <div className="content-stretch flex w-full flex-col items-center gap-[48px]">
+      <div className={`${THREE_COLUMN_GRID_CLASS} items-start gap-y-[40px]`}>
+        {participationPaths.map((path, index) => (
+          <ScrollFadeIn className="w-full" delay={0.3 + index * 0.1} key={path.title}>
+            <div className="flex flex-col items-start gap-[8px] text-left">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d9fce8]">
+                {path.title}
+              </p>
+              <p className={`${SUPPORTING_LINE} text-[#d4f6da]/55`}>{path.body}</p>
+              <UnderlinedArrowLink
+                className="mt-[8px] inline-flex text-[#82f5ad]"
+                href={path.href}
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-current md:text-[14px]"
+              >
+                {path.cta}
+              </UnderlinedArrowLink>
+            </div>
+          </ScrollFadeIn>
+        ))}
+      </div>
+      <div className={THREE_COLUMN_GRID_CLASS}>
+        <ScrollFadeIn className="md:col-start-2" delay={0.6}>
+          <ExploreParticipateCta />
+        </ScrollFadeIn>
+      </div>
     </div>
   );
 }
@@ -458,7 +465,7 @@ function Frame10() {
 
 function Frame11() {
   return (
-    <div id="participate" className="md:absolute md:-translate-x-1/2 relative bg-[#121718] content-stretch flex flex-col items-center justify-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(2557px+min(44.444vw,640px))] w-full">
+    <div id="participate" className="relative bg-[#121718] content-stretch flex flex-col items-center justify-center py-[64px] md:py-[112px] w-full">
       <Frame10 />
     </div>
   );
@@ -466,13 +473,16 @@ function Frame11() {
 
 function Frame18() {
   return (
-    <div className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full">
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
-        <LineRevealAuto delay={0.1} text="Read the technical documentation, essays, and updates that explain how Interfold works, why confidential coordination matters, and what is live now." />
+        <LineRevealAuto delay={0.1} text="Go deeper." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Explore how Interfold works, why confidential coordination matters, and what is live now.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -482,7 +492,7 @@ function Frame3() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
       href="https://docs.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -490,7 +500,7 @@ function Frame3() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Explore Docs
       </AnimatedButtonContent>
@@ -519,8 +529,8 @@ function Frame26() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Technical documentation, references, and implementation details.</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">DOCS</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Technical documentation, references, and implementation details.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame3 />
@@ -544,7 +554,7 @@ function Frame4() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
       href="https://blog.theinterfold.com/tag/confidential-coordination"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -552,7 +562,7 @@ function Frame4() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read essays
       </AnimatedButtonContent>
@@ -581,8 +591,8 @@ function Frame28() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">essays</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Writing on confidential coordination and the architecture behind the network.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame4 />
@@ -596,7 +606,7 @@ function Frame5() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]"
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
       href="https://blog.theinterfold.com/"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -604,7 +614,7 @@ function Frame5() {
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Read the blog
       </AnimatedButtonContent>
@@ -633,8 +643,8 @@ function Frame29() {
             </svg>
           </div>
         </div>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
-        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">BLOG</p>
+        <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Updates, research notes, and ecosystem announcements.</p>
       </div>
       <div className="mt-auto w-full">
         <Frame5 />
@@ -665,7 +675,7 @@ function Frame30() {
 
 function Frame20() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center md:left-1/2 pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] md:top-[calc(3056px+min(44.444vw,640px))] w-full">
+    <div className="relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center pb-[64px] md:pb-[224px] pt-[64px] md:pt-[112px] w-full">
       <Frame18 />
       <Frame30 />
     </div>
@@ -674,16 +684,19 @@ function Frame20() {
 
 function Frame14() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic opacity-80 relative shrink-0 text-center w-full md:w-[597px] px-4 md:px-0`}>
       <ScrollFadeIn className="w-full flex justify-center">
-        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
+        <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">
           <p className="leading-[1.075] mb-0 whitespace-pre">{`A new `}</p>
           <p className="leading-[1.075] whitespace-pre">execution Model</p>
         </div>
       </ScrollFadeIn>
       <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
-        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable outcomes without data custody, input exposure, or trusted hardware." />
+        <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems." />
       </p>
+      <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.</p>
+      </ScrollFadeIn>
     </div>
   );
 }
@@ -982,6 +995,7 @@ function ExecutionFlowThreeGlows({ isHidden }: { isHidden: boolean }) {
     <div
       aria-hidden="true"
       className={`absolute inset-0 pointer-events-none execution-flow-three-glows transition-opacity duration-200 ${isHidden ? "opacity-0" : "opacity-100"}`}
+      data-execution-flow-overlay=""
       ref={mountRef}
     />
   );
@@ -1040,7 +1054,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
           : "";
 
   return (
-    <svg className={`absolute block inset-0 pointer-events-none size-full overflow-visible ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+    <svg className={`absolute block inset-0 pointer-events-none size-full overflow-visible ${hoverClass}`} data-execution-flow-overlay="" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
       <g clipPath="url(#clip0_execution_flow_pulse_dots)">
         <style>{`
           .execution-flow-pulse-dot {
@@ -1053,15 +1067,19 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
             fill: #82F5AD;
           }
 
+          /* This overlay is its own svg, so it cannot share the group the rest
+             of the drawing dims inside. Dimming it the same way would put 50%
+             black over the 50% black lines and land at 75% — a dark dot on
+             every junction. It takes the dimmed tone as a solid colour
+             instead: #929292 is exactly what #252525 at half strength looks
+             like on the white this sits on. */
           .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot {
-            opacity: 0.5;
             animation: none;
           }
 
           .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot {
-            opacity: 0.5;
             animation: none;
           }
 
@@ -1069,7 +1087,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
           .execution-flow-pulse-dots-hover-inputs .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-nodes .execution-flow-final-dot,
           .execution-flow-pulse-dots-hover-output .execution-flow-pulse-dot-core {
-            fill: #252525 !important;
+            fill: #929292 !important;
           }
 
           .execution-flow-pulse-dots-hover-inputs .execution-flow-pulse-dot-halo,
@@ -1294,7 +1312,7 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
         : "";
 
   return (
-    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+    <svg className={`absolute block inset-0 pointer-events-none size-full ${hoverClass}`} data-execution-flow-overlay="" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
       <g clipPath="url(#clip0_execution_flow_inputs)">
         <style>{`
           .execution-flow-input-square {
@@ -1375,9 +1393,14 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
 
 function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlowHoverZone; isFullWidth?: boolean }) {
   return (
-    <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 mt-[0.57px] relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
+    <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
+          {/* Lines, nodes and spine dim together inside one group. Dimming them
+              separately stacked three translucent layers, and every node that
+              sat on a line came out at 0.75 alpha against the line's 0.5 —
+              which read as a dark blob at exactly the junctions the drawing is
+              trying to make legible. */}
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
             <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
@@ -1398,14 +1421,10 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
             <path d={svgPaths.pf569a00} id="Vector_26" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.p35357400} id="Vector_27" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
             <path d={svgPaths.pd678600} id="Vector_28" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-          </g>
           <g
-            className="transition-[color,opacity] duration-200"
+            className="transition-[color] duration-200"
             id="Group_2"
-            style={{
-              color: hoveredZone ? "#252525" : "#82F5AD",
-              opacity: hoveredZone ? 0.5 : 1,
-            }}
+            style={{ color: hoveredZone ? "#252525" : "#82F5AD" }}
           >
             <path d={svgPaths.p3380c5c0} fill="currentColor" id="Vector_29" />
             <path d={svgPaths.pe920280} fill="currentColor" id="Vector_32" />
@@ -1426,14 +1445,13 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
             <path d={svgPaths.p1decb600} fill="currentColor" id="Vector_47" />
           </g>
           <path
-            className="transition-opacity duration-200"
             d="M476.758 208.821V114.505"
             id="Vector_54"
             stroke="var(--stroke-0, #252525)"
             strokeMiterlimit="10"
             strokeWidth="2.18269"
-            style={{ opacity: hoveredZone ? 0.5 : 1 }}
           />
+          </g>
         </g>
         <defs>
           <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_0_363" x1="332.379" x2="332.379" y1="6.73522" y2="114.525">
@@ -1493,7 +1511,11 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
 }
 
 export function AnimatedExecutionModelGraphic() {
-  return <Layer hoveredZone={null} isFullWidth />;
+  return (
+    <ExecutionFlowReveal className="w-full">
+      <Layer hoveredZone={null} isFullWidth />
+    </ExecutionFlowReveal>
+  );
 }
 
 function Group({
@@ -1510,21 +1532,23 @@ function Group({
   };
 
   return (
+    <ExecutionFlowReveal>
     <div className="grid-cols-[1fr] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0 w-[calc(100vw-64px)] max-w-[1052px]">
       <Layer hoveredZone={hoveredZone} />
-      <div className={`${tagClass("inputs")} ml-[14.639%] mt-0`}>
+      <div className={`${tagClass("inputs")} ml-[14.639%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">01</p>
       </div>
-      <div className={`${tagClass("nodes")} ml-[48.479%] mt-0`}>
+      <div className={`${tagClass("nodes")} ml-[48.479%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">02</p>
       </div>
-      <div className={`${tagClass("output")} ml-[82.319%] mt-0`}>
+      <div className={`${tagClass("output")} ml-[82.319%] mt-0`} data-execution-flow-tag="">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[14px] text-white tracking-[1.4px] uppercase whitespace-nowrap">03</p>
       </div>
       <div aria-hidden="true" className="absolute left-0 top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("inputs")} />
       <div aria-hidden="true" className="absolute left-[33.84%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("nodes")} />
       <div aria-hidden="true" className="absolute left-[67.681%] top-0 z-10 h-full w-[32.319%]" onMouseEnter={() => setHoveredZone("output")} />
     </div>
+    </ExecutionFlowReveal>
   );
 }
 
@@ -1554,12 +1578,12 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px]">01</p>
-            <p className="leading-[1.075] mb-0 text-[14px]">Confidential</p>
+            <p className="leading-[1.075] mb-0 text-[14px]">Encrypted</p>
             <p className="leading-[1.075] text-[14px]">inputs</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Data remains private throughout execution</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Sensitive data remains private during execution.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.2}>
@@ -1571,12 +1595,12 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">02</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Threshold `}</p>
-            <p className="leading-[1.075] text-[14px] whitespace-pre">enforcement</p>
+            <p className="leading-[1.075] text-[14px] whitespace-pre">decryption</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">A subset of nodes governs execution and release</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Ciphernode committees use threshold decryption so no single party controls decryption.</p>
         </div>
       </ScrollFadeIn>
       <ScrollFadeIn className="w-full" delay={0.3}>
@@ -1588,15 +1612,36 @@ function Frame31({
               </svg>
             </div>
           </div>
-          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#252525] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
+          <div className="font-['Office_Code_Pro:Medium',sans-serif] leading-[0] not-italic relative shrink-0 text-[#3a5e3c] text-[0px] tracking-[1.4px] uppercase whitespace-nowrap">
             <p className="leading-[1.075] mb-0 text-[#3a5e3c] text-[14px] whitespace-pre">03</p>
             <p className="leading-[1.075] mb-0 text-[14px] whitespace-pre">{`Verifiable `}</p>
             <p className="leading-[1.075] text-[14px] whitespace-pre">outcomes</p>
           </div>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] w-[min-content]">Results are verifiable without revealing inputs</p>
+          <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] min-w-full not-italic relative shrink-0 text-[#3a5e3c] text-[14px] w-[min-content]">Results can be verified without revealing the private inputs behind them.</p>
         </div>
       </ScrollFadeIn>
     </div>
+  );
+}
+
+function HowItWorksCta() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <a
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center px-6 relative shrink-0 w-full transition-colors hover:bg-[#3a5e3c]`}
+      href="https://blog.theinterfold.com/how-interfold-works/"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <AnimatedButtonContent
+        isExternal
+        isHovered={isHovered}
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+      >
+        How Interfold Works
+      </AnimatedButtonContent>
+    </a>
   );
 }
 
@@ -1607,23 +1652,38 @@ function Frame15() {
   return (
     <div
       id="execution-model"
-      className="md:-translate-x-1/2 md:absolute relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] md:h-[923px] items-center md:left-1/2 py-[64px] md:py-[112px] md:top-[calc(650px+min(44.444vw,640px))] w-full"
+      className="relative bg-white content-stretch flex flex-col gap-[64px] md:gap-[96px] items-center py-[64px] md:py-[112px] w-full"
     >
       <Frame14 />
-      <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full" onMouseLeave={() => setHoveredZone(null)}>
-        <ScrollFadeIn delay={0.2}>
+      <div className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full">
+        {/* The three hover columns are full height, so they have to stop at the
+            bottom of the cards. Spanning the whole section put them over the
+            button below, which then could be neither hovered nor clicked, and
+            left a card lit while the pointer was already down on the button. */}
+        <div
+          className="content-stretch relative flex flex-col gap-[64px] md:gap-[96px] items-center w-full"
+          onMouseLeave={() => setHoveredZone(null)}
+        >
           <Group hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
-        </ScrollFadeIn>
-        <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
-          {executionHoverZones.map((zone) => (
-            <div
-              aria-hidden="true"
-              className="pointer-events-auto"
-              key={zone}
-              onMouseEnter={() => setHoveredZone(zone)}
-            />
-          ))}
+          <Frame31 hoveredZone={hoveredZone} setHoveredZone={setHoveredZone} />
+          <div className="pointer-events-none absolute inset-y-0 left-1/2 z-30 hidden w-[1052px] max-w-[calc(100%_-_64px)] -translate-x-1/2 grid-cols-3 gap-[16px] md:grid">
+            {executionHoverZones.map((zone) => (
+              <div
+                aria-hidden="true"
+                className="pointer-events-auto"
+                key={zone}
+                onMouseEnter={() => setHoveredZone(zone)}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Placed in the same grid as the cards above, in the middle column,
+            so the button is exactly one column wide at every width — and the
+            full column once the grid collapses to one. */}
+        <div className={THREE_COLUMN_GRID_CLASS}>
+          <ScrollFadeIn className="md:col-start-2 md:px-[8px]" delay={0.4}>
+            <HowItWorksCta />
+          </ScrollFadeIn>
         </div>
       </div>
     </div>
@@ -1666,12 +1726,12 @@ function Frame21() {
 
 function Frame12() {
   return (
-    <div className="content-stretch flex flex-col gap-[24px] items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0">
+    <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0`}>
       <div className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
       </div>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
-        <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#687d71] text-[14px] tracking-[1.4px] uppercase w-full md:w-[384px]">Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.</p>
+        <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>
     </div>
   );
@@ -1682,15 +1742,15 @@ function Frame6() {
 
   return (
     <a
-      className="group bg-[rgba(193,217,191,0.8)] content-stretch flex h-[52px] items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="https://docs.theinterfold.com/"
+      className={`group bg-[rgba(193,217,191,0.8)] content-stretch flex ${BUTTON_SIZE} items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
+      href="https://docs.theinterfold.com/getting-started"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
         isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
         Build on Interfold
       </AnimatedButtonContent>
@@ -1698,21 +1758,22 @@ function Frame6() {
   );
 }
 
-function Frame7() {
+function FrameRunCiphernode() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <a
-      className="group bg-[#82f5ad] content-stretch flex h-[52px] items-center justify-center relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]"
-      href="/fold-auction"
+      className={`group bg-[#82f5ad] content-stretch flex ${BUTTON_SIZE} items-center justify-center py-[16px] relative shrink-0 w-full md:w-[288px] max-w-[288px] transition-colors hover:bg-[#3a5e3c]`}
+      href="https://dashboard.theinterfold.com/#operator"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <AnimatedButtonContent
+        isExternal
         isHovered={isHovered}
-        textClassName="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14.429px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
+        textClassName="font-['ABC_Gramercy:Regular',sans-serif] leading-[1.075] not-italic relative shrink-0 text-[#3a5e3c] text-[14px] text-center whitespace-nowrap transition-colors group-hover:text-[#82f5ad]"
       >
-        Participate
+        Run a ciphernode
       </AnimatedButtonContent>
     </a>
   );
@@ -1720,12 +1781,14 @@ function Frame7() {
 
 function Frame17() {
   return (
-    <div className="content-stretch flex flex-col md:flex-row gap-[16px] items-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
+    // Three 288px buttons do not fit one row until well past the md breakpoint,
+    // so this wraps and centres rather than overflowing between 768px and ~940px.
+    <div className="content-stretch flex flex-col md:flex-row md:flex-wrap gap-[16px] items-center justify-center relative shrink-0 w-full md:w-auto px-4 md:px-0">
       <ScrollFadeIn delay={0.2}>
         <Frame6 />
       </ScrollFadeIn>
       <ScrollFadeIn delay={0.3}>
-        <Frame7 />
+        <FrameRunCiphernode />
       </ScrollFadeIn>
     </div>
   );
@@ -1733,35 +1796,16 @@ function Frame17() {
 
 function Frame13() {
   return (
-    <div className="md:-translate-x-1/2 md:absolute relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center md:left-1/2 py-[64px] md:py-[112px] lg:h-[503px] md:top-[calc(32px+min(44.444vw,640px))] w-full">
+    <div className="relative bg-[#d9fce8] content-stretch flex flex-col gap-[48px] items-center py-[64px] md:py-[112px] w-full">
       <Frame12 />
       <Frame17 />
     </div>
   );
 }
 
-function LiveNowBar() {
+export function DesktopFooter() {
   return (
-    <div className="relative flex h-[32px] w-full items-center justify-center bg-white md:absolute md:left-1/2 md:top-[min(44.444vw,640px)] md:-translate-x-1/2">
-      <div className="flex items-center justify-center gap-12 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] text-[#687d71]">
-        <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
-        <span>Live now</span>
-        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
-          <span>Aragon demo</span>
-          <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-        </a>
-        <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
-          <span>Network dashboard</span>
-          <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-        </a>
-      </div>
-    </div>
-  );
-}
-
-export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean }) {
-  return (
-    <footer className={`${staticLayout ? "relative" : "md:absolute relative md:left-0 md:top-[calc(3881px+min(44.444vw,640px))]"} bg-[#d9fce8] w-full`}>
+    <footer className="relative bg-[#d9fce8] w-full">
       <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
         <div className="md:col-start-1 md:row-start-1">
           <ScrollFadeIn>
@@ -1778,7 +1822,7 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
         <div className="not-italic md:col-start-3 md:row-start-1">
           <div className="flex flex-col gap-[8px]">
             <ScrollFadeIn delay={0.1}>
-              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
+              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px] [&_a]:font-normal">
               <ScrollFadeIn delay={0.2}>
@@ -1794,17 +1838,17 @@ export function DesktopFooter({ staticLayout = false }: { staticLayout?: boolean
         <div className="content-stretch flex flex-col gap-[8px] items-start not-italic w-full md:col-start-4 md:row-start-1">
           <div className="flex flex-col gap-[8px] w-full">
             <ScrollFadeIn delay={0.1}>
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#252525] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
             </ScrollFadeIn>
             <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://github.com/gnosisguild/enclave/">Github</a>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.4}>
-                <a className="block text-left text-base font-medium leading-[1.5] tracking-normal transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
               </ScrollFadeIn>
             </div>
           </div>
@@ -1832,8 +1876,8 @@ function Frame32() {
 
 export default function Desktop() {
   return (
-    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-hidden bg-[#d9fce8] md:min-h-[calc(4293px+min(44.444vw,640px))]" data-name="Desktop">
-      <div className="interfold-hero-transition md:absolute relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718] md:left-1/2 md:top-0 md:-translate-x-1/2" data-name="image 66">
+    <div className="interfold-page-transition relative min-h-screen w-full overflow-x-clip bg-[#d9fce8]" data-name="Desktop">
+      <div className="interfold-hero-transition relative h-[min(44.444vw,640px)] w-full overflow-hidden bg-[#121718]" data-name="image 66">
         <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 overflow-hidden bg-[#d9fce8] pointer-events-none">
           <HeroImage
             className="interfold-home-hero-image absolute inset-0 h-full w-full object-cover object-top mix-blend-darken"
@@ -1842,13 +1886,21 @@ export default function Desktop() {
           />
         </div>
       </div>
-      <LiveNowBar />
+      {/* The offset is whichever header is on screen. Below xl that is the
+          60px mobile header, which is sticky and in flow; from xl it is the
+          63px desktop header, which is fixed, so the strip pins to its
+          underside rather than to the top of the window. */}
+      <NetworkStrip className="sticky top-[60px] z-40 xl:top-[63px]" />
+      {/* Reading order is now the order on screen. It used to be
+          Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
+          Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block
+          was placed by an absolute top and the markup order did not matter. */}
+      <Frame13 />
       <Frame />
+      <Frame15 />
       <Frame19 />
       <Frame11 />
       <Frame20 />
-      <Frame15 />
-      <Frame13 />
       <Frame32 />
     </div>
   );

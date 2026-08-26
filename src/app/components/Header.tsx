@@ -2,6 +2,7 @@ import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { motion } from "motion/react";
 import { ExternalArrowSlide } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
+import { NetworkMenu } from "./NetworkMenu";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 
 function Wordmark() {
@@ -40,6 +41,11 @@ export function Header({
   const BrandLink = animateOpening ? motion.a : "a";
   const MarkLink = animateOpening ? motion.a : "a";
   const NavLink = animateOpening ? motion.a : "a";
+  // The pill is a component, not an element, so it joins the opening sequence
+  // through a wrapper. Without one it was the only thing in the bar already
+  // painted when the bar arrived, and the wordmark and links then faded in
+  // around it.
+  const PillSlot = animateOpening ? motion.div : "div";
   const openingMotion = (delay: number) => animateOpening
     ? {
         animate: { opacity: 1, y: 0 },
@@ -47,43 +53,56 @@ export function Header({
         transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
       }
     : {};
+  // The arrow hangs from the x-height line rather than sitting 1.2px under it.
+  // Measured off the rendered ink, not the font's metrics — the glyph does not
+  // sit flush on its own baseline. Same rule as the mobile menu.
+  const navArrowClass =
+    "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none top-[-0.0875em]";
   const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
   const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
-  const auctionLinkClass = `${navLinkClass} ${activePath === "fold-auction" ? "is-active" : ""}`;
 
   return (
     <>
       {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="xl:hidden" />}
       {showDesktop && (
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} ${desktopPositionClassName} z-50 hidden h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms] xl:block`}>
+        <div className={`${desktopPositionClassName} z-50 hidden w-full xl:block`}>
+        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms]`}>
           <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
             <BrandLink
               aria-label="The Interfold home"
-              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17.239px] w-[120.421px] justify-self-start"}
+              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17px] w-[120px] justify-self-start"}
               href="/"
               style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
               {...openingMotion(0.75)}
             >
               {animateOpening ? "The Interfold" : <Wordmark />}
             </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35.071px] w-[45.703px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
+            <MarkLink aria-label="The Interfold home" className="h-[35px] w-[46px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
               <InterfoldSymbol className="block h-full w-full" />
             </MarkLink>
-            <nav className="hidden justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
+            {/* items-center matters now that the pill is in here: without it the links
+                stretch to the pill's 41px and their text sits at the top of that
+                box, riding up above the wordmark. */}
+            <nav className="hidden items-center justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
-                <ExternalArrowSlide />
+                <ExternalArrowSlide className={navArrowClass} />
               </NavLink>
               <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
                 <span>Blog</span>
-                <ExternalArrowSlide />
+                <ExternalArrowSlide className={navArrowClass} />
               </NavLink>
-              <NavLink aria-current={activePath === "fold-auction" ? "page" : undefined} className={auctionLinkClass} href="/fold-auction" {...openingMotion(1.15)}>Auction</NavLink>
-              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.25)}>Participate</NavLink>
+              {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
+                  still live and still the claim route — reachable by direct link only. */}
+              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
+              <PillSlot className="self-center" {...openingMotion(1.25)}>
+                <NetworkMenu />
+              </PillSlot>
             </nav>
           </div>
         </header>
+        </div>
       )}
     </>
   );

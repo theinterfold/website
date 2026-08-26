@@ -5,7 +5,9 @@ import { HeroImage, auctionHeroSources } from "./HeroImage";
 import { HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { LineRevealAuto } from "./LineRevealAuto";
+import { SectionLabel } from "./SectionLabel";
 import { ScrollFadeIn } from "./ScrollFadeIn";
+import { BUTTON_SIZE } from "./titleBlock";
 
 // =============================================================================
 // AUCTION 2 CONFIGURATION — single source of truth for the live Auction 2 page.
@@ -26,8 +28,18 @@ const isPending = (href: string) => !href || href === PENDING_LINK;
 
 const AUCTION = {
   // --- Identity -------------------------------------------------------------
-  heroTitle: "FOLD Auction 2 is Live",
-  statusLead: "FOLD Auction 2 live now",
+  // Was: "FOLD Auction 2 is Live". Plural and unqualified on purpose \u2014 it covers
+  // both auctions, not just this one.
+  heroTitle: "$FOLD Auctions are closed",
+  // Was: "FOLD Auction 2 live now". Same two-part shape the page used when
+  // Auction 1 closed ("$FOLD auction closed \u00b7 400 ETH target surpassed"), but the
+  // second half is the action still open rather than a result.
+  //
+  // Held as two fields because the strip renders them differently by width: one
+  // line joined by a middle dot on desktop, two lines on mobile. Auction 1's
+  // version was short enough to fit either way; this one is not.
+  statusLead: "$FOLD auctions closed",
+  statusLeadSecondary: "Claiming open",
 
   // --- Participate (Auction 2 specific) --------------------------------------
   uniswapCcaUrl: "https://app.uniswap.org/explore/auctions/ethereum/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
@@ -97,13 +109,16 @@ const AUCTION = {
 
 const PAGE_TITLE = "FOLD Auction 2 · The Interfold";
 const META_DESCRIPTION =
-  "The FOLD Auction 2 is live. FOLD is distributed through a Continuous Clearing Auction on Uniswap. Registration required. Use official links only.";
+  "The $FOLD auctions are closed. FOLD was distributed through a Continuous Clearing Auction on Uniswap, and successful bidders can now claim. Use official links only.";
 
 // Composed date strings, tolerant of a still-pending time.
 const opensWhen = AUCTION.opensTime === PENDING_TEXT ? `${AUCTION.opensDate} at ${PENDING_TEXT}` : `${AUCTION.opensDate} at ${AUCTION.opensTime}`;
 const closesWhen = AUCTION.closesTime === PENDING_TEXT ? `${AUCTION.closesDate} at ${PENDING_TEXT}` : `${AUCTION.closesDate} at ${AUCTION.closesTime}`;
 
-const heroPrimaryCta = { label: "Join the FOLD Auction", href: AUCTION.uniswapCcaUrl };
+// Same Uniswap CCA URL, different job: that page is now where claiming happens.
+// This is the page's only claim link now that the update box is gone.
+// Was: "Join the FOLD Auction".
+const heroPrimaryCta = { label: "Claim Your FOLD", href: AUCTION.uniswapCcaUrl };
 // The live Auction 1 page pointed this at the participation guide, which for
 // Auction 2 has not been written yet. Rather than hide it, it points at the
 // Auction FAQ — which is what the currently published page does too. Swap it
@@ -113,19 +128,16 @@ const heroSecondaryCta = isPending(AUCTION.participationGuideUrl)
   : { label: "How to Participate", href: AUCTION.participationGuideUrl };
 const auctionActionLabel = "Join the FOLD Auction";
 
-// Auction 1's middle line was the 40-day cooldown, which no longer applies.
+// The strip now carries the post-auction detail, the way it did when Auction 1
+// closed. That version read "Results will be shared once finalized / 40-day
+// cooldown period / Use official links only"; the cooldown is gone and there are
+// no results to share yet, so these two lines cover claiming instead. The last
+// line is unchanged from both previous versions.
 const statusStripDetails = [
-  "Verification required",
+  "Claiming runs through the official Uniswap CCA interface",
+  "Connect the wallet you bid with",
   "Use official links only",
 ];
-
-function SectionLabel({ children, className = "text-[#687d71]" }: { children: string; className?: string }) {
-  return (
-    <p className={`font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.2px] md:text-[14px] md:leading-[1.075] md:tracking-[1.4px] ${className}`}>
-      {children}
-    </p>
-  );
-}
 
 function CtaButton({
   href,
@@ -144,7 +156,7 @@ function CtaButton({
     return (
       <span
         aria-disabled="true"
-        className={`flex h-[52px] w-full cursor-not-allowed items-center justify-center rounded-[6px] px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] ${
+        className={`flex w-full cursor-not-allowed items-center justify-center ${BUTTON_SIZE} px-6 text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] ${
           isPrimary ? "bg-[#82f5ad]/40 text-[#3a5e3c]/55" : "bg-[rgba(193,217,191,0.4)] text-[#3a5e3c]/55"
         }`}
       >
@@ -155,11 +167,11 @@ function CtaButton({
 
   return (
     <HoverArrowLink
-      className={`flex h-[52px] w-full items-center justify-center rounded-[6px] px-6 transition-colors hover:bg-[#3a5e3c] ${
+      className={`flex w-full items-center justify-center ${BUTTON_SIZE} px-6 transition-colors hover:bg-[#3a5e3c] ${
         isPrimary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
       }`}
       href={href}
-      textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+      textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
     >
       {children}
     </HoverArrowLink>
@@ -209,7 +221,7 @@ function FaqRow({ item }: { item: { question: string; answer: string } }) {
           >
             <motion.p
               animate={{ y: 0, opacity: 1 }}
-              className="pb-5 font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.25] text-[#687d71] md:text-[18px]"
+              className="pb-5 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]"
               initial={{ y: revealOffset, opacity: 0 }}
               transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
@@ -515,7 +527,7 @@ function ContractsCard() {
   // Lit surface (radial gradient, brighter at top) + beveled edge (top highlight,
   // hairline inner border, bottom inner shadow) to give the card real material depth.
   const shellClass =
-    "relative h-full overflow-hidden rounded-[28px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] p-6 pb-0 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:p-12 md:pb-0";
+    "relative h-full overflow-hidden rounded-[24px] bg-[radial-gradient(130%_120%_at_var(--mx)_var(--my),#1e2729_0%,#141a1b_48%,#0d1112_100%)] p-6 pb-0 text-[#d9fce8] shadow-[inset_0_1px_0_rgba(255,255,255,0.09),inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-50px_80px_-50px_rgba(0,0,0,0.6),0_24px_55px_-22px_rgba(0,0,0,0.6),0_10px_22px_-14px_rgba(0,0,0,0.5)] md:p-12 md:pb-0";
 
   return (
     <div
@@ -726,7 +738,7 @@ export function FoldAuctionPage() {
   }, []);
 
   return (
-    <div className="interfold-page-transition min-h-screen overflow-x-hidden bg-[#d9fce8] text-[#3a5e3c]">
+    <div className="interfold-page-transition min-h-screen overflow-x-clip bg-[#d9fce8] text-[#3a5e3c]">
       <main>
         {/* Hero visual band — same treatment as the homepage hero */}
         <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8] md:h-[min(44.444vw,640px)]">
@@ -748,8 +760,15 @@ export function FoldAuctionPage() {
         {/* Status strip */}
         <div className="bg-[#121718] px-4 py-3 text-[#82f5ad] md:px-8">
           <div className="mx-auto flex max-w-[1052px] items-center justify-center gap-x-3 text-center font-['Office_Code_Pro:Medium',sans-serif] text-[11px] uppercase leading-[1.4] tracking-[1.4px] md:text-[12px]">
-            <span aria-hidden="true" className="size-[7px] shrink-0 animate-pulse rounded-full bg-[#82f5ad] motion-reduce:animate-none" />
-            <span>{AUCTION.statusLead}</span>
+            {/* The status dot is gone: it was a liveness indicator, and nothing here is live. */}
+            <span>
+              {AUCTION.statusLead}
+              {/* Middle dot on one line at md and up; a hard break below it, where the
+                  two halves would otherwise wrap mid-phrase. */}
+              <span className="hidden md:inline">{" \u00b7 "}</span>
+              <br className="md:hidden" />
+              {AUCTION.statusLeadSecondary}
+            </span>
             <span className="group relative inline-flex">
               <button
                 aria-label={`More details: ${statusStripDetails.join(", ")}`}
@@ -761,7 +780,7 @@ export function FoldAuctionPage() {
                 </span>
               </button>
               <span
-                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[8px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
+                className="pointer-events-none absolute left-1/2 top-[calc(100%+10px)] z-20 flex w-max max-w-[80vw] -translate-x-1/2 flex-col items-center gap-y-1 rounded-[6px] border border-[#82f5ad]/15 bg-[#121718] px-4 py-2.5 text-[11px] leading-[1.4] tracking-[1.2px] text-[#82f5ad] opacity-0 shadow-[0_6px_20px_rgba(0,0,0,0.35)] transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
                 role="tooltip"
               >
                 <span aria-hidden="true" className="absolute -top-[5px] left-1/2 size-[10px] -translate-x-1/2 rotate-45 border-l border-t border-[#82f5ad]/15 bg-[#121718]" />
@@ -776,7 +795,7 @@ export function FoldAuctionPage() {
         {/* Hero copy */}
         <section className="bg-[#d9fce8] px-4 md:px-8 py-[64px] text-center md:py-[112px]">
           <div className="mx-auto flex max-w-md flex-col items-center gap-6 md:max-w-[760px]">
-            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.9] tracking-[-1.92px] md:text-[64px]">
+            <h1 className="w-full font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.87] tracking-[-1.92px] md:text-[64px]">
               <LineRevealAuto text={AUCTION.heroTitle} />
             </h1>
             <ScrollFadeIn className="flex w-full flex-col items-center gap-4" delay={0.1}>
@@ -803,7 +822,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Auction Details</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <span className="md:hidden">
                   <LineRevealAuto delay={0.08} text="FOLD Auction 2 is being distributed" />
                   <LineRevealAuto delay={0.17} text="through a Uniswap" />
@@ -850,7 +869,7 @@ export function FoldAuctionPage() {
             </div>
 
             <ScrollFadeIn className="mt-8" delay={0.15}>
-              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]">
                 Participation is subject to eligibility requirements, jurisdictional restrictions, and completion of the required registration and verification process.
               </p>
             </ScrollFadeIn>
@@ -868,7 +887,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>How to Participate</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <span className="md:hidden">
                   <LineRevealAuto delay={0.08} text="Register and complete verification." />
                   <LineRevealAuto delay={0.17} text="Bid through the official" />
@@ -897,7 +916,7 @@ export function FoldAuctionPage() {
                   <li key={item}>
                     <ScrollFadeIn className="grid grid-cols-[7px_1fr] gap-3" delay={0.05 + index * 0.08}>
                       <span className="mt-[9px] size-[5px] rounded-full bg-[#82f5ad]" />
-                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#3a5e3c] md:text-[18px]">
+                      <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
                         {item}
                       </span>
                     </ScrollFadeIn>
@@ -941,7 +960,7 @@ export function FoldAuctionPage() {
                           </span>
                         )}
                       </div>
-                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:text-[18px]">
+                      <p className="mt-3 max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d9fce8]">
                         {item.body}
                       </p>
                       {actions.length > 0 && (
@@ -975,7 +994,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel className="text-[#d9fce8]/55">The Role of FOLD</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="FOLD supports participation in The Interfold network." />
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8] md:max-w-[640px] md:text-[18px]">
@@ -986,14 +1005,14 @@ export function FoldAuctionPage() {
             <div className="mt-12 grid gap-4 md:grid-cols-2">
               {foldRoles.map((role, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={role.number}>
-                  <article className="flex h-full flex-col gap-3 rounded-[20px] bg-[#1c2426] p-6">
+                  <article className="flex h-full flex-col gap-3 rounded-[24px] bg-[#1c2426] p-6">
                     <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#82f5ad]">
                       {role.number}
                     </span>
                     <h3 className="font-['ABC_Gramercy:Regular',sans-serif] text-[28px] leading-[0.95] tracking-[-0.84px] text-[#d9fce8]">
                       {role.title}
                     </h3>
-                    <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#d9fce8]/85 md:text-[18px]">
+                    <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d9fce8]/85">
                       {role.body}
                     </p>
                   </article>
@@ -1028,7 +1047,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>What FOLD Supports</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[640px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="Private inputs. Shared outcomes." />
               </p>
               <p className="mx-auto mt-6 max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[16px] leading-[1.2] text-[#687d71] md:max-w-[640px] md:text-[18px]">
@@ -1039,7 +1058,7 @@ export function FoldAuctionPage() {
             <div className="mt-10 grid gap-4 md:grid-cols-2">
               {supportsExamples.map((example, index) => (
                 <ScrollFadeIn delay={index * 0.05} key={example.title}>
-                  <div className="h-full rounded-[16px] bg-white p-5">
+                  <div className="h-full rounded-[24px] bg-white p-6">
                     <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.1] text-[#3a5e3c] md:text-[20px]">
                       <span>{example.title}</span> <span className="text-[#687d71]">{example.body}</span>
                     </p>
@@ -1090,7 +1109,7 @@ export function FoldAuctionPage() {
               <ScrollFadeIn>
                 <SectionLabel>Official Links &amp; Contract Information</SectionLabel>
               </ScrollFadeIn>
-              <p className="mx-auto mt-[11.543px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
+              <p className="mx-auto mt-[12px] max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] md:max-w-[600px] md:text-[32px] md:leading-[0.95]">
                 <LineRevealAuto delay={0.08} text="Use only official Interfold links when participating in the FOLD auction." />
               </p>
             </div>
@@ -1109,7 +1128,7 @@ export function FoldAuctionPage() {
               <ContractsCard />
             </ScrollFadeIn>
             <ScrollFadeIn className="pointer-events-none relative z-10 mx-auto max-w-[620px] pt-36 md:pt-44" delay={0.16}>
-              <p className="pointer-events-auto text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.2] text-[#687d71]">
+              <p className="pointer-events-auto text-center font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#687d71]">
                 Always verify links and contract addresses through The Interfold&rsquo;s official channels.
                 The team will never DM you first and will never ask for your seed phrase or private keys.
               </p>
@@ -1118,7 +1137,7 @@ export function FoldAuctionPage() {
         </section>
 
         {/* Important information */}
-        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[96px]">
+        <section className="bg-white px-4 md:px-8 py-[64px] md:py-[112px]">
           <div className="mx-auto max-w-[760px]">
             <ScrollFadeIn>
               <SectionLabel>Important Information</SectionLabel>
@@ -1160,7 +1179,7 @@ export function FoldAuctionPage() {
         </section>
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
 
     </div>
   );

@@ -111,29 +111,55 @@ html.interfold-theme-participate #root {
   }
 }
 
+/* The resting fill has to be the frame behind the glyph, or the rect covers
+   the three document lines drawn inside it. It used to name the dark disc
+   colour outright; transparent means it follows whatever it is placed on. The
+   flash was tuned against that dark disc, so it also needed to come up to read
+   on a light frame. */
 @keyframes interfold-actor-provider-source {
   0%,
   12%,
   38%,
   100% {
-    fill: #3a5e3c;
+    fill: transparent;
   }
 
   23% {
-    fill: rgba(130, 245, 173, 0.24);
+    fill: rgba(130, 245, 173, 0.9);
   }
 }
 
+/* transform: scale() scales the stroke with the shape, so a mark that grows
+   also gets heavier than the line work around it. The stroke width is animated
+   back down by the same factor — 1.5 / 1.15 — so only the size changes. */
 @keyframes interfold-actor-core {
   0%,
   38%,
   62%,
   100% {
     transform: scale(1);
+    stroke-width: 1.5;
   }
 
   48% {
     transform: scale(1.15);
+    stroke-width: 1.304;
+  }
+}
+
+/* The committee core is a group, and stroke-width set on a group loses to the
+   children's own attribute, so they carry the counter-animation themselves.
+   Same duration and easing, so it stays in step with the scale above. */
+@keyframes interfold-actor-core-stroke {
+  0%,
+  38%,
+  62%,
+  100% {
+    stroke-width: 1.5;
+  }
+
+  48% {
+    stroke-width: 1.304;
   }
 }
 
@@ -143,10 +169,12 @@ html.interfold-theme-participate #root {
   26%,
   100% {
     transform: scale(1);
+    stroke-width: 1.5;
   }
 
   15% {
     transform: scale(1.42);
+    stroke-width: 1.056;
   }
 }
 
@@ -169,6 +197,10 @@ html.interfold-theme-participate #root {
 .actor-glyph__provider-core,
 .actor-glyph__committee-core {
   animation: interfold-actor-core 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.actor-glyph__committee-core > * {
+  animation: interfold-actor-core-stroke 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .actor-glyph__pulse {
@@ -464,6 +496,10 @@ html.interfold-transition-page-enter .interfold-page-transition {
 .mobile-what-possible-carousel .slick-slide {
   opacity: 0.64;
   transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  /* slick.css sets height: 100% here, and a flex item with a set cross size
+     will not stretch. Back to auto so the track stretches every card to the
+     tallest one and captions of different lengths stop changing the size. */
+  height: auto;
 }
 
 .mobile-what-possible-carousel .slick-slide.slick-active,
@@ -546,4 +582,45 @@ html.interfold-transition-page-enter .interfold-page-transition {
 .mobile-possibility-slider .slick-dots li.slick-active button::before {
   color: #82f5ad;
   opacity: 1;
+}
+
+/* The execution-model graphic is a drawing: inputs run in from the left, land
+   on the committee spine, and fan back out to the decrypted output. A fade
+   arrived with all of that already finished, so it is drawn instead — line by
+   line, each one from its left end — by ExecutionFlowReveal, which measures
+   the paths and runs the strokes itself. These rules only hold the pieces back
+   until it does; the class comes off the wrapper once the drawing is over. */
+.interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path {
+  opacity: 0;
+}
+
+.interfold-execution-flow-draw [data-execution-flow-overlay] {
+  opacity: 0;
+  transition: opacity 520ms ease-out;
+}
+
+.interfold-execution-flow-draw--live [data-execution-flow-overlay] {
+  opacity: 1;
+}
+
+.interfold-execution-flow-draw [data-execution-flow-tag] {
+  opacity: 0;
+  transform: translate3d(0, 6px, 0);
+  transition:
+    opacity 380ms ease-out,
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.interfold-execution-flow-draw [data-execution-flow-tag].is-drawn {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path,
+  .interfold-execution-flow-draw [data-execution-flow-overlay],
+  .interfold-execution-flow-draw [data-execution-flow-tag] {
+    opacity: 1;
+    transform: none;
+  }
 }

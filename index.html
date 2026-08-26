@@ -48,8 +48,13 @@
         margin: 0;
       }
 
+      /* min-height, not height: at height:100% the root box is exactly one
+         viewport tall however long the page is, and a position:sticky child
+         is confined to its own box — so the sticky mobile header stopped
+         sticking one screen down and left the network strip pinned to
+         nothing. */
       #root {
-        height: 100%;
+        min-height: 100%;
       }
     </style>
   </head>

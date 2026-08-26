@@ -387,7 +387,7 @@ export function ContentPage({ page }: { page: PageKey }) {
         <FollowOnSection page={page} />
       </main>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
     </div>
   );
 }

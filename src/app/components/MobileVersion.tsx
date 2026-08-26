@@ -1,5 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
+import { NetworkStrip } from "./NetworkStrip";
+import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -19,7 +21,7 @@ import etmStackedLogo from "../../imports/Desktop/encrypt-mempool-stacked.svg";
 import { AnimatedExecutionModelGraphic, DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ExploreResourceIcon, type ExploreResourceIconKind } from "./ExploreResourceIcon";
 import { HeroImage, homeHeroSources } from "./HeroImage";
-import { ExternalArrowSlide, HoverArrowContent, HoverArrowLink } from "./HoverArrowLink";
+import { HoverArrowContent, HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SiteMobileHeader } from "./SiteMobileHeader";
@@ -208,6 +210,27 @@ const mobileLogos = [
   { href: "https://www.encryptedmempool.org/", name: "Encrypt the Mempool", visualScale: 0.9, content: <MobilePartnerLogoAsset aspectRatio="791 / 219" src={etmStackedLogo} /> },
 ];
 
+const participationPaths = [
+  {
+    body: "Operate infrastructure for confidential coordination.",
+    cta: "Get started",
+    href: "https://dashboard.theinterfold.com/#operator",
+    title: "Run a ciphernode",
+  },
+  {
+    body: "Build applications using private inputs and verifiable outcomes.",
+    cta: "Explore docs",
+    href: "https://docs.theinterfold.com/getting-started",
+    title: "Build and integrate",
+  },
+  {
+    body: "Bring a live use case to Interfold and deploy it in practice.",
+    cta: "Reach out",
+    href: "mailto:comms@gnosisguild.org",
+    title: "Partner on a pilot",
+  },
+];
+
 export function MobileVersion() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const logoMarquee = useStartOnInView();
@@ -215,7 +238,7 @@ export function MobileVersion() {
 
   const carouselSettings = {
     centerMode: true,
-    centerPadding: '16px',
+    centerPadding: '0px',
     dots: true,
     infinite: true,
     speed: 500,
@@ -227,41 +250,31 @@ export function MobileVersion() {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-white">
+    <div className="min-h-screen w-full overflow-x-clip bg-white">
       <SiteMobileHeader />
 
-      {/* Hero Section */}
+      {/* Hero Section. The image, the strip and the copy are siblings of the page
+          root rather than one wrapped block: a sticky element can only travel
+          inside its own parent, so wrapping these three together would let the
+          strip stick just until the hero scrolled past, and no further. */}
+      <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
+        <HeroImage
+          className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
+          fadeIn={false}
+          pictureClassName="block h-full w-full"
+          sources={homeHeroSources}
+        />
+      </div>
+      {/* 60px is the mobile bar's height. */}
+      <NetworkStrip className="sticky top-[60px] z-40" />
       <div className="flex flex-col bg-[#d9fce8]">
-        <div className="interfold-hero-transition relative h-64 w-full overflow-hidden bg-[#d9fce8]">
-          <HeroImage
-            className="interfold-home-hero-image h-full w-full object-cover object-top mix-blend-darken"
-            fadeIn={false}
-            pictureClassName="block h-full w-full"
-            sources={homeHeroSources}
-          />
-        </div>
-        <div className="flex h-[32px] w-full shrink-0 items-center justify-center bg-white px-3">
-          <div className="flex items-center justify-center gap-4 whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:gap-6 sm:text-[12px] sm:tracking-[1.2px]">
-            <span aria-hidden="true" className="relative size-2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none" />
-            <span>Live now</span>
-            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dao.theinterfold.com/">
-              <span>Aragon demo</span>
-              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-            </a>
-            <a className="group inline-flex items-center gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="https://dashboard.theinterfold.com/">
-              <span>Network dashboard</span>
-              <ExternalArrowSlide className="relative inline-block h-[13px] w-[13px] overflow-hidden font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-none" rowClassName="h-[13px] w-[13px] leading-none" />
-            </a>
-          </div>
-        </div>
-
-        <div className="mx-auto flex max-w-md flex-col items-center gap-2 text-center px-[24px] py-[64px]">
+        <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} text-center px-[24px] py-[64px]`}>
           <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
           </div>
           <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
-            <p className="max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
-              Infrastructure for multiplayer privacy, enabling independent parties to coordinate without exposing inputs.
+            <p className={`max-w-[320px] ${SUPPORTING_LINE} text-[#687d71]`}>
+              Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.
             </p>
           </ScrollFadeIn>
 
@@ -269,20 +282,20 @@ export function MobileVersion() {
           <div className="mx-auto mt-8 flex w-[min(100%-96px,540px)] flex-col gap-3">
             <div className="w-full">
               <HoverArrowLink
-                className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="https://docs.theinterfold.com/"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
+                href="https://docs.theinterfold.com/getting-started"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
                 Build on Interfold
               </HoverArrowLink>
             </div>
             <div className="w-full">
               <HoverArrowLink
-                className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-                href="/fold-auction"
-                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+                className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c]`}
+                href="https://dashboard.theinterfold.com/#operator"
+                textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
               >
-                Participate
+                Run a ciphernode
               </HoverArrowLink>
             </div>
           </div>
@@ -310,13 +323,14 @@ export function MobileVersion() {
       {/* Execution Model Section */}
       <ScrollFadeIn className="flex flex-col items-center bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71] opacity-80">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90] opacity-80">
             A new execution Model
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            The Interfold brings confidential coordination to digital systems, turning private inputs into verifiable
-            outcomes without data custody, input exposure, or trusted hardware.
-          </p>
+            The Interfold brings confidential coordination to digital systems.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.
+            </p>
         </div>
 
         <div className="mb-12 w-full max-w-md">
@@ -330,10 +344,10 @@ export function MobileVersion() {
               01
             </p>
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase">
-              Confidential inputs
+              Encrypted inputs
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              Data remains private throughout execution
+              Sensitive data remains private during execution.
             </p>
           </div>
 
@@ -343,10 +357,10 @@ export function MobileVersion() {
               02
             </p>
             <p className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-[1.2] tracking-[1.2px] uppercase">
-              Threshold enforcement
+              Threshold decryption
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              A subset of nodes governs execution and release
+              Ciphernode committees use threshold decryption so no single party controls decryption.
             </p>
           </div>
 
@@ -359,38 +373,50 @@ export function MobileVersion() {
               Verifiable outcomes
             </p>
             <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#3a5e3c]">
-              Results are verifiable without revealing inputs
+              Results can be verified without revealing the private inputs behind them.
             </p>
           </div>
+        </div>
+
+        <div className="mx-auto mt-10 w-full max-w-md">
+          <HoverArrowLink
+            className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
+            href="https://blog.theinterfold.com/how-interfold-works/"
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+          >
+            How Interfold Works
+          </HoverArrowLink>
         </div>
       </ScrollFadeIn>
 
       {/* What Becomes Possible Section */}
       <ScrollFadeIn className="bg-[#d9fce8] px-6 py-16 pb-24">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             What Becomes Possible
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            When shared outcomes no longer require exposing inputs or trusting a single operator, new coordination
-            systems become possible.
-          </p>
+            New forms of coordination become possible.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              When shared outcomes no longer require exposing private inputs or trusting a single operator.
+            </p>
         </div>
 
-        <div className="mobile-what-possible-carousel mx-auto w-full max-w-md" ref={possibilityCarouselRef}>
+        <div className="mx-auto w-full max-w-md">
+          <div className="mobile-what-possible-carousel -mx-1.5 w-[calc(100%+12px)]" ref={possibilityCarouselRef}>
           <Slider {...carouselSettings}>
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Fairer market </p>
                     <p className="whitespace-pre">mechanisms</p>
                   </div>
-                  <p className="text-[14.429px] leading-[1.075]">
-                    Sealed auction mechanisms where bids remain private and outcomes are verifiable
+                  <p className="text-[14px] leading-[1.075]">
+                    Sealed-bid and batch auctions where bids remain private while outcomes remain verifiable.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -405,18 +431,18 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Stronger democratic </p>
                     <p className="whitespace-pre">systems</p>
                   </div>
-                  <p className="text-[14.429px] leading-[1.075]">
-                    Secret ballots with correct, verifiable tallying and no trusted operator
+                  <p className="text-[14px] leading-[1.075]">
+                    Confidential ballots with verifiable tallying, receipt-free voting, and no trusted ballot operator.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -431,18 +457,18 @@ export function MobileVersion() {
               </div>
             </div>
 
-            <div className="px-1.5">
-              <div className="flex flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
+            <div className="h-full px-1.5">
+              <div className="flex h-full min-h-[580px] flex-col gap-[20px] rounded-[24px] bg-[#121718] p-[8px]">
                 <div className="flex flex-col gap-[8px] p-[16px] font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]">
                   <div className="text-[32px] leading-[0.95] tracking-[-0.96px]">
                     <p className="mb-0 whitespace-pre">Collaborative </p>
                     <p className="whitespace-pre">Intelligence</p>
                   </div>
-                  <p className="text-[14.429px] leading-[1.075]">
-                    Multiple parties compute together to produce shared results without exposing data
+                  <p className="text-[14px] leading-[1.075]">
+                    Multiple parties compute across sensitive data and produce shared results without revealing the underlying inputs.
                   </p>
                 </div>
-                <div className="relative h-[324px] w-full overflow-hidden">
+                <div className="relative mt-auto h-[324px] w-full shrink-0 overflow-hidden">
                   <div className="absolute inset-0 bg-[#121718]" />
                   <div className="absolute inset-0 mix-blend-plus-lighter">
                     <img
@@ -457,6 +483,7 @@ export function MobileVersion() {
               </div>
             </div>
           </Slider>
+          </div>
         </div>
       </ScrollFadeIn>
 
@@ -464,46 +491,41 @@ export function MobileVersion() {
       <div id="participate">
         <ScrollFadeIn className="flex flex-col items-center bg-[#121718] px-6 py-16 text-center">
           <div className="mx-auto mb-12 w-full max-w-[320px]">
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]">
+            <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]/55">
               Participate
             </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
-              Confidential coordination becomes real through both applications and operators:
-            </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.2] text-[#d4f6da]">
-              Builders create multiparty systems that use private inputs, while ciphernodes help distribute execution
-              authority and govern outcome release.
+            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
+              Help form the network.</p>
+            <p className={`mt-3 text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>
+              Operate the network, build applications, or bring new use cases to Interfold.
             </p>
           </div>
 
-        <div className="mx-auto flex w-[min(100%-96px,540px)] flex-col gap-3">
-          <div className="w-full">
-            <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="https://docs.theinterfold.com/"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Build on Interfold
-            </HoverArrowLink>
-          </div>
-          <div className="w-full">
-            <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[rgba(193,217,191,0.8)] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="https://t.me/enclave_e3"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Join Telegram
-            </HoverArrowLink>
-          </div>
-          <div className="w-full">
-            <HoverArrowLink
-              className="flex w-full items-center justify-center bg-[#82f5ad] px-6 py-4 transition-colors hover:bg-[#3a5e3c]"
-              href="/participate"
-              textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] capitalize leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-            >
-              Participate
-            </HoverArrowLink>
-          </div>
+        {/* Marvin: was a repeat of the hero CTAs. Now a compact version of the
+            three participation paths — title, one line, one link. */}
+        <div className="mx-auto flex w-full max-w-[320px] flex-col gap-10 text-left">
+          {participationPaths.map((path) => (
+            <div className="flex flex-col items-start gap-2" key={path.title}>
+              <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d9fce8]">
+                {path.title}
+              </p>
+              <p className={`text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>{path.body}</p>
+              <UnderlinedArrowLink
+                className="mt-2 inline-flex text-[#82f5ad]"
+                href={path.href}
+                textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-current"
+              >
+                {path.cta}
+              </UnderlinedArrowLink>
+            </div>
+          ))}
+          <HoverArrowLink
+            className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c]`}
+            href="/participate"
+            textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
+          >
+            Explore all ways to participate
+          </HoverArrowLink>
         </div>
         </ScrollFadeIn>
       </div>
@@ -511,20 +533,20 @@ export function MobileVersion() {
       {/* Explore Section */}
       <ScrollFadeIn className="bg-white px-6 py-16">
         <div className="mx-auto mb-12 w-full max-w-[320px] text-center">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#687d71]">
+          <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             Explore
           </p>
           <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            Read the technical documentation, essays, and updates that explain how Interfold works, why confidential
-            coordination matters, and what is live now.
-          </p>
+            Go deeper.</p>
+            <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
+              Explore how Interfold works, why confidential coordination matters, and what is live now.
+            </p>
         </div>
 
-        <div className="mx-auto flex w-full max-w-md flex-col gap-[16px]">
+        <div className="mx-auto grid w-full max-w-md grid-cols-3 gap-[10px]">
           <ExploreCard
             kind="docs"
             title="DOCS"
-            description="Technical documentation, references, and implementation details."
             cta="Explore Docs"
             href="https://docs.theinterfold.com/"
             hoveredButton={hoveredButton}
@@ -534,7 +556,6 @@ export function MobileVersion() {
           <ExploreCard
             kind="essays"
             title="ESSAYS"
-            description="Writing on confidential coordination and the architecture behind the network."
             cta="Read essays"
             href="https://blog.theinterfold.com/tag/confidential-coordination"
             hoveredButton={hoveredButton}
@@ -544,8 +565,7 @@ export function MobileVersion() {
           <ExploreCard
             kind="blog"
             title="BLOG"
-            description="Updates, research notes, and ecosystem announcements."
-            cta="Read blog"
+            cta="Read the blog"
             href="https://blog.theinterfold.com/"
             hoveredButton={hoveredButton}
             setHoveredButton={setHoveredButton}
@@ -554,7 +574,7 @@ export function MobileVersion() {
         </div>
       </ScrollFadeIn>
 
-      <DesktopFooter staticLayout />
+      <DesktopFooter />
     </div>
   );
 }
@@ -562,7 +582,6 @@ export function MobileVersion() {
 function ExploreCard({
   kind,
   title,
-  description,
   cta,
   href,
   hoveredButton,
@@ -571,7 +590,6 @@ function ExploreCard({
 }: {
   kind: ExploreResourceIconKind;
   title: string;
-  description: string;
   cta: string;
   href: string;
   hoveredButton: string | null;
@@ -580,35 +598,30 @@ function ExploreCard({
 }) {
   return (
     <a
-      className="group w-full bg-white p-[8px] transition-colors hover:bg-[#d9fce8]"
+      className="group flex h-full w-full flex-col bg-white p-[6px] transition-colors hover:bg-[#d9fce8]"
       href={href}
       onMouseEnter={() => setHoveredButton(id)}
       onMouseLeave={() => setHoveredButton(null)}
     >
-      <div className="flex flex-col gap-[16px]">
-        <div className="h-0 w-full border-t-[2.88577px] border-[#3a5e3c]" />
-          <div className="flex h-[71px] w-[55px] shrink-0 items-end justify-center">
+      <div className="flex h-full flex-col gap-[12px]">
+        <div className="h-0 w-full border-t-[3px] border-[#3a5e3c]" />
+          <div className="flex h-[56px] w-full shrink-0 items-end justify-start">
             <ExploreResourceIcon className="h-full w-auto text-[#3a5e3c]" kind={kind} />
           </div>
-        <div className="flex flex-col gap-[8px]">
-          <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[14px] uppercase leading-[1.075] tracking-[1.4px] text-[#252525]">
-            {title}
-          </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-left text-[14.429px] leading-[1.075] text-[#3a5e3c]">
-            {description}
-          </p>
-        </div>
-        <div className="flex h-[52px] items-center justify-center overflow-hidden bg-[rgba(193,217,191,0.8)] transition-colors group-hover:bg-[#82f5ad]">
+        <p className="font-['Office_Code_Pro:Medium',sans-serif] text-left text-[12px] uppercase leading-[1.075] tracking-[1.2px] text-[#3a5e3c]">
+          {title}
+        </p>
+        <div className={`mt-auto flex items-center justify-center overflow-hidden ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-1 transition-colors group-hover:bg-[#82f5ad]`}>
           <div className="relative inline-flex items-center justify-center">
             <motion.p
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] capitalize leading-[1.075] text-[#3a5e3c]"
+              className="font-['ABC_Gramercy:Regular',sans-serif] text-center text-[12px] leading-[1.075] text-[#3a5e3c]"
               animate={{ x: hoveredButton === id ? -8 : 0 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
             >
               {cta}
             </motion.p>
             <motion.span
-              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14.429px] leading-[1.075] text-[#3a5e3c]"
+              className="absolute left-full ml-1 font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c]"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: hoveredButton === id ? 1 : 0, x: hoveredButton === id ? 0 : -10 }}
               transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
