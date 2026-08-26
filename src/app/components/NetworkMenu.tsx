@@ -14,6 +14,12 @@ const NETWORK_LINKS = [
   { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
 ];
 
+// A native <button> takes cursor:default, not pointer, so this one gave no
+// sign it could be pressed. The hover was no help either: #1c2426 against
+// #121718 is a luminance ratio of 1.145, which is not a change anyone sees.
+const REST = "#121718";
+const HOVER = "#2b373b";
+
 const OPEN_MS = 200;
 const OPEN_EASING = "cubic-bezier(0.33, 0, 0.2, 1)";
 
@@ -146,7 +152,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 z-0"
         style={{
-          backgroundColor: !isOpen && isHovered ? "#1c2426" : "#121718",
+          backgroundColor: !isOpen && isHovered ? HOVER : REST,
           clipPath: `inset(0 0 ${folded}px 0 round ${capRadius}px)`,
           height: `calc(100% + ${menuHeight}px)`,
           transitionDuration: `${OPEN_MS}ms, 150ms`,
@@ -158,7 +164,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className="relative z-10 flex w-full items-center gap-[10px] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8]"
+        className="relative z-10 flex w-full cursor-pointer items-center gap-[10px] py-[9px] pl-[16px] pr-[13px] text-[#d9fce8]"
         onBlur={() => setHasKeyboardFocus(false)}
         onClick={() => setIsOpen((current) => !current)}
         onFocus={(event) => setHasKeyboardFocus(event.target.matches(":focus-visible"))}
@@ -216,7 +222,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
               // up, but the arrow glyph carries 6.2px of right side-bearing, so
               // its ink stopped short of the chevron's. The padding pays that
               // back and the marks sit on one edge.
-              className="group flex items-center justify-between gap-6 whitespace-nowrap py-[9px] pl-[16px] pr-[7px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
+              className="group flex items-center justify-between gap-6 whitespace-nowrap py-[9px] pl-[16px] pr-[7px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#2b373b] hover:text-[#82f5ad]"
               href={link.href}
               key={link.href}
               onClick={close}
