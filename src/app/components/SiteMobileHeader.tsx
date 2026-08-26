@@ -3,6 +3,7 @@ import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { InterfoldSymbol } from "./InterfoldSymbol";
+import { MobileMenuTuner, SHOW_MOBILE_MENU_TUNER, useMobileMenuType } from "./MobileMenuTuner";
 
 function AnimatedMenuButton({
   isOpen,
@@ -73,8 +74,24 @@ export function SiteMobileHeader({
     }
   }, [isMenuOpen]);
 
+  // Size, leading and the gap between the titles come from the tuner so they
+  // can be dialled in the browser. With its flag off the hook hands back the
+  // defaults and nothing subscribes.
+  const menuType = useMobileMenuType();
+  const titleClass =
+    "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]";
+  const titleStyle = {
+    fontSize: `${menuType.size}px`,
+    lineHeight: menuType.leading,
+    wordSpacing: "-0.1em",
+  };
+  // The arrow was 22px against a 56px title; in em it holds that ratio however
+  // far the size slider travels.
+  const arrowStyle = { fontSize: `${(22 / 56).toFixed(4)}em` };
+
   return (
     <>
+      {SHOW_MOBILE_MENU_TUNER ? <MobileMenuTuner /> : null}
       <div className={`sticky top-0 z-50 ${className}`}>
       <div className={`interfold-header-drop relative flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms]`}>
         <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
@@ -116,51 +133,51 @@ export function SiteMobileHeader({
           >
             Menu
           </motion.p>
-          <div className="m-[0px] flex flex-col items-center gap-y-2 p-[0px]">
+          <div className="m-[0px] flex flex-col items-center p-[0px]" style={{ rowGap: `${menuType.spacing}px` }}>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className={titleClass}
               href="/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: "-0.1em" }}
+              style={titleStyle}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               Home
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className={`inline-flex items-baseline gap-1 ${titleClass}`}
               href="https://docs.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: "-0.1em" }}
+              style={titleStyle}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <span>Docs</span>
-              <span aria-hidden="true" className="text-[22px] leading-none">↗</span>
+              <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
             </motion.a>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className={`inline-flex items-baseline gap-1 ${titleClass}`}
               href="https://blog.theinterfold.com/"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: "-0.1em" }}
+              style={titleStyle}
               transition={{ duration: 0.6, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
             >
               <span>Blog</span>
-              <span aria-hidden="true" className="text-[22px] leading-none">↗</span>
+              <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
             </motion.a>
             {/* Auction removed from the menu after Auction 2 closed. /fold-auction is
                 still live and still the claim route — reachable by direct link only. */}
             <motion.a
               animate={{ opacity: 1, y: 0 }}
-              className="font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className={titleClass}
               href="/participate"
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsMenuOpen(false)}
-              style={{ wordSpacing: "-0.1em" }}
+              style={titleStyle}
               transition={{ duration: 0.6, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             >
               Participate
@@ -177,10 +194,10 @@ export function SiteMobileHeader({
               <motion.button
                 animate={{ opacity: 1, y: 0 }}
                 aria-expanded={isNetworkOpen}
-                className="block max-w-full text-center font-['ABC_Gramercy:Regular',sans-serif] text-[56px] capitalize leading-[0.95] tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                className={`block max-w-full text-center ${titleClass}`}
                 initial={{ opacity: 0, y: 16 }}
                 onClick={() => setIsNetworkOpen((current) => !current)}
-                style={{ wordSpacing: "-0.1em" }}
+                style={titleStyle}
                 transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 type="button"
               >
