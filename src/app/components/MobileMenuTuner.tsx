@@ -27,8 +27,8 @@ export type MobileMenuType = {
 // gap-y-2.
 export const DEFAULT_MOBILE_MENU_TYPE: MobileMenuType = {
   leading: 0.95,
-  size: 40,
-  spacing: 14,
+  size: 56,
+  spacing: 8,
 };
 
 let current: MobileMenuType = { ...DEFAULT_MOBILE_MENU_TYPE };

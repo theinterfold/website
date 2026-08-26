@@ -10,13 +10,9 @@ const NETWORK_LINKS = [
   { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
 ];
 
-// The pill's own measurements. The dot sits in the margin rather than in the
-// column of text, so the label and the two links below it start on one edge.
-const PILL_PAD_L = 20;
-const PILL_PAD_R = 18;
-const PILL_DOT = 9;
-const PILL_DOT_GAP = 12;
-const PILL_TEXT_X = PILL_PAD_L + PILL_DOT + PILL_DOT_GAP;
+// The live dot, sized and spaced like the one in the status strip.
+const DOT = 9;
+const DOT_GAP = 12;
 
 // The chevron, in em of the pill's text so it tracks the size with the arrows.
 // Same bend as the desktop control: two rounded bars pinned at the midpoint of
@@ -119,24 +115,28 @@ export function SiteMobileHeader({
   const titleBase =
     "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] transition-colors hover:text-[#82f5ad]";
   const titleClass = `${titleBase} text-[#3a5e3c]`;
+  // Governance and Dashboard carry the titles' size and are told apart by
+  // colour alone. #79907f is as far as that can go: it lifts the gap to the
+  // titles from 1.67 to 2.15, and the next step up leaves the pale background
+  // at 2.63, under the 3:1 large text needs to stay readable.
+  const subLinkClass = `${titleBase} text-[#79907f]`;
   // Capped at the tuner size, but shrinking with the viewport under it. The
   // pill has to hold "Network Alpha" on one line, and that name eats 6.5px of
   // width per px of type, with another 130 going to the gutters, the dot, the
   // chevron and the pill's own padding. Below ~390px there is not enough left,
   // and the whole menu steps down together rather than the pill alone.
-  const menuFontSize = `min(${menuType.size}px, calc((100vw - 130px) / 6.5))`;
+  const menuFontSize = `min(${menuType.size}px, calc((100vw - 83px) / 6.5))`;
   // Set without the menu's negative word-spacing: at this size it takes -4px
   // out of a 6.76px word space, and "Network Alpha" read as one word.
-  const pillTextStyle = {
-    fontSize: menuFontSize,
-    letterSpacing: "-0.8px",
-    lineHeight: menuType.leading,
-  };
   const titleStyle = {
     fontSize: menuFontSize,
     lineHeight: menuType.leading,
     wordSpacing: "-0.1em",
   };
+  // The only label here made of two words. The menu tightens word spacing by
+  // -0.1em, which at this size takes -4px out of a 6.76px space and made
+  // "Network Alpha" read as one word, so this one is set without it.
+  const twoWordTitleStyle = { ...titleStyle, wordSpacing: "normal" };
   // The arrow was 22px against a 56px title; in em it holds that ratio however
   // far the size slider travels.
   const arrowStyle = { fontSize: `${(22 / 56).toFixed(4)}em` };
@@ -237,75 +237,69 @@ export function SiteMobileHeader({
             >
               Participate
             </motion.a>
-            {/* The desktop nav's control, in the menu. A title could not hold
-                "Network Alpha" on one line at this size, but a pill carries its
-                own width — so the name stays whole — and it reads as something
-                that opens, which a plain title never did. */}
-            <motion.div
+            {/* No pill: the name stays whole and the live dot stays, but it is
+                set as a title like the rest. The dot is out of flow, the way the
+                status strip does it — sitting in the line it would push
+                "Network Alpha" off the centre the other titles sit on. */}
+            <motion.button
               animate={{ opacity: 1, y: 0 }}
-              className="w-full max-w-[342px] overflow-hidden rounded-[24px] bg-[#121718]"
+              aria-expanded={isNetworkOpen}
+              aria-haspopup="menu"
+              className={`relative inline-flex items-baseline ${titleClass}`}
               initial={{ opacity: 0, y: 16 }}
+              onClick={() => setIsNetworkOpen((current) => !current)}
+              style={twoWordTitleStyle}
               transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              type="button"
             >
-              <button
-                aria-expanded={isNetworkOpen}
-                aria-haspopup="menu"
-                className="flex w-full items-center py-[9px] text-left font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]"
-                onClick={() => setIsNetworkOpen((current) => !current)}
-                style={{ ...pillTextStyle, paddingLeft: `${PILL_PAD_L}px`, paddingRight: `${PILL_PAD_R}px` }}
-                type="button"
+              <span
+                aria-hidden="true"
+                className="absolute right-full top-1/2 -translate-y-1/2 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none"
+                style={{ height: `${DOT}px`, marginRight: `${DOT_GAP}px`, width: `${DOT}px` }}
+              />
+              <span>Network Alpha</span>
+              <span
+                aria-hidden="true"
+                className="relative block shrink-0"
+                style={{ height: `${CHEV_DROP + CHEV_T}em`, marginLeft: "4px", width: `${CHEV_W}em` }}
               >
-                <span
-                  aria-hidden="true"
-                  className="relative shrink-0 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none"
-                  style={{ height: `${PILL_DOT}px`, marginRight: `${PILL_DOT_GAP}px`, width: `${PILL_DOT}px` }}
-                />
-                <span>Network Alpha</span>
-                <span
-                  aria-hidden="true"
-                  className="relative ml-auto block shrink-0"
-                  style={{ height: `${CHEV_DROP + CHEV_T}em`, width: `${CHEV_W}em` }}
-                >
-                  <span style={chevronArm(true, isNetworkOpen)} />
-                  <span style={chevronArm(false, isNetworkOpen)} />
-                </span>
-              </button>
-              {/* 0fr to 1fr rather than a measured height: the closed state is
-                  right on the very first painted frame, with nothing to measure
-                  and no effect running after paint to correct it. */}
-              <div
-                className="grid transition-[grid-template-rows] duration-200 ease-[cubic-bezier(0.33,0,0.2,1)] motion-reduce:transition-none"
-                style={{ gridTemplateRows: isNetworkOpen ? "1fr" : "0fr" }}
-              >
-                <div className="overflow-hidden">
-                  <div className="pb-[8px]" role="menu">
-                    {NETWORK_LINKS.map((link) => (
-                      <a
-                        aria-hidden={!isNetworkOpen}
-                        className="flex items-baseline justify-between font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8] transition-colors hover:text-[#82f5ad]"
-                        href={link.href}
-                        key={link.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        rel="noopener noreferrer"
-                        role="menuitem"
-                        style={{
-                          ...pillTextStyle,
-                          paddingBottom: "7px",
-                          paddingLeft: `${PILL_TEXT_X}px`,
-                          paddingRight: `${PILL_PAD_R}px`,
-                          paddingTop: "7px",
-                        }}
-                        tabIndex={isNetworkOpen ? 0 : -1}
-                        target="_blank"
-                      >
-                        <span>{link.label}</span>
-                        <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
-                      </a>
-                    ))}
-                  </div>
+                <span style={chevronArm(true, isNetworkOpen)} />
+                <span style={chevronArm(false, isNetworkOpen)} />
+              </span>
+            </motion.button>
+
+            {/* 0fr to 1fr rather than a measured height: the closed state is
+                right on the very first painted frame, with nothing to measure
+                and no effect running after paint to correct it. */}
+            <div
+              className="grid w-full transition-[grid-template-rows] duration-200 ease-[cubic-bezier(0.33,0,0.2,1)] motion-reduce:transition-none"
+              style={{ gridTemplateRows: isNetworkOpen ? "1fr" : "0fr" }}
+            >
+              <div className="overflow-hidden">
+                {/* No padding on top: the list this sits in already puts its
+                    own row gap between the title and this group, and adding one
+                    here doubled it to 16 against the 8 everywhere else. */}
+                <div className="flex flex-col items-center" role="menu" style={{ rowGap: `${menuType.spacing}px` }}>
+                  {NETWORK_LINKS.map((link) => (
+                    <a
+                      aria-hidden={!isNetworkOpen}
+                      className={`inline-flex items-baseline gap-1 ${subLinkClass}`}
+                      href={link.href}
+                      key={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      style={titleStyle}
+                      tabIndex={isNetworkOpen ? 0 : -1}
+                      target="_blank"
+                    >
+                      <span>{link.label}</span>
+                      <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
+                    </a>
+                  ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       )}
