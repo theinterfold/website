@@ -17,8 +17,10 @@ const DOT_GAP = 12;
 // The chevron, in em of the pill's text so it tracks the size with the arrows.
 // Same bend as the desktop control: two rounded bars pinned at the midpoint of
 // their own arm, swinging through a straight line rather than turning over.
-const CHEV_W = 0.2526;
-const CHEV_T = 0.0253;
+// Both taken off the desktop control rather than chosen here: its chevron is
+// a 9px box with 0.9px bars against 22px text, which is 0.4091em and 0.0409em.
+const CHEV_W = 0.4091;
+const CHEV_T = 0.0409;
 const CHEV_ARM = CHEV_W / 2 / Math.cos(Math.PI / 4);
 const CHEV_DROP = (CHEV_W / 2) * Math.tan(Math.PI / 4);
 
@@ -120,15 +122,12 @@ export function SiteMobileHeader({
   // titles from 1.67 to 2.15, and the next step up leaves the pale background
   // at 2.63, under the 3:1 large text needs to stay readable.
   const subLinkClass = `${titleBase} text-[#79907f]`;
-  // The pill's black rather than the site green, so the network group reads as
-  // its own thing without a box around it. The chevron follows on currentColor.
-  const networkTitleClass = `${titleBase} text-[#121718]`;
-  // Capped at the tuner size, but shrinking with the viewport under it. The
-  // pill has to hold "Network Alpha" on one line, and that name eats 6.5px of
-  // width per px of type, with another 130 going to the gutters, the dot, the
-  // chevron and the pill's own padding. Below ~390px there is not enough left,
-  // and the whole menu steps down together rather than the pill alone.
-  const menuFontSize = `min(${menuType.size}px, calc((100vw - 83px) / 6.5))`;
+  // Capped at the tuner size, but shrinking with the viewport under it, so
+  // "Network Alpha" always holds one line. The name costs 6.5px of width per px
+  // of type and the chevron another 0.41. The 94 fixed is the gutters, the dot
+  // and its gap, plus a gutter of its own for the dot — sized off the label
+  // alone it landed 13px from the screen edge, with its glow closer still.
+  const menuFontSize = `min(${menuType.size}px, calc((100vw - 94px) / 6.91))`;
   // Set without the menu's negative word-spacing: at this size it takes -4px
   // out of a 6.76px word space, and "Network Alpha" read as one word.
   const titleStyle = {
@@ -140,9 +139,10 @@ export function SiteMobileHeader({
   // -0.1em, which at this size takes -4px out of a 6.76px space and made
   // "Network Alpha" read as one word, so this one is set without it.
   const twoWordTitleStyle = { ...titleStyle, wordSpacing: "normal" };
-  // The arrow was 22px against a 56px title; in em it holds that ratio however
-  // far the size slider travels.
-  const arrowStyle = { fontSize: `${(22 / 56).toFixed(4)}em` };
+  // The desktop rows set their arrow at 14px against 22px of text. The menu had
+  // it at 22/56, which left the arrows at 45% of the x-height here against 73%
+  // there — the same mark, visibly smaller. Same ratio now.
+  const arrowStyle = { fontSize: `${(14 / 22).toFixed(4)}em` };
 
   return (
     <>
@@ -248,7 +248,7 @@ export function SiteMobileHeader({
               animate={{ opacity: 1, y: 0 }}
               aria-expanded={isNetworkOpen}
               aria-haspopup="menu"
-              className={`relative inline-flex items-baseline ${networkTitleClass}`}
+              className={`relative inline-flex items-baseline ${titleClass}`}
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsNetworkOpen((current) => !current)}
               style={twoWordTitleStyle}
