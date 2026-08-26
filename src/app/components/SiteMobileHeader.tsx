@@ -82,8 +82,11 @@ export function SiteMobileHeader({
     "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] transition-colors hover:text-[#82f5ad]";
   const titleClass = `${titleBase} text-[#3a5e3c]`;
   // Governance and Dashboard are set exactly like the titles above them and
-  // told apart by colour alone, sage against the dark green.
-  const subLinkClass = `${titleBase} text-[#687d71]`;
+  // told apart by colour alone, sage against the dark green. #79907f is as far
+  // as that can go: it lifts the gap to the titles from 1.67 to 2.15, and the
+  // next step up leaves the pale background at 2.63, under the 3:1 that keeps
+  // large text readable.
+  const subLinkClass = `${titleBase} text-[#79907f]`;
   const titleStyle = {
     fontSize: `${menuType.size}px`,
     lineHeight: menuType.leading,
