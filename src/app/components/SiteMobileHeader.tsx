@@ -78,8 +78,12 @@ export function SiteMobileHeader({
   // can be dialled in the browser. With its flag off the hook hands back the
   // defaults and nothing subscribes.
   const menuType = useMobileMenuType();
-  const titleClass =
-    "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]";
+  const titleBase =
+    "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] transition-colors hover:text-[#82f5ad]";
+  const titleClass = `${titleBase} text-[#3a5e3c]`;
+  // Governance and Dashboard are set exactly like the titles above them and
+  // told apart by colour alone, sage against the dark green.
+  const subLinkClass = `${titleBase} text-[#687d71]`;
   const titleStyle = {
     fontSize: `${menuType.size}px`,
     lineHeight: menuType.leading,
@@ -194,8 +198,8 @@ export function SiteMobileHeader({
             {/* The same control as the nav's Network Alpha pill, in the shape a
                 menu wants: the title opens to reveal the two network surfaces
                 rather than listing them alongside the site's own pages. It reads
-                as one of the titles, so it is set like one — the two inside it
-                stay smaller and sage. */}
+                as one of the titles, so it is set like one — and so are the two
+                inside it, which are sage rather than smaller. */}
             {/* Just "Network" here. "Network Alpha" measures 359px against the
                 342px this overlay leaves on a 390px phone, so it wrapped to two
                 lines; the one-word label also matches the rhythm of Docs, Blog and
@@ -226,24 +230,28 @@ export function SiteMobileHeader({
               </motion.button>
 
               {isNetworkOpen && (
-                <div className="absolute left-1/2 top-full mt-3 flex w-max -translate-x-1/2 flex-col items-center gap-y-1">
+                <div
+                  className="absolute left-1/2 top-full mt-3 flex w-max -translate-x-1/2 flex-col items-center"
+                  style={{ rowGap: `${menuType.spacing}px` }}
+                >
                   {[
                     { label: "Governance", href: "https://governance.theinterfold.com" },
                     { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
                   ].map((link, index) => (
                     <motion.a
                       animate={{ opacity: 1, y: 0 }}
-                      className="inline-flex items-baseline gap-1 font-['ABC_Gramercy:Regular',sans-serif] text-[24px] capitalize leading-[1.2] tracking-[-0.5px] text-[#687d71] transition-colors hover:text-[#82f5ad]"
+                      className={`inline-flex items-baseline gap-1 ${subLinkClass}`}
                       href={link.href}
                       initial={{ opacity: 0, y: 10 }}
                       key={link.href}
                       onClick={() => setIsMenuOpen(false)}
                       rel="noopener noreferrer"
+                      style={titleStyle}
                       target="_blank"
                       transition={{ duration: 0.35, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <span>{link.label}</span>
-                      <span aria-hidden="true" className="text-[13px] leading-none">↗</span>
+                      <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
                     </motion.a>
                   ))}
                 </div>
