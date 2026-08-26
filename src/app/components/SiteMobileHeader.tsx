@@ -5,6 +5,44 @@ import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { MobileMenuTuner, SHOW_MOBILE_MENU_TUNER, useMobileMenuType } from "./MobileMenuTuner";
 
+const NETWORK_LINKS = [
+  { label: "Governance", href: "https://governance.theinterfold.com" },
+  { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
+];
+
+// The pill's own measurements. The dot sits in the margin rather than in the
+// column of text, so the label and the two links below it start on one edge.
+const PILL_PAD_L = 20;
+const PILL_PAD_R = 18;
+const PILL_DOT = 9;
+const PILL_DOT_GAP = 12;
+const PILL_TEXT_X = PILL_PAD_L + PILL_DOT + PILL_DOT_GAP;
+
+// The chevron, in em of the pill's text so it tracks the size with the arrows.
+// Same bend as the desktop control: two rounded bars pinned at the midpoint of
+// their own arm, swinging through a straight line rather than turning over.
+const CHEV_W = 0.2526;
+const CHEV_T = 0.0253;
+const CHEV_ARM = CHEV_W / 2 / Math.cos(Math.PI / 4);
+const CHEV_DROP = (CHEV_W / 2) * Math.tan(Math.PI / 4);
+
+function chevronArm(isLeft: boolean, isOpen: boolean) {
+  const centre = isLeft ? CHEV_W / 4 : (3 * CHEV_W) / 4;
+  return {
+    backgroundColor: "currentColor",
+    borderRadius: `${CHEV_T / 2}em`,
+    height: `${CHEV_T}em`,
+    left: `${centre - CHEV_ARM / 2}em`,
+    position: "absolute" as const,
+    top: `${CHEV_DROP / 2 - CHEV_T / 2}em`,
+    transform: `rotate(${(isLeft ? 1 : -1) * (isOpen ? -45 : 45)}deg)`,
+    transitionDuration: "200ms",
+    transitionProperty: "transform",
+    transitionTimingFunction: "cubic-bezier(0.33, 0, 0.2, 1)",
+    width: `${CHEV_ARM}em`,
+  };
+}
+
 function AnimatedMenuButton({
   isOpen,
   setIsOpen,
@@ -81,29 +119,27 @@ export function SiteMobileHeader({
   const titleBase =
     "font-['ABC_Gramercy:Regular',sans-serif] capitalize tracking-[-1.08px] transition-colors hover:text-[#82f5ad]";
   const titleClass = `${titleBase} text-[#3a5e3c]`;
-  // Governance and Dashboard are set exactly like the titles above them and
-  // told apart by colour alone, sage against the dark green. #79907f is as far
-  // as that can go: it lifts the gap to the titles from 1.67 to 2.15, and the
-  // next step up leaves the pale background at 2.63, under the 3:1 that keeps
-  // large text readable.
-  const subLinkClass = `${titleBase} text-[#79907f]`;
+  // Capped at the tuner size, but shrinking with the viewport under it. The
+  // pill has to hold "Network Alpha" on one line, and that name eats 6.5px of
+  // width per px of type, with another 130 going to the gutters, the dot, the
+  // chevron and the pill's own padding. Below ~390px there is not enough left,
+  // and the whole menu steps down together rather than the pill alone.
+  const menuFontSize = `min(${menuType.size}px, calc((100vw - 130px) / 6.5))`;
+  // Set without the menu's negative word-spacing: at this size it takes -4px
+  // out of a 6.76px word space, and "Network Alpha" read as one word.
+  const pillTextStyle = {
+    fontSize: menuFontSize,
+    letterSpacing: "-0.8px",
+    lineHeight: menuType.leading,
+  };
   const titleStyle = {
-    fontSize: `${menuType.size}px`,
+    fontSize: menuFontSize,
     lineHeight: menuType.leading,
     wordSpacing: "-0.1em",
   };
   // The arrow was 22px against a 56px title; in em it holds that ratio however
   // far the size slider travels.
   const arrowStyle = { fontSize: `${(22 / 56).toFixed(4)}em` };
-  // The chevron sits on the arrows' line: the same em box, the same 4px gap,
-  // and on the baseline rather than centred on the x-height, which is what put
-  // it higher than the arrows beside Docs and Blog. Its viewBox is 14x9, so the
-  // height follows the width to keep it from squashing.
-  const chevronStyle = {
-    height: `${(22 / 56 / (14 / 9)).toFixed(4)}em`,
-    marginLeft: "4px",
-    width: `${(22 / 56).toFixed(4)}em`,
-  };
 
   return (
     <>
@@ -149,7 +185,10 @@ export function SiteMobileHeader({
           >
             Menu
           </motion.p>
-          <div className="m-[0px] flex flex-col items-center p-[0px]" style={{ rowGap: `${menuType.spacing}px` }}>
+          {/* w-full and a gutter so the pill has a width to fill. Shrink-wrapped
+              to its content it hugged the label, and the chevron ended up
+              touching the "a" of Alpha with nowhere to go. */}
+          <div className="m-[0px] flex w-full flex-col items-center px-6" style={{ rowGap: `${menuType.spacing}px` }}>
             <motion.a
               animate={{ opacity: 1, y: 0 }}
               className={titleClass}
@@ -198,68 +237,75 @@ export function SiteMobileHeader({
             >
               Participate
             </motion.a>
-            {/* The same control as the nav's Network Alpha pill, in the shape a
-                menu wants: the title opens to reveal the two network surfaces
-                rather than listing them alongside the site's own pages. It reads
-                as one of the titles, so it is set like one — and so are the two
-                inside it, which are sage rather than smaller. */}
-            {/* Just "Network" here. "Network Alpha" measures 359px against the
-                342px this overlay leaves on a 390px phone, so it wrapped to two
-                lines; the one-word label also matches the rhythm of Docs, Blog and
-                Participate. The pill in the desktop nav and the live strip both
-                still say Network Alpha. */}
-            <div className="relative flex flex-col items-center px-6">
-              <motion.button
-                animate={{ opacity: 1, y: 0 }}
+            {/* The desktop nav's control, in the menu. A title could not hold
+                "Network Alpha" on one line at this size, but a pill carries its
+                own width — so the name stays whole — and it reads as something
+                that opens, which a plain title never did. */}
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              className="w-full max-w-[342px] overflow-hidden rounded-[24px] bg-[#121718]"
+              initial={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <button
                 aria-expanded={isNetworkOpen}
-                className={`block max-w-full text-center ${titleClass}`}
-                initial={{ opacity: 0, y: 16 }}
+                aria-haspopup="menu"
+                className="flex w-full items-center py-[9px] text-left font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8]"
                 onClick={() => setIsNetworkOpen((current) => !current)}
-                style={titleStyle}
-                transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                style={{ ...pillTextStyle, paddingLeft: `${PILL_PAD_L}px`, paddingRight: `${PILL_PAD_R}px` }}
                 type="button"
               >
-                Network
-                <svg
+                <span
                   aria-hidden="true"
-                  className={`inline-block align-baseline transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
-                  fill="none"
-                  focusable="false"
-                  style={chevronStyle}
-                  viewBox="0 0 14 9"
+                  className="relative shrink-0 rounded-full bg-[#82f5ad] shadow-[0_0_8px_2px_rgba(130,245,173,0.6)] before:absolute before:inset-[-2px] before:rounded-full before:bg-[#82f5ad]/45 before:animate-ping motion-reduce:before:animate-none"
+                  style={{ height: `${PILL_DOT}px`, marginRight: `${PILL_DOT_GAP}px`, width: `${PILL_DOT}px` }}
+                />
+                <span>Network Alpha</span>
+                <span
+                  aria-hidden="true"
+                  className="relative ml-auto block shrink-0"
+                  style={{ height: `${CHEV_DROP + CHEV_T}em`, width: `${CHEV_W}em` }}
                 >
-                  <polyline points="1 1.5 7 7.5 13 1.5" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" />
-                </svg>
-              </motion.button>
-
-              {isNetworkOpen && (
-                <div
-                  className="absolute left-1/2 top-full flex w-max -translate-x-1/2 flex-col items-center"
-                  style={{ marginTop: `${menuType.spacing}px`, rowGap: `${menuType.spacing}px` }}
-                >
-                  {[
-                    { label: "Governance", href: "https://governance.theinterfold.com" },
-                    { label: "Dashboard", href: "https://dashboard.theinterfold.com/" },
-                  ].map((link, index) => (
-                    <motion.a
-                      animate={{ opacity: 1, y: 0 }}
-                      className={`inline-flex items-baseline gap-1 ${subLinkClass}`}
-                      href={link.href}
-                      initial={{ opacity: 0, y: 10 }}
-                      key={link.href}
-                      onClick={() => setIsMenuOpen(false)}
-                      rel="noopener noreferrer"
-                      style={titleStyle}
-                      target="_blank"
-                      transition={{ duration: 0.35, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <span>{link.label}</span>
-                      <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
-                    </motion.a>
-                  ))}
+                  <span style={chevronArm(true, isNetworkOpen)} />
+                  <span style={chevronArm(false, isNetworkOpen)} />
+                </span>
+              </button>
+              {/* 0fr to 1fr rather than a measured height: the closed state is
+                  right on the very first painted frame, with nothing to measure
+                  and no effect running after paint to correct it. */}
+              <div
+                className="grid transition-[grid-template-rows] duration-200 ease-[cubic-bezier(0.33,0,0.2,1)] motion-reduce:transition-none"
+                style={{ gridTemplateRows: isNetworkOpen ? "1fr" : "0fr" }}
+              >
+                <div className="overflow-hidden">
+                  <div className="pb-[8px]" role="menu">
+                    {NETWORK_LINKS.map((link) => (
+                      <a
+                        aria-hidden={!isNetworkOpen}
+                        className="flex items-baseline justify-between font-['ABC_Gramercy:Regular',sans-serif] text-[#d9fce8] transition-colors hover:text-[#82f5ad]"
+                        href={link.href}
+                        key={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        rel="noopener noreferrer"
+                        role="menuitem"
+                        style={{
+                          ...pillTextStyle,
+                          paddingBottom: "7px",
+                          paddingLeft: `${PILL_TEXT_X}px`,
+                          paddingRight: `${PILL_PAD_R}px`,
+                          paddingTop: "7px",
+                        }}
+                        tabIndex={isNetworkOpen ? 0 : -1}
+                        target="_blank"
+                      >
+                        <span>{link.label}</span>
+                        <span aria-hidden="true" className="leading-none" style={arrowStyle}>↗</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       )}
