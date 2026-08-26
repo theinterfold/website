@@ -1,21 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/fold-auction",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/fold-auction/:path*",
-      "destination": "/",
-      "permanent": false
-    },
-    {
-      "source": "/auction/:path*",
-      "destination": "/",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
