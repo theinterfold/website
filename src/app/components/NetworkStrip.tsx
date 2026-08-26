@@ -11,7 +11,7 @@
 
 export function NetworkStrip({ className = "" }: { className?: string }) {
   return (
-    <div data-preview-note="strip" className={`flex w-full shrink-0 items-center justify-center border-t border-[#3a5e3c]/10 bg-white px-3 py-[6px] sm:h-[32px] sm:py-0 ${className}`}>
+    <div className={`flex w-full shrink-0 items-center justify-center border-t border-[#3a5e3c]/10 bg-white px-3 py-[6px] sm:h-[32px] sm:py-0 ${className}`}>
       {/* The dot is out of flow so it cannot push the line off centre. Centring
           the pair instead moved the words right by half the dot plus its gap. */}
       <p className="relative whitespace-nowrap font-['Office_Code_Pro:Medium',sans-serif] text-[10px] uppercase leading-[1.2] tracking-[1px] text-[#687d71] sm:text-[12px] sm:tracking-[1.2px]">

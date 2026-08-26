@@ -3,7 +3,6 @@ import { flushSync } from 'react-dom';
 import Desktop from '../../imports/Desktop/Desktop';
 import { AuctionLegalPage } from './AuctionLegalPage';
 import { Header } from './Header';
-import { PreviewNotes } from './previewNotes';
 import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
@@ -394,7 +393,6 @@ export function ResponsiveLayout() {
         {sharedHeader}
         <ParticipatePage />
         {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
-        <PreviewNotes routePath={routePath} />
       </>
     );
   }
@@ -404,7 +402,6 @@ export function ResponsiveLayout() {
       {sharedHeader}
       {isMobile ? <MobileVersion /> : <Desktop />}
       {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
-      <PreviewNotes routePath={routePath} />
     </>
   );
 }

@@ -84,7 +84,7 @@ export function Header({
             {/* items-center matters now that the pill is in here: without it the links
                 stretch to the pill's 41px and their text sits at the top of that
                 box, riding up above the wordmark. */}
-            <nav data-preview-note="nav" className="hidden items-center justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
+            <nav className="hidden items-center justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
                 <ExternalArrowSlide className={navArrowClass} />
