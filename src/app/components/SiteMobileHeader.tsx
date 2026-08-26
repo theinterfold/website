@@ -142,7 +142,25 @@ export function SiteMobileHeader({
   // The desktop rows set their arrow at 14px against 22px of text. The menu had
   // it at 22/56, which left the arrows at 45% of the x-height here against 73%
   // there — the same mark, visibly smaller. Same ratio now.
-  const arrowStyle = { fontSize: `${(14 / 22).toFixed(4)}em` };
+  //
+  // Both marks hang from the x-height line rather than sitting on the baseline.
+  // Measured, the x-height is 0.4619 of the type and the arrow ink 0.3386, so
+  // the arrow rides up the difference; the chevron box is 0.2454 and rides up
+  // more. On the baseline the chevron sank to the very bottom of letters this
+  // large and read as a different alignment from the arrows.
+  // Calibrated against what renders, not derived: the arrow glyph's ink does
+  // not sit flush on its own baseline, and a shift worked out from the ink
+  // height alone left it 2.4px high. Measured, these put both marks within half
+  // a pixel of the line. ARROW_LIFT is in the arrow's own size, CHEV_LIFT in
+  // the text's.
+  const ARROW_LIFT = "-0.106em";
+  const CHEV_LIFT = "-0.2085em";
+  const arrowStyle = {
+    fontSize: `${(14 / 22).toFixed(4)}em`,
+    position: "relative" as const,
+    top: ARROW_LIFT,
+  };
+  const chevronLift = CHEV_LIFT;
 
   return (
     <>
@@ -264,7 +282,7 @@ export function SiteMobileHeader({
               <span
                 aria-hidden="true"
                 className="relative block shrink-0"
-                style={{ height: `${CHEV_DROP + CHEV_T}em`, marginLeft: "4px", width: `${CHEV_W}em` }}
+                style={{ height: `${CHEV_DROP + CHEV_T}em`, marginLeft: "4px", top: chevronLift, width: `${CHEV_W}em` }}
               >
                 <span style={chevronArm(true, isNetworkOpen)} />
                 <span style={chevronArm(false, isNetworkOpen)} />
