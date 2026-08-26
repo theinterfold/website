@@ -88,6 +88,15 @@ export function SiteMobileHeader({
   // The arrow was 22px against a 56px title; in em it holds that ratio however
   // far the size slider travels.
   const arrowStyle = { fontSize: `${(22 / 56).toFixed(4)}em` };
+  // The chevron sits on the arrows' line: the same em box, the same 4px gap,
+  // and on the baseline rather than centred on the x-height, which is what put
+  // it higher than the arrows beside Docs and Blog. Its viewBox is 14x9, so the
+  // height follows the width to keep it from squashing.
+  const chevronStyle = {
+    height: `${(22 / 56 / (14 / 9)).toFixed(4)}em`,
+    marginLeft: "4px",
+    width: `${(22 / 56).toFixed(4)}em`,
+  };
 
   return (
     <>
@@ -187,9 +196,11 @@ export function SiteMobileHeader({
                 rather than listing them alongside the site's own pages. It reads
                 as one of the titles, so it is set like one — the two inside it
                 stay smaller and sage. */}
-            {/* 56px puts this label at the exact width of a small phone, so it
-                needs the same side margin the rest of the overlay has and wraps to
-                two lines. The chevron follows the last word. */}
+            {/* Just "Network" here. "Network Alpha" measures 359px against the
+                342px this overlay leaves on a 390px phone, so it wrapped to two
+                lines; the one-word label also matches the rhythm of Docs, Blog and
+                Participate. The pill in the desktop nav and the live strip both
+                still say Network Alpha. */}
             <div className="relative flex flex-col items-center px-6">
               <motion.button
                 animate={{ opacity: 1, y: 0 }}
@@ -201,12 +212,13 @@ export function SiteMobileHeader({
                 transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 type="button"
               >
-                Network Alpha
+                Network
                 <svg
                   aria-hidden="true"
-                  className={`ml-3 inline-block h-[15px] w-[24px] align-middle transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
+                  className={`inline-block align-baseline transition-transform duration-200 ${isNetworkOpen ? "-scale-y-100" : ""}`}
                   fill="none"
                   focusable="false"
+                  style={chevronStyle}
                   viewBox="0 0 14 9"
                 >
                   <polyline points="1 1.5 7 7.5 13 1.5" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" strokeWidth="1.5" />
