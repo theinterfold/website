@@ -41,6 +41,11 @@ export function Header({
   const BrandLink = animateOpening ? motion.a : "a";
   const MarkLink = animateOpening ? motion.a : "a";
   const NavLink = animateOpening ? motion.a : "a";
+  // The pill is a component, not an element, so it joins the opening sequence
+  // through a wrapper. Without one it was the only thing in the bar already
+  // painted when the bar arrived, and the wordmark and links then faded in
+  // around it.
+  const PillSlot = animateOpening ? motion.div : "div";
   const openingMotion = (delay: number) => animateOpening
     ? {
         animate: { opacity: 1, y: 0 },
@@ -86,7 +91,9 @@ export function Header({
               {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
                   still live and still the claim route — reachable by direct link only. */}
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
-              <NetworkMenu className="self-center" />
+              <PillSlot className="self-center" {...openingMotion(1.25)}>
+                <NetworkMenu />
+              </PillSlot>
             </nav>
           </div>
         </header>

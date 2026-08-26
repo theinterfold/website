@@ -83,6 +83,13 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
   // the links, in pixels rather than percentages, so the two clip edges sit on
   // the same line at every point of the move.
   const folded = isOpen ? 0 : menuHeight;
+  // The links need their own value for the one frame before the measuring
+  // effect runs — effects run after paint, and folding by a height that is
+  // still zero is not a closed menu, it is an open one. The menu was painting
+  // open on load and snapping shut. 100% of the links' own box needs no
+  // measurement, and once measured it resolves to the very same line, so
+  // nothing moves when it is swapped for the pixel count.
+  const linksFolded = isOpen ? "0px" : menuHeight ? `${menuHeight}px` : "100%";
 
   return (
     // The button stays in flow so this box has the pill's height and width; the
@@ -169,7 +176,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <div
         className={`absolute inset-x-0 top-full z-10 ${isOpen ? "" : "pointer-events-none"}`}
         style={{
-          clipPath: `inset(0 0 ${folded}px 0 round 0 0 ${capRadius}px ${capRadius}px)`,
+          clipPath: `inset(0 0 ${linksFolded} 0 round 0 0 ${capRadius}px ${capRadius}px)`,
           transitionDuration: `${OPEN_MS}ms`,
           transitionProperty: "clip-path",
           transitionTimingFunction: OPEN_EASING,
