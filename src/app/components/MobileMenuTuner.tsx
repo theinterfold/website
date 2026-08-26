@@ -13,7 +13,7 @@ import { createPortal } from "react-dom";
 // hook never subscribes and never reads storage, so the menu renders on
 // DEFAULT_MOBILE_MENU_TYPE for everyone.
 // =============================================================================
-export const SHOW_MOBILE_MENU_TUNER = true; // flip to false to hide the panel
+export const SHOW_MOBILE_MENU_TUNER = false; // flip to true to tune in the browser
 
 const STORE_KEY = "interfold-mobile-menu-type-v1";
 
