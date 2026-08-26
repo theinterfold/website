@@ -23,7 +23,7 @@ import {
 // on it, and the numbers it prints are the ones to paste into
 // DEFAULT_EXECUTION_FLOW_TIMING once they are settled.
 // =============================================================================
-export const SHOW_EXECUTION_FLOW_TUNER = true; // flip to false to hide the panel
+export const SHOW_EXECUTION_FLOW_TUNER = false; // flip to true to tune in the browser
 
 const STORE_KEY = "interfold-execution-flow-timing-v2";
 
