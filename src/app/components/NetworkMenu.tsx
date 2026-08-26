@@ -212,7 +212,11 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
           {NETWORK_LINKS.map((link) => (
             <a
               aria-hidden={!isOpen}
-              className="group flex items-center justify-between gap-6 whitespace-nowrap py-[9px] pl-[16px] pr-[13px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
+              // pr is 7 here against the button's 13: the two boxes already line
+              // up, but the arrow glyph carries 6.2px of right side-bearing, so
+              // its ink stopped short of the chevron's. The padding pays that
+              // back and the marks sit on one edge.
+              className="group flex items-center justify-between gap-6 whitespace-nowrap py-[9px] pl-[16px] pr-[7px] font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#d9fce8] transition-colors hover:bg-[#1c2426] hover:text-[#82f5ad]"
               href={link.href}
               key={link.href}
               onClick={close}
