@@ -120,6 +120,9 @@ export function SiteMobileHeader({
   // titles from 1.67 to 2.15, and the next step up leaves the pale background
   // at 2.63, under the 3:1 large text needs to stay readable.
   const subLinkClass = `${titleBase} text-[#79907f]`;
+  // The pill's black rather than the site green, so the network group reads as
+  // its own thing without a box around it. The chevron follows on currentColor.
+  const networkTitleClass = `${titleBase} text-[#121718]`;
   // Capped at the tuner size, but shrinking with the viewport under it. The
   // pill has to hold "Network Alpha" on one line, and that name eats 6.5px of
   // width per px of type, with another 130 going to the gutters, the dot, the
@@ -245,7 +248,7 @@ export function SiteMobileHeader({
               animate={{ opacity: 1, y: 0 }}
               aria-expanded={isNetworkOpen}
               aria-haspopup="menu"
-              className={`relative inline-flex items-baseline ${titleClass}`}
+              className={`relative inline-flex items-baseline ${networkTitleClass}`}
               initial={{ opacity: 0, y: 16 }}
               onClick={() => setIsNetworkOpen((current) => !current)}
               style={twoWordTitleStyle}
