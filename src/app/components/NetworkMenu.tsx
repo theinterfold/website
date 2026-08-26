@@ -17,6 +17,41 @@ const NETWORK_LINKS = [
 const OPEN_MS = 200;
 const OPEN_EASING = "cubic-bezier(0.33, 0, 0.2, 1)";
 
+// The chevron bends instead of turning. Two rounded bars, each pinned at the
+// midpoint of its own arm, swing from +A to -A and so pass through a straight
+// line on the way over — the iOS arrowhead, not a glyph spinning 180 degrees.
+//
+// Sized off the rows' arrows rather than chosen: the glyph measures 7.5px of
+// ink with a stroke around 0.8px, so the chevron carries the same weight and
+// sits in the same box instead of reading twice as heavy.
+const CHEVRON_WIDTH = 9;
+const CHEVRON_ANGLE = 45;
+const CHEVRON_WEIGHT = 0.9;
+
+const CHEVRON_HALF = CHEVRON_WIDTH / 2;
+const CHEVRON_RAD = (CHEVRON_ANGLE * Math.PI) / 180;
+const CHEVRON_ARM = CHEVRON_HALF / Math.cos(CHEVRON_RAD);
+const CHEVRON_DROP = CHEVRON_HALF * Math.tan(CHEVRON_RAD);
+const CHEVRON_HEIGHT = CHEVRON_DROP + CHEVRON_WEIGHT;
+
+function chevronArm(isLeft: boolean, isOpen: boolean) {
+  const centre = isLeft ? CHEVRON_HALF / 2 : (3 * CHEVRON_HALF) / 2;
+  const turn = (isLeft ? 1 : -1) * (isOpen ? -CHEVRON_ANGLE : CHEVRON_ANGLE);
+  return {
+    backgroundColor: "currentColor",
+    borderRadius: `${CHEVRON_WEIGHT / 2}px`,
+    height: `${CHEVRON_WEIGHT}px`,
+    left: `${centre - CHEVRON_ARM / 2}px`,
+    position: "absolute" as const,
+    top: `${CHEVRON_DROP / 2 - CHEVRON_WEIGHT / 2}px`,
+    transform: `rotate(${turn}deg)`,
+    transitionDuration: `${OPEN_MS}ms`,
+    transitionProperty: "transform",
+    transitionTimingFunction: OPEN_EASING,
+    width: `${CHEVRON_ARM}px`,
+  };
+}
+
 export function NetworkMenu({ className = "" }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -148,29 +183,14 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         <span className="font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] whitespace-nowrap">
           Network Alpha
         </span>
-        <svg
+        <span
           aria-hidden="true"
-          className="ml-auto h-[9px] w-[14px] shrink-0"
-          fill="none"
-          focusable="false"
-          // Turned rather than flipped. Scaling y from 1 to -1 passes through
-          // zero, so the chevron folded flat halfway and unfolded again.
-          style={{
-            rotate: isOpen ? "180deg" : "0deg",
-            transitionDuration: `${OPEN_MS}ms`,
-            transitionProperty: "rotate",
-            transitionTimingFunction: OPEN_EASING,
-          }}
-          viewBox="0 0 14 9"
+          className="relative ml-auto block shrink-0"
+          style={{ height: `${CHEVRON_HEIGHT}px`, width: `${CHEVRON_WIDTH}px` }}
         >
-          <polyline
-            points="1 1.5 7 7.5 13 1.5"
-            stroke="currentColor"
-            strokeLinecap="square"
-            strokeLinejoin="miter"
-            strokeWidth="1.5"
-          />
-        </svg>
+          <span style={chevronArm(true, isOpen)} />
+          <span style={chevronArm(false, isOpen)} />
+        </span>
       </button>
 
       <div
