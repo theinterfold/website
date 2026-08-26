@@ -29,12 +29,26 @@ const HERO_OVERLAY_CLEANUP_DELAY_MS = 760;
 const PAGE_FADE_COMMIT_DELAY_MS = 220;
 const PAGE_FADE_CLEANUP_DELAY_MS = 520;
 
+// The auction is archived: the pages stay in the tree but nothing reaches
+// them. Production redirects at the edge (see vercel.json) so they never load;
+// this covers local dev, where vercel.json does not apply, and any client-side
+// navigation that never touches the server.
+const ARCHIVED_ROUTES = /^(fold-auction|auction)(\/|$)/;
+
 function getPagePath() {
   if (typeof window === 'undefined') {
     return '';
   }
 
-  return window.location.pathname.replace(/^\/+|\/+$/g, '');
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
+
+  if (ARCHIVED_ROUTES.test(path)) {
+    // replace, not push: the archived URL should not sit in the back history.
+    window.history.replaceState({}, '', '/');
+    return '';
+  }
+
+  return path;
 }
 
 function applyPageTheme(page = getPagePath()) {
