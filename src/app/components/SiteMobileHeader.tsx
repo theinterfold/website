@@ -234,8 +234,8 @@ export function SiteMobileHeader({
 
               {isNetworkOpen && (
                 <div
-                  className="absolute left-1/2 top-full mt-3 flex w-max -translate-x-1/2 flex-col items-center"
-                  style={{ rowGap: `${menuType.spacing}px` }}
+                  className="absolute left-1/2 top-full flex w-max -translate-x-1/2 flex-col items-center"
+                  style={{ marginTop: `${menuType.spacing}px`, rowGap: `${menuType.spacing}px` }}
                 >
                   {[
                     { label: "Governance", href: "https://governance.theinterfold.com" },
