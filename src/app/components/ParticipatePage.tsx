@@ -414,7 +414,7 @@ export function ParticipatePage() {
             </ScrollFadeIn>
             <ScrollFadeIn className="flex w-full justify-center" delay={0.1}>
               <p data-preview-was="Builders, operators, and partners each help bring confidential coordination into practice." className={`w-full max-w-[320px] ${SUPPORTING_LINE} text-[#687d71] md:w-[440px] md:max-w-none`}>
-                Confidential coordination depends on multiple roles working together.
+                Confidential coordination brings different parties into a shared computation.
               </p>
             </ScrollFadeIn>
           </div>
@@ -428,10 +428,10 @@ export function ParticipatePage() {
                 Interfold enables programs to compute over encrypted inputs.
               </p>
               <p className={`mx-auto mt-4 max-w-[320px] ${SUPPORTING_LINE} text-[#687d71] md:max-w-none`}>
-                Without exposing the underlying data, or placing decryption control in a single party.
+                The underlying data stays private, and no single party controls decryption.
               </p>
               <div className="mt-8">
-                <SectionLabel>An E3 brings together different roles:</SectionLabel>
+                <SectionLabel>This requires three core roles:</SectionLabel>
               </div>
             </ScrollFadeIn>
 
