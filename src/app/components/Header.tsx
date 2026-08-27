@@ -58,8 +58,11 @@ export function Header({
   // sit flush on its own baseline. Same rule as the mobile menu.
   const navArrowClass =
     "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none top-[-0.0875em]";
-  const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
-  const externalNavLinkClass = "group inline-flex items-baseline gap-1 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
+  // px-4 with no gap keeps the 32px people see, but as each link's own padding
+  // rather than dead space between them. Sweeping the row used to flip the
+  // cursor eight times, hand to arrow and back, across three 32px gaps.
+  const navLinkClass = "interfold-top-nav-link px-4 transition-colors hover:text-[#82f5ad]";
+  const externalNavLinkClass = "group inline-flex items-baseline gap-1 px-4 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
 
   return (
@@ -84,7 +87,7 @@ export function Header({
             {/* items-center matters now that the pill is in here: without it the links
                 stretch to the pill's 41px and their text sits at the top of that
                 box, riding up above the wordmark. */}
-            <nav className="hidden items-center justify-self-end gap-8 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
+            <nav className="hidden items-center justify-self-end gap-0 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
               <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
                 <span>Docs</span>
                 <ExternalArrowSlide className={navArrowClass} />
@@ -96,7 +99,7 @@ export function Header({
               {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
                   still live and still the claim route — reachable by direct link only. */}
               <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
-              <PillSlot className="self-center" {...openingMotion(1.25)}>
+              <PillSlot className="ml-4 self-center" {...openingMotion(1.25)}>
                 <NetworkMenu />
               </PillSlot>
             </nav>
