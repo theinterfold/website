@@ -61,7 +61,7 @@ export function Header({
   // px-4 with no gap keeps the 32px people see, but as each link's own padding
   // rather than dead space between them. Sweeping the row used to flip the
   // cursor eight times, hand to arrow and back, across three 32px gaps.
-  const navLinkClass = "interfold-top-nav-link px-4 transition-colors hover:text-[#82f5ad]";
+  const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
   const externalNavLinkClass = "group inline-flex items-baseline gap-1 px-4 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
 

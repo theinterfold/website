@@ -258,7 +258,13 @@ html.interfold-theme-participate #root {
   }
 }
 
+/* The padding lives here rather than in a utility class, so the underline can
+   inset by the same value. Left in Tailwind they drifted apart the moment the
+   links were padded to close the gaps between them, and the rule ran the full
+   32px wider than the word. */
 .interfold-top-nav-link {
+  --nav-link-pad: 1rem;
+  padding-inline: var(--nav-link-pad);
   position: relative;
   text-decoration: none;
 }
@@ -268,12 +274,12 @@ html.interfold-theme-participate #root {
   bottom: -5px;
   content: "";
   height: 1px;
-  left: 0;
+  left: var(--nav-link-pad);
   opacity: 0;
   position: absolute;
+  right: var(--nav-link-pad);
   transform: scaleX(0);
   transform-origin: left center;
-  width: 100%;
 }
 
 .interfold-top-nav-link.is-active::after {
