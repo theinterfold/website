@@ -9,9 +9,9 @@ import "slick-carousel/slick/slick-theme.css";
 
 // Importar as mesmas imagens e SVGs do desktop
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
-import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.png";
-import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.png";
-import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.png";
+import imgChatGptImageApr232026051856Pm11 from "../../imports/Desktop/a80fa66d44b0ff61c570b989d6fb551d46380225.webp";
+import imgChatGptImageApr232026051856Pm12 from "../../imports/Desktop/2ed5559bf52ac38f0d906307f0ed5c48d52a224a.webp";
+import imgChatGptImageApr232026051856Pm13 from "../../imports/Desktop/5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.webp";
 import aragonLogo from "../../imports/Desktop/aragon-ant-logo-full.svg?no-inline";
 import aztecLogo from "../../imports/Desktop/aztec-wordmark-dark.svg";
 import boundlessLogo from "../../imports/Desktop/boundless-logo.svg";
