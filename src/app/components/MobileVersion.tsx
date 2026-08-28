@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { NetworkStrip } from "./NetworkStrip";
+import { participationPaths } from "./participationPaths";
 import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "./titleBlock";
 import { useStartOnInView } from "./useStartOnInView";
 import Slider from "react-slick";
@@ -208,27 +209,6 @@ const mobileLogos = [
   },
   { href: "https://boundless.xyz/", name: "Boundless", visualScale: 0.54, content: <MobilePartnerLogoAsset aspectRatio="901 / 114" src={boundlessLogo} /> },
   { href: "https://www.encryptedmempool.org/", name: "Encrypt the Mempool", visualScale: 0.9, content: <MobilePartnerLogoAsset aspectRatio="791 / 219" src={etmStackedLogo} /> },
-];
-
-const participationPaths = [
-  {
-    body: "Operate infrastructure for confidential coordination.",
-    cta: "Get started",
-    href: "https://dashboard.theinterfold.com/#operator",
-    title: "Run a ciphernode",
-  },
-  {
-    body: "Build applications using private inputs and verifiable outcomes.",
-    cta: "Explore docs",
-    href: "https://docs.theinterfold.com/getting-started",
-    title: "Build and integrate",
-  },
-  {
-    body: "Bring a live use case to Interfold and deploy it in practice.",
-    cta: "Reach out",
-    href: "mailto:comms@gnosisguild.org",
-    title: "Partner on a pilot",
-  },
 ];
 
 export function MobileVersion() {
