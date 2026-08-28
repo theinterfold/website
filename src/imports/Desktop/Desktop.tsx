@@ -220,9 +220,9 @@ function Frame16() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">What Becomes Possible</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+      <h2 className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="New forms of coordination become possible." />
-      </p>
+      </h2>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
         <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>When shared outcomes no longer require exposing private inputs or trusting a single operator.</p>
       </ScrollFadeIn>
@@ -365,9 +365,9 @@ function Frame8() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#d4f6da]/55 text-[14px] tracking-[1.4px] uppercase w-full">Participate</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
+      <h2 className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Help form the network." />
-      </p>
+      </h2>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
         <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#d4f6da]/55 w-full md:w-[440px]`}>Operate the network, build applications, or bring new use cases to Interfold.</p>
       </ScrollFadeIn>
@@ -477,9 +477,9 @@ function Frame18() {
       <ScrollFadeIn className="w-full">
         <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] relative shrink-0 text-[#8a9c90] text-[14px] tracking-[1.4px] uppercase w-full">Explore</p>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
+      <h2 className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-full">
         <LineRevealAuto delay={0.1} text="Go deeper." />
-      </p>
+      </h2>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
         <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Explore how Interfold works, why confidential coordination matters, and what is live now.</p>
       </ScrollFadeIn>
@@ -691,9 +691,9 @@ function Frame14() {
           <p className="leading-[1.075] whitespace-pre">execution Model</p>
         </div>
       </ScrollFadeIn>
-      <p className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
+      <h2 className="font-['ABC_Gramercy:Regular',sans-serif] leading-[0.95] min-w-full relative shrink-0 text-[#3a5e3c] text-[32px] tracking-[-0.96px] w-[min-content]">
         <LineRevealAuto delay={0.1} text="The Interfold brings confidential coordination to digital systems." />
-      </p>
+      </h2>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.2}>
         <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.</p>
       </ScrollFadeIn>
@@ -1727,9 +1727,13 @@ function Frame21() {
 function Frame12() {
   return (
     <div className={`content-stretch flex flex-col ${TITLE_BLOCK_GAP} items-center not-italic relative shrink-0 text-center w-full px-4 md:px-0`}>
-      <div className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
+      {/* h1, not a div: the page had no headings at all, so nothing could
+          navigate it by structure and search engines saw no hierarchy.
+          Tailwind's reset leaves headings inheriting size and weight, so the
+          tag carries meaning and changes nothing on screen. */}
+        <h1 className="w-full capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0] relative shrink-0 text-[#3a5e3c] text-[40px] md:text-[64px] tracking-[-1.92px]">
         <LineReveal lineClassName="leading-[0.87]" lines={["Private Inputs.", "Collective Outcomes."]} />
-      </div>
+      </h1>
       <ScrollFadeIn className="w-full flex justify-center" delay={0.28}>
         <p className={`${SUPPORTING_LINE} relative shrink-0 text-[#687d71] w-full md:w-[440px]`}>Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.</p>
       </ScrollFadeIn>

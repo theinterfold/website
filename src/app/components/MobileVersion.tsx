@@ -269,9 +269,9 @@ export function MobileVersion() {
       <NetworkStrip className="sticky top-[60px] z-40" />
       <div className="flex flex-col bg-[#d9fce8]">
         <div className={`mx-auto flex max-w-md flex-col items-center ${TITLE_BLOCK_GAP} text-center px-[24px] py-[64px]`}>
-          <div className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
+          <h1 className="max-w-[320px] font-['ABC_Gramercy:Regular',sans-serif] text-[36px] leading-[0.95] tracking-[-1.08px] capitalize text-[#3a5e3c]">
             <LineReveal lineClassName="leading-[0.95]" lines={["Private Inputs.", "Collective Outcomes."]} />
-          </div>
+          </h1>
           <ScrollFadeIn className="flex w-full justify-center" delay={0.25}>
             <p className={`max-w-[320px] ${SUPPORTING_LINE} text-[#687d71]`}>
               Interfold lets competing companies or complete strangers compute together on sensitive data: private inputs, verifiable outputs, no trusted hardware.
@@ -326,8 +326,8 @@ export function MobileVersion() {
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90] opacity-80">
             A new execution Model
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            The Interfold brings confidential coordination to digital systems.</p>
+          <h2 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
+            The Interfold brings confidential coordination to digital systems.</h2>
             <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
               Multiple parties compute over encrypted inputs and produce shared, verifiable outcomes.
             </p>
@@ -395,8 +395,8 @@ export function MobileVersion() {
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             What Becomes Possible
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            New forms of coordination become possible.</p>
+          <h2 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
+            New forms of coordination become possible.</h2>
             <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
               When shared outcomes no longer require exposing private inputs or trusting a single operator.
             </p>
@@ -494,8 +494,8 @@ export function MobileVersion() {
             <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#d4f6da]/55">
               Participate
             </p>
-            <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
-              Help form the network.</p>
+            <h2 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#d4f6da]">
+              Help form the network.</h2>
             <p className={`mt-3 text-[#d4f6da]/55 ${SUPPORTING_LINE}`}>
               Operate the network, build applications, or bring new use cases to Interfold.
             </p>
@@ -536,8 +536,8 @@ export function MobileVersion() {
           <p className="font-['Office_Code_Pro:Medium',sans-serif] mb-3 text-[12px] leading-[1.2] tracking-[1.2px] uppercase text-[#8a9c90]">
             Explore
           </p>
-          <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
-            Go deeper.</p>
+          <h2 className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.72px] text-[#3a5e3c]">
+            Go deeper.</h2>
             <p className={`mt-3 text-[#687d71] ${SUPPORTING_LINE}`}>
               Explore how Interfold works, why confidential coordination matters, and what is live now.
             </p>
