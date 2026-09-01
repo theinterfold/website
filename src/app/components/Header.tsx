@@ -1,5 +1,6 @@
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
 import { motion } from "motion/react";
+import { useBrandMarkMenu } from "./BrandMarkMenu";
 import { ExternalArrowSlide } from "./HoverArrowLink";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { NetworkMenu } from "./NetworkMenu";
@@ -38,6 +39,7 @@ export function Header({
   showDesktop?: boolean;
   showMobile?: boolean;
 }) {
+  const brandMenu = useBrandMarkMenu();
   const BrandLink = animateOpening ? motion.a : "a";
   const MarkLink = animateOpening ? motion.a : "a";
   const NavLink = animateOpening ? motion.a : "a";
@@ -76,12 +78,13 @@ export function Header({
               aria-label="The Interfold home"
               className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17px] w-[120px] justify-self-start"}
               href="/"
+              {...brandMenu.trigger("wordmark")}
               style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
               {...openingMotion(0.75)}
             >
               {animateOpening ? "The Interfold" : <Wordmark />}
             </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35px] w-[46px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...openingMotion(0.85)}>
+            <MarkLink aria-label="The Interfold home" className="h-[35px] w-[46px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...brandMenu.trigger("symbol")} {...openingMotion(0.85)}>
               <InterfoldSymbol className="block h-full w-full" />
             </MarkLink>
             {/* items-center matters now that the pill is in here: without it the links
@@ -107,6 +110,7 @@ export function Header({
         </header>
         </div>
       )}
+      {brandMenu.element}
     </>
   );
 }
