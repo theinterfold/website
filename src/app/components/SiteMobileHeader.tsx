@@ -2,6 +2,7 @@ import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { Cross as Hamburger } from "hamburger-react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
+import { useBrandMarkMenu } from "./BrandMarkMenu";
 import { InterfoldSymbol } from "./InterfoldSymbol";
 import { MobileMenuTuner, SHOW_MOBILE_MENU_TUNER, useMobileMenuType } from "./MobileMenuTuner";
 
@@ -74,6 +75,7 @@ export function SiteMobileHeader({
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNetworkOpen, setIsNetworkOpen] = useState(false);
+  const brandMenu = useBrandMarkMenu();
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -167,7 +169,7 @@ export function SiteMobileHeader({
       {SHOW_MOBILE_MENU_TUNER ? <MobileMenuTuner /> : null}
       <div className={`sticky top-0 z-50 ${className}`}>
       <div className={`interfold-header-drop relative flex items-center justify-center ${backgroundClassName} px-6 py-4 transition-colors duration-[720ms]`}>
-        <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/">
+        <a aria-label="The Interfold home" className="absolute left-6 h-4 w-28" href="/" {...brandMenu.trigger("wordmark")}>
           <svg className="h-full w-full" fill="none" preserveAspectRatio="xMinYMid meet" viewBox="0 0 120.421 17.239">
             <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
             <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
@@ -183,7 +185,7 @@ export function SiteMobileHeader({
           </svg>
         </a>
 
-        <a aria-label="The Interfold home" className="h-7 w-8 text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/">
+        <a aria-label="The Interfold home" className="h-7 w-8 text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...brandMenu.trigger("symbol")}>
           <InterfoldSymbol className="h-full w-full" />
         </a>
 
@@ -324,6 +326,8 @@ export function SiteMobileHeader({
           </div>
         </div>
       )}
+
+      {brandMenu.element}
     </>
   );
 }
