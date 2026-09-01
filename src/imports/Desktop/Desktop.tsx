@@ -19,6 +19,7 @@ import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { HoverArrowContent, UnderlinedArrowLink } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
 import { NetworkStrip } from "../../app/components/NetworkStrip";
+import { participationPaths } from "../../app/components/participationPaths";
 import { BUTTON_SIZE, SUPPORTING_LINE, TITLE_BLOCK_GAP } from "../../app/components/titleBlock";
 import { LineRevealAuto } from "../../app/components/LineRevealAuto";
 import { ScrollFadeIn } from "../../app/components/ScrollFadeIn";
@@ -374,30 +375,6 @@ function Frame8() {
     </div>
   );
 }
-
-// Marvin: this section was repeating the hero's CTAs. It is now a compact
-// version of the three participation paths from the Participate page —
-// title, one line, one link — and a text link to the page itself.
-const participationPaths = [
-  {
-    body: "Operate infrastructure for confidential coordination.",
-    cta: "Get started",
-    href: "https://dashboard.theinterfold.com/#operator",
-    title: "Run a ciphernode",
-  },
-  {
-    body: "Build applications using private inputs and verifiable outcomes.",
-    cta: "Explore docs",
-    href: "https://docs.theinterfold.com/getting-started",
-    title: "Build and integrate",
-  },
-  {
-    body: "Bring a live use case to Interfold and deploy it in practice.",
-    cta: "Reach out",
-    href: "mailto:comms@gnosisguild.org",
-    title: "Partner on a pilot",
-  },
-];
 
 // The route into the Participate page. It was a text link; it is a button now,
 // one column wide like the How Interfold Works button, so the two actions that
