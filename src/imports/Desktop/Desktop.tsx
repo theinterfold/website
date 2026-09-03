@@ -1872,16 +1872,23 @@ export default function Desktop() {
           63px desktop header, which is fixed, so the strip pins to its
           underside rather than to the top of the window. */}
       <NetworkStrip className="sticky top-[60px] z-40 xl:top-[63px]" />
-      {/* Reading order is now the order on screen. It used to be
-          Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
-          Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block
-          was placed by an absolute top and the markup order did not matter. */}
-      <Frame13 />
-      <Frame />
-      <Frame15 />
-      <Frame19 />
-      <Frame11 />
-      <Frame20 />
+      {/* main, not a bare fragment: the footer already declares itself, but
+          everything above it was an unlabelled div, so this page offered no
+          landmark to skip the header with and no boundary between the content
+          and the chrome around it. Every other page here has one. main is
+          display:block like the div it replaces -- nothing moves. */}
+      <main>
+        {/* Reading order is now the order on screen. It used to be
+            Frame, Frame19, Frame11, Frame20, Frame15, Frame13 while the page read
+            Frame13, Frame, Frame15, Frame19, Frame11, Frame20, because every block
+            was placed by an absolute top and the markup order did not matter. */}
+        <Frame13 />
+        <Frame />
+        <Frame15 />
+        <Frame19 />
+        <Frame11 />
+        <Frame20 />
+      </main>
       <Frame32 />
     </div>
   );
