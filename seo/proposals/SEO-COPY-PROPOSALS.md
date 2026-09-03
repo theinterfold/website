@@ -1,82 +1,118 @@
-# SEO: seis decisões de copy
+# SEO: six copy decisions
 
-O trabalho de infraestrutura vai avançar — canonicals, robots.txt, sitemap,
-404s a sério, dados estruturados. Nada disso muda uma palavra no site e não
-precisa de decisão.
+The plumbing is going ahead and needs no decision — it changes no words on the
+site. These six do change words, so they are yours.
 
-Estes seis precisam. Cada um com o que se ganha e o que se perde ao dizer não.
-
----
-
-**1. Dizer que o Enclave é agora The Interfold**
-
-Uma linha, no rodapé chega: `The Interfold was previously Enclave.`
-
-Os docs já o dizem, o site não. Todos os modelos de IA treinados antes da mudança
-conhecem o projeto como Enclave e não têm forma de ligar os dois nomes. Todo o
-artigo, talk e citação publicada como Enclave é autoridade que o nome novo não
-herda sem isto.
-
-*Se não:* os dados estruturados já levam `alternateName: "Enclave"`, que faz a
-ligação para as máquinas. Uma pessoa a ler a página continua sem saber.
+Each one says what we'd write, why it helps, and what we lose if you say no.
 
 ---
 
-**2. Título e description próprios para `/` e `/participate`**
+## The words we use below
 
-Hoje as duas servem `The Interfold` e a mesma frase — indistinguíveis num
-resultado de pesquisa. As do leilão já têm as suas.
+**Crawler** — the automated readers that visit our site. Google's, but also the
+ones behind ChatGPT, Claude and Perplexity. They are how both search results and
+AI answers get written.
 
-| | proposta |
+**Title and description** — the two lines that appear when our site shows up in
+a Google result, or when someone pastes a link into Slack or X. They live in the
+page's code, not on the page itself, so nobody browsing the site ever sees them.
+
+**Structured data** — a block of machine-readable facts in the page's code:
+our name, our former name, our official links. Invisible to a reader, and the
+most reliable way to tell a search engine or a model who we are.
+
+**Server-rendered vs. browser-rendered** — our docs and blog arrive as finished
+pages. Our marketing site arrives as an empty shell that assembles itself in the
+visitor's browser. Google can wait for that; the crawlers behind ChatGPT, Claude
+and Perplexity cannot, and to them every page on `www` currently looks blank.
+
+---
+
+## 1. Say somewhere that Enclave is now The Interfold
+
+One line, in the footer is enough: `The Interfold was previously Enclave.`
+
+The docs already say this. The site never does. Every AI model trained before the
+rename knows this project as Enclave and has no way to connect the two names —
+ask one what The Interfold is and it doesn't know. Every article, talk and
+citation published as Enclave is credibility the new name can't inherit without
+this.
+
+**If no:** the structured data already carries the old name, so machines can make
+the link. A person reading the page still can't.
+
+---
+
+## 2. Give the homepage and /participate their own title and description
+
+Today both show the same title and the same sentence, so in a Google result they
+are two entries with identical text. The two auction pages already have their
+own.
+
+| page | proposed title |
 |---|---|
-| `/` | `The Interfold · Infrastructure for Confidential Coordination` |
-| `/participate` | `Participate · The Interfold` + uma frase sobre os três caminhos |
+| homepage | `The Interfold · Infrastructure for Confidential Coordination` |
+| /participate | `Participate · The Interfold`, plus a sentence about the three paths |
 
-*Se não:* os canonicals já corrigem a parte que dizia ao Google que estas páginas
-eram duplicados uma da outra. Os títulos é que ficam iguais.
+A homepage title is the single strongest thing a search engine reads. Ours
+currently spends it on a name nobody searches for unless they already know the
+answer.
 
----
-
-**3. "Multiplayer privacy" ou "confidential coordination"?**
-
-Pergunta, não proposta. A meta description do site diz *multiplayer privacy* —
-frase que aparece **1 vez** em todo o site. *Confidential coordination* aparece
-**13 vezes** e é o que a homepage, a página participate e os docs dizem.
-
-Qualquer uma serve. As duas ao mesmo tempo não: quem decide sobre o que é este
-site pesa a repetição, e neste momento são duas frases diferentes.
+**If no:** the technical half is fixed either way — the site had been telling
+Google these pages were duplicates of each other, and that stops regardless. The
+titles just stay identical.
 
 ---
 
-**4. Nomear a tecnologia algures no site**
+## 3. "Multiplayer privacy" or "confidential coordination"?
 
-FHE, zero-knowledge, MPC, E3: **zero ocorrências** na copy do site. Os docs
-descrevem a stack toda; a porta de entrada não nomeia nada.
+A question, not a proposal.
 
-São os termos que alguém procura quando ainda não conhece o projeto. Uma frase na
-secção do execution model chega.
+The sentence that introduces us to every search engine says *multiplayer
+privacy*. That phrase appears **once** in all of our copy, on the auction page.
+*Confidential coordination* appears **thirteen times** and is what the homepage,
+the participate page and the docs all say.
 
-*Se não:* os docs continuam a ter a informação e são indexáveis. Só não está na
-página onde se decide se vale a pena continuar a ler.
-
----
-
-**5. O título do leilão diz "Auction 2"**
-
-O `<h1>` da mesma página diz `$FOLD Auctions are closed`, plural e a cobrir as
-duas — foi deliberado. O título não acompanhou. Ficou como estava.
+Either works. Both at once doesn't: a search engine deciding what we're about
+weighs repetition heavily, and a model summarising us reaches for whatever it saw
+most. Right now those are two different phrases. Worth choosing on purpose.
 
 ---
 
-**6. llms.txt — escrito, não publicado**
+## 4. Name the technology somewhere on the site
 
-Ficheiro markdown que descreve o protocolo para os crawlers que alimentam as IAs.
-Importa aqui porque o site é uma app React e o GPTBot, o ClaudeBot e o
-PerplexityBot não executam JavaScript — para eles todas as páginas do `www` estão
-vazias.
+FHE, zero-knowledge, MPC, E3 — **zero mentions** anywhere in the site's copy. The
+docs describe the full stack. The front door names none of it.
 
-São ~3 000 caracteres de prosa nova, escrita para ser **citada**. Precisa de
-leitura antes de sair. Está em `seo/proposals/llms.txt`.
+Those are the words someone types when they need this and don't yet know we
+exist. One sentence in the execution-model section would do it.
 
-*Contrapeso honesto:* os docs e o blog são renderizados no servidor e já são
-legíveis sem JavaScript. Isto é um resumo e um mapa, não a única cópia.
+**If no:** the docs keep the information and crawlers can read them. It just
+isn't on the page where a visitor decides whether to keep reading.
+
+---
+
+## 5. The auction page title still says "Auction 2"
+
+The headline on that same page says `$FOLD Auctions are closed` — plural,
+covering both, and deliberately so. The title never caught up. Left exactly as
+it was.
+
+---
+
+## 6. llms.txt — written, not published
+
+A plain-text file describing the protocol, written for the crawlers that feed AI
+assistants. It matters here because of the rendering problem above: to those
+crawlers our pages look blank, and a static text file is something they can
+actually read.
+
+It is roughly 380 words of new prose, drawn from the docs and our own copy. It
+needs a read before it goes out, because it is written to be **quoted** — an
+overstatement in it comes back as a misquotation in someone's AI answer.
+
+Draft is at `seo/proposals/llms.txt`.
+
+**Honest counterweight:** our docs and blog are already server-rendered and fully
+readable by these crawlers. This is a summary and a map, not the only copy of the
+information.
