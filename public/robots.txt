@@ -1,0 +1,47 @@
+# Everything on this site is public and meant to be read -- by people, by search
+# engines, and by the crawlers that feed AI assistants. The default below says
+# so explicitly rather than by omission.
+User-agent: *
+Allow: /
+
+# The AI crawlers that matter for this site, named so the decision is visible
+# and so revoking one is a one-line change rather than a research exercise.
+# All of them are already covered by the * group above; these blocks exist to
+# document the choice, not to widen it.
+#
+#   GPTBot          OpenAI -- training corpus
+#   OAI-SearchBot   OpenAI -- ChatGPT search results
+#   ChatGPT-User    OpenAI -- fetches a page when a user asks about it
+#   ClaudeBot       Anthropic -- training corpus
+#   Claude-User     Anthropic -- fetches a page when a user asks about it
+#   PerplexityBot   Perplexity -- its own index
+#   Google-Extended Google -- Gemini and AI Overviews grounding
+#   Applebot-Extended  Apple Intelligence
+#
+# Note: none of these execute JavaScript. They read the HTML as served, so what
+# they can quote is whatever ships in the document itself.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.theinterfold.com/sitemap.xml

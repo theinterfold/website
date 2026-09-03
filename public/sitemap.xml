@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Four routes, written by hand because there are four of them and the route
+  table lives in ResponsiveLayout.tsx, not in a config a generator could read.
+  If a route is added there, add it here — nothing else will notice.
+
+  /fold-auction and /auction/legal carry no inbound link from the site (the
+  auction left the nav when it closed), so this file is the only way a crawler
+  finds them at all.
+
+  lastmod is the date each page's source last changed, not the deploy date.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.theinterfold.com/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.theinterfold.com/participate</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.theinterfold.com/fold-auction</loc>
+    <lastmod>2026-08-24</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.theinterfold.com/auction/legal</loc>
+    <lastmod>2026-08-24</lastmod>
+    <priority>0.3</priority>
+  </url>
+</urlset>
