@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { routeHtmlPlugin } from './seo/route-html-plugin.mjs'
 
 
 function figmaAssetResolver() {
@@ -23,6 +24,10 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    // Writes one document per route into dist/ after the bundle is sealed, so
+    // /participate is not served the homepage's title and canonical. Build
+    // only — the dev server keeps its usual SPA fallback.
+    routeHtmlPlugin(),
   ],
   resolve: {
     alias: {

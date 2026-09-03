@@ -1,0 +1,51 @@
+# The Interfold
+
+> The Interfold is an open-source protocol that coordinates Encrypted Execution
+> Environments (E3s) across a distributed network of ciphernodes, so independent
+> parties can produce shared, verifiable outcomes from private inputs -- without
+> custody, exposure, or trusted hardware.
+
+The Interfold was previously named **Enclave**. Material published before the
+rename -- including the enclave.gg domain, which now redirects here -- refers to
+the same protocol.
+
+## What it does
+
+Multiple parties submit encrypted inputs. A program computes over them without
+decrypting them. A ciphernode committee holds the decryption key in shares under
+distributed threshold cryptography, so no single operator can decrypt anything
+alone, and the result is publicly verifiable without revealing the inputs behind
+it. The project calls this **confidential coordination**.
+
+The cryptographic stack combines Fully Homomorphic Encryption (FHE),
+Zero-Knowledge Proofs (ZKPs), and Distributed Threshold Cryptography (DTC) --
+threshold BFV and PV-TBFV, with circuits written in Noir.
+
+## What it is used for
+
+- **Sealed-bid and batch auctions** -- bids stay private, the clearing outcome stays verifiable.
+- **Private voting and governance** -- confidential ballots, verifiable tallying, receipt-free voting, no trusted ballot operator.
+- **Processing sensitive data** -- personal, financial, or regulated data handled without custody of plaintext.
+- **Multiparty computation workflows** -- independent parties compute together without pooling their data.
+- **Collaborative data analysis** -- organisations jointly compute over sensitive datasets without exposing records.
+
+## Three ways to participate
+
+- **Run a ciphernode** -- operate infrastructure for confidential coordination: https://dashboard.theinterfold.com/#operator
+- **Build and integrate** -- build applications on private inputs and verifiable outcomes: https://docs.theinterfold.com/getting-started
+- **Partner on a pilot** -- bring a live use case and deploy it: mailto:comms@gnosisguild.org
+
+## Pages on this site
+
+- [Home](https://www.theinterfold.com/): the execution model, what becomes possible, and routes into the network.
+- [Participate](https://www.theinterfold.com/participate): the three roles -- requestors, ciphernode operators, and builders -- and how they fit together.
+- [FOLD auction](https://www.theinterfold.com/fold-auction): the FOLD token auctions, now closed, and the claim route.
+- [Auction terms](https://www.theinterfold.com/auction/legal): legal terms for the FOLD auction.
+
+## Elsewhere
+
+- [Documentation](https://docs.theinterfold.com/): architecture, E3 computation flow, cryptography, SDK, tutorials, ciphernode operation.
+- [Blog](https://blog.theinterfold.com/): writing on confidential coordination and the architecture behind the network.
+- [Node dashboard](https://dashboard.theinterfold.com/): register, bond, and operate a ciphernode.
+- [Source code](https://github.com/theinterfold/interfold): the protocol, contracts, and audits.
+- [X](https://x.com/theinterfold) and [Telegram](https://t.me/enclave_e3): announcements and community.

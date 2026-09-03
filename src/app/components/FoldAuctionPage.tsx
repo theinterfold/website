@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
+import { useRef, useState, type CSSProperties, type MouseEvent as ReactMouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { HeroImage, auctionHeroSources } from "./HeroImage";
@@ -106,10 +106,6 @@ const AUCTION = {
   auctionExplorerUrl: "https://etherscan.io/address/0xfA63c5B9220a7f0D21e156490eC0b296838e6605",
   network: "Ethereum Mainnet",
 };
-
-const PAGE_TITLE = "FOLD Auction 2 · The Interfold";
-const META_DESCRIPTION =
-  "The $FOLD auctions are closed. FOLD was distributed through a Continuous Clearing Auction on Uniswap, and successful bidders can now claim. Use official links only.";
 
 // Composed date strings, tolerant of a still-pending time.
 const opensWhen = AUCTION.opensTime === PENDING_TEXT ? `${AUCTION.opensDate} at ${PENDING_TEXT}` : `${AUCTION.opensDate} at ${AUCTION.opensTime}`;
@@ -711,31 +707,12 @@ function LinkGroup({ group }: { group: (typeof linkGroups)[number] }) {
 }
 
 export function FoldAuctionPage() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = PAGE_TITLE;
-
-    const upsertMeta = (selector: string, attr: string, key: string, content: string) => {
-      let element = document.head.querySelector<HTMLMetaElement>(selector);
-      if (!element) {
-        element = document.createElement("meta");
-        element.setAttribute(attr, key);
-        document.head.appendChild(element);
-      }
-      element.setAttribute("content", content);
-    };
-
-    upsertMeta('meta[name="description"]', "name", "description", META_DESCRIPTION);
-    upsertMeta('meta[property="og:title"]', "property", "og:title", PAGE_TITLE);
-    upsertMeta('meta[property="og:description"]', "property", "og:description", META_DESCRIPTION);
-    upsertMeta('meta[property="og:url"]', "property", "og:url", `https://${AUCTION.officialDomain}/fold-auction`);
-    upsertMeta('meta[name="twitter:title"]', "name", "twitter:title", PAGE_TITLE);
-    upsertMeta('meta[name="twitter:description"]', "name", "twitter:description", META_DESCRIPTION);
-
-    return () => {
-      document.title = previousTitle;
-    };
-  }, []);
+  // The head used to be written here, on mount, and restored on unmount. It now
+  // ships in the document itself — seo/routes.mjs holds this page's title and
+  // description, seo/route-html-plugin.mjs writes them into
+  // dist/fold-auction/index.html at build time, and useRouteDocumentHead
+  // re-applies them on a client-side navigation. The copy is unchanged; a
+  // crawler that does not run JavaScript can now read it.
 
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-clip bg-[#d9fce8] text-[#3a5e3c]">

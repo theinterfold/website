@@ -7,6 +7,7 @@ import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
 import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources } from './HeroImage';
+import { useRouteDocumentHead } from './useRouteDocumentHead';
 
 const MOBILE_BREAKPOINT = 768;
 type HeroPagePath = '' | 'participate' | 'fold-auction';
@@ -132,6 +133,10 @@ export function ResponsiveLayout() {
   const [heroOverlay, setHeroOverlay] = useState<HeroOverlay | null>(null);
   const heroTransitionId = useRef(0);
   const routePathRef = useRef(getPagePath());
+
+  // The document head follows the route, not the document the tab was opened
+  // at. Same manifest the build reads.
+  useRouteDocumentHead(routePath);
 
   useEffect(() => {
     const configureExternalLink = (anchor: HTMLAnchorElement) => {

@@ -10,7 +10,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-dark-mode.svg" media="(prefers-color-scheme: dark)" />
 
+    <!-- interfold:seo:start -->
+    <!-- Everything between these markers is rewritten per route at build time
+         by seo/route-html-plugin.mjs, from the manifest in seo/routes.mjs. What
+         is written here is the homepage's copy; /participate, /fold-auction and
+         /auction/legal get their own. Edit the manifest, not this block — this
+         one survives only because dist/index.html is the homepage. -->
     <title>The Interfold</title>
+
+    <link rel="canonical" href="https://www.theinterfold.com/" />
 
     <meta
       name="description"
@@ -24,13 +32,19 @@
       content="Infrastructure for multiplayer privacy, enabling independent parties to coordinate without revealing their inputs."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.theinterfold.com" />
+    <meta property="og:url" content="https://www.theinterfold.com/" />
+    <meta property="og:locale" content="en" />
     <meta
       property="og:image"
       content="https://www.theinterfold.com/interfold-banner.jpg"
     />
+    <!-- The banner is 1200x630. Stating it lets Slack, X and LinkedIn reserve
+         the card before the image lands instead of after. -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@theinterfold" />
     <meta name="twitter:title" content="The Interfold" />
     <meta
       name="twitter:description"
@@ -40,6 +54,57 @@
       name="twitter:image"
       content="https://www.theinterfold.com/interfold-banner.jpg"
     />
+
+    <!-- The rest of this document is an empty #root until React runs, and the
+         crawlers behind ChatGPT, Claude and Perplexity do not run React. This
+         block is the one part of the page they can read: who this is, what it
+         does, and — through alternateName — that Enclave and The Interfold are
+         the same protocol, which nothing else on the site says out loud.
+
+         Every string here is copy the site already ships. It is quoted rather
+         than ranked, so a fuller description would serve it better; that is a
+         proposal in SEO-COPY-PROPOSALS.md, not a change to make quietly. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.theinterfold.com/#organization",
+            "name": "The Interfold",
+            "alternateName": "Enclave",
+            "url": "https://www.theinterfold.com/",
+            "logo": "https://www.theinterfold.com/brand/interfold-wordmark-dark.svg",
+            "description": "Infrastructure for multiplayer privacy, enabling independent parties to coordinate without revealing their inputs.",
+            "sameAs": [
+              "https://github.com/theinterfold/interfold",
+              "https://x.com/theinterfold",
+              "https://t.me/enclave_e3",
+              "https://docs.theinterfold.com/",
+              "https://blog.theinterfold.com/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.theinterfold.com/#website",
+            "name": "The Interfold",
+            "url": "https://www.theinterfold.com/",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.theinterfold.com/#organization" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.theinterfold.com/#webpage",
+            "url": "https://www.theinterfold.com/",
+            "name": "The Interfold",
+            "description": "Infrastructure for multiplayer privacy, enabling independent parties to coordinate without revealing their inputs.",
+            "isPartOf": { "@id": "https://www.theinterfold.com/#website" },
+            "about": { "@id": "https://www.theinterfold.com/#organization" }
+          }
+        ]
+      }
+    </script>
+    <!-- interfold:seo:end -->
 
     <style>
       html,
