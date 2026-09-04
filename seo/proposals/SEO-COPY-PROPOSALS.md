@@ -182,9 +182,13 @@ the information.
 
 ---
 
-### 7. Project-level FAQs — Marvin's suggestion
+### 7. Answer the questions a stranger asks
 
-Yes, with one adjustment: the gap isn't *more* FAQs, it's *different* ones.
+This came up as a question — whether more FAQs would help. The recommendation
+below is mine, so argue with me and not with whoever raised it.
+
+Short answer: yes, but not because FAQs are good for SEO in the abstract. They
+are not. It works here because of what is missing, not because of the format.
 
 There are already fourteen FAQ entries on the docs — nine on the auction, five
 on the token. Every one of them is about FOLD. There is no answer anywhere to:
@@ -199,14 +203,22 @@ Those are the questions a stranger asks, and they are exactly the questions an A
 assistant gets asked. A question is the shape of what someone types into a chat
 box, which is why FAQ content retrieves so well.
 
+**The format is not the point.** An FAQ is just the cheapest container for those
+answers — it lets us say "was this Enclave? yes" and "what cryptography is this?"
+without reopening the homepage's copy. Put the same answers in an About page or
+in the homepage itself and they work exactly as well. What matters is that the
+answers exist somewhere on the main site, in the words someone would actually
+search for.
+
+Which also makes this the cheapest route to decisions 1 and 4, if either of those
+feels like too much to write into the homepage directly.
+
 **Natural split:** questions about the *project* live on the main site; questions
 about *building with it* stay on the docs.
 
-**One thing to set expectations on:** Google restricted FAQ rich results to
-government and health sites in 2023, so the little expandable answers under a
-search result are no longer available to us. The markup buys almost nothing now.
-The content still buys a lot. Worth knowing before anyone measures success by
-whether the snippets appear.
-
-This is also the cheapest way to do decision 4 — naming the technology — without
-touching the homepage's existing copy.
+**Two things not to expect.** Google restricted FAQ rich results to government
+and health sites in 2023, so the expandable answers under a search result are not
+available to us — the markup buys almost nothing now, though the content still
+buys a lot. And a page nobody links to does not rank on its own: this works
+because it answers questions that currently have no answer anywhere, not because
+adding an FAQ page lifts a site by itself.
