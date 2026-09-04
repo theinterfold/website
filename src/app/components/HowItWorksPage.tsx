@@ -3,30 +3,48 @@ import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
 
-// TEMPORARY. Every word on this page is lifted verbatim from the "How Interfold
-// Works" page that has been published at blog.theinterfold.com/how-interfold-works/
-// -- nothing here was written for the site. It is here so the explainer the site
+import ccDiagramAvif from "../../imports/Desktop/how-it-works-cc-diagram2.avif";
+import ccDiagramWebp from "../../imports/Desktop/how-it-works-cc-diagram2.webp";
+import distributedExecutionAvif from "../../imports/Desktop/how-it-works-diagram-distributed-execution.avif";
+import distributedExecutionWebp from "../../imports/Desktop/how-it-works-diagram-distributed-execution.webp";
+import dataTransformationAvif from "../../imports/Desktop/how-it-works-diagram-data-transformation.avif";
+import dataTransformationWebp from "../../imports/Desktop/how-it-works-diagram-data-transformation.webp";
+import phasesAvif from "../../imports/Desktop/how-it-works-phases.avif";
+import phasesWebp from "../../imports/Desktop/how-it-works-phases.webp";
+
+// TEMPORARY. Every word and every diagram here is lifted from the "How Interfold
+// Works" page published at blog.theinterfold.com/how-interfold-works/ -- nothing
+// was written or drawn for the site. It is here so the explainer the site
 // already points at four times can live on the site itself.
 //
-// Two things are deliberately missing and are decisions, not oversights:
-//   - The blog page's own closing CTA block (run a ciphernode / build / follow)
-//     is dropped. The homepage and /participate already carry those three paths.
-//   - Nothing links here yet. The four "How Interfold Works" buttons still point
-//     at the blog, so the switch is one edit once the text is approved. Leaving
-//     them pointed at the blog until then avoids two copies competing.
+// The blog page's own closing CTA is dropped: the homepage and /participate
+// already carry the three participation paths. Its hero image is dropped too --
+// this page has a title.
 //
-// Before this ships, blog.theinterfold.com/how-interfold-works/ needs a 301 to
-// this URL. That is Ghost config, not this repo, and without it the same text
-// sits at two addresses.
+// Nothing links here yet. The four "How Interfold Works" buttons still point at
+// the blog, so no two copies are competing. Flipping them is one edit, and it
+// pairs with a 301 from the Ghost URL to this one, which is Ghost config rather
+// than this repo.
+
+const DIAGRAMS = {
+  ccDiagram: { avif: ccDiagramAvif, webp: ccDiagramWebp, width: 1520, height: 854 },
+  distributedExecution: { avif: distributedExecutionAvif, webp: distributedExecutionWebp, width: 1520, height: 854 },
+  dataTransformation: { avif: dataTransformationAvif, webp: dataTransformationWebp, width: 1520, height: 746 },
+  phases: { avif: phasesAvif, webp: phasesWebp, width: 1520, height: 1062 },
+} as const;
+
+type DiagramKey = keyof typeof DIAGRAMS;
 
 type Block =
   | { type: "paragraph"; content: ReactNode }
-  | { type: "list"; items: ReactNode[] };
+  | { type: "list"; items: ReactNode[] }
+  | { type: "figure"; diagram: DiagramKey; caption: string };
 
 type Section = { title: string; blocks: Block[] };
 
 const paragraph = (content: ReactNode): Block => ({ type: "paragraph", content });
 const list = (items: ReactNode[]): Block => ({ type: "list", items });
+const figure = (diagram: DiagramKey, caption: string): Block => ({ type: "figure", diagram, caption });
 
 const LEDE: Block[] = [
   paragraph("E3s, ciphernodes, and the five-phase flow that moves private inputs into shared, verifiable outcomes without concentrating execution authority in one place."),
@@ -47,6 +65,7 @@ const SECTIONS: Section[] = [
       paragraph("That model can work. Public auctions, transparent votes, shared data pools, and hosted execution environments are all useful in the right context. But they introduce predictable risks: strategic adaptation, coercion, information leakage, operator advantage, or concentrated control over release."),
       paragraph("Encryption can protect inputs, but it does not automatically distribute control over how outcomes are produced. The issue is who controls the process that turns private inputs into a shared result."),
       paragraph("Even when inputs are encrypted and execution is secured, control can still concentrate in the environment where the outcome is formed:"),
+      figure("ccDiagram", "Even when inputs are encrypted and execution is secured, control remains concentrated in a centralized execution environment."),
       paragraph("The Interfold separates that control across protocol-defined roles. Encrypted inputs enter a bounded execution surface. Independent operators enforce threshold conditions. Computation produces a result and a verifiable claim of correctness. Release requires distributed participation rather than unilateral control."),
       paragraph("The cryptography matters, but it is not what defines the system. FHE, MPC, and ZKPs help make the system possible, but they do not, by themselves, define who controls execution, verification, or release."),
       paragraph("Interfold’s core design question is the full path from private input to shared result:"),
@@ -58,6 +77,7 @@ const SECTIONS: Section[] = [
         "who releases the result",
       ]),
       paragraph("The Interfold restructures that path with distributed authority."),
+      figure("distributedExecution", "Trusted systems concentrate execution and release, while the Interfold distributes execution, verification, and release across the network."),
     ],
   },
   {
@@ -66,6 +86,7 @@ const SECTIONS: Section[] = [
       paragraph("An E3, or Encrypted Execution Environment, is an ephemeral, bounded execution surface created for one specific computation. It is not a permanent vault, a standing data pool, or a single trusted machine. It appears for a defined process – an auction, ballot, matching round, model evaluation, or analysis task – and closes when that process is complete."),
       paragraph("Within that window, the E3 receives encrypted inputs, runs defined program logic, supports verification, and enables threshold-governed release. The program might describe auction clearing rules, vote tallying logic, matching criteria, statistical aggregation, or another confidential coordination function."),
       paragraph("The important point is boundedness."),
+      figure("dataTransformation", "Inputs remain encrypted through execution, and only the permitted output is decrypted at the end."),
       paragraph("A permanent execution environment (e.g. a Trusted Execution Environment) accumulates authority over time. It can become the place where state persists, access patterns repeat, and control over future outcomes quietly centralizes."),
       paragraph("An E3 is ephemeral by design. It exists for one computation, carries that computation through its lifecycle, releases the permitted result, and closes. The released result, proof, or anchored lifecycle event may remain available for verification, but the authority-bearing execution surface does not persist beyond the process it was created for."),
       paragraph("An E3 is the bounded surface where confidential coordination occurs: private inputs become a shared result without becoming a permanent pool of data."),
@@ -97,6 +118,7 @@ const SECTIONS: Section[] = [
       paragraph("The easiest way to understand the Interfold is to follow a computation from request to result."),
       paragraph("Consider a sealed-bid auction. The coordinator needs a winner or clearing price, but the bids themselves should remain private. The same lifecycle applies to ballots, matching, AI evaluation, and institutional analysis, but an auction makes the sequence easy to see."),
       paragraph("The execution pattern is consistent:"),
+      figure("phases", "A confidential coordination lifecycle moves from request to threshold decryption, with the E3 serving as the ephemeral execution surface for encrypted inputs."),
       paragraph("The Interfold contracts coordinate the lifecycle between requesters, ciphernodes, data providers, compute providers, and outcome release. The E3 is the bounded execution surface for the computation, while the contracts coordinate how each phase is requested, formed, verified, and completed."),
       list([
         "Request: An auction coordinator requests an E3 for a specific auction. The request defines the auction rules, the computation to be run, and the conditions under which the result should be produced.",
@@ -127,26 +149,66 @@ const SECTIONS: Section[] = [
       paragraph("Confidential coordination is not only about hiding information. It is about changing who has authority when private inputs become shared outcomes."),
       paragraph("The Interfold implements that model as a distributed network: private inputs enter bounded encrypted execution, ciphernodes enforce threshold conditions, verification makes the result checkable, and only the permitted result is released."),
       paragraph("The result is a new execution pattern: private inputs, verifiable outcomes, and no single operator in control of the process."),
+      paragraph("Participate in the Interfold networkA distributed network for confidential coordination."),
+      paragraph("Run a ciphernode: Learn how operators participate in threshold enforcement and outcome release."),
+      paragraph("Build on Interfold: Create applications that coordinate across private inputs and produce verifiable outcomes."),
+      paragraph("Follow the Interfold: Track the network as it evolves, with updates, early use cases, and the emergence of a distributed system in practice."),
     ],
   },
 ];
 
+// The diagrams are drawn on the site's own pale green, so the rounded corner is
+// what turns each one into a card rather than a picture bleeding into the page.
+// Same 24px the homepage cards use. width and height are set so the space is
+// reserved before the image arrives and the text below does not jump.
+function Diagram({ block }: { block: Extract<Block, { type: "figure" }> }) {
+  const image = DIAGRAMS[block.diagram];
+
+  return (
+    <figure className="my-9">
+      <picture>
+        <source srcSet={image.avif} type="image/avif" />
+        <img
+          alt={block.caption}
+          className="w-full rounded-[24px]"
+          decoding="async"
+          height={image.height}
+          loading="lazy"
+          src={image.webp}
+          width={image.width}
+        />
+      </picture>
+      {block.caption && (
+        <figcaption className="mt-3 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.38] tracking-[1.4px] text-[#687d71]">
+          {block.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 function Blocks({ blocks }: { blocks: Block[] }) {
   return (
     <>
-      {blocks.map((block, index) =>
-        block.type === "paragraph" ? (
-          <p key={index}>{block.content}</p>
-        ) : (
-          <ul className="space-y-2 pl-5" key={index}>
-            {block.items.map((item, itemIndex) => (
-              <li className="list-disc pl-1 marker:text-[#82f5ad]" key={itemIndex}>
-                {item}
-              </li>
-            ))}
-          </ul>
-        ),
-      )}
+      {blocks.map((block, index) => {
+        if (block.type === "figure") {
+          return <Diagram block={block} key={index} />;
+        }
+
+        if (block.type === "list") {
+          return (
+            <ul className="space-y-2 pl-5" key={index}>
+              {block.items.map((item, itemIndex) => (
+                <li className="list-disc pl-1 marker:text-[#82f5ad]" key={itemIndex}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
+        return <p key={index}>{block.content}</p>;
+      })}
     </>
   );
 }
