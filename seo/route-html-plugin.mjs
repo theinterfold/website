@@ -40,9 +40,9 @@ function structuredData(route) {
         url: `${SITE.origin}/`,
         logo: `${SITE.origin}/brand/interfold-wordmark-dark.svg`,
         // SITE.description, not a richer one written for this node. A fuller
-        // sentence would serve an AI assistant better -- it is what gets quoted
-        // -- and one is proposed in SEO-COPY-PROPOSALS.md, but it would be new
-        // copy and this is not the place to slip it in.
+        // sentence would serve an AI assistant better -- this is the text that
+        // gets quoted -- but writing one is a copy decision, and a build script
+        // is not the place to slip that in.
         description: SITE.description,
         sameAs: [
           "https://github.com/theinterfold/interfold",

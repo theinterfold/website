@@ -31,8 +31,8 @@ export const ROUTES = [
   //
   // Which is also the limitation: / and /participate are still indistinguishable
   // from each other in a search result. Fixing that means writing four strings,
-  // and those are on the list for Marvin -- see SEO-COPY-PROPOSALS.md. When they
-  // are approved this file is the only one that needs editing.
+  // and those four strings are with Marvin. When they come back approved, this
+  // file is the only one that needs editing.
   {
     path: "/",
     title: "The Interfold",
