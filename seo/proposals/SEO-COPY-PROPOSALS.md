@@ -9,10 +9,6 @@ yours.
 
 ## The words used below
 
-**Crawler** — the automated readers that visit our site. Google's, but also the
-ones behind ChatGPT, Claude and Perplexity. They are how both search results and
-AI answers get written.
-
 **Title and description** — the two lines that appear when our site shows up in
 a Google result, or when someone pastes a link into Slack or X. They live in the
 page's code, not on the page, so nobody browsing the site ever sees them.
