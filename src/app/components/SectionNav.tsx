@@ -66,30 +66,52 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
   return (
     <nav
       aria-label="Sections"
-      className="pointer-events-none fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 min-[1400px]:block"
+      // Fixed width, not shrink-to-fit. Anchored to the right edge, a rail that
+      // sizes to its widest child moves every time the widest child changes --
+      // which was every time the mark moved, so the whole column twitched
+      // sideways as you scrolled.
+      className="fixed right-6 top-1/2 z-40 hidden w-[52px] -translate-y-1/2 min-[1400px]:block"
     >
-      <ol className="pointer-events-auto m-0 flex list-none flex-col gap-3 p-0">
+      <ol className="m-0 flex list-none flex-col gap-3 p-0">
         {sections.map((section) => {
           const isActive = section.slug === active;
 
           return (
-            <li key={section.slug}>
+            <li className="group relative" key={section.slug}>
               <a
                 aria-current={isActive ? "true" : undefined}
-                className={`group flex items-baseline gap-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] leading-none tracking-[1.4px] transition-colors ${
-                  isActive ? "text-[#3a5e3c]" : "text-[#687d71]/50 hover:text-[#687d71]"
-                }`}
+                className="flex items-center justify-end gap-2 font-['Office_Code_Pro:Medium',sans-serif] text-[11px] leading-none tracking-[1.4px]"
                 href={`#${section.slug}`}
               >
-                <span className="w-[18px] shrink-0">{section.number}</span>
-                {/* The rule carries the state, so the number stays legible at
-                    rest and nothing has to grow or move on hover. */}
+                {/* Colour carries the state, and only colour. Every number and
+                    every rule keeps its size in every state, so nothing in the
+                    rail moves while you read. */}
                 <span
-                  className={`mt-[3px] h-px shrink-0 transition-all ${
-                    isActive ? "w-[26px] bg-[#82f5ad]" : "w-[12px] bg-[#687d71]/30 group-hover:w-[18px]"
+                  className={`transition-colors ${
+                    isActive ? "text-[#3a5e3c]" : "text-[#687d71]/45 group-hover:text-[#687d71]"
+                  }`}
+                >
+                  {section.number}
+                </span>
+                <span
+                  className={`h-px w-[14px] shrink-0 transition-colors ${
+                    isActive ? "bg-[#82f5ad]" : "bg-[#687d71]/30 group-hover:bg-[#687d71]/60"
                   }`}
                 />
               </a>
+
+              {/* On hover only. At the width the rail appears, the gap between
+                  the text column and the rail is 232px, which is not enough for
+                  a title to live in permanently -- so the reader asks for it and
+                  it takes no space the rest of the time. 230px is that gap minus
+                  the margin, so a long title wraps rather than covering the
+                  text it is meant to help you navigate. */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute right-full top-1/2 mr-3 hidden w-max max-w-[230px] -translate-y-1/2 rounded-[6px] bg-[#3a5e3c] px-3 py-2 text-right font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-[1.25] text-[#d9fce8] group-hover:block"
+              >
+                {section.title}
+              </span>
             </li>
           );
         })}
