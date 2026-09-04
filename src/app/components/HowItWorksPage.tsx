@@ -40,7 +40,7 @@ type Block =
   | { type: "list"; items: ReactNode[] }
   | { type: "figure"; diagram: DiagramKey; caption: string };
 
-type Section = { number: string; title: string; blocks: Block[] };
+type Section = { number: string; slug: string; title: string; blocks: Block[] };
 
 const paragraph = (content: ReactNode): Block => ({ type: "paragraph", content });
 const list = (items: ReactNode[]): Block => ({ type: "list", items });
@@ -59,6 +59,7 @@ const LEDE: Block[] = [
 const SECTIONS: Section[] = [
   {
     number: "01",
+    slug: "what-interfold-changes",
     title: "What Interfold changes",
     blocks: [
       paragraph("The Interfold distributes execution authority across a network."),
@@ -83,6 +84,7 @@ const SECTIONS: Section[] = [
   },
   {
     number: "02",
+    slug: "e3s",
     title: "E3s: ephemeral execution surfaces",
     blocks: [
       paragraph("An E3, or Encrypted Execution Environment, is an ephemeral, bounded execution surface created for one specific computation. It is not a permanent vault, a standing data pool, or a single trusted machine. It appears for a defined process – an auction, ballot, matching round, model evaluation, or analysis task – and closes when that process is complete."),
@@ -96,6 +98,7 @@ const SECTIONS: Section[] = [
   },
   {
     number: "03",
+    slug: "ciphernodes",
     title: "Ciphernodes: distributed enforcement",
     blocks: [
       paragraph("An E3 does not enforce itself."),
@@ -117,6 +120,7 @@ const SECTIONS: Section[] = [
   },
   {
     number: "04",
+    slug: "five-phases",
     title: "From request to release: Interfold in 5 phases",
     blocks: [
       paragraph("The easiest way to understand the Interfold is to follow a computation from request to result."),
@@ -137,6 +141,7 @@ const SECTIONS: Section[] = [
   },
   {
     number: "05",
+    slug: "the-network",
     title: "Why the ciphernode network is the system",
     blocks: [
       paragraph("The network is not an accessory to the Interfold. It is what prevents the system from collapsing back into custodial execution. If one operator controls input admission, runtime, verification, decryption, and release, then encryption may reduce what that operator can see, but it does not remove that operator’s control over the outcome path."),
@@ -223,7 +228,10 @@ function Blocks({ blocks }: { blocks: Block[] }) {
 // their own shape.
 function SectionRow({ section }: { section: Section }) {
   return (
-    <article className="mx-auto max-w-[760px] border-t border-[#3a5e3c]/25 py-10 md:py-14">
+    <article
+      className="mx-auto max-w-[760px] scroll-mt-[63px] border-t border-[#3a5e3c]/25 py-10 md:py-14"
+      id={section.slug}
+    >
       <header className="mb-7">
         <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-none tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
           {section.number}

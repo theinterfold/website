@@ -131,6 +131,7 @@ export function ResponsiveLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [routePath, setRoutePath] = useState(getPagePath);
+  const [hash, setHash] = useState(() => (typeof window === 'undefined' ? '' : window.location.hash));
   const [heroOverlay, setHeroOverlay] = useState<HeroOverlay | null>(null);
   const heroTransitionId = useRef(0);
   const routePathRef = useRef(getPagePath());
@@ -138,6 +139,65 @@ export function ResponsiveLayout() {
   // The document head follows the route, not the document the tab was opened
   // at. Same manifest the build reads.
   useRouteDocumentHead(routePath);
+
+  // A link with a hash lands on nothing here. The browser looks for the element
+  // while #root is still empty, finds nothing, and has given up long before
+  // React renders anything to find -- so /#execution-model, /#participate and
+  // every anchor on the long pages scroll to the top instead of to the section.
+  // Retry across a few frames until the element exists. scrollIntoView honours
+  // the scroll-mt the sections carry, so it clears the fixed header.
+  useEffect(() => {
+    const id = hash.slice(1);
+
+    if (!id) {
+      return;
+    }
+
+    let frame = 0;
+    let held = 0;
+    let request = 0;
+
+    const settle = () => {
+      const target = document.getElementById(id);
+
+      // Keep re-asserting it for a moment after the element appears. The
+      // sections arrive translated 16px down and animate to 0, so a single
+      // scroll lands 16px out and the header clips the top of the row.
+      if (target) {
+        target.scrollIntoView();
+        held += 1;
+
+        if (held < 45) {
+          request = window.requestAnimationFrame(settle);
+        }
+
+        return;
+      }
+
+      // ~1s at 60fps. Past that the id is not coming, and scrolling the reader
+      // somewhere arbitrary is worse than leaving them at the top.
+      if (frame < 60) {
+        frame += 1;
+        request = window.requestAnimationFrame(settle);
+      }
+    };
+
+    request = window.requestAnimationFrame(settle);
+
+    return () => window.cancelAnimationFrame(request);
+  }, [routePath, hash]);
+
+  // A jump inside the page changes the hash without changing the route, so the
+  // effect above would not re-run. The browser handles that jump itself, but it
+  // lands 16px out for the same reason -- so route the in-page case through the
+  // same settle.
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash);
+
+    window.addEventListener('hashchange', onHashChange);
+
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
 
   useEffect(() => {
     const configureExternalLink = (anchor: HTMLAnchorElement) => {
