@@ -24,24 +24,31 @@ export const SITE = {
 };
 
 export const ROUTES = [
-  // Every string below already exists on the site today. Nothing here is new
-  // copy: / and /participate carry exactly the title and description they ship
-  // with now, and the two auction pages carry theirs verbatim from the
-  // useEffects this replaced. The wiring is what changed, not the words.
+  // / and /participate used to carry the same title as each other and the same
+  // description, so a search result listed them twice with identical text and
+  // nothing to tell them apart. The two auction pages had always had their own;
+  // these two now do too.
   //
-  // Which is also the limitation: / and /participate are still indistinguishable
-  // from each other in a search result. Fixing that means writing four strings,
-  // and those four strings are with Marvin. When they come back approved, this
-  // file is the only one that needs editing.
+  // The homepage description is untouched -- whether "multiplayer privacy" or
+  // "confidential coordination" is the phrase to lead with is a separate
+  // question, and it is still open.
   {
     path: "/",
-    title: "The Interfold",
+    // Brand alone is the weakest thing a homepage title can be. This one spent
+    // it on a name nobody searches for unless they already know the answer.
+    title: "The Interfold \u00b7 Infrastructure for Confidential Coordination",
     description: SITE.description,
   },
   {
     path: "/participate",
-    title: "The Interfold",
-    description: SITE.description,
+    // "Participate \u00b7 The Interfold" would have spent half the title
+    // repeating a name the result already shows in the URL above it. The page
+    // offers three concrete things; the title says which. One possibility, not
+    // a settled wording -- Marvin has it.
+    title: "Participate \u00b7 Run a Ciphernode, Build, or Partner",
+    // The three paths, in the page's own order and its own words.
+    description:
+      "Three ways into the network: run a ciphernode, build applications on private inputs and verifiable outcomes, or bring a live use case to Interfold.",
   },
   {
     path: "/fold-auction",
