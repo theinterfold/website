@@ -1,11 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import homeHero768 from "../../imports/Desktop/the-interfold-home-hero-768.webp";
-import homeHero1440 from "../../imports/Desktop/the-interfold-home-hero-1440.webp";
-import homeHero2160 from "../../imports/Desktop/the-interfold-home-hero-2160.webp";
-import homeHero2912 from "../../imports/Desktop/the-interfold-home-hero-2912.webp";
-import participateHero768 from "../../imports/Desktop/the-interfold-participate-hero-768.webp";
-import participateHero1440 from "../../imports/Desktop/the-interfold-participate-hero-1440.webp";
-import participateHero1672 from "../../imports/Desktop/the-interfold-participate-hero-1672.webp";
+import homeHero768Webp from "../../imports/Desktop/the-interfold-home-hero-768.webp";
+import homeHero1440Webp from "../../imports/Desktop/the-interfold-home-hero-1440.webp";
+import homeHero2160Webp from "../../imports/Desktop/the-interfold-home-hero-2160.webp";
+import homeHero2912Webp from "../../imports/Desktop/the-interfold-home-hero-2912.webp";
+import homeHero768Avif from "../../imports/Desktop/the-interfold-home-hero-768.avif";
+import homeHero1440Avif from "../../imports/Desktop/the-interfold-home-hero-1440.avif";
+import homeHero2160Avif from "../../imports/Desktop/the-interfold-home-hero-2160.avif";
+import homeHero2912Avif from "../../imports/Desktop/the-interfold-home-hero-2912.avif";
+import participateHero768Webp from "../../imports/Desktop/the-interfold-participate-hero-768.webp";
+import participateHero1440Webp from "../../imports/Desktop/the-interfold-participate-hero-1440.webp";
+import participateHero1672Webp from "../../imports/Desktop/the-interfold-participate-hero-1672.webp";
+import participateHero768Avif from "../../imports/Desktop/the-interfold-participate-hero-768.avif";
+import participateHero1440Avif from "../../imports/Desktop/the-interfold-participate-hero-1440.avif";
+import participateHero1672Avif from "../../imports/Desktop/the-interfold-participate-hero-1672.avif";
 import auctionHero768Avif from "../../imports/Desktop/the-interfold-auction-hero-768.avif";
 import auctionHero1440Avif from "../../imports/Desktop/the-interfold-auction-hero-1440.avif";
 import auctionHero1672Avif from "../../imports/Desktop/the-interfold-auction-hero-1672.avif";
@@ -32,18 +39,51 @@ type HeroImageSources = {
   preload?: HeroImagePreload;
 };
 
+// AVIF first, WebP behind it. The auction hero has shipped this pair since it
+// was added; these two were the ones still on WebP alone, and the home hero is
+// the heaviest thing the site loads -- 900kB at 2912w, and it is the LCP element
+// on the page most people arrive at. Re-encoded at crf 23, which lands between
+// 29% and 39% smaller across the seven files at SSIM 0.995-0.997 against the
+// WebP it replaces. Checked at 1:1 on the densest part of the point cloud, where
+// smearing would show first: the dots keep their shape and their separation.
+const homeHeroAvifSrcSet = `${homeHero768Avif} 768w, ${homeHero1440Avif} 1440w, ${homeHero2160Avif} 2160w, ${homeHero2912Avif} 2912w`;
+const homeHeroWebpSrcSet = `${homeHero768Webp} 768w, ${homeHero1440Webp} 1440w, ${homeHero2160Webp} 2160w, ${homeHero2912Webp} 2912w`;
+
 export const homeHeroSources: HeroImageSources = {
-  src: homeHero1440,
-  srcSet: `${homeHero768} 768w, ${homeHero1440} 1440w, ${homeHero2160} 2160w, ${homeHero2912} 2912w`,
+  src: homeHero1440Webp,
+  srcSet: homeHeroWebpSrcSet,
   width: 2912,
   height: 1632,
+  type: "image/webp",
+  formats: [
+    { srcSet: homeHeroAvifSrcSet, type: "image/avif" },
+    { srcSet: homeHeroWebpSrcSet, type: "image/webp" },
+  ],
+  preload: {
+    href: homeHero1440Avif,
+    srcSet: homeHeroAvifSrcSet,
+    type: "image/avif",
+  },
 };
 
+const participateHeroAvifSrcSet = `${participateHero768Avif} 768w, ${participateHero1440Avif} 1440w, ${participateHero1672Avif} 1672w`;
+const participateHeroWebpSrcSet = `${participateHero768Webp} 768w, ${participateHero1440Webp} 1440w, ${participateHero1672Webp} 1672w`;
+
 export const participateHeroSources: HeroImageSources = {
-  src: participateHero1440,
-  srcSet: `${participateHero768} 768w, ${participateHero1440} 1440w, ${participateHero1672} 1672w`,
+  src: participateHero1440Webp,
+  srcSet: participateHeroWebpSrcSet,
   width: 1672,
   height: 941,
+  type: "image/webp",
+  formats: [
+    { srcSet: participateHeroAvifSrcSet, type: "image/avif" },
+    { srcSet: participateHeroWebpSrcSet, type: "image/webp" },
+  ],
+  preload: {
+    href: participateHero1440Avif,
+    srcSet: participateHeroAvifSrcSet,
+    type: "image/avif",
+  },
 };
 
 const auctionHeroAvifSrcSet = `${auctionHero768Avif} 768w, ${auctionHero1440Avif} 1440w, ${auctionHero1672Avif} 1672w`;
