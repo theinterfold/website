@@ -3,6 +3,7 @@ import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { UnderlinedArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
+import { SectionNav } from "./SectionNav";
 
 type LegalBlock =
   | { type: "paragraph"; content: ReactNode }
@@ -481,9 +482,18 @@ const termsSections: LegalSection[] = [
   },
 ];
 
+const legalNavSections = termsSections.map((section) => ({
+  number: section.number,
+  slug: `clause-${section.number}`,
+  title: section.title,
+}));
+
 function LegalSectionRow({ section }: { section: LegalSection }) {
   return (
-    <article className="mx-auto max-w-[760px] border-t border-[#3a5e3c]/25 py-10 md:py-14">
+    <article
+      className="mx-auto max-w-[760px] scroll-mt-[63px] border-t border-[#3a5e3c]/25 py-10 md:py-14"
+      id={`clause-${section.number}`}
+    >
       <header className="mb-7">
         <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-none tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
           {section.number}
@@ -536,6 +546,7 @@ export function AuctionLegalPage() {
 
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] md:pt-[63px]">
+      <SectionNav sections={legalNavSections} />
       <main>
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">

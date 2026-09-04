@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { SectionLabel } from "./SectionLabel";
+import { SectionNav } from "./SectionNav";
 
 import ccDiagramAvif from "../../imports/Desktop/how-it-works-cc-diagram2.avif";
 import ccDiagramWebp from "../../imports/Desktop/how-it-works-cc-diagram2.webp";
@@ -250,6 +251,7 @@ function SectionRow({ section }: { section: Section }) {
 export function HowItWorksPage() {
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] md:pt-[63px]">
+      <SectionNav sections={SECTIONS} />
       <main>
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="how-interfold-works">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
