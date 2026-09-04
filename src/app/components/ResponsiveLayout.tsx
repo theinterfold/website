@@ -7,6 +7,7 @@ import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
 import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources } from './HeroImage';
+import { HowItWorksPage } from './HowItWorksPage';
 import { useRouteDocumentHead } from './useRouteDocumentHead';
 
 const MOBILE_BREAKPOINT = 768;
@@ -343,15 +344,16 @@ export function ResponsiveLayout() {
   const isParticipate = routePath === 'participate';
   const isFoldAuction = routePath === 'fold-auction';
   const isAuctionLegal = routePath === 'auction/legal';
+  const isHowItWorks = routePath === 'how-it-works';
   const headerBackgroundPath = heroOverlay?.page ?? routePath;
-  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)) ? (
+  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || isHowItWorks || (!isMobile && isHome)) ? (
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
       backgroundClassName={headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
-      showMobile={isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)}
+      showMobile={isParticipate || isFoldAuction || isAuctionLegal || isHowItWorks || (!isMobile && isHome)}
     />
   ) : null;
 
@@ -388,6 +390,15 @@ export function ResponsiveLayout() {
       <>
         {sharedHeader}
         <AuctionLegalPage />
+      </>
+    );
+  }
+
+  if (isHowItWorks) {
+    return (
+      <>
+        {sharedHeader}
+        <HowItWorksPage />
       </>
     );
   }

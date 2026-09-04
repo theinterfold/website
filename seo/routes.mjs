@@ -51,6 +51,14 @@ export const ROUTES = [
       "Three ways into the network: run a ciphernode, build applications on private inputs and verifiable outcomes, or bring a live use case to Interfold.",
   },
   {
+    // TEMPORARY, and unlinked on purpose. The title and description are the
+    // ones the blog page already carries; nothing here is new copy.
+    path: "/how-it-works",
+    title: "How Interfold Works \u00b7 The Interfold",
+    description:
+      "E3s, ciphernodes, and the five-phase flow that moves private inputs into shared, verifiable outcomes without concentrating execution authority in one place.",
+  },
+  {
     path: "/fold-auction",
     // Verbatim from the useEffect this replaced in FoldAuctionPage.tsx. Note
     // that the hero above it now reads "$FOLD Auctions are closed", plural and
