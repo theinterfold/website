@@ -1,8 +1,8 @@
-# SEO: six copy decisions
+# SEO: seven copy decisions
 
 Two halves. The first is work that changes no words on the site and is going
 ahead — it's listed here so you know what's happening, not because it needs your
-sign-off. The second is six places where words would have to change. Those are
+sign-off. The second is seven places where words would have to change. Those are
 yours.
 
 ---
@@ -61,7 +61,32 @@ heading positions and sizes on desktop and mobile. Nothing moved on screen.
 
 ---
 
-## Now the six
+## "Doesn't the docs site already cover this?"
+
+Fair question, and for **facts**, largely yes. Ask an AI how the protocol works
+and it will find and cite the docs — they arrive as finished pages, they are
+detailed, they are accurate. Nothing there is lost. A technical search should
+land on the docs; that is the right page.
+
+For everything else, no, and for three separate reasons.
+
+**Different reader.** The docs answer *how do I build with this*. Nobody deciding
+whether to care reads a developer reference. An investor, a partner, a
+journalist, someone weighing up running a node — they search differently, and
+sending them to the docs is a poor outcome even when it ranks.
+
+**Separate property.** Search engines treat `docs.theinterfold.com` and
+`www.theinterfold.com` as different sites. Standing the docs earn does not lift
+the homepage.
+
+**The missing layer isn't on the docs either.** People link to and quote
+`theinterfold.com`, not a docs page. And the thing that isn't written anywhere —
+why this exists, who is behind it, that it was Enclave — is exactly what the
+main site is for.
+
+---
+
+## Now the seven
 
 Each says what we'd write, why it helps, and what we lose if you say no. They
 stand alone — yes to some and no to others is a good answer.
@@ -154,3 +179,34 @@ Draft is at `seo/proposals/llms.txt`.
 *Honest counterweight:* our docs and blog are already server-rendered and fully
 readable by these crawlers. This is a summary and a map, not the only copy of
 the information.
+
+---
+
+### 7. Project-level FAQs — Marvin's suggestion
+
+Yes, with one adjustment: the gap isn't *more* FAQs, it's *different* ones.
+
+There are already fourteen FAQ entries on the docs — nine on the auction, five
+on the token. Every one of them is about FOLD. There is no answer anywhere to:
+
+- What is The Interfold?
+- Was this Enclave?
+- Who builds it?
+- Has it been audited?
+- How is this different from using a TEE, or from plain multiparty computation?
+
+Those are the questions a stranger asks, and they are exactly the questions an AI
+assistant gets asked. A question is the shape of what someone types into a chat
+box, which is why FAQ content retrieves so well.
+
+**Natural split:** questions about the *project* live on the main site; questions
+about *building with it* stay on the docs.
+
+**One thing to set expectations on:** Google restricted FAQ rich results to
+government and health sites in 2023, so the little expandable answers under a
+search result are no longer available to us. The markup buys almost nothing now.
+The content still buys a lot. Worth knowing before anyone measures success by
+whether the snippets appear.
+
+This is also the cheapest way to do decision 4 — naming the technology — without
+touching the homepage's existing copy.
