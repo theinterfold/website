@@ -109,10 +109,18 @@ the link. A person reading the page still can't.
 Today both show the same title and the same sentence, so in a Google result they
 are two entries with identical text. The two auction pages already have their own.
 
-| page | proposed title |
-|---|---|
-| homepage | `The Interfold · Infrastructure for Confidential Coordination` |
-| /participate | `Participate · The Interfold`, plus a sentence about the three paths |
+| | today | proposed |
+|---|---|---|
+| homepage | `The Interfold` | `The Interfold · Infrastructure for Confidential Coordination` |
+| /participate | `The Interfold` | `Participate · The Interfold` |
+
+They also share one description, word for word:
+
+> Infrastructure for multiplayer privacy, enabling independent parties to
+> coordinate without revealing their inputs.
+
+That one would stay on the homepage. /participate would get its own — a sentence
+about the three paths into the network, since that is what the page is.
 
 A homepage title is the single strongest thing a search engine reads. Ours
 currently spends it on a name nobody searches for unless they already know the
