@@ -101,14 +101,18 @@ export function SectionNav({ sections }: { sections: NavSection[] }) {
               </a>
 
               {/* On hover only. At the width the rail appears, the gap between
-                  the text column and the rail is 232px, which is not enough for
-                  a title to live in permanently -- so the reader asks for it and
-                  it takes no space the rest of the time. 230px is that gap minus
-                  the margin, so a long title wraps rather than covering the
-                  text it is meant to help you navigate. */}
+                  the text column and the rail is 232px -- not enough for a title
+                  to live in permanently, so the reader asks for it and it costs
+                  nothing at rest. 230px is that gap minus the margin, so a long
+                  title wraps in the margin rather than covering the text it is
+                  meant to help you navigate.
+
+                  No box around it. Nothing else on the site puts text in a
+                  filled pill, and the margin it sits in is empty, so it does
+                  not need a ground of its own to be read. */}
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute right-full top-1/2 mr-3 hidden w-max max-w-[230px] -translate-y-1/2 rounded-[6px] bg-[#3a5e3c] px-3 py-2 text-right font-['ABC_Gramercy:Regular',sans-serif] text-[13px] leading-[1.25] text-[#d9fce8] group-hover:block"
+                className="pointer-events-none absolute right-full top-1/2 mr-4 hidden w-max max-w-[230px] -translate-y-1/2 text-right font-['ABC_Gramercy:Regular',sans-serif] text-[15px] leading-[1.2] text-[#3a5e3c] group-hover:block"
               >
                 {section.title}
               </span>
