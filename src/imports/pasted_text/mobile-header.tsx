@@ -802,8 +802,8 @@ function Footer() {
 
         {/* Legal Links */}
         <div className="font-['ABC_Gramercy:Regular',sans-serif] mb-4 flex flex-col text-[22px] leading-[1.05] capitalize text-[#3a5e3c]">
-          <button className="text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
-          <button className="text-left transition-colors hover:text-[#82f5ad]">Terms & Conditions</button>
+          <a className="text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="/privacy">Privacy</a>
+          <a className="text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="/terms">Terms & Conditions</a>
         </div>
 
         <div className="font-['Office_Code_Pro:Medium',sans-serif] mb-4 flex flex-col text-[10px] leading-[1.4] tracking-[1px] uppercase text-[#687d71]">

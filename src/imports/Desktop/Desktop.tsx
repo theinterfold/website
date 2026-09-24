@@ -1805,12 +1805,12 @@ export function DesktopFooter() {
             <ScrollFadeIn delay={0.1}>
               <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
             </ScrollFadeIn>
-            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px] [&_a]:font-normal">
+            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
               <ScrollFadeIn delay={0.2}>
-                <button className="block text-left transition-colors hover:text-[#82f5ad]">Privacy</button>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" href="/privacy">Privacy</a>
               </ScrollFadeIn>
               <ScrollFadeIn delay={0.3}>
-                <button className="block text-left transition-colors hover:text-[#82f5ad]">{`Terms & Conditions`}</button>
+                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" href="/terms">{`Terms & Conditions`}</a>
               </ScrollFadeIn>
             </div>
           </div>

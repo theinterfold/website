@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
 import Desktop from '../../imports/Desktop/Desktop';
 import { AuctionLegalPage } from './AuctionLegalPage';
+import { WebsiteLegalPage } from './WebsiteLegalPage';
 import { Header } from './Header';
 import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
@@ -338,20 +339,21 @@ export function ResponsiveLayout() {
   const isParticipate = routePath === 'participate';
   const isFoldAuction = routePath === 'fold-auction';
   const isAuctionLegal = routePath === 'auction/legal';
+  const isWebsiteLegal = routePath === 'privacy' || routePath === 'terms';
   const headerBackgroundPath = heroOverlay?.page ?? routePath;
-  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)) ? (
+  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || (!isMobile && isHome)) ? (
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
-      backgroundClassName={headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
+      backgroundClassName={isWebsiteLegal || headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
-      showMobile={isParticipate || isFoldAuction || isAuctionLegal || (!isMobile && isHome)}
+      showMobile={isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || (!isMobile && isHome)}
     />
   ) : null;
 
   // Renderiza versão mobile em telas pequenas, desktop em telas grandes
-  if (!isClient) {
+  if (!isClient && !isWebsiteLegal) {
     // Durante SSR/primeira renderização, renderiza desktop
     return (
       <>
@@ -383,6 +385,15 @@ export function ResponsiveLayout() {
       <>
         {sharedHeader}
         <AuctionLegalPage />
+      </>
+    );
+  }
+
+  if (routePath === 'privacy' || routePath === 'terms') {
+    return (
+      <>
+        {sharedHeader}
+        <WebsiteLegalPage page={routePath} />
       </>
     );
   }
