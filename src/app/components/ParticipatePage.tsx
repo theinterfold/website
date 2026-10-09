@@ -1,5 +1,6 @@
 import { ActorGlyph, type ActorGlyphName } from "./ActorGlyph";
 import Slider from "react-slick";
+import { NetworkProgressSection } from "./NetworkProgressSection";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { HeroImage, participateHeroSources } from "./HeroImage";
 import { HoverArrowLink } from "./HoverArrowLink";
@@ -64,14 +65,6 @@ const pathways = [
       { label: "Chat with us", href: "https://t.me/enclave_e3", primary: false },
     ],
   },
-];
-
-// All three are reached now — Network Alpha is live, so nothing here is still
-// ahead of the network.
-const timelineItems = [
-  "Internal devnet",
-  "Public testnet",
-  "Network Alpha",
 ];
 
 // Each actor names its drawing rather than relying on its position in this
@@ -430,90 +423,7 @@ export function ParticipatePage() {
           </div>
         </section>
 
-        <section className="bg-[#121718] px-4 py-[64px] text-[#82f5ad] md:py-[112px]">
-          <div className="mx-auto max-w-[1052px]">
-            <div className="text-center">
-              <ScrollFadeIn>
-                <SectionLabel className="text-[#d9fce8]/55">Now live</SectionLabel>
-              </ScrollFadeIn>
-              <ScrollFadeIn className="mx-auto mt-[12px] max-w-[320px] md:w-[600px] md:max-w-md">
-                <p className="font-['ABC_Gramercy:Regular',sans-serif] text-[24px] leading-[1.1] tracking-[-0.96px] text-[#82f5ad] md:text-[32px] md:leading-[0.95]">
-                  The network has entered its next stage:
-                </p>
-              </ScrollFadeIn>
-              {/* The stages sit on their own panel so the sequence reads as one
-                  object rather than as loose marks on the section background.
-                  24px is the radius the cards already use — the only large radius
-                  in the system. #1c2426 is the panel tone from the auction page. */}
-              <div className="mx-auto mt-16 max-w-md rounded-[24px] bg-[#1c2426] p-6 md:max-w-none md:p-10">
-              {/* Four columns, but only three stages: the fourth is the continuation
-                  marker below. The connector percentages are column centres, so they
-                  move whenever the column count does. */}
-              <div className="relative grid gap-10 md:grid-cols-4 md:gap-4">
-                <div className="absolute left-[calc(12.5%+36px)] right-[calc(62.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
-                <div className="absolute left-[calc(37.5%+36px)] right-[calc(37.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
-                <div className="absolute left-[calc(62.5%+36px)] right-[calc(12.5%+36px)] top-5 hidden border-t border-dotted border-[#687d71] md:block" />
-                {timelineItems.map((item, index) => {
-                  const isActive = true;
-
-                  return (
-                    <ScrollFadeIn className="relative flex flex-col items-center" delay={index * 0.1} key={item}>
-                      <span className={`relative z-10 grid size-10 place-items-center font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:text-[14px] ${isActive ? "bg-[#82f5ad] text-[#121718]" : "bg-[#687d71] text-[#121718]"}`}>
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className={`mt-4 block size-3 rounded-full ${isActive ? "bg-[#82f5ad]" : "bg-[#687d71]"}`} />
-                      <span className={`mt-3 h-8 w-px ${isActive ? "bg-[#82f5ad]/60" : "bg-[#687d71]"}`} />
-                      <p className={`mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] md:max-w-md md:text-[14px] ${isActive ? "text-[#d9fce8]" : "text-[#d9fce8]/55"}`}>
-                        {item}
-                      </p>
-                    </ScrollFadeIn>
-                  );
-                })}
-
-                {/* Deliberately not a stage 04: no number, hollow marker, muted
-                    colour. It says the sequence keeps going, not that something
-                    else is scheduled. */}
-                <ScrollFadeIn className="relative flex flex-col items-center" delay={timelineItems.length * 0.1}>
-                  <span className="relative z-10 grid size-10 place-items-center border border-dotted border-[#687d71] font-['Office_Code_Pro:Medium',sans-serif] text-[14px] leading-none text-[#687d71]">
-                    &rarr;
-                  </span>
-                  <span className="mt-4 block size-3 rounded-full border border-dotted border-[#687d71]" />
-                  <span className="mt-3 h-8 w-px bg-[#687d71]" />
-                  <p className="mt-4 max-w-[320px] font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#d9fce8]/55 md:max-w-md md:text-[14px]">
-                    Network formation continues
-                  </p>
-                </ScrollFadeIn>
-              </div>
-              </div>
-              <ScrollFadeIn className="mx-auto mt-14 max-w-[320px] md:max-w-[760px]">
-                <p className={`${SUPPORTING_LINE} text-[#82f5ad]`}>
-                  Network Alpha is live on Ethereum mainnet.
-                  <br />
-                  More operators join, more applications and E3s go live, and governance comes online from here.
-                </p>
-              </ScrollFadeIn>
-              <ScrollFadeIn
-                className="mx-auto mt-10 flex w-full max-w-[320px] flex-col items-center gap-2 md:max-w-none md:flex-row md:justify-center md:gap-3"
-                delay={0.1}
-              >
-                <HoverArrowLink
-                  className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[#82f5ad] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
-                  href="https://dashboard.theinterfold.com/"
-                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                >
-                  Explore Network Alpha
-                </HoverArrowLink>
-                <HoverArrowLink
-                  className={`flex w-full items-center justify-center ${BUTTON_SIZE} bg-[rgba(193,217,191,0.8)] px-6 transition-colors hover:bg-[#3a5e3c] md:w-auto`}
-                  href="https://blog.theinterfold.com/network-alpha-mainnet/"
-                  textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-                >
-                  Read the launch post
-                </HoverArrowLink>
-              </ScrollFadeIn>
-            </div>
-          </div>
-        </section>
+        <NetworkProgressSection />
 
       </main>
 
