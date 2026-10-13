@@ -1,0 +1,44 @@
+// Run after `npm run build`, or pass a custom Vite output directory.
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { ROUTES, SITE, outputPath } from '../seo/routes.mjs';
+
+const root = resolve(process.argv[2] ?? 'dist');
+const read = (path) => readFile(resolve(root, path), 'utf8');
+const decode = (value) => value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+const titles = new Set();
+for (const route of ROUTES) {
+  const html = await read(outputPath(route));
+  const url = `${SITE.origin}${route.path}`;
+  const title = decode(html.match(/<title[^>]*>(.*?)<\/title>/s)?.[1] ?? '');
+  assert.equal(title, route.title, route.path);
+  titles.add(title);
+  assert.equal((html.match(/<title\b/g) ?? []).length, 1);
+  assert.equal((html.match(/rel="canonical"/g) ?? []).length, 1);
+  assert.ok(html.includes(`rel="canonical" href="${url}"`));
+  assert.ok(html.includes(`property="og:url" content="${url}"`));
+  assert.ok(html.includes('name="robots" content="index, follow"'));
+  assert.ok(!html.includes('noindex'));
+  assert.ok(html.includes('https://cloud.umami.is/script.js'), 'Preserve analytics');
+  const json = JSON.parse(html.match(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/s)?.[1] ?? 'null');
+  const page = json['@graph'].find((node) => node['@type'] === 'WebPage');
+  assert.equal(page.url, url);
+  assert.equal(page.name, title);
+  assert.equal(page.description, route.description);
+  for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g)) await readFile(resolve(root, `.${match[1]}`));
+}
+assert.equal(titles.size, ROUTES.length, 'Each page needs its own title');
+const sitemap = await read('sitemap.xml');
+const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => decode(match[1]));
+assert.deepEqual(urls, ROUTES.map((route) => `${SITE.origin}${route.path}`));
+assert.ok(!sitemap.includes('<lastmod>'), 'Do not invent modification dates');
+const robots = await read('robots.txt');
+assert.ok(robots.startsWith('User-agent: *\nAllow: /\n'));
+assert.ok(robots.includes(`Sitemap: ${SITE.origin}/sitemap.xml`));
+const error = await read('404.html');
+assert.ok(error.includes('Page not found'));
+assert.ok(error.includes('name="robots" content="noindex, follow"'));
+assert.ok(!error.includes('rel="canonical"'));
+assert.ok(!error.includes('application/ld+json'));
+console.log(`SEO checks passed: ${ROUTES.length} route documents, sitemap, robots, assets, analytics and 404.`);

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { SectionLabel } from "./SectionLabel";
 
@@ -28,35 +27,7 @@ const legalPages = {
 };
 
 export function WebsiteLegalPage({ page }: { page: keyof typeof legalPages }) {
-  const { title, description, paragraphs } = legalPages[page];
-
-  useEffect(() => {
-    const previousTitle = document.title;
-    const pageTitle = `${title} · The Interfold`;
-    const updates: [string, string][] = [
-      ['meta[name="description"]', description],
-      ['meta[property="og:title"]', pageTitle],
-      ['meta[property="og:description"]', description],
-      ['meta[property="og:url"]', `https://www.theinterfold.com/${page}`],
-      ['meta[name="twitter:title"]', pageTitle],
-      ['meta[name="twitter:description"]', description],
-    ];
-    const previousMetadata = updates.map(([selector, content]) => {
-      const element = document.head.querySelector<HTMLMetaElement>(selector);
-      const previousContent = element?.content;
-      if (element) element.content = content;
-      return { element, previousContent };
-    });
-
-    document.title = pageTitle;
-
-    return () => {
-      document.title = previousTitle;
-      previousMetadata.forEach(({ element, previousContent }) => {
-        if (element && previousContent !== undefined) element.content = previousContent;
-      });
-    };
-  }, [page, title, description]);
+  const { title, paragraphs } = legalPages[page];
 
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] xl:pt-[63px]">

@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { DesktopFooter } from "../../imports/Desktop/Desktop";
 import { UnderlinedArrowLink } from "./HoverArrowLink";
 import { ScrollFadeIn } from "./ScrollFadeIn";
@@ -488,9 +488,9 @@ function LegalSectionRow({ section }: { section: LegalSection }) {
         <span className="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] leading-none tracking-[1.4px] text-[#82f5ad] md:text-[14px]">
           {section.number}
         </span>
-        <h3 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[26px] leading-[1] tracking-[-0.78px] md:text-[30px]">
+        <h2 className="mt-3 font-['ABC_Gramercy:Regular',sans-serif] text-[26px] leading-[1] tracking-[-0.78px] md:text-[30px]">
           {section.title}
-        </h3>
+        </h2>
       </header>
       <div className="space-y-5 font-['ABC_Gramercy:Regular',sans-serif] text-[17px] leading-[1.45] text-[#3a5e3c] md:text-[18px]">
         {section.blocks.map((block, index) => {
@@ -502,12 +502,12 @@ function LegalSectionRow({ section }: { section: LegalSection }) {
 
           if (block.type === "subheading") {
             return (
-              <h4
+              <h3
                 className="pt-3 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-[#687d71] md:text-[13px]"
                 key={index}
               >
                 {block.content}
-              </h4>
+              </h3>
             );
           }
 
@@ -527,34 +527,15 @@ function LegalSectionRow({ section }: { section: LegalSection }) {
 }
 
 export function AuctionLegalPage() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    const description = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
-    const previousDescription = description?.content;
-
-    document.title = "FOLD Auction Legal · The Interfold";
-
-    if (description) {
-      description.content = "Important information and terms governing participation in the FOLD auction.";
-    }
-
-    return () => {
-      document.title = previousTitle;
-      if (description && previousDescription !== undefined) {
-        description.content = previousDescription;
-      }
-    };
-  }, []);
-
   return (
     <div className="interfold-page-transition min-h-screen overflow-x-clip bg-white text-[#3a5e3c] md:pt-[63px]">
       <main>
         <section className="scroll-mt-[63px] bg-white px-4 pb-[24px] pt-[20px] text-center md:px-8 md:pb-[32px] md:pt-[28px]" id="fold-auction-terms">
           <ScrollFadeIn className="mx-auto max-w-[760px]">
             <SectionLabel>Terms</SectionLabel>
-            <h2 className="mx-auto mt-[12px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
+            <h1 className="mx-auto mt-[12px] max-w-[620px] font-['ABC_Gramercy:Regular',sans-serif] text-[40px] leading-[0.95] tracking-[-1.6px] md:text-[64px] md:tracking-[-2.56px]">
               FOLD Auction Terms
-            </h2>
+            </h1>
             <p className="mt-6 font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.2] tracking-[1.4px] text-[#687d71] md:text-[14px]">
               Last updated: <span className="text-[#3a5e3c]">Aug 16 2026</span>
             </p>
