@@ -54,6 +54,7 @@ export function ScrollFadeIn({ children, delay = 0, className }: ScrollFadeInPro
 
   return (
     <motion.div
+      data-content-reveal=""
       ref={ref}
       initial="hidden"
       animate={shouldReduceMotion || revealDelay !== null ? 'visible' : 'hidden'}

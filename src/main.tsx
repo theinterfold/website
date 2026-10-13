@@ -1,10 +1,17 @@
 
-  import { createRoot } from "react-dom/client";
+  import { createRoot, hydrateRoot } from "react-dom/client";
   import App from "./app/App.tsx";
-  import { homeHeroSources, participateHeroSources, preloadHeroImage } from "./app/components/HeroImage.tsx";
+  import { auctionHeroSources, homeHeroSources, participateHeroSources, preloadHeroImage } from "./app/components/HeroImage.tsx";
   import "./styles/index.css";
 
-  preloadHeroImage(window.location.pathname.replace(/^\/+|\/+$/g, "") === "participate" ? participateHeroSources : homeHeroSources);
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+  const hero = path === "" ? homeHeroSources : path === "participate" ? participateHeroSources : path === "fold-auction" ? auctionHeroSources : null;
+  if (hero) preloadHeroImage(hero);
 
-  createRoot(document.getElementById("root")!).render(<App />);
+  const root = document.getElementById("root")!;
+  if (root.hasAttribute("data-prerendered")) {
+    hydrateRoot(root, <App initialPath={root.dataset.route} />);
+  } else {
+    createRoot(root).render(<App />);
+  }
   

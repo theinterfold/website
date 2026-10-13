@@ -25,6 +25,7 @@ export function LineReveal({
     <span className={`block ${className}`} ref={ref}>
       {lines.map((line, index) => (
         <motion.span
+          data-content-reveal=""
           animate={shouldReduceMotion || isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           className={`block ${lineClassName}`}
           initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}

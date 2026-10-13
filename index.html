@@ -40,6 +40,22 @@
   </head>
 
   <body>
+    <noscript>
+      <style>
+        [data-content-reveal],
+        .interfold-header-transition a,
+        .interfold-header-transition nav > div,
+        .interfold-hero-transition img,
+        [data-name="Desktop"] > .relative.isolate > div {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .interfold-header-drop { animation: none !important; }
+        .slick-track { display: grid !important; gap: 1.5rem; width: auto !important; transform: none !important; }
+        .slick-slide { display: block !important; float: none !important; width: auto !important; opacity: 1 !important; }
+        .slick-cloned, .slick-dots { display: none !important; }
+      </style>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

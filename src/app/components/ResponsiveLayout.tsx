@@ -130,12 +130,14 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
   );
 }
 
-export function ResponsiveLayout() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [routePath, setRoutePath] = useState(getPagePath);
+export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
+  // Both existing home layouts are present in the static document. CSS selects
+  // the right one before hydration; the unused tree is then removed.
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [routePath, setRoutePath] = useState(() => initialPath ?? getPagePath());
   const [heroOverlay, setHeroOverlay] = useState<HeroOverlay | null>(null);
   const heroTransitionId = useRef(0);
-  const routePathRef = useRef(getPagePath());
+  const routePathRef = useRef(initialPath ?? getPagePath());
 
   useRouteDocumentHead(routePath);
 
@@ -348,6 +350,7 @@ export function ResponsiveLayout() {
   const isNotFound = !route;
   const headerBackgroundPath = heroOverlay?.page ?? routePath;
   const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || isNotFound || (!isMobile && isHome)) ? (
+    <div className={isHome ? 'hidden md:contents' : 'contents'}>
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
@@ -356,6 +359,7 @@ export function ResponsiveLayout() {
       showDesktop={!isMobile}
       showMobile={isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || isNotFound || (!isMobile && isHome)}
     />
+    </div>
   ) : null;
 
   if (isNotFound) {
@@ -403,7 +407,12 @@ export function ResponsiveLayout() {
   return (
     <>
       {sharedHeader}
-      {isMobile ? <MobileVersion /> : <Desktop />}
+      <div className="hidden md:contents">
+        {isMobile !== true && <Desktop />}
+      </div>
+      <div className="contents md:hidden">
+        {isMobile !== false && <MobileVersion />}
+      </div>
       {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
     </>
   );

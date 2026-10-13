@@ -10,6 +10,7 @@ export function sitemapXml() {
 export function routeHtmlPlugin() {
   return {
     name: 'interfold-route-html',
+    apply: (_config, { isSsrBuild }) => !isSsrBuild,
     enforce: 'post',
     transformIndexHtml: {
       order: 'post',
