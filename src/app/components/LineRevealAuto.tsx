@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import { requestReveal } from "./revealSequencer";
 
+const useBrowserLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
 // Reveals a single string one *rendered* line at a time. It measures where the
 // text actually wraps (re-measuring on resize and after fonts load), then
 // staggers each line with the site's fade-up motion. Use for headings that are
@@ -47,7 +49,7 @@ export function LineRevealAuto({
     });
   }, [delay, isInView, lines, revealDelay, shouldReduceMotion, stagger]);
 
-  useLayoutEffect(() => {
+  useBrowserLayoutEffect(() => {
     const node = measureRef.current;
     if (!node) {
       return;
@@ -127,7 +129,7 @@ export function LineRevealAuto({
 
       {/* Height reservation before the first measurement completes. */}
       {!lines && (
-        <span aria-hidden="true" className="block opacity-0">
+        <span data-content-reveal="" className="block opacity-0">
           {text}
         </span>
       )}

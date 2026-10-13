@@ -10,6 +10,12 @@ const decode = (value) => value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').r
 const titles = new Set();
 for (const route of ROUTES) {
   const html = await read(outputPath(route));
+  assert.ok(html.includes('data-prerendered=""'), 'Page content must be prerendered');
+  const body = html.split('<div id="root"')[1] ?? '';
+  assert.ok(body.includes('<h1'), `Missing primary heading in ${route.path}`);
+  const text = body.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/g, '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+  assert.ok(text.length > 150, `Missing readable page content in ${route.path}`);
+  assert.ok(body.includes('href="/'), `Missing crawlable internal links in ${route.path}`);
   const url = `${SITE.origin}${route.path}`;
   const title = decode(html.match(/<title[^>]*>(.*?)<\/title>/s)?.[1] ?? '');
   assert.equal(title, route.title, route.path);
@@ -38,6 +44,8 @@ assert.ok(robots.startsWith('User-agent: *\nAllow: /\n'));
 assert.ok(robots.includes(`Sitemap: ${SITE.origin}/sitemap.xml`));
 const error = await read('404.html');
 assert.ok(error.includes('Page not found'));
+assert.ok(error.includes('data-prerendered=""'));
+assert.ok(error.includes('<h1'));
 assert.ok(error.includes('name="robots" content="noindex, follow"'));
 assert.ok(!error.includes('rel="canonical"'));
 assert.ok(!error.includes('application/ld+json'));

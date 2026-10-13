@@ -40,7 +40,7 @@ npm run preview
 ```
 
 For a custom build directory, run `node scripts/check-seo.mjs /path/to/output`.
-The checker validates the generated documents, canonical URLs, structured data,
+The checker validates the prerendered body content, canonical URLs, structured data,
 sitemap, robots, asset references, analytics and the noindex error document.
 
 Vercel serves the generated HTML with `cleanUrls` and `trailingSlash: false`.
@@ -53,5 +53,16 @@ must not independently modify or restore the document head. Verify navigation
 from 404 to home, home to participate, auction to home, and browser back/forward;
 canonical URLs, robots and the WebPage JSON-LD must all describe the current page.
 
-This stage generates the document head; visible page content still renders with
-React in the browser. Content prerendering is a separate follow-up.
+`npm run build` also renders the existing React components into each document via
+`src/entry-server.tsx` and `scripts/prerender.mjs`. The temporary server bundle is
+removed after rendering and is never deployed. React hydrates the resulting HTML;
+development continues to use the regular client entry point.
+
+The homepage has separate existing mobile and desktop layouts. The static HTML
+includes both, selected by CSS; hydration removes the unused layout. Keep the
+initial server/client tree identical to avoid hydration errors. Text reveal
+components expose their existing content through `data-content-reveal` when
+JavaScript is disabled; the normal animation timings and sequencer are unchanged.
+Test all routes with JavaScript disabled at mobile and desktop widths, then with
+JavaScript enabled for hydration, resizing, menus, accordions, transitions and
+reduced motion. Error documents must also contain readable content.
