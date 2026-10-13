@@ -9,6 +9,10 @@ import { MobileVersion } from './MobileVersion';
 import { ParticipatePage } from './ParticipatePage';
 import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources } from './HeroImage';
 
+import { findRoute } from '../../../seo/routes.mjs';
+import { useRouteDocumentHead } from './useRouteDocumentHead';
+import { NotFoundPage } from './NotFoundPage';
+
 const MOBILE_BREAKPOINT = 768;
 type HeroPagePath = '' | 'participate' | 'fold-auction';
 type HeroOverlay = {
@@ -128,11 +132,12 @@ function HeroTransitionOverlay({ overlay }: { overlay: HeroOverlay }) {
 
 export function ResponsiveLayout() {
   const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const [routePath, setRoutePath] = useState(getPagePath);
   const [heroOverlay, setHeroOverlay] = useState<HeroOverlay | null>(null);
   const heroTransitionId = useRef(0);
   const routePathRef = useRef(getPagePath());
+
+  useRouteDocumentHead(routePath);
 
   useEffect(() => {
     const configureExternalLink = (anchor: HTMLAnchorElement) => {
@@ -175,7 +180,6 @@ export function ResponsiveLayout() {
   }, []);
 
   useEffect(() => {
-    setIsClient(true);
     const currentPath = getPagePath();
     applyPageTheme(currentPath);
     routePathRef.current = currentPath;
@@ -335,42 +339,30 @@ export function ResponsiveLayout() {
     };
   }, []);
 
-  const isHome = routePath === '';
-  const isParticipate = routePath === 'participate';
-  const isFoldAuction = routePath === 'fold-auction';
-  const isAuctionLegal = routePath === 'auction/legal';
-  const isWebsiteLegal = routePath === 'privacy' || routePath === 'terms';
+  const route = findRoute(`/${routePath}`);
+  const isHome = route?.key === 'home';
+  const isParticipate = route?.key === 'participate';
+  const isFoldAuction = route?.key === 'auction';
+  const isAuctionLegal = route?.key === 'auction-legal';
+  const isWebsiteLegal = route?.key === 'privacy' || route?.key === 'terms';
+  const isNotFound = !route;
   const headerBackgroundPath = heroOverlay?.page ?? routePath;
-  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || (!isMobile && isHome)) ? (
+  const sharedHeader = (isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || isNotFound || (!isMobile && isHome)) ? (
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
       animateOpening
-      backgroundClassName={isWebsiteLegal || headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
+      backgroundClassName={isWebsiteLegal || isNotFound || headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}
-      showMobile={isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || (!isMobile && isHome)}
+      showMobile={isParticipate || isFoldAuction || isAuctionLegal || isWebsiteLegal || isNotFound || (!isMobile && isHome)}
     />
   ) : null;
 
-  // Renderiza versão mobile em telas pequenas, desktop em telas grandes
-  if (!isClient && !isWebsiteLegal) {
-    // Durante SSR/primeira renderização, renderiza desktop
-    return (
-      <>
-        <Header
-          activePath=""
-          animateOpening
-          backgroundClassName="bg-[#d9fce8]"
-          desktopPositionClassName="md:fixed md:left-0 md:top-0"
-          showDesktop
-          showMobile={false}
-        />
-        <Desktop />
-      </>
-    );
+  if (isNotFound) {
+    return <>{sharedHeader}<NotFoundPage /></>;
   }
 
-  if (routePath === 'fold-auction') {
+  if (isFoldAuction) {
     return (
       <>
         {sharedHeader}
