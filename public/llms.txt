@@ -1,0 +1,46 @@
+# The Interfold
+
+> The Interfold is open-source infrastructure for confidential coordination. Independent parties use it to produce shared, verifiable outcomes from private inputs.
+
+Developed by Gnosis Guild, The Interfold was previously named Enclave. Older articles and code may still use that name.
+
+The protocol coordinates Encrypted Execution Environments (E3s): computations over encrypted inputs with verifiable results. It combines fully homomorphic encryption (FHE), threshold cryptography and zero-knowledge proofs. Committees of ciphernodes perform distributed key generation and threshold decryption; no single ciphernode holds the complete decryption key. The protocol does not require trusted hardware enclaves.
+
+Applications include encrypted voting, sealed-bid auctions and shared analytics. Privacy depends on committee-collusion thresholds and application design. The final plaintext result is public, so applications must account for what that result can reveal. The overview below explains these assumptions and limits.
+
+FOLD is the network token, used in ciphernode bonding and governance. For current deployment addresses, operator requirements, token rules and governance parameters, consult the relevant documentation. Blog posts describe the project at their publication date; the archived 2024 whitepaper is historical material.
+
+This file covers the main website and points to official resources. The documentation has its own plain-text llms.txt index, linked below.
+
+## Understand the protocol
+
+- [The Interfold website](https://www.theinterfold.com/): Project introduction and confidential coordination model.
+- [Protocol overview](https://docs.theinterfold.com/learn): What the protocol does, its guarantees, assumptions, limits and roles.
+- [Documentation index for AI assistants](https://docs.theinterfold.com/llms.txt): Plain-text entry point to the technical documentation.
+- [What is an E3?](https://docs.theinterfold.com/learn/what-is-e3): Encrypted Execution Environments, their components and when they fit an application.
+- [Architecture](https://docs.theinterfold.com/learn/architecture): On-chain contracts and off-chain services.
+- [Cryptography](https://docs.theinterfold.com/learn/cryptography): Threshold encryption, distributed key generation and cryptographic proofs.
+- [Use cases](https://docs.theinterfold.com/learn/use-cases): Application examples and their constraints.
+
+## Build and participate
+
+- [Participate](https://www.theinterfold.com/participate): Paths for ciphernode operators, developers and pilot partners.
+- [Developer quick start](https://docs.theinterfold.com/build/quick-start): Create a project and run an E3 locally.
+- [SDK](https://docs.theinterfold.com/build/sdk): Application integration reference.
+- [Run a ciphernode](https://docs.theinterfold.com/operate): Operator setup, bonding, requirements and operation.
+- [Protocol source code](https://github.com/theinterfold/interfold): Official implementation, releases and development history.
+
+## FOLD and governance
+
+- [FOLD tokenomics](https://docs.theinterfold.com/tokenomics): Supply, allocation and unlock schedules.
+- [Governance](https://docs.theinterfold.com/governance): Voting power, proposals and encrypted voting in the Interfold DAO.
+- [Contract reference](https://docs.theinterfold.com/reference/contracts): Deployment addresses and contract details.
+- [FOLD auctions](https://www.theinterfold.com/fold-auction): Auction information and links to the applicable terms; consult the page for dates and status.
+
+## Optional
+
+- [Official blog](https://blog.theinterfold.com/): Project updates, explainers, research and ecosystem articles.
+- [Glossary](https://docs.theinterfold.com/reference/glossary): Definitions of protocol terminology.
+- [Auction legal information](https://www.theinterfold.com/auction/legal): Legal information for the FOLD auctions.
+- [Privacy policy](https://www.theinterfold.com/privacy): Website privacy policy.
+- [Terms and conditions](https://www.theinterfold.com/terms): Website terms and conditions.
