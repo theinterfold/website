@@ -33,6 +33,14 @@ entry here and render its key in `ResponsiveLayout.tsx`. The build generates one
 HTML document per route plus `sitemap.xml` and `404.html`. `public/robots.txt`
 references the generated sitemap; do not add a separate static sitemap.
 
+`public/llms.txt` is the curated guide for AI assistants, served unchanged at
+`/llms.txt` and linked from each generated document with `rel="describedby"`.
+Keep its summary and annotated links aligned with the official documentation;
+link to current requirements and deployment details rather than copying values
+that can go stale. The docs maintain their own index at
+`https://docs.theinterfold.com/llms.txt`. When updating this guide, verify its
+links and confirm the build serves it as plain text, not an HTML fallback.
+
 ```bash
 npm run build
 npm run check:seo
