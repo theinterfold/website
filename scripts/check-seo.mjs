@@ -26,7 +26,7 @@ for (const route of ROUTES) {
   assert.ok(html.includes(`property="og:url" content="${url}"`));
   assert.ok(html.includes('name="robots" content="index, follow"'));
   assert.ok(!html.includes('noindex'));
-  assert.ok(html.includes('https://cloud.umami.is/script.js'), 'Preserve analytics');
+  assert.ok(html.includes('https://analytics.theinterfold.com/script.js'), 'Use self-hosted analytics');
   const json = JSON.parse(html.match(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/s)?.[1] ?? 'null');
   const page = json['@graph'].find((node) => node['@type'] === 'WebPage');
   assert.equal(page.url, url);
