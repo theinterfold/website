@@ -1,70 +1,27 @@
-import svgPaths from "../../imports/Desktop/svg-coxcrzwjvg";
-import { motion } from "motion/react";
+import { SiteHeaderChrome } from "../../../packages/site-header/lib/index.js";
 import { useBrandMarkMenu } from "./BrandMarkMenu";
-import { ExternalArrowSlide } from "./HoverArrowLink";
-import { InterfoldSymbol } from "./InterfoldSymbol";
+import { ExternalArrowSlide } from "../../../packages/site-header/lib/motion";
 import { NetworkMenu } from "./NetworkMenu";
 import { SiteMobileHeader } from "./SiteMobileHeader";
 
-function Wordmark() {
-  return (
-    <svg className="block h-full w-full" fill="none" preserveAspectRatio="none" viewBox="0 0 120.421 17.239">
-      <path d={svgPaths.p17d7a800} fill="#3A5E3C" />
-      <path d={svgPaths.p1ca65800} fill="#3A5E3C" />
-      <path d={svgPaths.pc6803c0} fill="#3A5E3C" />
-      <path d={svgPaths.pd8ed180} fill="#3A5E3C" />
-      <path d={svgPaths.p3771fe00} fill="#3A5E3C" />
-      <path d={svgPaths.p2960eb80} fill="#3A5E3C" />
-      <path d={svgPaths.p357bef30} fill="#3A5E3C" />
-      <path d={svgPaths.p2e47ac00} fill="#3A5E3C" />
-      <path d={svgPaths.p254332f0} fill="#3A5E3C" />
-      <path d={svgPaths.p102bd800} fill="#3A5E3C" />
-      <path d={svgPaths.p12150980} fill="#3A5E3C" />
-    </svg>
-  );
-}
-
 export function Header({
   activePath = "",
-  animateOpening = false,
   backgroundClassName = "bg-[#d9fce8]",
   desktopPositionClassName = "md:sticky md:top-0",
   showDesktop = true,
   showMobile = true,
 }: {
   activePath?: string;
-  animateOpening?: boolean;
   backgroundClassName?: string;
   desktopPositionClassName?: string;
   showDesktop?: boolean;
   showMobile?: boolean;
 }) {
   const brandMenu = useBrandMarkMenu();
-  const BrandLink = animateOpening ? motion.a : "a";
-  const MarkLink = animateOpening ? motion.a : "a";
-  const NavLink = animateOpening ? motion.a : "a";
-  // The pill is a component, not an element, so it joins the opening sequence
-  // through a wrapper. Without one it was the only thing in the bar already
-  // painted when the bar arrived, and the wordmark and links then faded in
-  // around it.
-  const PillSlot = animateOpening ? motion.div : "div";
-  const openingMotion = (delay: number) => animateOpening
-    ? {
-        animate: { opacity: 1, y: 0 },
-        initial: { opacity: 0, y: -6 },
-        transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
-      }
-    : {};
-  // The arrow hangs from the x-height line rather than sitting 1.2px under it.
-  // Measured off the rendered ink, not the font's metrics — the glyph does not
-  // sit flush on its own baseline. Same rule as the mobile menu.
-  const navArrowClass =
-    "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none top-[-0.0875em]";
-  // px-4 with no gap keeps the 32px people see, but as each link's own padding
-  // rather than dead space between them. Sweeping the row used to flip the
-  // cursor eight times, hand to arrow and back, across three 32px gaps.
-  const navLinkClass = "interfold-top-nav-link transition-colors hover:text-[#82f5ad]";
-  const externalNavLinkClass = "group inline-flex items-baseline gap-1 px-4 transition-colors hover:text-[#82f5ad] focus-visible:text-[#82f5ad]";
+  // Shared link padding keeps the navigation inside its half of the header,
+  // with continuous hit areas between links.
+  const navLinkClass = "site-header-link interfold-top-nav-link group";
+  const externalNavLinkClass = "site-header-link group";
   const participateLinkClass = `${navLinkClass} ${activePath === "participate" ? "is-active" : ""}`;
 
   return (
@@ -72,42 +29,30 @@ export function Header({
       {showMobile && <SiteMobileHeader backgroundClassName={backgroundClassName} className="xl:hidden" />}
       {showDesktop && (
         <div className={`${desktopPositionClassName} z-50 hidden w-full xl:block`}>
-        <header className={`interfold-header-transition ${animateOpening ? "interfold-header-drop" : ""} h-[63px] w-full ${backgroundClassName} transition-colors duration-[720ms]`}>
-          <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 md:px-6">
-            <BrandLink
-              aria-label="The Interfold home"
-              className={animateOpening ? "justify-self-start capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] not-italic text-[#3a5e3c] text-[18px] md:text-[22px] tracking-[-0.66px] whitespace-nowrap transition-colors hover:text-[#82f5ad]" : "h-[17px] w-[120px] justify-self-start"}
-              href="/"
-              {...brandMenu.trigger("wordmark")}
-              style={animateOpening ? { fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" } : undefined}
-              {...openingMotion(0.75)}
-            >
-              {animateOpening ? "The Interfold" : <Wordmark />}
-            </BrandLink>
-            <MarkLink aria-label="The Interfold home" className="h-[35px] w-[46px] justify-self-center text-[#3a5e3c] transition-colors duration-200 hover:text-[#82f5ad] focus-visible:text-[#82f5ad]" href="/" {...brandMenu.trigger("symbol")} {...openingMotion(0.85)}>
-              <InterfoldSymbol className="block h-full w-full" />
-            </MarkLink>
-            {/* items-center matters now that the pill is in here: without it the links
-                stretch to the pill's 41px and their text sits at the top of that
-                box, riding up above the wordmark. */}
-            <nav className="hidden items-center justify-self-end gap-0 font-['ABC_Gramercy:Regular',sans-serif] text-[22px] leading-[1.05] tracking-[-0.66px] text-[#3a5e3c] md:flex">
-              <NavLink className={externalNavLinkClass} href="https://docs.theinterfold.com/" {...openingMotion(0.95)}>
+        <SiteHeaderChrome
+          variant="desktop"
+          className={`${backgroundClassName} transition-colors duration-[720ms]`}
+          brandLinkProps={brandMenu.trigger("wordmark")}
+          symbolLinkProps={brandMenu.trigger("symbol")}
+          navigation={
+            <>
+              <a className={externalNavLinkClass} href="https://docs.theinterfold.com/">
                 <span>Docs</span>
-                <ExternalArrowSlide className={navArrowClass} />
-              </NavLink>
-              <NavLink className={externalNavLinkClass} href="https://blog.theinterfold.com/" {...openingMotion(1.05)}>
+                <ExternalArrowSlide className="site-nav-arrow" rowClassName="site-nav-arrow-row" />
+              </a>
+              <a className={externalNavLinkClass} href="https://blog.theinterfold.com/">
                 <span>Blog</span>
-                <ExternalArrowSlide className={navArrowClass} />
-              </NavLink>
-              {/* Auction removed from the nav after Auction 2 closed. /fold-auction is
-                  still live and still the claim route — reachable by direct link only. */}
-              <NavLink aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate" {...openingMotion(1.15)}>Participate</NavLink>
-              <PillSlot className="ml-4 self-center" {...openingMotion(1.25)}>
+                <ExternalArrowSlide className="site-nav-arrow" rowClassName="site-nav-arrow-row" />
+              </a>
+              <a aria-current={activePath === "participate" ? "page" : undefined} className={participateLinkClass} href="/participate">
+                <span>Participate</span>
+              </a>
+              <div className="site-header-action">
                 <NetworkMenu />
-              </PillSlot>
-            </nav>
-          </div>
-        </header>
+              </div>
+            </>
+          }
+        />
         </div>
       )}
       {brandMenu.element}

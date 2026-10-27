@@ -1,6 +1,7 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+@import '../../packages/site-header/lib/styles.css';
 
 html,
 body,
@@ -16,64 +17,6 @@ html.interfold-theme-participate,
 html.interfold-theme-participate body,
 html.interfold-theme-participate #root {
   --interfold-page-background: #ffffff;
-}
-
-.interfold-ghost-signup__embed {
-  color: #3a5e3c;
-  font-family: 'ABC_Gramercy', serif;
-  position: relative;
-  z-index: 30;
-}
-
-.interfold-ghost-signup__embed .gh-signup-root {
-  background: transparent !important;
-  width: 100%;
-}
-
-.interfold-ghost-signup__embed iframe {
-  background: transparent !important;
-  border: 0 !important;
-  display: block;
-  min-height: 58px;
-  position: relative;
-  width: 100% !important;
-}
-
-@media (min-width: 768px) and (max-width: 1279px) {
-  .interfold-footer-signup .interfold-ghost-signup__embed {
-    max-width: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .interfold-footer-baseline-item {
-    align-self: last baseline;
-  }
-
-  .interfold-footer-signup-form .interfold-ghost-signup__embed {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: baseline;
-  }
-}
-
-.interfold-ghost-signup__embed form {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-.interfold-ghost-signup__embed input {
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  color: #3a5e3c !important;
-  font-family: 'ABC_Gramercy', serif !important;
-}
-
-.interfold-ghost-signup__embed input::placeholder {
-  color: #3a5e3c !important;
-  opacity: 1 !important;
 }
 
 .interfold-home-hero-image {
@@ -227,79 +170,7 @@ html.interfold-theme-participate #root {
   animation-delay: 0.8s;
 }
 
-.interfold-mobile-menu-trigger .hamburger-react {
-  left: 50%;
-  position: absolute !important;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 
-.interfold-mobile-menu-overlay {
-  height: 100vh;
-  min-height: 100vh;
-}
-
-@supports (height: 100lvh) {
-  .interfold-mobile-menu-overlay {
-    height: 100lvh;
-    min-height: 100lvh;
-  }
-}
-
-@keyframes interfold-top-nav-line-in {
-  from {
-    opacity: 1;
-    transform: scaleX(0);
-  }
-
-  to {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
-
-/* The padding lives here rather than in a utility class, so the underline can
-   inset by the same value. Left in Tailwind they drifted apart the moment the
-   links were padded to close the gaps between them, and the rule ran the full
-   32px wider than the word. */
-.interfold-top-nav-link {
-  --nav-link-pad: 1rem;
-  padding-inline: var(--nav-link-pad);
-  position: relative;
-  text-decoration: none;
-}
-
-.interfold-top-nav-link::after {
-  background: currentColor;
-  bottom: -5px;
-  content: "";
-  height: 1px;
-  left: var(--nav-link-pad);
-  opacity: 0;
-  position: absolute;
-  right: var(--nav-link-pad);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-.interfold-top-nav-link.is-active::after {
-  animation: interfold-top-nav-line-in 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
-}
-
-@keyframes interfold-header-drop {
-  from {
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.interfold-header-drop {
-  animation: interfold-header-drop 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
-  will-change: transform;
-}
 
 /* Motion blur for the flipping contracts card. */
 @keyframes interfold-card-spin-blur {
@@ -336,10 +207,6 @@ html.interfold-theme-participate #root {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .interfold-header-drop {
-    animation: none;
-  }
-
   html,
   body,
   #root {
@@ -472,12 +339,6 @@ html.interfold-transition-page-enter .interfold-page-transition {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .interfold-top-nav-link.is-active::after {
-    animation: none;
-    opacity: 1;
-    transform: scaleX(1);
-  }
-
   .interfold-logo-marquee__track {
     animation: none;
   }
