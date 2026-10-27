@@ -131,7 +131,8 @@ import { jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
 function ArrowSlide({
   className = "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none",
   rowClassName = "h-[14px] w-[14px] leading-none",
-  isExternal = false
+  isExternal = false,
+  children
 }) {
   const arrow = isExternal ? "↗" : "→";
   return /* @__PURE__ */ jsx3("span", {
@@ -142,11 +143,11 @@ function ArrowSlide({
       children: [
         /* @__PURE__ */ jsx3("span", {
           className: rowClassName,
-          children: arrow
+          children: children ?? arrow
         }),
         /* @__PURE__ */ jsx3("span", {
           className: rowClassName,
-          children: arrow
+          children: children ?? arrow
         })
       ]
     })

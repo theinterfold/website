@@ -5,13 +5,14 @@ export function ArrowSlide({
   className = "relative inline-block h-[14px] w-[14px] overflow-hidden text-[14px] leading-none",
   rowClassName = "h-[14px] w-[14px] leading-none",
   isExternal = false,
+  children,
 }: ArrowSlideProps) {
   const arrow = isExternal ? "↗" : "→";
   return (
     <span aria-hidden="true" className={`interfold-arrow-slide ${className}`}>
       <span className="interfold-arrow-slide__track">
-        <span className={rowClassName}>{arrow}</span>
-        <span className={rowClassName}>{arrow}</span>
+        <span className={rowClassName}>{children ?? arrow}</span>
+        <span className={rowClassName}>{children ?? arrow}</span>
       </span>
     </span>
   );
