@@ -78,17 +78,11 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
     };
   }, [close, isOpen]);
 
-  // How much of the shape is folded away. One number drives both the shape and
-  // the links, in pixels rather than percentages, so the two clip edges sit on
-  // the same line at every point of the move.
-  const folded = isOpen ? 0 : menuHeight;
-  // The links need their own value for the one frame before the measuring
-  // effect runs — effects run after paint, and folding by a height that is
-  // still zero is not a closed menu, it is an open one. The menu was painting
-  // open on load and snapping shut. 100% of the links' own box needs no
-  // measurement, and once measured it resolves to the very same line, so
-  // nothing moves when it is swapped for the pixel count.
-  const linksFolded = isOpen ? "0px" : menuHeight ? `${menuHeight}px` : "100%";
+  // Closed geometry must not change when ResizeObserver measures the links.
+  // Growing the full surface and then animating its clip exposed the panel on
+  // refresh. Only an explicit opening grows the surface; the links clip uses
+  // its own box, so it stays fully closed before and after measurement.
+  const linksFolded = isOpen ? "0%" : "100%";
 
   return (
     // The button stays in flow so this box has the control's height and width; the
@@ -100,10 +94,10 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         className="pointer-events-none absolute inset-x-0 top-0 z-0"
         style={{
           backgroundColor: !isOpen && isHovered ? HOVER : REST,
-          clipPath: `inset(0 0 ${folded}px 0 round ${radius})`,
-          height: `calc(100% + ${menuHeight}px)`,
+          borderRadius: radius,
+          height: isOpen ? `calc(100% + ${menuHeight}px)` : "100%",
           transitionDuration: reducedMotion ? "0ms" : `${OPEN_MS}ms, 150ms`,
-          transitionProperty: "clip-path, background-color",
+          transitionProperty: "height, background-color",
           transitionTimingFunction: `${OPEN_EASING}, ease`,
         }}
       />
