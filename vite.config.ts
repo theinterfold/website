@@ -3,6 +3,14 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { routeHtmlPlugin } from './seo/route-html-plugin.mjs'
+import { createRequire } from 'node:module'
+
+const { verifyHeader } = createRequire(import.meta.url)(path.resolve(__dirname, 'scripts/header-release.cjs'))
+verifyHeader({
+  releaseRoot: path.resolve(__dirname, 'packages/site-header/lib'),
+  assetsRoot: path.resolve(__dirname, 'public/brand'),
+  sourceRoot: path.resolve(__dirname, 'packages/site-header'),
+})
 
 
 function figmaAssetResolver() {

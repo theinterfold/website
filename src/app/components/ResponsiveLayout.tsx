@@ -353,7 +353,6 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
     <div className={isHome ? 'hidden md:contents' : 'contents'}>
     <Header
       activePath={isAuctionLegal ? 'fold-auction' : routePath}
-      animateOpening
       backgroundClassName={isWebsiteLegal || isNotFound || headerBackgroundPath === 'participate' || headerBackgroundPath === 'auction/legal' ? 'bg-white' : 'bg-[#d9fce8]'}
       desktopPositionClassName="md:fixed md:left-0 md:top-0"
       showDesktop={!isMobile}

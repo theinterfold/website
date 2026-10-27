@@ -8,6 +8,7 @@ import { LineRevealAuto } from "./LineRevealAuto";
 import { SectionLabel } from "./SectionLabel";
 import { ScrollFadeIn } from "./ScrollFadeIn";
 import { BUTTON_SIZE } from "./titleBlock";
+import { SiteCtaLink } from "../../../packages/site-header/lib/motion";
 
 // =============================================================================
 // AUCTION 2 CONFIGURATION — single source of truth for the live Auction 2 page.
@@ -162,22 +163,16 @@ function CtaButton({
   }
 
   return (
-    <HoverArrowLink
-      className={`flex w-full items-center justify-center ${BUTTON_SIZE} px-6 transition-colors hover:bg-[#3a5e3c] ${
-        isPrimary ? "bg-[#82f5ad] text-[#3a5e3c]" : "bg-[rgba(193,217,191,0.8)] text-[#3a5e3c]"
-      }`}
-      href={href}
-      textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[14px] leading-[1.075] text-[#3a5e3c] transition-colors group-hover:text-[#82f5ad]"
-    >
+    <SiteCtaLink className="w-full" href={href} variant={variant}>
       {children}
-    </HoverArrowLink>
+    </SiteCtaLink>
   );
 }
 
 function TextLink({ href, children }: { href: string; children: string }) {
   return (
     <UnderlinedArrowLink
-      className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+      className="inline-flex text-[#3a5e3c] transition-colors hover:text-[var(--site-chrome-hover)] focus-visible:text-[var(--site-chrome-hover)]"
       href={href}
       textClassName="font-['Office_Code_Pro:Medium',sans-serif] text-[12px] uppercase leading-[1.075] tracking-[1.4px] text-current"
       underlineClassName="border-b border-current pb-[4px]"
@@ -197,7 +192,7 @@ function FaqRow({ item }: { item: { question: string; answer: string } }) {
     <div className="border-b border-[#3a5e3c]/30">
       <button
         aria-expanded={open}
-        className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.1] tracking-[-0.5px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad] md:text-[24px]"
+        className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.1] tracking-[-0.5px] text-[#3a5e3c] transition-colors hover:text-[var(--site-chrome-hover)] focus-visible:text-[var(--site-chrome-hover)] md:text-[24px]"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >
@@ -691,7 +686,7 @@ function LinkGroup({ group }: { group: (typeof linkGroups)[number] }) {
         {group.rows.map((row) => (
           <li className="border-b border-[#3a5e3c]/30" key={row.label}>
             <a
-              className="flex items-center justify-between gap-4 py-4 font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.05] tracking-[-0.5px] text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+              className="flex items-center justify-between gap-4 py-4 font-['ABC_Gramercy:Regular',sans-serif] text-[20px] leading-[1.05] tracking-[-0.5px] text-[#3a5e3c] transition-colors hover:text-[var(--site-chrome-hover)] focus-visible:text-[var(--site-chrome-hover)]"
               href={row.href}
               rel={row.href.startsWith("http") ? "noreferrer" : undefined}
               target={row.href.startsWith("http") ? "_blank" : undefined}
@@ -821,7 +816,7 @@ export function FoldAuctionPage() {
                     <dd className="whitespace-pre-line font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-[#3a5e3c]">
                       {row.href ? (
                         <UnderlinedArrowLink
-                          className="inline-flex text-[#3a5e3c] transition-colors hover:text-[#82f5ad]"
+                          className="inline-flex text-[#3a5e3c] transition-colors hover:text-[var(--site-chrome-hover)] focus-visible:text-[var(--site-chrome-hover)]"
                           href={row.href}
                           textClassName="font-['ABC_Gramercy:Regular',sans-serif] text-[18px] leading-[1.075] text-current"
                           underlineClassName="border-b border-current pb-[3px]"
@@ -1137,7 +1132,7 @@ export function FoldAuctionPage() {
                   {isPending(AUCTION.auctionTermsUrl) ? (
                     <span className="text-[#3a5e3c]">Auction Terms</span>
                   ) : (
-                    <a className="border-b border-current text-[#3a5e3c] transition-colors hover:text-[#82f5ad]" href={AUCTION.auctionTermsUrl}>
+                    <a className="border-b border-current text-[#3a5e3c] transition-colors hover:text-[var(--site-chrome-hover)] focus-visible:text-[var(--site-chrome-hover)]" href={AUCTION.auctionTermsUrl}>
                       Auction Terms
                     </a>
                   )}

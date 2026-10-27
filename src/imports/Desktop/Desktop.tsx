@@ -14,7 +14,7 @@ import legionLogo from "./legion-logo.svg";
 import taikoLogo from "./taiko-h-mono.svg";
 import etmStackedLogo from "./encrypt-mempool-stacked.svg";
 import { ExploreResourceIcon } from "../../app/components/ExploreResourceIcon";
-import { GhostSignupForm } from "../../app/components/GhostSignupForm";
+import { SiteFooter } from "../../../packages/site-header/lib";
 import { HeroImage, homeHeroSources } from "../../app/components/HeroImage";
 import { HoverArrowContent, UnderlinedArrowLink } from "../../app/components/HoverArrowLink";
 import { LineReveal } from "../../app/components/LineReveal";
@@ -1785,70 +1785,7 @@ function Frame13() {
 }
 
 export function DesktopFooter() {
-  return (
-    <footer className="relative bg-[#d9fce8] w-full">
-      <div className="mx-auto grid min-h-[312px] max-w-[1440px] grid-cols-1 gap-12 px-4 py-6 md:min-h-[412px] md:grid-cols-4 md:grid-rows-[1fr_auto] md:gap-x-8 md:gap-y-10 md:px-6">
-        <div className="md:col-start-1 md:row-start-1">
-          <ScrollFadeIn>
-            <p
-              className="-ml-[8px] capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[0.87] not-italic text-[#3a5e3c] text-[40px] tracking-[-1.92px] md:-ml-[12px] md:text-[64px]"
-              style={{ fontFeatureSettings: '"liga" 1, "clig" 1', fontVariantLigatures: "common-ligatures" }}
-            >
-              <span className="block">The</span>
-              <span className="block pl-[8px] md:pl-[12px]">Interfold</span>
-            </p>
-          </ScrollFadeIn>
-        </div>
-
-        <div className="not-italic md:col-start-3 md:row-start-1">
-          <div className="flex flex-col gap-[8px]">
-            <ScrollFadeIn delay={0.1}>
-              <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Legal</p>
-            </ScrollFadeIn>
-            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
-              <ScrollFadeIn delay={0.2}>
-                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" href="/privacy">Privacy</a>
-              </ScrollFadeIn>
-              <ScrollFadeIn delay={0.3}>
-                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4" href="/terms">{`Terms & Conditions`}</a>
-              </ScrollFadeIn>
-            </div>
-          </div>
-        </div>
-
-        <div className="content-stretch flex flex-col gap-[8px] items-start not-italic w-full md:col-start-4 md:row-start-1">
-          <div className="flex flex-col gap-[8px] w-full">
-            <ScrollFadeIn delay={0.1}>
-            <p className="font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase whitespace-nowrap">Follow us</p>
-            </ScrollFadeIn>
-            <div className="capitalize font-['ABC_Gramercy:Regular',sans-serif] leading-[1.05] text-[#3a5e3c] text-[22px] tracking-[-0.66px]">
-              <ScrollFadeIn delay={0.2}>
-                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://t.me/enclave_e3">Telegram</a>
-              </ScrollFadeIn>
-              <ScrollFadeIn delay={0.3}>
-                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://github.com/theinterfold/interfold">Github</a>
-              </ScrollFadeIn>
-              <ScrollFadeIn delay={0.4}>
-                <a className="block text-left text-base font-medium leading-[1.5] transition-colors hover:text-[#82f5ad]" href="https://x.com/theinterfold">X</a>
-              </ScrollFadeIn>
-            </div>
-          </div>
-        </div>
-
-        <div className="interfold-footer-baseline-item interfold-footer-signup w-full md:col-span-2 md:col-start-3 md:row-start-2 xl:col-span-1 xl:col-start-4">
-          <ScrollFadeIn className="w-full" delay={0.5}>
-            <GhostSignupForm className="interfold-footer-signup-form md:py-0" />
-          </ScrollFadeIn>
-        </div>
-
-        <div className="interfold-footer-baseline-item font-['Office_Code_Pro:Medium',sans-serif] leading-[1.075] not-italic text-[#3a5e3c] text-[14px] tracking-[1.4px] uppercase md:col-start-1 md:row-start-2">
-          <ScrollFadeIn delay={0.7}>
-            <p>{`All Rights Reserved © 2026`}</p>
-          </ScrollFadeIn>
-        </div>
-      </div>
-    </footer>
-  );
+  return <SiteFooter Reveal={ScrollFadeIn} />;
 }
 
 function Frame32() {

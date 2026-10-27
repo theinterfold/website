@@ -1,4 +1,5 @@
 import { build } from 'vite';
+import { HEADER_ENTRANCE_BOOTSTRAP } from '../packages/site-header/lib/index.js';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -23,7 +24,7 @@ try {
     const markup = render(route.path);
     if (!markup.includes('<h1')) throw new Error(`Missing page content in ${filename}`);
     const path = route.path.replace(/^\/+|\/+$/g, '');
-    await writeFile(destination, html.replace(marker, `<div id="root" data-prerendered="" data-route="${path}">${markup}</div>`));
+    await writeFile(destination, html.replace(marker, `<div id="root" data-prerendered="" data-route="${path}">${markup}</div><script>${HEADER_ENTRANCE_BOOTSTRAP}</script>`));
   }
   console.log(`Prerendered ${ROUTES.length} pages and the 404 using the existing React components.`);
 } finally {
