@@ -4,7 +4,7 @@ import { useReducedMotion } from "motion/react";
 
 import { BendingChevron } from "../../../packages/site-header/lib/index.js";
 
-import { ExternalArrowSlide } from "../../../packages/site-header/lib/motion";
+import { ArrowSlide, ExternalArrowSlide } from "../../../packages/site-header/lib/motion";
 
 // The rounded rectangle expands downwards into the same menu surface.
 const NETWORK_LINKS = [
@@ -105,7 +105,7 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
-        className="site-header-pill site-header-pill-type site-header-network-trigger relative z-10 w-full cursor-pointer text-[#d9fce8]"
+        className="group site-header-pill site-header-pill-type site-header-network-trigger relative z-10 w-full cursor-pointer text-[#d9fce8]"
         onBlur={() => setHasKeyboardFocus(false)}
         onClick={() => setIsOpen((current) => !current)}
         onFocus={(event) => setHasKeyboardFocus(event.target.matches(":focus-visible"))}
@@ -125,13 +125,12 @@ export function NetworkMenu({ className = "" }: { className?: string }) {
         <span>
           Network Alpha
         </span>
-        <BendingChevron
-          open={isOpen}
-          width={9}
-          thickness={0.9}
-          className="ml-auto"
-          style={{ top: "0.0246em" }}
-        />
+        <ArrowSlide
+          className="relative top-[0.0246em] ml-auto inline-block h-[14px] w-[9px] overflow-hidden"
+          rowClassName="flex h-[14px] w-[9px] items-center"
+        >
+          <BendingChevron open={isOpen} width={9} thickness={0.9} />
+        </ArrowSlide>
       </button>
 
       <div

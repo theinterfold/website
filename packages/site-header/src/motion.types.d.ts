@@ -48,6 +48,8 @@ export type HoverArrowContentProps = {
 export declare function HoverArrowContent(props: HoverArrowContentProps): ReactNode;
 
 export type ArrowSlideProps = {
+  /** Optional icon; uses the same rolling track as the website arrows. */
+  children?: ReactNode;
   className?: string;
   rowClassName?: string;
   isExternal?: boolean;
