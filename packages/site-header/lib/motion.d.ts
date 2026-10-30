@@ -66,3 +66,15 @@ export type UnderlinedArrowLinkProps = {
 export declare function ArrowSlide(props: ArrowSlideProps): ReactNode;
 export declare function ExternalArrowSlide(props: Omit<ArrowSlideProps, "isExternal">): ReactNode;
 export declare function UnderlinedArrowLink(props: UnderlinedArrowLinkProps): ReactNode;
+
+export type SiteDropdownPanelProps = {
+  open: boolean;
+  panelRef?: import("react").Ref<HTMLDivElement>;
+  children: ReactNode;
+  className?: string;
+  id?: string;
+  role?: string;
+  "aria-label"?: string;
+  onKeyDown?: import("react").KeyboardEventHandler<HTMLDivElement>;
+};
+export declare function SiteDropdownPanel(props: SiteDropdownPanelProps): ReactNode;
