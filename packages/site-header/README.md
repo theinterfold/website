@@ -218,9 +218,15 @@ The accepted comparison is horizontal lockup, 24px type and Fold Green at 65%
 for Governance. These are now the shared product defaults, not just study state.
 The study still allows overrides. The Network Alpha control uses the shared
 6px action radius, matching the wallet's corners. It retains its dark surface
-and continuous downward menu expansion; the glowing dot is removed from both
-desktop and mobile network controls. Dropdown rows follow the chosen navbar
-type scale. Reduced motion makes the panel expansion immediate.
+and opens a separate panel 4px below the unchanged trigger. The shared
+`SiteDropdownPanel` grows from 95% and moves down 8px, anchored at top centre.
+It uses the Scaena/DialKit spring (visualDuration .15, bounce 0) for entrance
+and exit; reduced motion makes this immediate. Its final width matches the
+trigger exactly. Visibility follows completion; rapid reversals preserve velocity. The panel
+starts hidden in SSR and closes on Escape, outside pointer input or focus leaving
+the control. Arrow keys navigate destinations; Escape restores trigger focus.
+Desktop and mobile network controls remain without a glowing dot; mobile
+keeps its existing inline disclosure.
 
 ### Navigation arrows · 27 October 2026
 

@@ -203,17 +203,37 @@
   padding: 9px 13px 9px 16px;
 }
 /* Network navigation has a compact trigger and subordinate destinations. */
+/* The trigger keeps its geometry; the menu is a separate anchored surface. */
 .site-header-network-trigger {
   min-width: 180px;
   height: 44px;
   font-size: 20px;
   letter-spacing: -.025em;
+  border-radius: var(--site-action-radius);
+  background: #121718;
+  color: #d9fce8;
+  transition: background-color 150ms;
 }
-.site-header-network-menu::before {
-  content: "";
-  display: block;
-  margin-inline: 16px;
-  border-top: 1px solid color-mix(in srgb, #d9fce8 18%, transparent);
+.site-header-network-trigger:is(:hover, [aria-expanded="true"]) {
+  background: #2b373b;
+}
+.site-header-network-trigger:focus-visible {
+  outline: 2px solid #82f5ad;
+  outline-offset: -3px;
+}
+.site-header-dropdown-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border: 1px solid color-mix(in srgb, #d9fce8 14%, #121718);
+  border-radius: var(--site-action-radius);
+  background: #121718;
+  box-shadow: 0 6px 16px rgb(18 23 24 / 12%);
+  transform-origin: top center;
 }
 .site-header-network-item {
   display: flex;
@@ -221,7 +241,8 @@
   justify-content: space-between;
   gap: 16px;
   min-height: 44px;
-  padding: 10px 13px 10px 16px;
+  padding: 10px;
+  border-radius: max(0px, calc(var(--site-action-radius) - 2px));
   font: 400 18px/1.2 var(--site-chrome-font);
   letter-spacing: -.02em;
   white-space: nowrap;
@@ -231,6 +252,7 @@
 .site-header-network-item:is(:hover, :focus-visible) {
   background-color: #2b373b;
   color: #82f5ad;
+  outline-offset: -2px;
 }
 .site-header-menu-trigger {
   position: fixed;

@@ -1,6 +1,6 @@
 // packages/site-header/src/motion.tsx
-import { useEffect, useRef, useState as useState2 } from "react";
-import { motion as motion2, useInView, useReducedMotion as useReducedMotion2 } from "framer-motion";
+import { useEffect as useEffect2, useRef as useRef2, useState as useState3 } from "react";
+import { motion as motion3, useInView, useReducedMotion as useReducedMotion3 } from "framer-motion";
 
 // packages/site-header/src/revealSequencer.ts
 var STEP_MS = 140;
@@ -188,15 +188,48 @@ function UnderlinedArrowLink({
     ]
   });
 }
+// packages/site-header/src/dropdownPanel.tsx
+import { useEffect, useRef, useState as useState2 } from "react";
+import { motion as motion2, useReducedMotion as useReducedMotion2 } from "framer-motion";
+import { jsx as jsx4 } from "react/jsx-runtime";
+var closed = { opacity: 0, y: -8, scale: 0.95 };
+var opened = { opacity: 1, y: 0, scale: 1 };
+var spring = { type: "spring", visualDuration: 0.15, bounce: 0 };
+function SiteDropdownPanel({ open, panelRef, children, className = "", ...props }) {
+  const reducedMotion = useReducedMotion2();
+  const [settledClosed, setSettledClosed] = useState2(!open);
+  const currentOpen = useRef(open);
+  currentOpen.current = open;
+  useEffect(() => {
+    if (open)
+      setSettledClosed(false);
+  }, [open]);
+  return /* @__PURE__ */ jsx4(motion2.div, {
+    ...props,
+    ref: panelRef,
+    className: `site-header-dropdown-panel ${className}`,
+    "data-open": open,
+    "aria-hidden": !open,
+    initial: false,
+    animate: open ? opened : reducedMotion ? { ...opened, opacity: 0 } : closed,
+    transition: reducedMotion ? { duration: 0 } : spring,
+    style: { visibility: open || !settledClosed ? "visible" : "hidden", pointerEvents: open ? "auto" : "none" },
+    onAnimationComplete: () => {
+      if (!currentOpen.current)
+        setSettledClosed(true);
+    },
+    children
+  });
+}
 
 // packages/site-header/src/motion.tsx
-import { jsx as jsx4 } from "react/jsx-runtime";
+import { jsx as jsx5 } from "react/jsx-runtime";
 var elements = {
-  div: motion2.div,
-  section: motion2.section,
-  header: motion2.header,
-  h1: motion2.h1,
-  p: motion2.p
+  div: motion3.div,
+  section: motion3.section,
+  header: motion3.header,
+  h1: motion3.h1,
+  p: motion3.p
 };
 var hidden = { opacity: 0, y: 16 };
 var visible = { opacity: 1, y: 0 };
@@ -207,17 +240,17 @@ function ScrollFadeIn({
   amount = 0.3,
   ...props
 }) {
-  const ref = useRef(null);
+  const ref = useRef2(null);
   const isInView = useInView(ref, { once: true, amount });
-  const shouldReduceMotion = useReducedMotion2();
-  const [revealed, setRevealed] = useState2(false);
-  const [focused, setFocused] = useState2(false);
+  const shouldReduceMotion = useReducedMotion3();
+  const [revealed, setRevealed] = useState3(false);
+  const [focused, setFocused] = useState3(false);
   const Element = elements[as];
-  useEffect(() => {
+  useEffect2(() => {
     if (shouldReduceMotion)
       setRevealed(true);
   }, [shouldReduceMotion]);
-  useEffect(() => {
+  useEffect2(() => {
     if (!isInView || shouldReduceMotion || revealed || focused)
       return;
     const node = ref.current;
@@ -231,7 +264,7 @@ function ScrollFadeIn({
       start: () => setRevealed(true)
     });
   }, [delay, isInView, revealed, focused, shouldReduceMotion]);
-  return /* @__PURE__ */ jsx4(Element, {
+  return /* @__PURE__ */ jsx5(Element, {
     ...props,
     ref,
     initial: shouldReduceMotion ? visible : hidden,
@@ -247,6 +280,7 @@ export {
   HoverArrowContent,
   ScrollFadeIn,
   SiteCtaLink,
+  SiteDropdownPanel,
   UnderlinedArrowLink,
   requestReveal
 };

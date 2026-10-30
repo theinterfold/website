@@ -65,3 +65,5 @@ export function ScrollFadeIn({
 export { HoverArrowContent } from "./hoverArrow";
 export { SiteCtaLink } from "./ctaLink";
 export { ArrowSlide, ExternalArrowSlide, UnderlinedArrowLink } from "./arrowLink";
+
+export { SiteDropdownPanel } from "./dropdownPanel";
