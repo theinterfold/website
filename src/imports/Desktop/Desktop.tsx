@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import * as THREE from "three";
 import { AnimatePresence, motion } from "motion/react";
 import svgPaths from "./svg-coxcrzwjvg";
-import { ExecutionFlowReveal } from "../../app/components/ExecutionFlowReveal";
+import { ExecutionFlowReveal, EXECUTION_FLOW_PEN_EASE, useExecutionFlowReducedMotion } from "../../app/components/ExecutionFlowReveal";
 import imgChatGptImageApr232026051856Pm11 from "./a80fa66d44b0ff61c570b989d6fb551d46380225.webp";
 import imgChatGptImageApr232026051856Pm12 from "./2ed5559bf52ac38f0d906307f0ed5c48d52a224a.webp";
 import imgChatGptImageApr232026051856Pm13 from "./5358f3e3b9a49f0d5d69994ddaa8f725c44612c4.webp";
@@ -701,8 +700,16 @@ const executionFlowLinePaths = [
 ] as const;
 
 const executionFlowMaxOrder = Math.max(...executionFlowLinePaths.map(({ order }) => order));
-const executionFlowCycleDuration = 1 / 0.22;
+// Shared by the SVG drawing and the luminous core: never widen the solid glow.
+const executionFlowStrokeWidth = 2.18269;
+const executionFlowCycleDuration = 3;
 const executionFlowInputSquareLead = 0.09;
+// Compress the pen ease's acceleration window so each leg launches quickly
+// and spends much longer braking toward the junction/output, without a hold.
+const executionFlowGlowAccelerationWindow = 0.22;
+const executionFlowGlowSpline = EXECUTION_FLOW_PEN_EASE
+  .map((value, index) => index % 2 === 0 ? Number((value * executionFlowGlowAccelerationWindow).toFixed(6)) : value)
+  .join(" ");
 
 const executionFlowViewBox = {
   height: 256,
@@ -718,263 +725,163 @@ function getExecutionFlowStagger(order: number, pathIndex = 0) {
   return ((1 - easedOrder) * 0.42 + pathIndex * 0.004) % 1;
 }
 
-const executionFlowVertexShader = `
-  attribute float aAlong;
-  attribute float aOffset;
-  varying float vAlong;
-  varying float vOffset;
-
-  void main() {
-    vAlong = aAlong;
-    vOffset = aOffset;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
-
-const executionFlowFragmentShader = `
-  precision highp float;
-
-  uniform float uOpacity;
-  uniform float uTime;
-  varying float vAlong;
-  varying float vOffset;
-
-  void main() {
-    float head = fract(uTime + vOffset);
-    float distanceToHead = abs(fract(vAlong - head + 0.5) - 0.5);
-    float signal = smoothstep(0.24, 0.0, distanceToHead);
-    float alpha = pow(signal, 1.18) * uOpacity;
-
-    if (alpha < 0.01) {
-      discard;
-    }
-
-    gl_FragColor = vec4(0.5098, 0.9608, 0.6784, alpha);
-  }
-`;
+type ExecutionFlowPoint = { x: number; y: number };
 
 function parseExecutionFlowPath(pathData: string) {
   const tokens = pathData.match(/[MLHV]|-?\d*\.?\d+(?:e[-+]?\d+)?/gi) ?? [];
-  const points: THREE.Vector2[] = [];
+  const points: ExecutionFlowPoint[] = [];
   let command = "";
-  let cursor = new THREE.Vector2(0, 0);
-
-  for (let index = 0; index < tokens.length; ) {
-    const token = tokens[index];
-
-    if (/^[MLHV]$/i.test(token)) {
-      command = token.toUpperCase();
-      index += 1;
+  let x = 0;
+  let y = 0;
+  for (let index = 0; index < tokens.length;) {
+    if (/^[MLHV]$/i.test(tokens[index])) {
+      command = tokens[index++].toUpperCase();
       continue;
     }
-
     if (command === "M" || command === "L") {
-      const x = Number(token);
-      const y = Number(tokens[index + 1]);
-      cursor = new THREE.Vector2(x, y);
-      points.push(cursor.clone());
-      index += 2;
-      if (command === "M") {
-        command = "L";
-      }
+      x = Number(tokens[index++]);
+      y = Number(tokens[index++]);
+      command = "L";
+    } else if (command === "H") {
+      x = Number(tokens[index++]);
+    } else if (command === "V") {
+      y = Number(tokens[index++]);
+    } else {
+      index++;
       continue;
     }
-
-    if (command === "H") {
-      cursor = new THREE.Vector2(Number(token), cursor.y);
-      points.push(cursor.clone());
-      index += 1;
-      continue;
-    }
-
-    if (command === "V") {
-      cursor = new THREE.Vector2(cursor.x, Number(token));
-      points.push(cursor.clone());
-      index += 1;
-      continue;
-    }
-
-    index += 1;
+    points.push({ x, y });
   }
-
-  const firstPoint = points[0];
-  const lastPoint = points[points.length - 1];
-  if (firstPoint && lastPoint && (firstPoint.x > lastPoint.x || (firstPoint.x === lastPoint.x && firstPoint.y > lastPoint.y))) {
-    points.reverse();
-  }
-
+  const first = points[0];
+  const last = points[points.length - 1];
+  if (first && last && (first.x > last.x || (first.x === last.x && first.y > last.y))) points.reverse();
   const distances = [0];
-  for (let index = 1; index < points.length; index += 1) {
-    distances.push(distances[index - 1] + points[index].distanceTo(points[index - 1]));
+  for (let index = 1; index < points.length; index++) {
+    distances.push(distances[index - 1] + Math.hypot(points[index].x - points[index - 1].x, points[index].y - points[index - 1].y));
   }
-
-  const length = distances[distances.length - 1] ?? 0;
-
-  return { distances, length, points };
+  return { points, distances, length: distances[distances.length - 1] ?? 0 };
 }
 
-function getExecutionFlowMiter(points: THREE.Vector2[], pointIndex: number, halfWidth: number) {
-  const previousPoint = points[Math.max(0, pointIndex - 1)];
-  const point = points[pointIndex];
-  const nextPoint = points[Math.min(points.length - 1, pointIndex + 1)];
-  const previousDirection = point.clone().sub(previousPoint);
-  const nextDirection = nextPoint.clone().sub(point);
+// The original shader's smoothstep(0.24, 0, distance)^1.18 envelope, sampled
+// symmetrically for a repeating SVG gradient. Route timing is controlled below.
+const executionFlowGlowStops = [
+  ...Array.from({ length: 33 }, (_, index) => index * 0.24 / 32),
+  ...Array.from({ length: 33 }, (_, index) => 0.76 + index * 0.24 / 32),
+].map((offset) => {
+  const t = Math.min(1, Math.min(offset, 1 - offset) / 0.24);
+  const value = Math.pow(1 - t * t * (3 - 2 * t), 1.18) * 100;
+  const alpha = value / 100 * 0.96;
+  const paintColor = `rgb(${37 + (130 - 37) * alpha} ${37 + (245 - 37) * alpha} ${37 + (173 - 37) * alpha})`;
+  return { offset, color: `rgb(${value}% ${value}% ${value}%)`, paintColor };
+});
 
-  if (previousDirection.lengthSq() === 0 && nextDirection.lengthSq() === 0) {
-    return new THREE.Vector2(0, halfWidth);
+// The artwork splits each journey at the central junction. Pair those pieces
+// on one clock so the slow midpoint is the junction, not halfway along a piece.
+const executionFlowGeometry = executionFlowLinePaths.map(({ d }) => parseExecutionFlowPath(d));
+const executionFlowOutgoingRoutes = [8, 11, 10, 17, 12, 14, 15, 18] as const;
+
+function distanceAlongExecutionFlowRoute(routeIndex: number, point: ExecutionFlowPoint) {
+  const { points, distances } = executionFlowGeometry[routeIndex];
+  let nearest = { separation: Infinity, distance: 0 };
+  for (let index = 0; index < points.length - 1; index++) {
+    const start = points[index];
+    const end = points[index + 1];
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const progress = Math.max(0, Math.min(1, ((point.x - start.x) * dx + (point.y - start.y) * dy) / (dx * dx + dy * dy)));
+    const separation = Math.hypot(point.x - start.x - dx * progress, point.y - start.y - dy * progress);
+    if (separation < nearest.separation) nearest = { separation, distance: distances[index] + Math.hypot(dx, dy) * progress };
   }
-
-  if (previousDirection.lengthSq() === 0) {
-    const direction = nextDirection.normalize();
-    return new THREE.Vector2(-direction.y, direction.x).multiplyScalar(halfWidth);
-  }
-
-  if (nextDirection.lengthSq() === 0) {
-    const direction = previousDirection.normalize();
-    return new THREE.Vector2(-direction.y, direction.x).multiplyScalar(halfWidth);
-  }
-
-  const previousNormal = new THREE.Vector2(-previousDirection.y, previousDirection.x).normalize();
-  const nextNormal = new THREE.Vector2(-nextDirection.y, nextDirection.x).normalize();
-  const miter = previousNormal.clone().add(nextNormal);
-
-  if (miter.lengthSq() < 0.0001) {
-    return nextNormal.multiplyScalar(halfWidth);
-  }
-
-  miter.normalize();
-  const scale = halfWidth / Math.max(0.25, miter.dot(nextNormal));
-
-  return miter.multiplyScalar(Math.min(scale, halfWidth * 3));
+  return nearest.distance;
 }
 
-function createExecutionFlowGeometry(lineWidth: number) {
-  const halfWidth = lineWidth / 2;
-  const positions: number[] = [];
-  const alongs: number[] = [];
-  const offsets: number[] = [];
-  const indices: number[] = [];
+const executionFlowJourneys = executionFlowOutgoingRoutes.map((outgoingIndex, inputIndex) => {
+  const incoming = executionFlowGeometry[inputIndex];
+  const outgoing = executionFlowGeometry[outgoingIndex];
+  // Two outgoing runs have their final diagonal drawn as a separate SVG path.
+  const connectorIndex = inputIndex === 0 ? 9 : inputIndex === 3 ? 16 : null;
+  const connector = connectorIndex === null ? null : executionFlowGeometry[connectorIndex];
+  const connectorOffset = connector ? distanceAlongExecutionFlowRoute(outgoingIndex, connector.points[0]) : outgoing.length;
+  const end = (connector ?? outgoing).points.at(-1)!;
+  const output = executionFlowGeometry[13].points.at(-1)!;
+  const outgoingLength = connectorOffset + (connector?.length ?? 0) + Math.hypot(output.x - end.x, output.y - end.y);
+  return {
+    outgoingIndex,
+    connectorIndex,
+    connectorOffset,
+    midpoint: incoming.length,
+    length: incoming.length + outgoingLength,
+    phase: getExecutionFlowStagger(inputIndex, inputIndex),
+  };
+});
 
-  executionFlowLinePaths.forEach(({ d, order }, pathIndex) => {
-    const { distances, length, points } = parseExecutionFlowPath(d);
-    if (points.length < 2 || length === 0) {
-      return;
-    }
-
-    const baseVertexIndex = positions.length / 3;
-    const offset = getExecutionFlowStagger(order, pathIndex);
-
-    points.forEach((point, pointIndex) => {
-      const normal = getExecutionFlowMiter(points, pointIndex, halfWidth);
-      const along = distances[pointIndex] / length;
-
-      positions.push(point.x + normal.x, point.y + normal.y, 0);
-      positions.push(point.x - normal.x, point.y - normal.y, 0);
-      alongs.push(along, along);
-      offsets.push(offset, offset);
-    });
-
-    for (let pointIndex = 0; pointIndex < points.length - 1; pointIndex += 1) {
-      const current = baseVertexIndex + pointIndex * 2;
-      indices.push(current, current + 1, current + 2, current + 1, current + 3, current + 2);
-    }
+const executionFlowGlowRoutes = executionFlowLinePaths.map(({ d }, pathIndex) => {
+  const { points, distances, length } = executionFlowGeometry[pathIndex];
+  const inputIndex = pathIndex < 8 ? pathIndex : pathIndex === 13 ? 4 : executionFlowJourneys.findIndex((journey) => journey.outgoingIndex === pathIndex || journey.connectorIndex === pathIndex);
+  const journey = executionFlowJourneys[inputIndex];
+  const routeOffset = pathIndex < 8 ? 0 : journey.midpoint + (pathIndex === 13 ? executionFlowGeometry[12].length : pathIndex === journey.connectorIndex ? journey.connectorOffset : 0);
+  // Keep each piece's existing physical glow width while sharing travel phase.
+  const stops = executionFlowGlowStops.map((stop) => ({
+    ...stop,
+    offset: stop.offset <= 0.24 ? stop.offset * length / journey.length : 1 - (1 - stop.offset) * length / journey.length,
+  }));
+  const segments = points.slice(0, -1).map((start, index) => {
+    const end = points[index + 1];
+    const distance = distances[index + 1] - distances[index];
+    const dx = (end.x - start.x) / distance;
+    const dy = (end.y - start.y) / distance;
+    // These wide polygons carry only intensity. The visible core is always
+    // the original, complete SVG path, so corners never get reconstructed.
+    const margin = 12;
+    const polygon = [
+      [start.x - dx * margin - dy * margin, start.y - dy * margin + dx * margin],
+      [start.x - dx * margin + dy * margin, start.y - dy * margin - dx * margin],
+      [end.x + dx * margin + dy * margin, end.y + dy * margin - dx * margin],
+      [end.x + dx * margin - dy * margin, end.y + dy * margin + dx * margin],
+    ].map((point) => point.join(",")).join(" ");
+    const x1 = start.x - dx * (routeOffset + distances[index]);
+    const y1 = start.y - dy * (routeOffset + distances[index]);
+    return { polygon, x1, y1, x2: x1 + dx * journey.length, y2: y1 + dy * journey.length, travel: [0, journey.midpoint, journey.length].map((distance) => `${dx * distance} ${dy * distance}`).join(";") };
   });
+  return { d, segments, stops, begin: `${-journey.phase * executionFlowCycleDuration}s` };
+});
 
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-  geometry.setAttribute("aAlong", new THREE.Float32BufferAttribute(alongs, 1));
-  geometry.setAttribute("aOffset", new THREE.Float32BufferAttribute(offsets, 1));
-  geometry.setIndex(indices);
-  geometry.computeBoundingSphere();
-
-  return geometry;
-}
-
-function createExecutionFlowMaterial(opacity: number) {
-  return new THREE.ShaderMaterial({
-    blending: THREE.NormalBlending,
-    depthTest: false,
-    depthWrite: false,
-    fragmentShader: executionFlowFragmentShader,
-    side: THREE.DoubleSide,
-    transparent: true,
-    uniforms: {
-      uOpacity: { value: opacity },
-      uTime: { value: 0 },
-    },
-    vertexShader: executionFlowVertexShader,
-  });
-}
-
-function ExecutionFlowThreeGlows({ isHidden }: { isHidden: boolean }) {
-  const mountRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const mount = mountRef.current;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!mount || reduceMotion.matches) {
-      return undefined;
-    }
-
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setClearColor(0x000000, 0);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.domElement.style.display = "block";
-    renderer.domElement.style.height = "100%";
-    renderer.domElement.style.width = "100%";
-    mount.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(0, executionFlowViewBox.width, 0, executionFlowViewBox.height, -10, 10);
-    camera.position.z = 1;
-
-    const haloMaterial = createExecutionFlowMaterial(0.2);
-    const coreMaterial = createExecutionFlowMaterial(0.96);
-    const haloMesh = new THREE.Mesh(createExecutionFlowGeometry(8.6), haloMaterial);
-    const coreMesh = new THREE.Mesh(createExecutionFlowGeometry(3.15), coreMaterial);
-    scene.add(haloMesh, coreMesh);
-
-    const resize = () => {
-      const rect = mount.getBoundingClientRect();
-      renderer.setSize(rect.width, rect.height, false);
-    };
-
-    const resizeObserver = new ResizeObserver(resize);
-    resizeObserver.observe(mount);
-    resize();
-
-    let animationFrame = 0;
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      const time = (clock.getElapsedTime() * 0.22) % 1;
-      haloMaterial.uniforms.uTime.value = time;
-      coreMaterial.uniforms.uTime.value = time;
-      renderer.render(scene, camera);
-      animationFrame = window.requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame);
-      resizeObserver.disconnect();
-      mount.removeChild(renderer.domElement);
-      haloMesh.geometry.dispose();
-      coreMesh.geometry.dispose();
-      haloMaterial.dispose();
-      coreMaterial.dispose();
-      renderer.dispose();
-    };
-  }, []);
+function ExecutionFlowSvgGlows({ isHidden, id }: { isHidden: boolean; id: string }) {
 
   return (
-    <div
-      aria-hidden="true"
-      className={`absolute inset-0 pointer-events-none execution-flow-three-glows transition-opacity duration-200 ${isHidden ? "opacity-0" : "opacity-100"}`}
-      data-execution-flow-overlay=""
-      ref={mountRef}
-    />
+    <g aria-hidden="true" data-execution-flow-overlay="" className={`pointer-events-none transition-opacity duration-200 ${isHidden ? "opacity-0" : "opacity-100"}`}>
+      <defs>
+        <filter id={`${id}-blur`} filterUnits="userSpaceOnUse" x="-20" y="-20" width={executionFlowViewBox.width + 40} height={executionFlowViewBox.height + 40} colorInterpolationFilters="sRGB">
+          <feGaussianBlur stdDeviation="1.4333333333" />
+        </filter>
+        {executionFlowGlowRoutes.map(({ segments, stops, begin }, routeIndex) => (
+          <g key={routeIndex}>
+            {segments.flatMap((segment, segmentIndex) => [false, true].map((paint) => (
+              <linearGradient key={`${segmentIndex}-${paint}`} id={`${id}-${routeIndex}-${segmentIndex}${paint ? "-paint" : ""}`} gradientUnits="userSpaceOnUse" spreadMethod="repeat" x1={segment.x1} y1={segment.y1} x2={segment.x2} y2={segment.y2}>
+                {stops.map(({ offset, color, paintColor }) => <stop key={offset} offset={offset} stopColor={paint ? paintColor : color} />)}
+                <animateTransform attributeName="gradientTransform" type="translate" values={segment.travel} begin={begin} dur={`${executionFlowCycleDuration}s`} calcMode="spline" keyTimes="0;0.5;1" keySplines={`${executionFlowGlowSpline};${executionFlowGlowSpline}`} repeatCount="indefinite" />
+              </linearGradient>
+            )))}
+            <mask id={`${id}-mask-${routeIndex}`} maskUnits="userSpaceOnUse" x="-20" y="-20" width={executionFlowViewBox.width + 40} height={executionFlowViewBox.height + 40} style={{ maskType: "luminance" }}>
+              {segments.map(({ polygon }, segmentIndex) => <polygon key={segmentIndex} points={polygon} fill={`url(#${id}-${routeIndex}-${segmentIndex})`} />)}
+            </mask>
+            {/* Paint the light into the base stroke instead of compositing a
+                second antialiased stroke over it. The edge is rasterized once. */}
+            <pattern id={`${id}-paint-${routeIndex}`} patternUnits="userSpaceOnUse" width={executionFlowViewBox.width} height={executionFlowViewBox.height}>
+              <rect width={executionFlowViewBox.width} height={executionFlowViewBox.height} fill="#252525" />
+              {/* Direct gradient paints keep the pattern live. A mask nested
+                  inside this paint server can be cached at its first frame. */}
+              {segments.map(({ polygon }, segmentIndex) => <polygon key={segmentIndex} points={polygon} fill={`url(#${id}-${routeIndex}-${segmentIndex}-paint)`} />)}
+            </pattern>
+          </g>
+        ))}
+      </defs>
+      {executionFlowGlowRoutes.map(({ d }, routeIndex) => (
+        <g key={routeIndex} mask={`url(#${id}-mask-${routeIndex})`}>
+          <path d={d} stroke="#82F5AD" strokeWidth={executionFlowStrokeWidth} strokeMiterlimit="10" strokeOpacity="0.2" filter={`url(#${id}-blur)`} />
+        </g>
+      ))}
+    </g>
   );
 }
 
@@ -996,7 +903,7 @@ function ExecutionFlowInputSquare({ d, order }: ExecutionFlowInputSquareProps) {
       d={d}
       fill="#252525"
       style={{
-        animationDelay: `${-(getExecutionFlowStagger(order) + executionFlowInputSquareLead) * executionFlowCycleDuration}s`,
+        animationDelay: `${-(getExecutionFlowStagger(order, order) + executionFlowInputSquareLead) * executionFlowCycleDuration}s`,
         animationDuration: `${executionFlowCycleDuration}s`,
       }}
     />
@@ -1008,7 +915,7 @@ function ExecutionFlowPulseDot({ order, x, y }: ExecutionFlowPulseDotProps) {
     <g
       className="execution-flow-pulse-dot"
       style={{
-        animationDelay: `${-getExecutionFlowStagger(order) * executionFlowCycleDuration}s`,
+        animationDelay: `${-((getExecutionFlowStagger(order, order) + 0.5) % 1) * executionFlowCycleDuration}s`,
         animationDuration: `${executionFlowCycleDuration}s`,
         transformBox: "fill-box",
         transformOrigin: "center",
@@ -1108,7 +1015,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
             animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), cubic-bezier(0.16, 1, 0.3, 1);
             animation-iteration-count: infinite, infinite;
             animation-duration: ${executionFlowCycleDuration}s;
-            animation-delay: ${-getExecutionFlowStagger(4) * executionFlowCycleDuration}s;
+            animation-delay: ${-getExecutionFlowStagger(4, 4) * executionFlowCycleDuration}s;
             fill: #252525;
             transform-box: fill-box;
             transform-origin: center;
@@ -1124,7 +1031,7 @@ function ExecutionFlowPulseDotsOverlay({ hoveredZone }: { hoveredZone: Execution
             animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
             animation-iteration-count: infinite;
             animation-duration: ${executionFlowCycleDuration}s;
-            animation-delay: ${-getExecutionFlowStagger(4) * executionFlowCycleDuration}s;
+            animation-delay: ${-getExecutionFlowStagger(4, 4) * executionFlowCycleDuration}s;
             fill: #82F5AD;
             opacity: 0;
           }
@@ -1369,9 +1276,15 @@ function ExecutionFlowInputSquaresOverlay({ hoveredZone }: { hoveredZone: Execut
 }
 
 function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlowHoverZone; isFullWidth?: boolean }) {
+  const glowId = `execution-glow-${useId().replace(/:/g, "")}`;
+  const reduceMotion = useExecutionFlowReducedMotion();
+  const lineStroke = (d: string) => hoveredZone || reduceMotion
+    ? "var(--stroke-0, #252525)"
+    : `url(#${glowId}-paint-${executionFlowLinePaths.findIndex((path) => path.d === d)})`;
   return (
     <div className={`col-1 aspect-[819.892/256] justify-self-center ml-0 relative row-1 ${isFullWidth ? "w-full" : "w-[77.936%]"}`} data-name="Layer_1">
       <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 819.892 256">
+        {!reduceMotion && <ExecutionFlowSvgGlows id={glowId} isHidden={hoveredZone !== null} />}
         <g clipPath="url(#clip0_0_363)" id="Layer_1">
           {/* Lines, nodes and spine dim together inside one group. Dimming them
               separately stacked three translucent layers, and every node that
@@ -1379,25 +1292,25 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
               which read as a dark blob at exactly the junctions the drawing is
               trying to make legible. */}
           <g className="transition-opacity duration-200" style={{ opacity: hoveredZone ? 0.5 : 1 }}>
-            <path d={svgPaths.p123a9f60} id="Vector_9" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p21624440} id="Vector_10" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.pe4db960} id="Vector_11" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p510e600} id="Vector_12" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p2e229900} id="Vector_13" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.pc115780} id="Vector_14" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p3bf3d180} id="Vector_15" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p3f53d2c0} id="Vector_16" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p21bd2000} id="Vector_17" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p313dfde0} id="Vector_18" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d="M711.769 127.996H778.918" id="Vector_19" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p5f6cf80} id="Vector_21" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p2a2f8580} id="Vector_22" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p21910e80} id="Vector_23" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p39d77040} id="Vector_24" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p1e4e5a40} id="Vector_25" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.pf569a00} id="Vector_26" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.p35357400} id="Vector_27" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
-            <path d={svgPaths.pd678600} id="Vector_28" stroke="var(--stroke-0, #252525)" strokeMiterlimit="10" strokeWidth="2.18269" />
+            <path data-execution-flow-route="" d={svgPaths.p123a9f60} id="Vector_9" stroke={lineStroke(svgPaths.p123a9f60)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p21624440} id="Vector_10" stroke={lineStroke(svgPaths.p21624440)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.pe4db960} id="Vector_11" stroke={lineStroke(svgPaths.pe4db960)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p510e600} id="Vector_12" stroke={lineStroke(svgPaths.p510e600)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p2e229900} id="Vector_13" stroke={lineStroke(svgPaths.p2e229900)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.pc115780} id="Vector_14" stroke={lineStroke(svgPaths.pc115780)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p3bf3d180} id="Vector_15" stroke={lineStroke(svgPaths.p3bf3d180)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p3f53d2c0} id="Vector_16" stroke={lineStroke(svgPaths.p3f53d2c0)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p21bd2000} id="Vector_17" stroke={lineStroke(svgPaths.p21bd2000)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p313dfde0} id="Vector_18" stroke={lineStroke(svgPaths.p313dfde0)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d="M711.769 127.996H778.918" id="Vector_19" stroke={lineStroke("M711.769 127.996H778.918")} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p5f6cf80} id="Vector_21" stroke={lineStroke(svgPaths.p5f6cf80)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p2a2f8580} id="Vector_22" stroke={lineStroke(svgPaths.p2a2f8580)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p21910e80} id="Vector_23" stroke={lineStroke(svgPaths.p21910e80)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p39d77040} id="Vector_24" stroke={lineStroke(svgPaths.p39d77040)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p1e4e5a40} id="Vector_25" stroke={lineStroke(svgPaths.p1e4e5a40)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.pf569a00} id="Vector_26" stroke={lineStroke(svgPaths.pf569a00)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.p35357400} id="Vector_27" stroke={lineStroke(svgPaths.p35357400)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
+            <path data-execution-flow-route="" d={svgPaths.pd678600} id="Vector_28" stroke={lineStroke(svgPaths.pd678600)} strokeMiterlimit="10" strokeWidth={executionFlowStrokeWidth} />
           <g
             className="transition-[color] duration-200"
             id="Group_2"
@@ -1426,7 +1339,7 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
             id="Vector_54"
             stroke="var(--stroke-0, #252525)"
             strokeMiterlimit="10"
-            strokeWidth="2.18269"
+            strokeWidth={executionFlowStrokeWidth}
           />
           </g>
         </g>
@@ -1480,7 +1393,6 @@ function Layer({ hoveredZone, isFullWidth = false }: { hoveredZone: ExecutionFlo
           </clipPath>
         </defs>
       </svg>
-      <ExecutionFlowThreeGlows isHidden={hoveredZone !== null} />
       <ExecutionFlowPulseDotsOverlay hoveredZone={hoveredZone} />
       <ExecutionFlowInputSquaresOverlay hoveredZone={hoveredZone} />
     </div>
