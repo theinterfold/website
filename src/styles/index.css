@@ -457,8 +457,14 @@ html.interfold-transition-page-enter .interfold-page-transition {
    line, each one from its left end — by ExecutionFlowReveal, which measures
    the paths and runs the strokes itself. These rules only hold the pieces back
    until it does; the class comes off the wrapper once the drawing is over. */
-.interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path {
+.interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type > g#Layer_1 path {
   opacity: 0;
+}
+
+/* The base stroke is the light's paint surface too. Keep it dark until the
+   existing reveal hands over to the looping animation. */
+.interfold-execution-flow-draw:not(.interfold-execution-flow-draw--live) [data-execution-flow-route] {
+  stroke: #252525;
 }
 
 .interfold-execution-flow-draw [data-execution-flow-overlay] {
@@ -484,7 +490,15 @@ html.interfold-transition-page-enter .interfold-page-transition {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type path,
+  [data-execution-flow-route] {
+    stroke: #252525;
+  }
+
+  [data-name="Layer_1"] > svg:first-of-type > [data-execution-flow-overlay] {
+    display: none;
+  }
+
+  .interfold-execution-flow-draw [data-name="Layer_1"] > svg:first-of-type > g#Layer_1 path,
   .interfold-execution-flow-draw [data-execution-flow-overlay],
   .interfold-execution-flow-draw [data-execution-flow-tag] {
     opacity: 1;

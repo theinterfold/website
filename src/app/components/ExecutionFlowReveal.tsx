@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { ReactNode, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useInView } from "motion/react";
 import { ExecutionFlowTuner, SHOW_EXECUTION_FLOW_TUNER } from "./ExecutionFlowTuner";
 
 export type ExecutionFlowTiming = {
@@ -19,8 +19,25 @@ export type ExecutionFlowTiming = {
   routeStagger: number;
 };
 
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const getReducedMotionSnapshot = () => window.matchMedia(reducedMotionQuery).matches;
+const getServerReducedMotionSnapshot = () => false;
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(reducedMotionQuery);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+// Hydration must start with the same SVG as the server. CSS applies the
+// reduced-motion appearance immediately; React then omits the live gradients.
+export function useExecutionFlowReducedMotion() {
+  return useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, getServerReducedMotionSnapshot);
+}
+
+export const EXECUTION_FLOW_PEN_EASE = [0.45, 0, 0.55, 1] as const;
+
 export const DEFAULT_EXECUTION_FLOW_TIMING: ExecutionFlowTiming = {
-  easing: "cubic-bezier(0.45, 0, 0.55, 1)",
+  easing: `cubic-bezier(${EXECUTION_FLOW_PEN_EASE.join(", ")})`,
   penSpeed: 1.2,
   // A B H C D E F G — the long run that sweeps in along the floor goes third
   // rather than last, which is where Tiago put it on the preview.
@@ -146,7 +163,7 @@ function pointAt(route: Route, travelled: number) {
 export function ExecutionFlowReveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { amount: 0.3, once: true });
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useExecutionFlowReducedMotion();
   const [hasDrawn, setHasDrawn] = useState(false);
   const [run, setRun] = useState(0);
 
@@ -173,7 +190,7 @@ export function ExecutionFlowReveal({ children, className = "" }: { children: Re
     const { easing: ROUTE_EASING, penSpeed: PEN_SPEED, routeOrder, routeStagger: ROUTE_STAGGER } = timing;
 
     const svg = root.querySelector<SVGSVGElement>('[data-name="Layer_1"] > svg');
-    const strokes = svg ? Array.from(svg.querySelectorAll<SVGPathElement>("path[stroke]")).map(measure) : [];
+    const strokes = svg ? Array.from(svg.querySelectorAll<SVGPathElement>("path[stroke]")).filter((path) => !path.closest("[data-execution-flow-overlay]")).map(measure) : [];
     if (!svg || strokes.length === 0) {
       setHasDrawn(true);
       return undefined;
