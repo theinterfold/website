@@ -10,11 +10,12 @@ function subscribe(callback: () => void) {
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Same markup, geometry and entrance registration in both applications. */
-export function SiteHeaderMenuButton({ open, onOpenChange, variant = "responsive", className = "" }: SiteHeaderMenuButtonProps) {
+export function SiteHeaderMenuButton({ open, onOpenChange, variant = "responsive", className = "", id, action }: SiteHeaderMenuButtonProps) {
   const reducedMotion = useSyncExternalStore(subscribe, reduced, () => true);
   return (
-    <div className={`site-header-menu-trigger interfold-mobile-menu-trigger ${className}`}
+    <div id={id} className={`site-header-menu-trigger interfold-mobile-menu-trigger ${className}`}
       data-header-menu-trigger={variant} data-ready="false" suppressHydrationWarning>
+      {action && <div className="site-header-menu-action" data-menu-open={open}>{action}</div>}
       <Hamburger toggled={open} toggle={onOpenChange} direction="right"
         size={28} distance="sm" duration={reducedMotion ? 0 : .35}
         color="var(--site-chrome-ink)" rounded

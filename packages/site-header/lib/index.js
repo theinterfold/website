@@ -255,12 +255,14 @@ var LOCKUP_WORDMARK_PATHS = [
 // packages/site-header/src/wordmark.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
 var WORDMARK_SCALE = 120.421 / LOCKUP.wordmarkWidth;
+var GOVERNANCE_ROW = LOCKUP.wordmarkHeight + 24;
+var GOVERNANCE_WIDTH = (237 - 124.7) / WORDMARK_SCALE;
 function HeaderWordmark({ governance = false }) {
   return /* @__PURE__ */ jsxs("svg", {
     className: "site-header-wordmark",
     "data-governance": governance || undefined,
     viewBox: `${LOCKUP.wordmarkX} 0 ${governance ? 237 / WORDMARK_SCALE : LOCKUP.wordmarkWidth} ${LOCKUP.wordmarkHeight}`,
-    preserveAspectRatio: "xMinYMin meet",
+    preserveAspectRatio: governance ? "xMaxYMin slice" : "xMinYMin meet",
     fill: "currentColor",
     "aria-hidden": "true",
     focusable: "false",
@@ -268,13 +270,26 @@ function HeaderWordmark({ governance = false }) {
       LOCKUP_WORDMARK_PATHS.map((d, index) => /* @__PURE__ */ jsx("path", {
         d
       }, index)),
-      governance && /* @__PURE__ */ jsx("text", {
-        x: LOCKUP.wordmarkX + 124.7 / WORDMARK_SCALE,
-        y: LOCKUP.baseline,
-        className: "site-header-governance",
-        fontSize: 22 / WORDMARK_SCALE,
-        letterSpacing: -0.66 / WORDMARK_SCALE,
-        children: "Governance"
+      governance && /* @__PURE__ */ jsx("svg", {
+        x: LOCKUP.wordmarkX + 124.7 / WORDMARK_SCALE - 6,
+        y: -12,
+        width: GOVERNANCE_WIDTH + 12,
+        height: GOVERNANCE_ROW,
+        viewBox: `-6 -12 ${GOVERNANCE_WIDTH + 12} ${GOVERNANCE_ROW}`,
+        overflow: "hidden",
+        className: "site-header-governance-window",
+        children: /* @__PURE__ */ jsx("g", {
+          className: "interfold-arrow-slide__track site-header-governance-track",
+          style: { "--interfold-roll-offset": `-${GOVERNANCE_ROW}px` },
+          children: [0, GOVERNANCE_ROW].map((offset) => /* @__PURE__ */ jsx("text", {
+            x: 0,
+            y: LOCKUP.baseline + offset,
+            className: "site-header-governance",
+            fontSize: 22 / WORDMARK_SCALE,
+            letterSpacing: -0.66 / WORDMARK_SCALE,
+            children: "Governance"
+          }, offset))
+        })
       })
     ]
   });
@@ -449,36 +464,44 @@ var Cross = (props) => /* @__PURE__ */ React.createElement(Burger, _extends({}, 
 
 // packages/site-header/src/menuButton.tsx
 import { useSyncExternalStore } from "react";
-import { jsx as jsx3 } from "react/jsx-runtime";
+import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function subscribe(callback) {
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   preference.addEventListener("change", callback);
   return () => preference.removeEventListener("change", callback);
 }
 var reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-function SiteHeaderMenuButton({ open, onOpenChange, variant = "responsive", className = "" }) {
+function SiteHeaderMenuButton({ open, onOpenChange, variant = "responsive", className = "", id, action }) {
   const reducedMotion = useSyncExternalStore(subscribe, reduced, () => true);
-  return /* @__PURE__ */ jsx3("div", {
+  return /* @__PURE__ */ jsxs3("div", {
+    id,
     className: `site-header-menu-trigger interfold-mobile-menu-trigger ${className}`,
     "data-header-menu-trigger": variant,
     "data-ready": "false",
     suppressHydrationWarning: true,
-    children: /* @__PURE__ */ jsx3(Cross, {
-      toggled: open,
-      toggle: onOpenChange,
-      direction: "right",
-      size: 28,
-      distance: "sm",
-      duration: reducedMotion ? 0 : 0.35,
-      color: "var(--site-chrome-ink)",
-      rounded: true,
-      label: open ? "Close menu" : "Open menu"
-    })
+    children: [
+      action && /* @__PURE__ */ jsx3("div", {
+        className: "site-header-menu-action",
+        "data-menu-open": open,
+        children: action
+      }),
+      /* @__PURE__ */ jsx3(Cross, {
+        toggled: open,
+        toggle: onOpenChange,
+        direction: "right",
+        size: 28,
+        distance: "sm",
+        duration: reducedMotion ? 0 : 0.35,
+        color: "var(--site-chrome-ink)",
+        rounded: true,
+        label: open ? "Close menu" : "Open menu"
+      })
+    ]
   });
 }
 // packages/site-header/src/signup.tsx
 import { useEffect as useEffect3, useRef } from "react";
-import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 var GHOST_SIGNUP_SCRIPT = "https://cdn.jsdelivr.net/ghost/signup-form@~0.3/umd/signup-form.min.js";
 var GHOST_SITE = "https://blog.theinterfold.com/";
 var GHOST_FORM_BACKGROUND = "#f2fff7";
@@ -602,7 +625,7 @@ function GhostSignupForm({ className = "" }) {
         embed.remove();
     };
   }, []);
-  return /* @__PURE__ */ jsxs3("div", {
+  return /* @__PURE__ */ jsxs4("div", {
     className: `interfold-ghost-signup ${className}`,
     children: [
       /* @__PURE__ */ jsx4("p", {
@@ -619,7 +642,7 @@ function GhostSignupForm({ className = "" }) {
 }
 
 // packages/site-header/src/footer.tsx
-import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx5, jsxs as jsxs5 } from "react/jsx-runtime";
 function StaticReveal({ children, className }) {
   return /* @__PURE__ */ jsx5("div", {
     className,
@@ -656,13 +679,13 @@ function SiteFooter({
     id: "site-footer",
     className: "site-footer",
     style: { backgroundColor: background },
-    children: /* @__PURE__ */ jsxs4("div", {
+    children: /* @__PURE__ */ jsxs5("div", {
       className: "site-footer-grid",
       children: [
         /* @__PURE__ */ jsx5("div", {
           className: "site-footer-brand",
           children: /* @__PURE__ */ jsx5(Reveal, {
-            children: /* @__PURE__ */ jsxs4("p", {
+            children: /* @__PURE__ */ jsxs5("p", {
               className: "site-footer-wordmark",
               children: [
                 /* @__PURE__ */ jsx5("span", {
@@ -675,7 +698,7 @@ function SiteFooter({
             })
           })
         }),
-        groups.map((group, index) => /* @__PURE__ */ jsxs4("div", {
+        groups.map((group, index) => /* @__PURE__ */ jsxs5("div", {
           className: `${index === 0 ? "site-footer-legal" : "site-footer-social"} site-footer-group`,
           children: [
             /* @__PURE__ */ jsx5(Reveal, {
@@ -721,7 +744,7 @@ function SiteFooter({
   });
 }
 // packages/site-header/src/chevron.tsx
-import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 function BendingChevron({
   open,
   width = 10,
@@ -729,7 +752,7 @@ function BendingChevron({
   className = "",
   style
 }) {
-  return /* @__PURE__ */ jsxs5("span", {
+  return /* @__PURE__ */ jsxs6("span", {
     "aria-hidden": "true",
     className: `interfold-chevron ${className}`,
     "data-open": open,
@@ -766,9 +789,12 @@ function useMobileMenuBehavior(open, onOpenChange) {
     };
     const controls = () => [
       ...Array.from(dialogRef.current?.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]') ?? []),
-      document.querySelector(".interfold-mobile-menu-trigger [role='button']")
-    ].filter((item) => !!item && item.tabIndex >= 0 && item.getAttribute("aria-hidden") !== "true");
+      ...Array.from(document.querySelectorAll(".interfold-mobile-menu-trigger button:not([disabled]), .interfold-mobile-menu-trigger [role='button']"))
+    ].filter((item) => !!item && item.tabIndex >= 0 && !item.closest("[inert], [aria-hidden='true']") && item.getClientRects().length > 0);
+    const hasForegroundDialog = () => Array.from(document.querySelectorAll('[role="dialog"], [role="alertdialog"], dialog[open]')).some((dialog) => dialog !== dialogRef.current && !dialog.contains(dialogRef.current) && !dialog.closest('[hidden], [inert], [aria-hidden="true"]') && dialog.getClientRects().length > 0);
     const onKey = (event) => {
+      if (event.defaultPrevented || hasForegroundDialog())
+        return;
       if (event.key === "Escape") {
         event.preventDefault();
         onOpenChange?.(false);
@@ -782,6 +808,8 @@ function useMobileMenuBehavior(open, onOpenChange) {
       items[next]?.focus({ preventScroll: true });
     };
     const onFocus = (event) => {
+      if (hasForegroundDialog())
+        return;
       const target = event.target;
       if (!dialogRef.current?.contains(target) && !target.closest(".interfold-mobile-menu-trigger")) {
         controls()[0]?.focus({ preventScroll: true });
@@ -820,7 +848,7 @@ function useMobileMenuBehavior(open, onOpenChange) {
 }
 
 // packages/site-header/src/index.tsx
-import { jsx as jsx7, jsxs as jsxs6 } from "react/jsx-runtime";
+import { jsx as jsx7, jsxs as jsxs7 } from "react/jsx-runtime";
 function SiteHeaderChrome({
   variant = "responsive",
   layout,
@@ -863,10 +891,10 @@ function SiteHeaderChrome({
     "data-variant": variant,
     "data-layout": selectedLayout,
     "data-extended-brand": extendedBrand || undefined,
-    children: /* @__PURE__ */ jsxs6("div", {
+    children: /* @__PURE__ */ jsxs7("div", {
       className: "site-header-grid",
       children: [
-        /* @__PURE__ */ jsxs6("div", {
+        /* @__PURE__ */ jsxs7("div", {
           className: selectedLayout === "current" ? "site-header-identity" : "site-header-lockup",
           children: [
             /* @__PURE__ */ jsx7("div", {

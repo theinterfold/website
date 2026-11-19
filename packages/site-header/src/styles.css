@@ -263,6 +263,14 @@
   height: 16px;
   transform: translateY(-50%);
 }
+.site-header-menu-action {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
 .site-header-menu-trigger .hamburger-react {
   position: absolute !important;
   left: 50%;
@@ -330,12 +338,19 @@
   flex-direction: column;
   transition: transform 300ms cubic-bezier(.22, 1, .36, 1);
 }
+.site-header-governance-track { display: inline; }
 .group:hover .interfold-arrow-slide__track,
-.group:focus-visible .interfold-arrow-slide__track { transform: translateY(-50%); }
+.group:focus-visible .interfold-arrow-slide__track,
+.site-header-brand:hover .site-header-governance-track,
+.site-header-brand:focus-visible .site-header-governance-track {
+  transform: translateY(var(--interfold-roll-offset, -50%));
+}
 @media (prefers-reduced-motion: reduce) {
   .interfold-arrow-slide__track { transition: none; }
   .group:hover .interfold-arrow-slide__track,
-  .group:focus-visible .interfold-arrow-slide__track { transform: none; }
+  .group:focus-visible .interfold-arrow-slide__track,
+  .site-header-brand:hover .site-header-governance-track,
+  .site-header-brand:focus-visible .site-header-governance-track { transform: none; }
 }
 @media (min-width: 1280px) {
   :root {
@@ -373,7 +388,7 @@
   }
 }
 @media (max-width: 639px) {
-  .site-header-chrome[data-extended-brand] .site-header-symbol-slot {
+  .site-header-chrome[data-extended-brand]:not(:has(.site-header-wordmark[data-governance])) .site-header-symbol-slot {
     visibility: hidden;
   }
 }
@@ -417,6 +432,20 @@
 }
 .site-header-chrome[data-layout]:not([data-layout="current"]) .site-header-wordmark[data-governance] {
   width: calc(var(--site-lockup-wordmark-width) * 237 / 120.421);
+}
+/* The product occupies the rightmost 112.3 units of the 237-unit wordmark.
+   Aligning the SVG to that edge keeps its baseline and rolling label intact. */
+@media (width < 1280px) {
+  .site-header-chrome[data-variant]:not([data-variant="desktop"]) .site-header-brand .site-header-wordmark[data-governance] {
+    height: calc(var(--site-nav-type-size) * 17.202 / 22);
+    width: calc(var(--site-nav-type-size) * 112.3 / 22);
+  }
+  .site-header-chrome:not([data-variant="desktop"]) .site-header-wordmark[data-governance] > path {
+    display: none;
+  }
+  .site-header-chrome:not([data-variant="desktop"]) .site-header-wordmark[data-governance] {
+    --site-governance-ink: currentColor;
+  }
 }
 /* Explicit type studies also keep the original composition's wordmark in scale. */
 :root[data-navbar-type-size] .site-header-chrome[data-layout="current"] .site-header-wordmark {
@@ -678,6 +707,39 @@ select:open + .interfold-chevron > .interfold-chevron-right { transform: rotate(
 .interfold-mobile-menu-overlay { height: 100vh; min-height: 100vh; }
 @supports (height: 100lvh) {
   .interfold-mobile-menu-overlay { height: 100lvh; min-height: 100lvh; }
+}
+/* Optional application action slot. Navigation owns the flexible middle;
+   account controls stay within the visible viewport, including browser chrome. */
+.interfold-mobile-menu-overlay[data-menu-footer] {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
+  justify-content: stretch;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  padding-top: 72px;
+}
+.site-header-menu-label {
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+.site-header-menu-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  padding-block: 24px;
+}
+.site-header-menu-content > :first-child { margin-block: auto; }
+.site-header-menu-footer {
+  width: 100%;
+  max-width: var(--site-chrome-width);
+  margin-inline: auto;
+  padding: 16px var(--site-chrome-gutter) max(16px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--ui-stroke, rgb(58 94 60 / .16));
 }
 @keyframes interfold-menu-item-in {
   from { opacity: 0; transform: translateY(16px); }

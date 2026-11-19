@@ -18,9 +18,16 @@ export function useMobileMenuBehavior(open: boolean, onOpenChange?: (open: boole
       ...Array.from(dialogRef.current?.querySelectorAll<HTMLElement>(
         'a[href], button:not([disabled]), [tabindex="0"]',
       ) ?? []),
-      document.querySelector<HTMLElement>(".interfold-mobile-menu-trigger [role='button']"),
-    ].filter((item): item is HTMLElement => !!item && item.tabIndex >= 0 && item.getAttribute("aria-hidden") !== "true");
+      ...Array.from(document.querySelectorAll<HTMLElement>(
+        ".interfold-mobile-menu-trigger button:not([disabled]), .interfold-mobile-menu-trigger [role='button']",
+      )),
+    ].filter((item): item is HTMLElement => !!item && item.tabIndex >= 0 && !item.closest("[inert], [aria-hidden='true']") && item.getClientRects().length > 0);
+    const hasForegroundDialog = () => Array.from(document.querySelectorAll<HTMLElement>(
+      '[role="dialog"], [role="alertdialog"], dialog[open]',
+    )).some(dialog => dialog !== dialogRef.current && !dialog.contains(dialogRef.current)
+      && !dialog.closest('[hidden], [inert], [aria-hidden="true"]') && dialog.getClientRects().length > 0);
     const onKey = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || hasForegroundDialog()) return;
       if (event.key === "Escape") {
         event.preventDefault();
         onOpenChange?.(false);
@@ -34,6 +41,7 @@ export function useMobileMenuBehavior(open: boolean, onOpenChange?: (open: boole
       items[next]?.focus({ preventScroll: true });
     };
     const onFocus = (event: FocusEvent) => {
+      if (hasForegroundDialog()) return;
       const target = event.target as HTMLElement;
       if (!dialogRef.current?.contains(target) && !target.closest(".interfold-mobile-menu-trigger")) {
         controls()[0]?.focus({ preventScroll: true });

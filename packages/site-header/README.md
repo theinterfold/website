@@ -19,6 +19,14 @@ recreate the wordmark, symbol, or their animation flags in navbar slots.
 Mobile menu entries share `interfold-menu-item` and the same CSS timing;
 only their order and destinations vary.
 
+Below 1280px, product headers show the Interfold symbol and the product name.
+The Governance wordmark retains its rolling hover and keyboard-focus treatment.
+The marketing site uses its existing Interfold wordmark at every width.
+
+Applications may pass an `action` to `SiteHeaderMenuButton` for a control beside
+the hamburger. The control stays next to the close button while the menu is open.
+If it opens an account dialog, that dialog handles focus and Escape until it closes.
+
 The generated `manifest.json` fingerprints the source, release and folding asset.
 Both application builds verify the release. In Governance, the optional ignored
 `.interfold-header.local.json` (`websiteRoot`, relative to that file) or
