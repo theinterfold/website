@@ -65,9 +65,12 @@ export declare function InterfoldSymbol(props: {
   lockup?: boolean;
 }): React.JSX.Element;
 export interface SiteHeaderMenuButtonProps {
+  /** Application control that stays beside the menu toggle in both menu states. */
+  action?: ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   variant?: "mobile" | "responsive";
   className?: string;
+  id?: string;
 }
 export declare function SiteHeaderMenuButton(props: SiteHeaderMenuButtonProps): React.JSX.Element;
