@@ -57,7 +57,11 @@ export function installHeaderEntranceRuntime(): HeaderRuntime {
       }
     }
 
-    for (const symbol of header.querySelectorAll<SVGElement>("[data-symbol-animated]")) {
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const symbols = revision && variant !== "mobile" && desktop.matches
+      ? header.querySelectorAll<SVGElement>("[data-symbol-animated]")
+      : [];
+    for (const symbol of symbols) {
       const image = symbol.querySelector<SVGImageElement>(".interfold-symbol-motion");
       if (!image) continue;
       let settled = false;
@@ -74,23 +78,25 @@ export function installHeaderEntranceRuntime(): HeaderRuntime {
         symbol.classList.add("interfold-symbol-playing");
         later(restore, 4010 / 3);
       };
+      const stopOnMobile = () => { if (!desktop.matches) restore(); };
+      desktop.addEventListener("change", stopOnMobile);
       image.addEventListener("load", loaded);
       image.addEventListener("error", restore);
       cleanups.push(() => {
+        desktop.removeEventListener("change", stopOnMobile);
         image.removeEventListener("load", loaded);
         image.removeEventListener("error", restore);
         restore();
       });
-      if (revision) {
-        symbol.classList.add("interfold-symbol-pending");
-        later(() => {
-          if (settled) return;
-          // A stable first-visit URL can use the browser cache. Explicit replay
-          // gets a fresh SVG timeline without delaying or restarting the header.
-          image.setAttribute("href", `/brand/interfold-symbol-fold.svg${replay ? `?play=${Date.now()}` : ""}`);
-          timeout = later(restore, 5000);
-        }, 1100);
-      }
+      symbol.classList.add("interfold-symbol-pending");
+      later(() => {
+        if (settled) return;
+        if (!desktop.matches) return restore();
+        // A stable first-visit URL can use the browser cache. Explicit replay
+        // gets a fresh SVG timeline without delaying or restarting the header.
+        image.setAttribute("href", `/brand/interfold-symbol-fold.svg${replay ? `?play=${Date.now()}` : ""}`);
+        timeout = later(restore, 5000);
+      }, 1100);
     }
     const dispose = () => {
       disposed = true;
