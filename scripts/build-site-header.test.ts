@@ -17,8 +17,8 @@ test("header sync requires an explicit valid checkout and check mode never write
     mkdirSync(join(governance, "app"), { recursive: true });
     copyFileSync(resolve(import.meta.dir, "build-site-header.ts"), join(website, "scripts/build-site-header.ts"));
     copyFileSync(resolve(import.meta.dir, "header-release.cjs"), join(website, "scripts/header-release.cjs"));
-    for (const name of ["index.tsx", "motion.tsx"]) writeFileSync(join(source, name), "export const value = 1;\n");
-    for (const name of ["types.d.ts", "motion.types.d.ts"]) writeFileSync(join(source, name), "export declare const value: number;\n");
+    for (const name of ["index.tsx", "motion.tsx", "pageNavigation.js"]) writeFileSync(join(source, name), "export const value = 1;\n");
+    for (const name of ["types.d.ts", "motion.types.d.ts", "pageNavigation.d.ts"]) writeFileSync(join(source, name), "export declare const value: number;\n");
     writeFileSync(join(source, "styles.css"), ":root { --width: 1440px; }\n");
     writeFileSync(join(website, "packages/site-header/README.md"), "Canonical header\n");
     writeFileSync(join(governance, "app/package.json"), JSON.stringify({ name: "CRISPVoting" }));

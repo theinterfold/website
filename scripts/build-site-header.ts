@@ -45,7 +45,7 @@ const result = await Bun.build({
 if (!result.success) throw new AggregateError(result.logs, "Site header build failed");
 const files = new Map<string, string>();
 for (const artifact of result.outputs) files.set(basename(artifact.path), await artifact.text());
-for (const [from, to] of [["styles.css", "styles.css"], ["types.d.ts", "index.d.ts"], ["motion.types.d.ts", "motion.d.ts"]])
+for (const [from, to] of [["styles.css", "styles.css"], ["types.d.ts", "index.d.ts"], ["motion.types.d.ts", "motion.d.ts"], ["pageNavigation.js", "pageNavigation.js"], ["pageNavigation.d.ts", "pageNavigation.d.ts"]])
   files.set(to, await readFile(resolve(source, from), "utf8"));
 files.set("package.json", JSON.stringify({
   name: "@interfold/site-header", version: "1.0.0", private: true,

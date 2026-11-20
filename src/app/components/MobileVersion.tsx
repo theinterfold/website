@@ -25,7 +25,6 @@ import { HeroImage, homeHeroSources } from "./HeroImage";
 import { HoverArrowContent, HoverArrowLink, UnderlinedArrowLink } from "./HoverArrowLink";
 import { LineReveal } from "./LineReveal";
 import { ScrollFadeIn } from "./ScrollFadeIn";
-import { SiteMobileHeader } from "./SiteMobileHeader";
 import { useMobileCarouselOpacity } from "./useMobileCarouselOpacity";
 
 function MobilePartnerLogoFrame({
@@ -230,8 +229,7 @@ export function MobileVersion() {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-clip bg-white">
-      <SiteMobileHeader />
+    <div className="interfold-page-transition min-h-screen w-full overflow-x-clip bg-white">
 
       {/* Hero Section. The image, the strip and the copy are siblings of the page
           root rather than one wrapped block: a sticky element can only travel
