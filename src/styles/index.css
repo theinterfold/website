@@ -232,18 +232,6 @@ html.interfold-transition-content-enter .interfold-page-transition > main > :not
   animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
 }
 
-html.interfold-transition-page-exit .interfold-page-transition {
-  opacity: 0;
-  transform: translate3d(0, -18px, 0);
-  transition:
-    opacity 220ms var(--interfold-transition-ease),
-    transform 220ms var(--interfold-transition-ease);
-}
-
-html.interfold-transition-page-enter .interfold-page-transition {
-  animation: interfold-content-enter 280ms var(--interfold-transition-ease) both;
-}
-
 .interfold-route-hero-overlay {
   contain: layout;
   inset: 0;

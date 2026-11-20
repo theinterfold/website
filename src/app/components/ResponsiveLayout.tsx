@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
+import { transitionPage } from '../../../packages/site-header/lib/pageNavigation.js';
 import Desktop from '../../imports/Desktop/Desktop';
 import { AuctionLegalPage } from './AuctionLegalPage';
 import { WebsiteLegalPage } from './WebsiteLegalPage';
 import { Header } from './Header';
 import { FoldAuctionPage } from './FoldAuctionPage';
 import { MobileVersion } from './MobileVersion';
+import { SiteMobileHeader } from './SiteMobileHeader';
 import { ParticipatePage } from './ParticipatePage';
 import { HeroImage, auctionHeroSources, homeHeroSources, participateHeroSources } from './HeroImage';
 
@@ -25,14 +27,10 @@ type HeroOverlay = {
 
 const CONTENT_ONLY_EXIT_CLASS = 'interfold-transition-content-exit';
 const CONTENT_ONLY_ENTER_CLASS = 'interfold-transition-content-enter';
-const FULL_PAGE_EXIT_CLASS = 'interfold-transition-page-exit';
-const FULL_PAGE_ENTER_CLASS = 'interfold-transition-page-enter';
 const HERO_OVERLAY_ACTIVE_CLASS = 'interfold-route-hero-active';
 const HERO_OVERLAY_DURATION_MS = 720;
-const HERO_ROUTE_COMMIT_DELAY_MS = 40;
+const HERO_ROUTE_COMMIT_DELAY_MS = 240;
 const HERO_OVERLAY_CLEANUP_DELAY_MS = 760;
-const PAGE_FADE_COMMIT_DELAY_MS = 220;
-const PAGE_FADE_CLEANUP_DELAY_MS = 520;
 
 function getPagePath() {
   if (typeof window === 'undefined') {
@@ -201,55 +199,45 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
         setRoutePath(nextPath);
       });
     };
+    let pageMotion: AbortController | undefined;
+    const pageSurface = () => Array.from(document.querySelectorAll<HTMLElement>('.interfold-page-transition'))
+      .find(node => node.getClientRects().length > 0) ?? null;
     let heroOverlayRouteTimer: number | undefined;
     let heroOverlayCleanupTimer: number | undefined;
 
     const clearTransitionModeClasses = () => {
       document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
       document.documentElement.classList.remove(CONTENT_ONLY_ENTER_CLASS);
-      document.documentElement.classList.remove(FULL_PAGE_EXIT_CLASS);
-      document.documentElement.classList.remove(FULL_PAGE_ENTER_CLASS);
       document.documentElement.classList.remove(HERO_OVERLAY_ACTIVE_CLASS);
     };
 
+    const stopTransition = () => {
+      window.clearTimeout(heroOverlayRouteTimer);
+      window.clearTimeout(heroOverlayCleanupTimer);
+      heroOverlayRouteTimer = undefined;
+      pageMotion?.abort();
+      pageMotion = undefined;
+      setHeroOverlay(null);
+      clearTransitionModeClasses();
+    };
+
     const startRouteTransition = (commit: () => void, nextPage = getPagePath()) => {
+      stopTransition();
       const shouldReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const nextHeroPage = getHeroPagePath(nextPage);
-
-      if (heroOverlayRouteTimer) {
-        window.clearTimeout(heroOverlayRouteTimer);
-      }
-
-      if (heroOverlayCleanupTimer) {
-        window.clearTimeout(heroOverlayCleanupTimer);
-      }
-
-      clearTransitionModeClasses();
 
       if (shouldReduceMotion) {
         commit();
         return;
       }
 
-      if (nextHeroPage === null) {
-        commit();
-        return;
-      }
-
-      const currentHero = document.querySelector('.interfold-hero-transition');
-      const shouldUseHeroTransition = currentHero instanceof HTMLElement && window.scrollY <= 8;
-
-      if (!shouldUseHeroTransition) {
-        applyPageTheme(nextPage);
-        document.documentElement.classList.add(FULL_PAGE_EXIT_CLASS);
-        heroOverlayRouteTimer = window.setTimeout(() => {
-          document.documentElement.classList.remove(FULL_PAGE_EXIT_CLASS);
-          document.documentElement.classList.add(FULL_PAGE_ENTER_CLASS);
-          commit();
-        }, PAGE_FADE_COMMIT_DELAY_MS);
-        heroOverlayCleanupTimer = window.setTimeout(() => {
-          clearTransitionModeClasses();
-        }, PAGE_FADE_CLEANUP_DELAY_MS);
+      const currentHero = pageSurface()?.querySelector('.interfold-hero-transition');
+      if (nextHeroPage === null || !currentHero || window.scrollY > 8) {
+        const controller = new AbortController();
+        pageMotion = controller;
+        void transitionPage(pageSurface, commit, controller.signal).finally(() => {
+          if (pageMotion === controller) pageMotion = undefined;
+        });
         return;
       }
 
@@ -268,6 +256,7 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
       });
       document.documentElement.classList.add(CONTENT_ONLY_EXIT_CLASS);
       heroOverlayRouteTimer = window.setTimeout(() => {
+        heroOverlayRouteTimer = undefined;
         document.documentElement.classList.remove(CONTENT_ONLY_EXIT_CLASS);
         document.documentElement.classList.add(CONTENT_ONLY_ENTER_CLASS);
         commit();
@@ -280,8 +269,26 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
       }, HERO_OVERLAY_CLEANUP_DELAY_MS);
     };
 
-    const checkRoute = () => {
-      startRouteTransition(commitRoutePath, getPagePath());
+    const placeDestination = (scrollY: number) => {
+      const anchor = document.getElementById(window.location.hash.slice(1));
+      const target = anchor ?? pageSurface()?.querySelector<HTMLElement>('h1, main');
+      if (target) {
+        if (!target.hasAttribute('tabindex')) target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+      if (anchor) anchor.scrollIntoView();
+      else window.scrollTo({ top: scrollY, behavior: 'instant' });
+    };
+
+    const checkRoute = (event: PopStateEvent) => {
+      if (getPagePath() === routePathRef.current) {
+        if (pageMotion || heroOverlayRouteTimer) stopTransition();
+        return;
+      }
+      startRouteTransition(() => {
+        commitRoutePath();
+        placeDestination(event.state?.interfoldScrollY ?? 0);
+      });
     };
 
     const handleInternalLinkClick = (event: MouseEvent) => {
@@ -292,7 +299,7 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
       const target = event.target instanceof Element ? event.target : null;
       const link = target?.closest('a[href]');
 
-      if (!(link instanceof HTMLAnchorElement) || link.target || link.hasAttribute('download')) {
+      if (!(link instanceof HTMLAnchorElement) || (link.target && link.target !== '_self') || link.hasAttribute('download')) {
         return;
       }
 
@@ -304,20 +311,19 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
 
       const nextRoute = url.pathname.replace(/^\/+|\/+$/g, '');
 
-      if (getHeroPagePath(nextRoute) === null) {
+      if (!findRoute(url.pathname)) return;
+      if (nextRoute === routePathRef.current && nextRoute === getPagePath()) {
+        if (pageMotion || heroOverlayRouteTimer) stopTransition();
+        if (url.href === window.location.href) event.preventDefault();
         return;
       }
-
       event.preventDefault();
 
-      if (`${url.pathname}${url.search}${url.hash}` === `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-        return;
-      }
-
       startRouteTransition(() => {
+        window.history.replaceState({ ...window.history.state, interfoldScrollY: window.scrollY }, '');
         window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
         commitRoutePath();
-        window.scrollTo(0, 0);
+        placeDestination(0);
       }, nextRoute);
     };
 
@@ -327,6 +333,7 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
     document.addEventListener('click', handleInternalLinkClick);
 
     return () => {
+      pageMotion?.abort();
       window.removeEventListener('resize', checkMobile);
       window.removeEventListener('popstate', checkRoute);
       document.removeEventListener('click', handleInternalLinkClick);
@@ -410,7 +417,7 @@ export function ResponsiveLayout({ initialPath }: { initialPath?: string }) {
         {isMobile !== true && <Desktop />}
       </div>
       <div className="contents md:hidden">
-        {isMobile !== false && <MobileVersion />}
+        {isMobile !== false && <><SiteMobileHeader /><MobileVersion /></>}
       </div>
       {heroOverlay && <HeroTransitionOverlay key={heroOverlay.id} overlay={heroOverlay} />}
     </>

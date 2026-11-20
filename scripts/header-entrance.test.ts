@@ -25,7 +25,8 @@ function environment(storage = new Map<string, string>(), reduced = false, block
   header.dataset = { variant: "responsive", ready: "false", entrance: "static" };
   trigger.dataset = { headerMenuTrigger: "responsive", ready: "false" };
   const preference = Object.assign(new EventTarget(), { matches: reduced });
-  const window = { matchMedia: () => preference, name: "" };
+  const desktop = Object.assign(new EventTarget(), { matches: true });
+  const window = { matchMedia: (query: string) => query === "(min-width: 1280px)" ? desktop : preference, name: "" };
   const context = createContext({
     window, location: { search: "" }, URLSearchParams, Symbol,
     document: { querySelectorAll: (selector: string) => selector === ".site-header-chrome" ? [header] : [trigger] },
@@ -48,7 +49,7 @@ function environment(storage = new Map<string, string>(), reduced = false, block
     now = target;
   };
   const runtime = () => (window as any)[Symbol.for("interfold.header.entrance.runtime")];
-  return { boot, advance, runtime, image, symbol, header, trigger, preference, storage, timers };
+  return { boot, advance, runtime, image, symbol, header, trigger, preference, desktop, storage, timers };
 }
 
 test("the standalone first paint starts all header parts and hydration adopts it without replay", () => {
@@ -115,4 +116,32 @@ test("Strict Mode adoption keeps the timeline; unmount and failed assets restore
   next.runtime().release(next.header);
   expect(next.timers.size).toBe(0);
   expect(next.symbol.classes.size).toBe(0);
+});
+
+test("compact and explicitly mobile headers keep the static symbol on first paint and replay", () => {
+  for (const variant of ["responsive", "mobile"]) {
+    const page = environment();
+    page.header.dataset.variant = variant;
+    page.desktop.matches = variant === "mobile";
+    page.boot();
+    expect(page.header.dataset.entrance).toBe("playing");
+    page.advance(1100);
+    expect(page.image.attributes.has("href")).toBe(false);
+    page.runtime().prepare(page.header, true);
+    page.advance(1100);
+    expect(page.image.attributes.has("href")).toBe(false);
+    expect(page.symbol.classes.size).toBe(0);
+  }
+});
+
+test("entering the compact layout cancels a pending or playing fold without replaying on resize", () => {
+  for (const elapsed of [500, 1200]) {
+    const page = environment(); page.boot(); page.advance(elapsed);
+    if (elapsed >= 1100) page.image.dispatchEvent(new Event("load"));
+    page.desktop.matches = false; page.desktop.dispatchEvent(new Event("change"));
+    page.desktop.matches = true; page.desktop.dispatchEvent(new Event("change"));
+    page.advance(2500);
+    expect(page.image.attributes.has("href")).toBe(false);
+    expect(page.symbol.classes.size).toBe(0);
+  }
 });

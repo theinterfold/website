@@ -11,7 +11,7 @@
     "build:header": "bun scripts/build-site-header.ts",
     "sync:header": "bun scripts/build-site-header.ts --sync-governance",
     "check:header": "bun scripts/build-site-header.ts --check",
-    "test:header": "bun test scripts/build-site-header.test.ts scripts/header-entrance.test.ts"
+    "test:header": "bun test scripts/build-site-header.test.ts scripts/header-entrance.test.ts scripts/page-navigation.test.ts"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

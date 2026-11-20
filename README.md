@@ -26,6 +26,8 @@ This project uses the Interfold homepage as the source of truth for visual style
 
 When adding or editing pages, reuse existing styles and components where possible. Avoid introducing one-off values unless strictly necessary.
 
+Every internal page uses the [shared page navigation pattern](packages/site-header/README.md#page-navigation) when the route changes.
+
 ## Technical SEO
 
 `seo/routes.mjs` is the route and metadata registry. When adding a page, add its
